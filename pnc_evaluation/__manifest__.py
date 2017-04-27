@@ -3,15 +3,16 @@
     'name': "pnc_evaluation",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Le module permettant de realiser 
+        l'évaluation du Plan National Cancer
+        """,
 
     'description': """
-        Long description of module's purpose
+        Evaluation du Plan National Cancer
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "ESI",
+    'website': "http://www.esi.dz",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml

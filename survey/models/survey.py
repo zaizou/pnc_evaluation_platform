@@ -549,69 +549,9 @@ class SurveyPage(models.Model):
                               oldname='note',
                               help='An introductory text to your page')
 
-class AgregationLevel(models.Model):
-    _name = 'survey.agregation_level'
-    _description = 'Niveau d Agregationn loopa d un indicatneur : Evaluation Subjective Action, Evaluation Objective Action, Action, Objectif, Axe '
-    name=fields.Char('Niveau d Agregation',required=True, translate=True)
-    agregation_level_parent_parent_id=fields.Many2one('survey.agregation_level',string='Niveau d Agregation Parent', ondelete='SET NULL')
-    agregation_level_child_id=fields.Many2one('survey.agregation_level',string='Niveau Agregation Fils ', ondelete='SET NULL')
-    indicateur_ids=fields.One2many('survey.indicateur','agregation_level_id',string='Indicateurs')
-    
-class SurveyDataModel(models.Model):
-    _name = 'survey.data_model'
-    _description = 'Modelisation d une valeur numerique'
-    name=fields.Char('Model',required=True, translate=True)
-    tag=fields.Char('Tag',required=True, translate=True)
 
-class FonctionCalcul(models.Model):
-    _inherit='ir.actions.server'
-    _name ='survey.fonction_calcul'
-
-
-class Indicateur(models.Model):
-    _name = 'survey.indicateur'
-    _description = 'PNC Indicateur'
-    name = fields.Char('Indicateur Name', required=True, translate=True)
-    valeur = fields.Float("Valeur Indicateur", default=0.0)
-    parent_indicateur = fields.Many2one('survey.indicateur',
-            string='Indicateur Parent', ondelete='SET NULL')
-    questions = fields.One2many('survey.question', 'indicateur_id',
-                                string='Questions', copy=True)
-    agregation_level_id=fields.Many2one('survey.agregation_level',string='Niveau d Agregation ', ondelete='SET NULL')
-    fonction_calcul=fields.Many2one('ir.actions.server',string='Fonction de Calcul', ondelete='SET NULL')
-    poids=fields.Integer('Poids de l Indicateur', default=1)
-    max_value=fields.Float("Valeur Max", default=0.0)
-    min_value=fields.Float("Valeur Min", default=0.0)
-    @api.multi
-    def calcul_valeur_indicateur(self, id_indicateur):
-    	count = 0
-    	somme = 0
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach 141414")
-        for indic in id_indicateur:
-            return indic.fonction_calcul()
-    	"""for indic in id_indicateur:
-    		for question in indic.questions:
-				count= count + 1
-				somme = somme + question.question_value
-				indic.valeur = somme / count """
 				
 class SurveyQuestion(models.Model):
-    
-    """
-    action = {
-                "type": "ir.actions.act_window",
-                "view_mode": "form",
-                "res_model": object._name,
-                "res_id": object.id,
-            }
-    """
 
     """ Questions that will be asked in a survey.
 
@@ -637,18 +577,14 @@ class SurveyQuestion(models.Model):
                                 string='Survey')
     sequence = fields.Integer('Sequence', default=10)
 
-    # Indicateur
-
-    indicateur_id = fields.Many2one('survey.indicateur',
-                                    string='Indicateur')
+  
 
     # Valeur de la question (Moyenne des Reponses)
 
     question_value = fields.Float('Valeur de la Question', default=0.0)
-    fonction_calcul=fields.Float('Fonction de Calcul',default=1)
+    
 
-    #Data Model
-    #data_model_id=fields.Many2One('survey.data_model',string='Modele de donnees')
+    
 
     # Question
 
@@ -758,34 +694,6 @@ class SurveyQuestion(models.Model):
                         ), ('validation_date',
                         'CHECK (validation_min_date <= validation_max_date)'
                         , 'Max date cannot be smaller than min date!')]
-
-
-    
-        
-
-    @api.one
-    def update_related_indicator(self, question_id):
-        
-        #count = 0
-        #somme = 0
-        #questions = self.env['survey.question'].browse(question_id)
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        _logger.warning("testing the new approach")
-        #question_calculation()
-        #for question in questions:
-        _logger.warning("self.indicateur_id.id  == %s",self.indicateur_id.id)
-        _logger.warning("self.indicateur_id.fonction_calcul.id  == %s",self.indicateur_id.fonction_calcul.id)
-        return {
-                "type": "ir.actions.server",
-                "id": self.indicateur_id.fonction_calcul.id,
-                "context": {"active_id": self.indicateur_id.id, "active_model": "survey.indicateur"}
-        }
     
 
     @api.onchange('validation_email')
@@ -1280,16 +1188,6 @@ class SurveyUserInputLine(models.Model):
                           )
             return False
         else:
-            _logger.warning("testing the new approach")
-            _logger.warning("question.indicateur_id.fonction_calcul.id %s",question.indicateur_id.fonction_calcul.id)
-            _logger.warning("question.indicateur_id.id %s",question.indicateur_id.id)
-            self.ensure_one()
-            action= {
-            "type": "ir.actions.server",
-            "id": question.indicateur_id.fonction_calcul.id,
-            "context": {"active_id": question.indicateur_id.id, "active_model": "survey.indicateur"}
-            }
-            return action
             saver(user_input_id, question, post, answer_tag)
             
 
