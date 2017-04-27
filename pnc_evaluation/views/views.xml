@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="pnc_evaluation.list">
+      <field name="name">pnc_evaluation list</field>
+      <field name="model">pnc_evaluation.pnc_evaluation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="pnc_evaluation.action_window">
+      <field name="name">pnc_evaluation window</field>
+      <field name="res_model">pnc_evaluation.pnc_evaluation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="pnc_evaluation.action_server">
+      <field name="name">pnc_evaluation server</field>
+      <field name="model_id" ref="model_pnc_evaluation_pnc_evaluation"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="pnc_evaluation" id="pnc_evaluation.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="pnc_evaluation.menu_1" parent="pnc_evaluation.menu_root"/>
+    <menuitem name="Menu 2" id="pnc_evaluation.menu_2" parent="pnc_evaluation.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="pnc_evaluation.menu_1_list" parent="pnc_evaluation.menu_1"
+              action="pnc_evaluation.action_window"/>
+    <menuitem name="Server to list" id="pnc_evaluation" parent="pnc_evaluation.menu_2"
+              action="pnc_evaluation.action_server"/>
+    -->
+  </data>
+</odoo>
