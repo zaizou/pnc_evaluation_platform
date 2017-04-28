@@ -55,9 +55,9 @@ class Indicator(models.Model):
 				somme = somme + question.question_value
 				indic.valeur = somme / count """
 
-class SurveyQuestion(models.Model):
+class SurveyQuestionExtend(models.Model):
     _inherit='survey.question'
-      # Indicateur
+      # Indicateur.
     indicateur_id = fields.Many2one('survey.indicateur',string='Indicateur')
     #Data Model
     #data_model_id=fields.Many2One('survey.data_model',string='Modele de donnees')
@@ -85,6 +85,16 @@ class SurveyQuestion(models.Model):
                 "id": self.indicateur_id.fonction_calcul.id,
                 "context": {"active_id": self.indicateur_id.id, "active_model": "survey.indicateur"}
         }
+class SurveyUserInputLineExtend(models.Model):
+    _inherit='survey.user_input_line'
+    valeur=fields.Float('Numerical value')
 
+    @api.model
+    def save_lines(self,user_input_id,question,post,answer_tag,):
+        call=super(SurveyUserInputLineExtend,self).save_lines(user_input_id,question,post,answer_tag)
+        _logger.warning("child called")
+        _logger.warning("child called")
+        _logger.warning("child called")
+        _logger.warning("child called")
+        return call
 
-            
