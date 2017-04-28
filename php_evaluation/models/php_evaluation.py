@@ -28,7 +28,7 @@ class Indicator(models.Model):
     valeur = fields.Float("Valeur indicator", default=0.0)
     parent_indicator = fields.Many2one('php_evaluation.indicator',
             string='indicator Parent', ondelete='SET NULL')
-    questions = fields.One2many('php_evaluation.question', 'indicator_id',
+    questions = fields.One2many('survey.question', 'indicator_id',
                                 string='Questions', copy=True)
     agregation_level_id=fields.Many2one('php_evaluation.agregation_level',string='Niveau d Agregation ', ondelete='SET NULL')
     calculation_function=fields.Many2one('ir.actions.server',string='Fonction de Calcul', ondelete='SET NULL')
@@ -58,7 +58,7 @@ class Indicator(models.Model):
 class SurveyQuestionExtend(models.Model):
     _inherit='survey.question'
       # indicator.
-    indicator_id = fields.Many2one('survey.indicator',string='indicator')
+    indicator_id = fields.Many2one('php_evaluation.indicator',string='indicator')
     #Data Model
     #data_model_id=fields.Many2One('survey.data_model',string='Modele de donnees')
 
