@@ -8,7 +8,7 @@ class AgregationLevel(models.Model):
     name=fields.Char('Niveau d Agregation',required=True, translate=True)
     agregation_level_parent_parent_id=fields.Many2one('php_evaluation.agregation_level',string='Niveau d Agregation Parent', ondelete='SET NULL')
     agregation_level_child_id=fields.Many2one('php_evaluation.agregation_level',string='Niveau Agregation Fils ', ondelete='SET NULL')
-    indicator_ids=fields.One2many('php_evaluation.indicator','agregation_level_id',string='Indicateurs')
+    indicator_ids=fields.One2many('php_evaluation.indicator','agregation_level_id',string='indicators')
     
 class DataModel(models.Model):
     _name = 'php_evaluation.data_model'
@@ -23,16 +23,16 @@ class CalculationFunction(models.Model):
 
 class Indicator(models.Model):
     _name = 'php_evaluation.indicator'
-    _description = 'PNC Indicateur'
-    name = fields.Char('Indicateur Name', required=True, translate=True)
-    valeur = fields.Float("Valeur Indicateur", default=0.0)
+    _description = 'PNC indicator'
+    name = fields.Char('indicator Name', required=True, translate=True)
+    valeur = fields.Float("Valeur indicator", default=0.0)
     parent_indicator = fields.Many2one('php_evaluation.indicator',
-            string='Indicateur Parent', ondelete='SET NULL')
+            string='indicator Parent', ondelete='SET NULL')
     questions = fields.One2many('php_evaluation.question', 'indicator_id',
                                 string='Questions', copy=True)
     agregation_level_id=fields.Many2one('php_evaluation.agregation_level',string='Niveau d Agregation ', ondelete='SET NULL')
     calculation_function=fields.Many2one('ir.actions.server',string='Fonction de Calcul', ondelete='SET NULL')
-    poids=fields.Integer('Poids de l Indicateur', default=1)
+    poids=fields.Integer('Poids de l indicator', default=1)
     max_value=fields.Float("Valeur Max", default=0.0)
     min_value=fields.Float("Valeur Min", default=0.0)
     @api.multi
@@ -57,8 +57,8 @@ class Indicator(models.Model):
 
 class SurveyQuestionExtend(models.Model):
     _inherit='survey.question'
-      # Indicateur.
-    indicateur_id = fields.Many2one('survey.indicateur',string='Indicateur')
+      # indicator.
+    indicator_id = fields.Many2one('survey.indicator',string='indicator')
     #Data Model
     #data_model_id=fields.Many2One('survey.data_model',string='Modele de donnees')
 
@@ -78,12 +78,12 @@ class SurveyQuestionExtend(models.Model):
         _logger.warning("testing the new approach")
         #question_calculation()
         #for question in questions:
-        _logger.warning("self.indicateur_id.id  == %s",self.indicateur_id.id)
-        _logger.warning("self.indicateur_id.fonction_calcul.id  == %s",self.indicateur_id.fonction_calcul.id)
+        _logger.warning("self.indicator_id.id  == %s",self.indicator_id.id)
+        _logger.warning("self.indicator_id.fonction_calcul.id  == %s",self.indicator_id.fonction_calcul.id)
         return {
                 "type": "ir.actions.server",
-                "id": self.indicateur_id.fonction_calcul.id,
-                "context": {"active_id": self.indicateur_id.id, "active_model": "survey.indicateur"}
+                "id": self._id.fonction_calcul.id,
+                "context": {"active_id": self._id.id, "active_model": "survey.indicator"}
         }
 class SurveyUserInputLineExtend(models.Model):
     _inherit='survey.user_input_line'
