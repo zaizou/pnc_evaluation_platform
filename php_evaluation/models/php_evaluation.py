@@ -7,15 +7,14 @@ class AgregationLevel(models.Model):
     _description = u"Niveau d\'Agrégationn  d\'un indicatneur : Evaluation Subjective Action, Evaluation Objective Action, Action, Objectif, Axe "
     name = fields.Char('Niveau d Agregation',required=True, translate=True)
     agregation_level_parent_parent_id = fields.Many2one('php_evaluation.agregation_level',string='Niveau d Agregation Parent', ondelete='SET NULL')
-    agregation_level_child_id = fields.Many2one('php_evaluation.agregation_level',string='Niveau Agregation Fils ', ondelete='SET NULL')
-    indicator_ids = fields.One2many('php_evaluation.indicator','agregation_level_id',string='indicators')
+    agregation_level_childs_ids = fields.One2many('php_evaluation.agregation_level','agregation_level_parent_parent_id',string=u"Niveaux d\'agrégation fils ")
+    instances_ids = fields.One2many('php_evaluation.agregation_level_instance','agregation_level_id',string='Instances')
 
 class AgregationLevelInstance(models.Model):
     _name = 'php_evaluation.agregation_level_instance'
     _description = 'Niveau d Agregationn : Axe 01 : Prevention, Axe 02 , Objectif 01 ... '
     name = fields.Char('Niveau d Agregation',required=True, translate=True)
-    agregation_level_instance_parent_id = fields.Many2one('php_evaluation.agregation_level_instance',string='Niveau d Agregation Parent', ondelete='SET NULL')
-    agregation_level_instance_child_id = fields.Many2one('php_evaluation.agregation_level',string='Niveau Agregation Fils ', ondelete='SET NULL')
+    agregation_level_id = fields.Many2one('php_evaluation.agregation_level',string=u"Niveau d\'agrégation (Catégorie)", ondelete='SET NULL')
     indicator_ids = fields.One2many('php_evaluation.indicator','agregation_level_id',string='indicators')
     
 class DataModel(models.Model):
@@ -47,13 +46,14 @@ class Indicator(models.Model):
     _description = 'PNC indicator'
     name = fields.Char('Nom de l\'indicateur', required=True, translate=True)
     valeur = fields.Float("Valeur de l\'indicator", default=0.0)
-    parent_indicator = fields.Many2one('php_evaluation.indicator',
-            string='indicator Parent', ondelete='SET NULL')
+    parent_indicator_id = fields.Many2one('php_evaluation.indicator',
+            string='indicateur parent', ondelete='SET NULL')
+    child_indicators_ids = fields.One2many('php_evaluation.indicator','parent_indicator_id',string='Sous indicateurs')
     questions = fields.One2many('survey.question', 'indicator_id',
                                 string='Questions', copy=True)
-    agregation_level_id=fields.Many2one('php_evaluation.agregation_level',string='Niveau d Agregation ', ondelete='SET NULL')
-    calculation_function=fields.Many2one('ir.actions.server',string='Fonction de Calcul', ondelete='SET NULL')
-    weight=fields.Integer('Poids de l indicator', default=1)
+    agregation_level_id=fields.Many2one('php_evaluation.agregation_level_instance',string=u"Niveau d\'agrégation", ondelete='SET NULL')
+    calculation_function=fields.Many2one('ir.actions.server',string='Fonction de calcul', ondelete='SET NULL')
+    weight=fields.Integer('Poids de l\'indicator', default=1)
     max_value=fields.Float("Valeur Max", default=0.0)
     min_value=fields.Float("Valeur Min", default=0.0)
     @api.multi
@@ -85,7 +85,7 @@ class IndicatorCategory(models.Model):
 class SurveyQuestionExtend(models.Model):
     _inherit = 'survey.question'
       # indicator.
-    indicator_id = fields.Many2one('php_evaluation.indicator',string='indicator')
+    indicator_id = fields.Many2one('php_evaluation.indicator',string=u"Indicateur associé")
     #Data Model
     #data_model_id=fields.Many2One('survey.data_model',string='Modele de donnees')
 
