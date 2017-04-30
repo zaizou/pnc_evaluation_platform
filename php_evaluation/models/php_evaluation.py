@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
+import logging
 from odoo import models, fields, api
+_logger = logging.getLogger(__name__)
 
 class AgregationLevel(models.Model):
     _name = 'php_evaluation.agregation_level'
@@ -91,10 +92,6 @@ class SurveyQuestionExtend(models.Model):
 
     @api.one
     def update_related_indicator(self, question_id):
-        
-        #count = 0
-        #somme = 0
-        #questions = self.env['survey.question'].browse(question_id)
         _logger.warning("testing the new approach")
         _logger.warning("testing the new approach")
         _logger.warning("testing the new approach")
@@ -106,11 +103,12 @@ class SurveyQuestionExtend(models.Model):
         #question_calculation()
         #for question in questions:
         _logger.warning("self.indicator_id.id  == %s",self.indicator_id.id)
-        _logger.warning("self.indicator_id.fonction_calcul.id  == %s",self.indicator_id.fonction_calcul.id)
-        return {
+        _logger.warning("self.indicator_id.fonction_calcul.id  == %s",self.indicator_id.calculation_function.id)
+        self.ensure_one()
+        action =  {
                 "type": "ir.actions.server",
-                "id": self._id.fonction_calcul.id,
-                "context": {"active_id": self._id.id, "active_model": "survey.indicator"}
+                "id": self.indicator_id.calculation_function.id,
+                "context": {"active_id": self.indicator_id.id, "active_model": "survey.indicator"}
         }
 class SurveyUserInputLineExtend(models.Model):
     _inherit='survey.user_input_line'
@@ -118,10 +116,13 @@ class SurveyUserInputLineExtend(models.Model):
 
     @api.model
     def save_lines(self,user_input_id,question,post,answer_tag,):
+        _logger.warning("child called")
+        _logger.warning("child called")
+        _logger.warning("child called")
+        _logger.warning("child called")
         call=super(SurveyUserInputLineExtend,self).save_lines(user_input_id,question,post,answer_tag)
-        _logger.warning("child called")
-        _logger.warning("child called")
-        _logger.warning("child called")
-        _logger.warning("child called")
+        questions=self.env['survey.question'].browse(question)
+        for question in question:
+            question.update_related_indicator(question)
         return call
 

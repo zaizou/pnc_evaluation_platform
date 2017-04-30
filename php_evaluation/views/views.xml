@@ -1,6 +1,25 @@
 <odoo>
   <data>
 
+  <!--
+
+  Extending survey views
+
+  -->
+       <record model="ir.ui.view" id="question_form_view_extend">
+            <field name="name">question.form</field>
+			<field name="model">survey.question</field>
+            <field name="inherit_id" ref="survey.survey_question_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="after">
+                   <page string="Evaluation">
+                        <field  name="indicator_id"/>
+                    </page>
+                </xpath>
+            </field>
+       </record>
+
+
   <!-->
     <record model="ir.ui.view" id="fonction_calcul_form_view">
 			<field name="name">fonction_calcul.form</field>
