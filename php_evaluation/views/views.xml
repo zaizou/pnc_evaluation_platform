@@ -112,7 +112,7 @@
 							</page>
 							<page string="indicateurs">
 								<group>
-									<field name="parent_indicator"/>
+									<field name="parent_indicator_id"/>
 								</group>
 							</page>
 							<page string="Valeur">
@@ -274,12 +274,12 @@
 							
 							<field name="agregation_level_parent_parent_id"/>
 							
-							<field name="agregation_level_child_id"/>
+							<field name="agregation_level_childs_ids"/>
 							
 						</group>
 
 						<group>
-							<field name="indicator_ids"/>
+							
 						</group>
 					</sheet>
 				</form>
