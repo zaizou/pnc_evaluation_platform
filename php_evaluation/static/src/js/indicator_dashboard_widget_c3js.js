@@ -16,6 +16,7 @@ odoo.define('indicateur_dashboard', function(require) {
         },
 
         display_graph: function() {
+
             var self = this;
             //self.svg = d3.select(self.$el.find('svg')[0])
             //self.svg = d3.select(this.$el).append('svg');
@@ -45,6 +46,32 @@ odoo.define('indicateur_dashboard', function(require) {
                     .call(self.chart);
 
             });
+
+
+
+            //var svg = d3.select(this.$el[0]).append('svg');
+            //self.svg.datum([100]);
+            //self.svg.transition().duration(100);
+            //self.chart(self.svg);
+            // self.svg.datum([100]).transition().duration(1200).call(self.chart);
+
+
+
+
+            //  this.to_remove = self.chart.update;
+            //nv.utils.onWindowResize(self.chart.update);
+            //return chart;
+            //nv.addGraph(self.chart);
+            //return self.chart;
+
+            /* var svg = d3.select(self.$el.find('svg')[0]);
+             svg.datum(self.data)
+                 .transition().duration(1200);
+             //.call(self.chart);
+             chart(svg);
+             self.customize_chart();
+
+             nv.utils.windowResize(self.on_resize);*/
 
         },
 

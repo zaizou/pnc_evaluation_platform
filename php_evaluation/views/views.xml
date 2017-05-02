@@ -171,10 +171,10 @@
                 <field name="kanban_dashboard"/>
             
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="kanban-box" >
+                        
                         <div t-attf-class="#{kanban_color(0)}">
                             <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
-                            <!--<t t-value="record.type.raw_value" t-set="journal_type"/>-->
                             <t t-call="IndicateurTop"/>
                             <div class="container o_kanban_card_content o_visible">
                                 <t  t-call="IndicateurBodyGraph"/>
@@ -182,7 +182,9 @@
                             <div class="container o_kanban_card_manage_pane o_invisible">
                                 <t t-call="IndicateurManage"/>
                             </div>
-                        </div>
+
+                            </div>
+                        
                     </t>
 
                     <t t-name="IndicateurManage">
@@ -352,7 +354,7 @@
 		  <record model="ir.actions.act_window" id="action_php_evaluation_agregation_level_dashboard">
 			<field name="name">Niveaux du'Agregation</field>
 			<field name="res_model">php_evaluation.agregation_level</field>
-			<field name="view_mode">kanban</field>
+			<field name="view_mode">graph</field>
 		</record>
 
 	   <menuitem name="Niveaux du'Agregation Dashboard" id="menu_agregation_level_dashboard"
