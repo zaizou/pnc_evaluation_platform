@@ -701,19 +701,36 @@ odoo.define('web.GraphWidget', function(require) {
         },
         display_gauge_chart: function() {
             alert('the data 14 :' + this.data[0].value);
-            var chart1 = c3.generate({
-                bindto: this.$el[0],
-                data: {
-                    columns: [
-                        ['data', 75.0]
-                    ],
-                    type: 'gauge',
-                },
-                gauge: {
-                    min: 50,
-                    max: 100
+            var table = document.createComment('table');
+            $(this.$el[0]).append(table);
+            var line;
+            var cell;
+            for (var i = 0; i < 10; i++) {
+                if (i % 3 == 0) {
+                    line = document.createElement('tr');
+                    $(table).append(line);
                 }
-            });
+                cell = document.createElement('td');
+                cell.setAttribute("class", "cell" + i)
+                $(line).append(cell);
+
+                var chart1 = c3.generate({
+                    bindto: "td.cell" + i,
+                    data: {
+                        columns: [
+                            ['data', 75.0]
+                        ],
+                        type: 'gauge',
+                    },
+                    gauge: {
+                        min: 50,
+                        max: 100
+                    }
+                });
+
+            }
+
+
             /*alert('the data 14 :' + this.data[0].value);
                         
             for (var i = 0; i < this.data.length; i++) {

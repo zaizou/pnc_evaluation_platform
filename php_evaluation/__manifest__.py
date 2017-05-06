@@ -28,6 +28,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/php_templates.xml',
+        'views/indicator_report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

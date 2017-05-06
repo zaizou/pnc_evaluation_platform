@@ -1,11 +1,67 @@
 <odoo>
   <data>
 
-  <!--
 
-  Extending survey views
+     
 
-  -->
+
+
+      <record model="ir.ui.view" id="eval_my_dash_view">
+            <field name="name">My Dashboard</field>
+            <field name="model">php_evaluation.indicator</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                        <t t-foreach="docs" t-as="o">
+                                <div t-attf-class="#{kanban_color(0)}">
+                                   <t t-value="JSON.parse(o.kanban_dashboard.raw_value)" t-set="dashboard"/>
+                                    <div class="container o_kanban_card_content o_visible">
+                                        <div t-field-options='{"widget": "contact", "fields": ["address","my_field","name"]'></div>
+                                        <field name="kanban_dashboard_graph"  widget="indicateur_dashboard_graph"/>
+                                        <t  t-call="IndicateurBodyGraph"/>
+                                    </div>
+                                </div>
+                        </t>
+                </form>
+            </field>
+        </record>
+
+
+           <record model="ir.ui.view" id="indicator_test_view">
+			<field name="name">indicator.test</field>
+			<field name="model">php_evaluation.indicator</field>
+			<field name="arch" type="xml">
+                <form>
+                <template>
+                        <t t-foreach="docs" t-as="o">
+                                <div t-attf-class="#{kanban_color(0)}">
+                                   <t t-value="JSON.parse(o.kanban_dashboard.raw_value)" t-set="dashboard"/>
+                                    <div class="container o_kanban_card_content o_visible">
+                                        <div t-field="o.kanban_dashboard" t-field-options='{"widget": "indicateur_dashboard_graph", "fields": ["o.kanban_dashboard"]'></div>
+                                    </div>
+                                </div>
+                        </t>
+				 
+                   </template>
+                   </form>
+			</field>
+		</record>
+
+
+        <record model="ir.actions.act_window" id="php_evaluation_dash">
+			<field name="name">Indic Dashboard</field>
+			<field name="res_model">php_evaluation.indicator</field>
+            <field name="view_id" ref="indicator_test_view"/>
+			<field name="view_mode">form</field>
+		</record>
+
+
+        <menuitem name="Tableau de Bord" id="menu_pnc_dashboard"
+		 action="php_evaluation_dash" parent="menu_php_evaluation" sequence="5"/>
+
+
+          
+
+
        <record model="ir.ui.view" id="question_form_view_extend">
             <field name="name">question.form</field>
 			<field name="model">survey.question</field>
@@ -13,106 +69,21 @@
 			<field name="arch" type="xml">
                 <xpath expr="//notebook/page[1]" position="after">
                    <page string="Evaluation">
+                   <!--
                         <field  name="indicator_id"/>
+                        -->
                     </page>
                 </xpath>
             </field>
        </record>
 
 
-  <!-->
-    <record model="ir.ui.view" id="fonction_calcul_form_view">
-			<field name="name">fonction_calcul.form</field>
-			<field name="model">survey.fonction_calcul</field>
-			<field name="arch" type="xml">
-				<form string="Calculation Function Form">
-                    <sheet>
-						<div class="oe_button_box" name="button_box">
-                            <field name="menu_ir_values_id" invisible="1"/>
-                            <button name="create_action" string="Add in the 'More' menu" type="object"
-                                    attrs="{'invisible':[('menu_ir_values_id','!=',False)]}"
-                                    help="Display an option on related documents to run this sever action"/>
-                            <button name="unlink_action" string="Remove from the 'More' menu" type="object" 
-                                    attrs="{'invisible':[('menu_ir_values_id','=',False)]}"
-                                    help="Remove the contextual action related to this server action"/>
-                        </div>
-                        <div class="oe_title">
-                            <label for="name" class="oe_edit_only"/>
-                            <h1><field name="name" placeholder="e.g. Update order quantity"/></h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="type" invisible="1"/>
-                                <field name="model_id"/>
-                                <field name="state"/>
-                            </group>
-                            <group>
-                                <field name="condition"/>
-                                <field name="sequence"/>
-                            </group>
-                        </group>
-
-
-
-                        <notebook colspan="4">
-                            <page string="Python Code" name="code" autofocus="autofocus">
-                                <field name="code" widget="ace" options="{'mode': 'python'}" placeholder="Enter Python code here. Help about Python expression is available in the help tab of this document."/>
-                            </page>
-
-
-                            <page string="Help">
-                                <group>
-                                    <div style="margin-top: 4px;">
-                                        <h3>Help with Python expressions.</h3>
-                                        <p>Various fields may use Python code or Python expressions. The following variables can be used:</p>
-                                        <ul>
-                                            <li>env: Odoo Environement on which the action is triggered</li>
-                                            <li>record: browse_record of the record on which the action is triggered</li>
-                                            <li>time, datetime, timezone: Python module</li>
-                                            <li>log(message, level='info'): a logging function to create ir_logging records</li>
-                                        </ul>
-                                        <div>
-                                            <p>Example of condition expression using Python</p>
-                                            <ul>
-                                                <li>condition: True</li>
-                                                <li>condition: record.list_price &gt; 5000</li>
-                                            </ul>
-                                        </div>
-                                        <div >
-                                            <p>Example of python code</p>
-												<code style="white-space: pre-wrap">
-													partner_name = record.name + '_code'
-													env["res.partner"].create({"name": partner_name})
-												</code>
-                                        </div>
-                                    </div>
-                                    <group>
-                                        <h3 colspan="2">Dynamic expression builder</h3>
-                                        <p colspan="2" >
-                                            Please set the Base Model of the action to enable the dynamic expression buidler.
-                                        </p>
-                                        <field name="model_object_field" />
-                                        <field name="sub_object" readonly="1" />
-                                        <field name="sub_model_object_field" />
-                                        <field name="copyvalue" />
-                                        <h3 colspan="2">Find the ID of a record in the database</h3>
-                                        <field name="id_object"/>
-                                        <field name="id_value"/>
-                                    </group>
-                                </group>
-                            </page>
-                        </notebook>
-                    </sheet>
-				</form>
-			</field>
-	</record>
-  -->
-
 		<!-- Indicateurs-->
+        
 	   <record model="ir.ui.view" id="indicateur_form_view">
 			<field name="name">indicator.form</field>
 			<field name="model">php_evaluation.indicator</field>
-			<field name="arch" type="xml">
+			<field name="arch" type="html">
 				<form string="Indicateur Form">
 					<sheet>
 						<group>
@@ -138,6 +109,9 @@
 								<field name="calculation_function" />
 								<field name="valeur"/>
 							</page>
+                            <page string="test">
+                                <field name="kanban_dashboard_graph"  widget="indicateur_dashboard_graph"/>
+                            </page>
 						</notebook>
 					</sheet>
 				</form>
@@ -164,16 +138,14 @@
             <kanban create="false" class="oe_background_grey o_kanban_dashboard o_account_kanban">
                 <field name="id"/>
                 <field name="name"/>
-                <!--
-                <field name="type"/>
-				-->
+               
                 <field name="show_on_dashboard"/>
                 <field name="kanban_dashboard"/>
             
                 <templates>
                     <t t-name="kanban-box" >
                         
-                        <div t-attf-class="#{kanban_color(0)}">
+                        <div style="width: 700px;" class="o_kanban_four_column_tags oe_kanban_global_click" t-attf-class="#{kanban_color(0)}">
                             <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
                             <t t-call="IndicateurTop"/>
                             <div class="container o_kanban_card_content o_visible">
@@ -186,6 +158,9 @@
                             </div>
                         
                     </t>
+
+                  
+
 
                     <t t-name="IndicateurManage">
                         
@@ -200,6 +175,8 @@
                                 <!--<div class="o_secondary" t-att-title="dashboard.title"> -->
                                     <!--<field name="type"/>-->
                                 <!--</div>-->
+
+                           
                             </div>
                             <div class="o_kanban_manage_button_section">
                                 <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
