@@ -303,9 +303,51 @@
         <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="php_evaluation,static/description/icon.png"/>
 
 
+         <menuitem name="Le Plan" id="pnc_documents"
+		  parent="menu_php_evaluation" sequence="0"/>
+
+         <menuitem name="Plan Cancer" id="pnc_programs"
+		  parent="pnc_documents" sequence="1"/>
+
+         <menuitem name="Plan Cancer 2015 - 2019" id="pnc_programs_current"
+		 action="survey.action_survey_form" parent="pnc_programs" sequence="1"/>
+
+         <menuitem name="Plans d'action" id="plan_action"
+		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
+
+         <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
+		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
+
+         <menuitem name="Evaluations" id="pnc_evaluation"
+		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
+
+         <menuitem name="Groupes de Travail" id="pnc_evaluation"
+		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
+
+
+         <menuitem name="Suivi" id="pnc_suivi"
+		  parent="menu_php_evaluation" sequence="0"/>
+
+          <menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
+		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+
+          <menuitem name="Réunions groupes de travail" id="reunions_gt"
+		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+
+
+
+          <menuitem name="Evaluation" id="pnc_evaluation"
+		  parent="menu_php_evaluation" sequence="0"/>
+
+
+
+
+         
+
+<!--
         <menuitem name="Surveys" id="menu_php_evaluation_form" action="survey.action_survey_form" parent="menu_php_evaluation" sequence="1"/>
         <menuitem name="Answers" id="menu_php_evaluation_type_form1" action="survey.action_survey_user_input" parent="menu_php_evaluation" sequence="1"/>
-
+-->
 
 	
 		<record model="ir.actions.act_window" id="action_php_evaluation_indicators">
