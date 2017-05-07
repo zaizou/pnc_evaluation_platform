@@ -5,7 +5,7 @@ _logger = logging.getLogger(__name__)
 
 class AgregationLevel(models.Model):
     _name = 'php_evaluation.agregation_level'
-    _description = u"Niveau d\'Agrégationn  d\'un indicatneur : Evaluation Subjective Action, Evaluation Objective Action, Action, Objectif, Axe "
+    _description = u"Niveau d\'Agrégationn hh d\'un indicatneur : Evaluation Subjective Action, Evaluation Objective Action, Action, Objectif, Axe "
     name = fields.Char('Niveau d Agregation',required=True, translate=True)
     description = fields.Char('Description du niveau')
     level = fields.Selection(selection=[('axe','Axe'),('objectif','Objectif'),('action','Action'),('mesure','Mesure')],string=u"Niveau d\'agrégation",)

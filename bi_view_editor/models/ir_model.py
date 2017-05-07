@@ -5,6 +5,9 @@
 from odoo import api, models
 from odoo.modules.registry import RegistryManager
 
+import logging
+_logger = logging.getLogger(__name__)
+
 
 NO_BI_MODELS = [
     'temp.range',
@@ -83,11 +86,12 @@ class IrModel(models.Model):
             return 0
 
         model_model = model['model']
-        model_name = model['name']
+        model_name = u""+model['name'].replace("'","\\'")
+        _logger.warning("model name :  %s",model_name)
         count_check = 0
-        count_check += _check_name(model_model)
-        count_check += _check_startswith(model_model)
-        count_check += _check_contains(model_model)
+        # count_check += _check_name(model_model)
+        # count_check += _check_startswith(model_model)
+        # count_check += _check_contains(model_model)
         count_check += _check_unknow(model_name)
         if not count_check:
             return self.env['ir.model.access'].check(
@@ -287,8 +291,7 @@ class IrModel(models.Model):
         # # update registry
         if self._context.get('bve'):
             # setup models; this reloads custom models in registry
-            self.pool.setup_models(self._cr, partial=(not self.pool.ready))
-
+            self.env.setup_models(self._cr, partial=(not self.env.ready))
             # signal that registry has changed
             RegistryManager.signal_registry_change(self.env.cr.dbname)
 
