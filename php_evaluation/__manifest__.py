@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "pnc_evaluation",
-
+    'version' :'1.0',
     'summary': """
         Le module permettant de realiser 
         l'évaluation du Plan National Cancer
@@ -21,12 +21,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','survey'],
+    'depends': ['base','survey','document','hr','bi_view_editor'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
+        'views/pnc_documents.xml',
+        'views/pnc_stakeholders.xml',
+        'views/pnc_menus.xml',
         'views/php_templates.xml',
         'views/indicator_report.xml'
     ],
@@ -37,4 +40,7 @@
     'installable': True,
     'auto_install': False,
     'application': True,
+    'sequence': 105,
+    
+
 }

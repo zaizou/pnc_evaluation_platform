@@ -55,8 +55,7 @@
 		</record>
 
 
-        <menuitem name="Tableau de Bord" id="menu_pnc_dashboard"
-		 action="php_evaluation_dash" parent="menu_php_evaluation" sequence="5"/>
+        
 
 
           
@@ -270,6 +269,8 @@
 						<group>
 							<field name="name" class="oe_inline"/>
 							
+							<field name="level"/>
+
 							<field name="agregation_level_parent_parent_id"/>
 							
 							<field name="agregation_level_childs_ids"/>
@@ -297,47 +298,22 @@
 		</record>
 
 
+
+
+ 
+
+
+
+
+
+
 	<!-- Evaluation Action and Menu Items -->	
 
 
-        <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="php_evaluation,static/description/icon.png"/>
-
-
-         <menuitem name="Le Plan" id="pnc_documents"
-		  parent="menu_php_evaluation" sequence="0"/>
-
-         <menuitem name="Plan Cancer" id="pnc_programs"
-		  parent="pnc_documents" sequence="1"/>
-
-         <menuitem name="Plan Cancer 2015 - 2019" id="pnc_programs_current"
-		 action="survey.action_survey_form" parent="pnc_programs" sequence="1"/>
-
-         <menuitem name="Plans d'action" id="plan_action"
-		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
-
-         <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
-		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
-
-         <menuitem name="Evaluations" id="pnc_evaluation"
-		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
-
-         <menuitem name="Groupes de Travail" id="pnc_evaluation"
-		 action="survey.action_survey_form" parent="pnc_documents" sequence="2"/>
-
-
-         <menuitem name="Suivi" id="pnc_suivi"
-		  parent="menu_php_evaluation" sequence="0"/>
-
-          <menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
-		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
-
-          <menuitem name="Réunions groupes de travail" id="reunions_gt"
-		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+        
 
 
 
-          <menuitem name="Evaluation" id="pnc_evaluation"
-		  parent="menu_php_evaluation" sequence="0"/>
 
 
 
@@ -356,8 +332,7 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 
-		<menuitem name="Indicateurs" id="menu_survey_indicateurs"
-		 action="action_php_evaluation_indicators" parent="menu_php_evaluation" sequence="2"/>
+
 
 		 <record model="ir.actions.act_window" id="action_php_evaluation_indicators_dashboard">
 			<field name="name">Indicateurs</field>
@@ -365,8 +340,6 @@
 			<field name="view_mode">kanban</field>
 		</record>
 
-		 <menuitem name="Indicateurs Dashboard" id="menu_php_evaluation_indicators_dashboard"
-		 action="action_php_evaluation_indicators_dashboard" parent="menu_php_evaluation" sequence="3"/>
 
 		 
 
@@ -376,8 +349,7 @@
 			<field name="view_mode">graph</field>
 		</record>
 
-	   <menuitem name="Niveaux du'Agregation Dashboard" id="menu_agregation_level_dashboard"
-		 action="action_php_evaluation_agregation_level_dashboard" parent="menu_php_evaluation" sequence="5"/>
+
 
 		 <record model="ir.actions.act_window" id="action_php_evaluation_agregation_levels">
 			<field name="name">Niveaux d Agregation</field>
@@ -385,8 +357,7 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 
-		<menuitem name="Niveaux d Agregation" id="menu_php_evaluation_agregation_levels"
-		 action="action_php_evaluation_agregation_levels" parent="menu_php_evaluation" sequence="6"/>
+		
 
 
 

@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+      <!-- PNC groupes and users-->	
+
+      <!-- stackeholders views and actions -->
+		<record model="ir.ui.view" id="stakeholder_form_view">
+			<field name="name">stakeholder.form</field>
+			<field name="model">php_evaluation.stakeholder</field>
+			<field name="arch" type="xml">
+				<form string="Parties prenantes">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="groupes_ids" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+        
+
+
+        <record model="ir.ui.view" id="stakeholder_tree_view">
+			<field name="name">stakeholder.tree</field>
+			<field name="model">php_evaluation.stakeholder</field>
+			<field name="arch" type="xml">
+				<tree string="">
+					<field name="id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="php_evaluation_stakeholder">
+			<field name="name">Plan Cancer</field>
+			<field name="res_model">php_evaluation.stakeholder</field>
+            <field name="view_id" ref="stakeholder_tree_view"/>
+			<field name="view_mode">kanban,tree,form,graph</field>
+		</record>
+		
+  </data>
+</odoo>

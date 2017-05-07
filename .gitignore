@@ -33,7 +33,6 @@ base_import
 base_import_module
 base_setup
 base_vat
-bi_view_editor
 board
 bus
 calendar

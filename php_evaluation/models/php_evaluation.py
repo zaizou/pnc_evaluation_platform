@@ -146,14 +146,19 @@ class SurveyUserInputLineExtend(models.Model):
 class pnc_program(models.Model):
      _name = 'php_evaluation.pnc'
      _description = "Le Plan National Cancer"
+     name = fields.Char(u"Intitulé du Plan")
      agregation_level_ids = fields.One2many('php_evaluation.agregation_level','pnc_program_id',string = u"Structure du Plan",domain = [('level','=','axe')])
 class action_program(models.Model):
      _name = 'php_evaluation.pa'
      _description = "Programme d\'Action"
+     name = fields.Char(u"Intitulé du plan d'action")
+     date = fields.Date(u"Date d'établissement du Plan")
+    #  TODO ajout du modèle plan d'action 
      agregation_level_ids = fields.One2many('php_evaluation.agregation_level','action_program_id',string = u"Structure du Programme")
 class rapport_meo(models.Model):
      _name = 'php_evaluation.rmo'
      _description = "Rapport de mise en oeuvre"
+     name = fields.Char(u"Intitulé du rapport")
      formulaires_ids = fields.One2many('php_evaluation.fmo','rapport_moe_id',string=u"Formulaires de mise en oeuvre ") 
 class formulaire_moe(models.Model):
      _name = 'php_evaluation.fmo'
@@ -175,6 +180,7 @@ class date_cle(models.Model):
 class rapport_evalution(models.Model):
      _name = 'php_evaluation.re'
      _description = u"Rapport d\'évaluation"
+     name = fields.Char(u"Initulé du rapport")
      formulaires_evaluation_ids = fields.One2many('php_evaluation.fe','rapport_evaluation_id',string=u"Formulaires d\'évaluation")
      formulaires_inspection_ids = fields.One2many('php_evaluation.finspection','rapport_evaluation_id',string=u"Formulaires d\'inspection")
 class formulaire_evaluation(models.Model):
@@ -205,3 +211,16 @@ class formulaire_inspection(models.Model):
      constat = fields.Text(u"Constat")
      realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string='L\'Action a été')
      progress = fields.Text(u"Progrès accomplis")
+class partie_prenante(models.Model):
+     _name = 'php_evaluation.stakeholder'
+     _description = u"Les Parties Prenantes du Plan Cancer "
+     name = fields.Char(u"Nom")
+     groupes_ids = fields.One2many('hr.department','partie_prenante_id',string=u"Groupes")
+class pnc_groupe(models.Model):
+     _inherit = 'hr.department'
+     partie_prenante_id = fields.Many2one('php_evaluation.stakeholder',string=u"Partie prenante")
+class pnc_employee(models.Model):
+     _inherit = 'hr.employee'
+     specialite = fields.Char(u"Spécialité")
+     
+
