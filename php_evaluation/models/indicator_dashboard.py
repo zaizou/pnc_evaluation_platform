@@ -4,7 +4,7 @@ from odoo.tools.misc import formatLang
 
 
 class indicator_dashboard(models.Model):
-    _inherit = "php_evaluation.indicator"
+    _inherit = "phpevaluation.indicator"
 
     @api.one
     def _kanban_dashboard(self):

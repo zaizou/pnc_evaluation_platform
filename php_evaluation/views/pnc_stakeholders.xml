@@ -5,7 +5,7 @@
       <!-- stackeholders views and actions -->
 		<record model="ir.ui.view" id="stakeholder_form_view">
 			<field name="name">stakeholder.form</field>
-			<field name="model">php_evaluation.stakeholder</field>
+			<field name="model">phpevaluation.stakeholder</field>
 			<field name="arch" type="xml">
 				<form string="Parties prenantes">
 					<sheet>
@@ -22,7 +22,7 @@
 
         <record model="ir.ui.view" id="stakeholder_tree_view">
 			<field name="name">stakeholder.tree</field>
-			<field name="model">php_evaluation.stakeholder</field>
+			<field name="model">phpevaluation.stakeholder</field>
 			<field name="arch" type="xml">
 				<tree string="">
 					<field name="id"/>
@@ -31,9 +31,9 @@
 			</field>
 		</record>
 
-        <record model="ir.actions.act_window" id="php_evaluation_stakeholder">
+        <record model="ir.actions.act_window" id="phpevaluation_stakeholder">
 			<field name="name">Plan Cancer</field>
-			<field name="res_model">php_evaluation.stakeholder</field>
+			<field name="res_model">phpevaluation.stakeholder</field>
             <field name="view_id" ref="stakeholder_tree_view"/>
 			<field name="view_mode">kanban,tree,form,graph</field>
 		</record>

@@ -62,6 +62,7 @@ class IrModel(models.Model):
 
         def _check_name(model_model):
             if model_model in NO_BI_MODELS:
+                _logger.warning("_check_name  %s",model_model)    
                 return 1
             return 0
 
@@ -69,7 +70,8 @@ class IrModel(models.Model):
             if model_model.startswith('workflow') or \
                     model_model.startswith('ir.') or \
                     model_model.startswith('base_'):
-                return 1
+                        _logger.warning("_check_startswith %s",model_model)    
+                        return 1
             return 0
 
         def _check_contains(model_model):
@@ -77,21 +79,23 @@ class IrModel(models.Model):
                     '_' in model_model or \
                     'report' in model_model or \
                     'edi.' in model_model:
+                _logger.warning("_check_contains %s",model_model)  
                 return 1
             return 0
 
         def _check_unknow(model_name):
             if model_name == 'Unknow' or '.' in model_name:
+                _logger.warning("_check_unknow %s",model_model)    
                 return 1
             return 0
 
         model_model = model['model']
         model_name = u""+model['name'].replace("'","\\'")
-        _logger.warning("model name :  %s",model_name)
+        _logger.warning("--------------------->model model :  %s",model_model)
         count_check = 0
-        # count_check += _check_name(model_model)
-        # count_check += _check_startswith(model_model)
-        # count_check += _check_contains(model_model)
+        count_check += _check_name(model_model)
+        count_check += _check_startswith(model_model)
+        count_check += _check_contains(model_model)
         count_check += _check_unknow(model_name)
         if not count_check:
             return self.env['ir.model.access'].check(

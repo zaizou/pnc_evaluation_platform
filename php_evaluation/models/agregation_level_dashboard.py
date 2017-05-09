@@ -4,7 +4,7 @@ from odoo.tools.misc import formatLang
 
 
 class agregation_level(models.Model):
-    _inherit = "php_evaluation.agregation_level"
+    _inherit = "phpevaluation.agregation_level"
 
     @api.one
     def _kanban_dashboard(self):
