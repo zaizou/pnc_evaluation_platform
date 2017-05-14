@@ -1,0 +1,89 @@
+<odoo>
+  <data>
+      
+
+        <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="phpevaluation,static/description/icon.png"/>
+
+        <menuitem name="Le Plan National Cancer" id="pnc_documents"
+		  parent="menu_php_evaluation" sequence="0"/>
+
+         <menuitem name="Plan Cancer 2015 - 2019" id="pnc_programs_current"
+		 action="phpevaluation_pnc" parent="pnc_documents" sequence="0"/>
+
+         <menuitem name="Plans d'action" id="plan_action"
+		 action="phpevaluation_pa" parent="pnc_documents" sequence="10"/>
+
+         <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
+		 action="phpevaluation_rmo" parent="pnc_documents" sequence="20"/>
+
+         <menuitem name="Evaluations" id="pnc_evaluation"
+		 action="phpevaluation_re" parent="pnc_documents" sequence="30"/>
+
+         <menuitem name="Parties Prenantes" id="pnc_evaluation_stakeholders"
+		 action="" parent="pnc_documents" sequence="40"/>
+
+
+         <menuitem name="Suivi du Plan Cancer" id="pnc_suivi"
+		  parent="menu_php_evaluation" sequence="10"/>
+
+          <menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
+		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+
+          <menuitem name="Réunions groupes de travail" id="reunions_gt"
+		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+
+
+
+        <menuitem name="Evaluation du Plan Cancer" id="pnc_evaluation_section"
+		  parent="menu_php_evaluation" sequence="20"/>
+
+        <menuitem name="Rapports d'évaluation' " id="pnc_re"
+		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
+
+        <menuitem name="Réunions d'évaluation'" id="reunions_gt"
+		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
+
+        <menuitem name="Plannifiation des Inspections" id="reunions_gt"
+		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
+
+
+
+         <menuitem name="Tableau de Bord" id="menu_pnc_dashboard"
+		  parent="menu_php_evaluation" sequence="29"/>
+
+         <menuitem name="Génération d'un rapport" id="report_gen"
+		 action="bi_view_editor.action_bi_view_editor_view_form" parent="menu_pnc_dashboard" sequence="0"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash"
+		 action="board.open_board_my_dash_action" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Tableau de bord M" id="pnc_dash_test"
+		 action="phpevaluation_dash" parent="menu_pnc_dashboard" sequence="10"/>
+
+
+         
+
+
+         <menuitem name="Configuration" id="pnc_evaluation_config"
+		  parent="menu_php_evaluation" sequence="30"/>
+
+
+         <menuitem name="Indicateurs" id="menu_survey_indicateurs"
+		 action="action_phpevaluation_indicators" parent="pnc_evaluation_config" sequence="2"/>
+
+
+		 <menuitem name="Indicateurs Dashboard" id="menu_php_evaluation_indicators_dashboard"
+		 action="action_phpevaluation_indicators_dashboard" parent="pnc_evaluation_config" sequence="3"/>
+		 
+	     <menuitem name="Niveaux du'Agregation Dashboard" id="menu_agregation_level_dashboard"
+		 action="action_phpevaluation_agregation_level_dashboard" parent="pnc_evaluation_config" sequence="5"/>
+
+
+        <menuitem name="Niveaux d Agregation" id="menu_php_evaluation_agregation_levels"
+		 action="action_phpevaluation_agregation_levels" parent="pnc_evaluation_config" sequence="6"/>
+
+
+
+		
+  </data>
+</odoo>

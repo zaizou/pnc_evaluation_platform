@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+    
+    <template id="assets_backend" name="php_evaluation assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link href="/phpevaluation/static/src/css/c3.min.css" rel="stylesheet" type="text/css"/>
+                <script type="text/javascript" src="/phpevaluation/static/src/js/c3.js"></script>
+                <script type="text/javascript" src="/phpevaluation/static/src/js/agregation_level_dashboard_widget.js"></script>
+                <script type="text/javascript" src="/phpevaluation/static/src/js/indicator_dashboard_widget.js"></script>
+            </xpath>
+        </template>
+
+     
+        <!-- <template id="listing"> -->
+        <!--   <ul> -->
+        <!--     <li t-foreach="objects" t-as="object"> -->
+        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
+        <!--         <t t-esc="object.display_name"/> -->
+        <!--       </a> -->
+        <!--     </li> -->
+        <!--   </ul> -->
+        <!-- </template> -->
+        <!-- <template id="object"> -->
+        <!--   <h1><t t-esc="object.display_name"/></h1> -->
+        <!--   <dl> -->
+        <!--     <t t-foreach="object._fields" t-as="field"> -->
+        <!--       <dt><t t-esc="field"/></dt> -->
+        <!--       <dd><t t-esc="object[field]"/></dd> -->
+        <!--     </t> -->
+        <!--   </dl> -->
+        <!-- </template> -->
+    </data>
+</odoo>
