@@ -84,6 +84,7 @@
 			</field>
 		</record>
 
+<!--
 		<record model="ir.ui.view" id="pa_esi_view">
 			<field name="name">pa.esi</field>
 			<field name="model">phpevaluation.pa</field>
@@ -91,13 +92,13 @@
 				<esi></esi>
 			</field>
 		</record>
-
+-->
 
         <record model="ir.actions.act_window" id="phpevaluation_pa">
 			<field name="name">Plan Cancer</field>
 			<field name="res_model">phpevaluation.pa</field>
             <field name="view_id" ref="pa_tree_view"/>
-			<field name="view_mode">kanban,esi,gantt,tree,form,graph</field>
+			<field name="view_mode">kanban,gantt,tree,form,graph</field>
 		</record>
 
 

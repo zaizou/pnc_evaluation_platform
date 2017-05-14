@@ -2,7 +2,7 @@
   <data>
       
 
-        <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="php_evaluation,static/description/icon.png"/>
+        <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="phpevaluation,static/description/icon.png"/>
 
         <menuitem name="Le Plan National Cancer" id="pnc_documents"
 		  parent="menu_php_evaluation" sequence="0"/>
