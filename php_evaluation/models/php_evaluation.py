@@ -246,6 +246,7 @@ class projetPlanAction(models.Model):
      _inherit = 'project.project'
      _name = 'phpevaluation.actionplanproject'
      tasks = fields.One2many('phpevaluation.actionplantask','project_id',string=u"Tâches")
+     #TODO action niveau d'agregation
 class tachePlanAction(models.Model):
      _inherit = 'project.task'
      _name = 'phpevaluation.actionplantask'
@@ -256,11 +257,13 @@ class contribution(models.Model):
      type_contribution = fields.Selection(selection=[('doc','Documentation'),('rea',u"Réalisation")],string=u"Type de la contribution")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
      reunion_coordination_id = fields.Many2one('phpevaluation.reu_coor',string=u"Réunion")
-
      
+
+    
 class reunionCoordination(models.Model):
      _inherit = 'calendar.event'
      _name = 'phpevaluation.reu_coor'
+     #TODO date
      contributions_ids = fields.One2many('phpevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs invités")

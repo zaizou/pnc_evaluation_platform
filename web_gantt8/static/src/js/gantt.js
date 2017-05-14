@@ -18,20 +18,30 @@ odoo.define('web_gantt8.gantt', function(require) {
         view_type: "gantt8",
         icon: 'fa-tasks',
         init: function() {
+            console.log("init Called");
             this._super.apply(this, arguments);
             this.has_been_loaded = $.Deferred();
             this.chart_id = _.uniqueId();
         },
         willStart: function() {
+            console.log("WillStart Called");
+
             var self = this;
             this.$el.addClass(this.fields_view.arch.attrs['class']);
             return self.alive(new Model(this.dataset.model)
                 .call('fields_get')).then(function(fields) {
                 self.fields = fields;
+
+                console.log("this.dataset.model : " + self.dataset.model);
+                console.log("this.dataset");
+                console.log(self.dataset);
+                console.log(self.fields);
+
                 self.has_been_loaded.resolve();
             });
         },
         do_search: function(domains, contexts, group_bys) {
+            console.log("doSearch Called");
             var self = this;
             self.last_domains = domains;
             self.last_contexts = contexts;
@@ -55,15 +65,21 @@ odoo.define('web_gantt8.gantt', function(require) {
                     domain: domains,
                     context: contexts
                 }).then(function(data) {
+                    console.log("calling on_data_loaded");
+                    console.log(data);
                     return self.on_data_loaded(data, n_group_bys);
+
                 });
             });
         },
         reload: function() {
+            console.log("reload Called");
+            console.log("calling do_search");
             if (this.last_domains !== undefined)
                 return this.do_search(this.last_domains, this.last_contexts, this.last_group_bys);
         },
         on_data_loaded: function(tasks, group_bys) {
+            console.log("on_data_loaded Called");
             var self = this;
             var ids = _.pluck(tasks, "id");
             return this.dataset.name_get(ids).then(function(names) {
@@ -74,6 +90,7 @@ odoo.define('web_gantt8.gantt', function(require) {
             });
         },
         on_data_loaded_2: function(tasks, group_bys) {
+            console.log("on_data_loaded_2 Called");
             var self = this;
             $(".oe_gantt", this.$el).html("");
 
@@ -216,6 +233,7 @@ odoo.define('web_gantt8.gantt', function(require) {
             this.$el.find(".oe_gantt td:first > div, .oe_gantt td:eq(1) > div > div").css("overflow", "");
         },
         on_task_changed: function(task_obj) {
+            console.log("on_task_changed Called");
             var self = this;
             var itask = task_obj.TaskInfo.internal_task;
             var start = task_obj.getEST();
@@ -238,21 +256,25 @@ odoo.define('web_gantt8.gantt', function(require) {
             this.dataset.write(itask.id, data);
         },
         on_task_display: function(task) {
+            console.log("on_task_display Called");
             var self = this;
             var pop = new form_common.FormViewDialog(self, {
                 res_model: self.dataset.model,
                 res_id: task.id
             }).open();
             pop.on('write_completed', self, function() {
+                console.log("calling reload");
                 self.reload();
             });
         },
         on_task_create: function() {
+            console.log("on_task_create Called");
             var self = this;
             new form_common.SelectCreateDialog(this, {
                 res_model: self.dataset.model,
                 initial_view: "form",
                 on_selected: function() {
+                    console.log("calling reload");
                     self.reload();
                 }
             }).open();

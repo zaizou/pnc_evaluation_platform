@@ -1,0 +1,13 @@
+,
+        init: function() {
+
+        },
+        willStart: function() {
+
+        },
+        do_search: function() {
+
+        },
+        reload: function() {
+
+        }
