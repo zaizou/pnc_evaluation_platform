@@ -152,6 +152,11 @@
                             <field name="name" />
 							<field name="date" />
 						</group>
+						<group>
+							<field name="axes_ids"  widget="many2many_tags"/>
+							<field name="objectifs_ids"  widget="many2many_tags"/>
+							<field name="action_ids"  widget="many2many_tags"/>
+						</group>
 					</sheet>
 				</form>
 			</field>
