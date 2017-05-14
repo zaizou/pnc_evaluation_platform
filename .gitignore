@@ -290,5 +290,8 @@ web_kanban_gauge
 web_planner
 web_settings_dashboard
 web_tour
+survey
+web
+web_editor
 __init__.py
 __init__.pyc

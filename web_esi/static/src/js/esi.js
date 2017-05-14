@@ -79,65 +79,17 @@ odoo.define('web_esi.esi', function(require) {
                     console.log("data is :  " + data);
                     console.log(data);
                     $(elemBody).empty();
-
-                    var img = (ecart > 0) ? "up.png" : "down.png";
-
+                    //var img = (ecart > 0) ? "up.png" : "down.png";
                     for (var i = 0; i < data.length; i++) {
                         var line = document.createElement('tr');
                         $(elemBody).append(line);
                         $(line).append("<td>" + data[i].id +
                             "</td><td>" + data[i].display_name + "</td><td class=\"gra" + i + "\"><img src=\"/web_esi/static/src/img/arrow/up.png\" /></td>");
-
-
-
                     }
-
-
                     //return self.on_data_loaded(data, n_group_bys);
                 });
             });
-
-
-
-
-            //$(container).append('<table><tr><td><h1>test</h1></td></tr><tr><td>hello</td></tr></table>');
-            //$(this.$el).attr("color", "#FF5533");
-
-            // gather the fields to get
-            /* var fields = _.compact(_.map(["date_start", "date_delay", "date_stop", "progress"], function(key) {
-                return self.fields_view.arch.attrs[key] || '';
-            }));
-            fields = _.uniq(fields.concat(n_group_bys));
-*/
-            /* return $.when(this.has_been_loaded).then(function() {
-                 return self.dataset.read_slice(fields, {
-                     domain: domains,
-                     context: contexts
-                 }).then(function(data) {
-                     console.log("calling on_data_loaded");
-                     console.log(data);
-                     return self.on_data_loaded(data, n_group_bys);
-
-                 });
-             });*/
-
         },
-        on_data_loaded: function(tasks, group_bys) {
-            console.log("on_data_loaded Called");
-            var self = this;
-            var ids = _.pluck(tasks, "id");
-            return this.dataset.name_get(ids).then(function(names) {
-                var ntasks = _.map(tasks, function(task) {
-                    return _.extend({ __name: _.detect(names, function(name) { return name[0] == task.id; })[1] }, task);
-                });
-                return self.on_data_loaded_2(ntasks, group_bys);
-            });
-        }
-
     });
-
-
     core.view_registry.add('esi', MyView);
-
-
 });

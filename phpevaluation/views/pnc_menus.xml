@@ -51,15 +51,16 @@
          <menuitem name="Tableau de Bord" id="menu_pnc_dashboard"
 		  parent="menu_php_evaluation" sequence="29"/>
 
-         <menuitem name="Génération d'un rapport" id="report_gen"
+  <!--       <menuitem name="Génération d'un rapport" id="report_gen"
 		 action="bi_view_editor.action_bi_view_editor_view_form" parent="menu_pnc_dashboard" sequence="0"/>
-
+-->
          <menuitem name="Tableau de bord" id="pnc_dash"
 		 action="board.open_board_my_dash_action" parent="menu_pnc_dashboard" sequence="9"/>
 
+<!--
          <menuitem name="Tableau de bord M" id="pnc_dash_test"
 		 action="phpevaluation_dash" parent="menu_pnc_dashboard" sequence="10"/>
-
+-->
 
          
 
@@ -67,20 +68,6 @@
          <menuitem name="Configuration" id="pnc_evaluation_config"
 		  parent="menu_php_evaluation" sequence="30"/>
 
-
-         <menuitem name="Indicateurs" id="menu_survey_indicateurs"
-		 action="action_phpevaluation_indicators" parent="pnc_evaluation_config" sequence="2"/>
-
-
-		 <menuitem name="Indicateurs Dashboard" id="menu_php_evaluation_indicators_dashboard"
-		 action="action_phpevaluation_indicators_dashboard" parent="pnc_evaluation_config" sequence="3"/>
-		 
-	     <menuitem name="Niveaux du'Agregation Dashboard" id="menu_agregation_level_dashboard"
-		 action="action_phpevaluation_agregation_level_dashboard" parent="pnc_evaluation_config" sequence="5"/>
-
-
-        <menuitem name="Niveaux d Agregation" id="menu_php_evaluation_agregation_levels"
-		 action="action_phpevaluation_agregation_levels" parent="pnc_evaluation_config" sequence="6"/>
 
 
 

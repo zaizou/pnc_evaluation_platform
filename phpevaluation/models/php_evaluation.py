@@ -143,10 +143,9 @@ class formulaire_evaluation(models.Model):
      _description = u"Formulaire d\'évaluation"
      #rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
-
-     etat = fields.Selection(selection=[(3,u"Finalisée"),(2,u"En cours")(1,u"En préparation")],string='Etat de l\'action')
-     realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string='L\'Action a été')
-     res_attend = fields.Selection(selection= [(1,u"Moin satisfaisants"),(2,u"Plus ou moin satisfaisants"),(3,u"Satisfaisants"),(4,u"Plus que satisfaisants")],string=u"Résultats attendus / résultats obtenus")
+     etat = fields.Selection(selection=[(3,u"Finalisée"),(2,u"En cours"),(1,u"En préparation")],string=u"Etat de l\'action",)
+     realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string=u"L\'Action a été",)
+     res_attend = fields.Selection(selection= [(1,u"Moin satisfaisants"),(2,u"Plus ou moin satisfaisants"),(3,u"Satisfaisants"),(4,u"Plus que satisfaisants")],string=u"Résultats attendus / résultats obtenus",)
      inspection = fields.Boolean(u"Nécessité d\'inspection")
      date_debut_p = fields.Date(u"Date début prévue")
      date_debut_r = fields.Date(u"Date début réelle")

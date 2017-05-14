@@ -21,17 +21,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','survey','document','hr','bi_view_editor','calendar'],
+    'depends': ['base','web_esi','web_gantt8','board','document','hr','calendar','project'], 
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/views.xml',
-        # 'views/pnc_documents.xml',
-        # 'views/pnc_stakeholders.xml',
-        # 'views/pnc_menus.xml',
-        # 'views/php_templates.xml',
-        # 'views/indicator_report.xml'
+        'views/pnc_documents.xml',
+        'views/pnc_stakeholders.xml',
+        'views/pnc_menus.xml',
+        'views/php_templates.xml',
+        'views/indicator_report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
