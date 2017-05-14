@@ -79,11 +79,14 @@ odoo.define('web_esi.esi', function(require) {
                     console.log("data is :  " + data);
                     console.log(data);
                     $(elemBody).empty();
+
+                    var img = (ecart > 0) ? "up.png" : "down.png";
+
                     for (var i = 0; i < data.length; i++) {
                         var line = document.createElement('tr');
                         $(elemBody).append(line);
                         $(line).append("<td>" + data[i].id +
-                            "</td><td>" + data[i].display_name + "</td><td class=\"gra" + i + "\"></td>");
+                            "</td><td>" + data[i].display_name + "</td><td class=\"gra" + i + "\"><img src=\"/web_esi/static/src/img/arrow/up.png\" /></td>");
 
 
 
