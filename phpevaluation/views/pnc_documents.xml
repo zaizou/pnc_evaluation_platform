@@ -211,6 +211,9 @@
 					<sheet>
 						<group>
                             <field name="name" />
+							<field name="date_elaboration" />
+						</group>
+						<group>
 							<field name="formulaires_ids" />
 						</group>
 					</sheet>
@@ -227,6 +230,7 @@
 				<tree string="Rapports de mise en oeuvre">
 					<field name="id"/>
 					<field name="name"/>
+					<field name="date_elaboration"/>
 				</tree>
 			</field>
 		</record>
@@ -238,6 +242,72 @@
 			<field name="view_mode">form,tree,graph</field>
 		</record>
 
+
+<!-- Formulaire MO views and actions -->
+<record model="ir.ui.view" id="fmo_form_view">
+			<field name="name">fmo.form</field>
+			<field name="model">phpevaluation.fmo</field>
+			<field name="arch" type="xml">
+				<form string="Formulaire de mise en oeuvre">
+					<sheet>
+						<group>
+                            <field name="date" />
+						</group>
+						<group>
+							<field name="action_realisee" />
+							<field name="manniere_moe" />
+							<field name="parties_impliquee" />
+							<field name="dates_cles_ids" />
+						</group>
+						<group>
+                            <field name="resultats_attendus" />
+							<field name="descriptions_res" />
+							<field name="probleme_ronc" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+ <record model="ir.ui.view" id="fmo_tree_view">
+			<field name="name">fmo.tree</field>
+			<field name="model">phpevaluation.fmo</field>
+			<field name="arch" type="xml">
+				<tree string="Formulaire de mise en oeuvre">
+					<field name="date"/>
+					<field name="action_realisee"/>
+				</tree>
+			</field>
+		</record>
+
+<!-- Date cle views and actions -->
+	<record model="ir.ui.view" id="date_cle_form_view">
+			<field name="name">date_cle.form</field>
+			<field name="model">phpevaluation.date_cle</field>
+			<field name="arch" type="xml">
+				<form string="Date clé">
+					<sheet>
+						<group>
+                            <field name="date" />
+						</group>
+						<group>
+                            <field name="comment" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+ <record model="ir.ui.view" id="date_cle_tree_view">
+			<field name="name">date_cle.tree</field>
+			<field name="model">phpevaluation.date_cle</field>
+			<field name="arch" type="xml">
+				<tree string="Formulaire de mise en oeuvre">
+					<field name="date"/>
+					<field name="comment"/>
+				</tree>
+			</field>
+		</record>
 <!-- re views and actions -->
 		<record model="ir.ui.view" id="re_form_view">
 			<field name="name">re.form</field>
