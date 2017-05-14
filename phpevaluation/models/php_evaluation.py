@@ -7,9 +7,9 @@ class AgregationLevel(models.Model):
     _name = 'phpevaluation.agregation_level'
     _description = u"Niveau d\'Agrégationn testhhp d\'un indicatneur : Evaluation Subjective Action, Evaluation Objective Action, Action, Objectif, Axe "
     level = fields.Selection(selection=[('axe','Axe'),('objectif','Objectif'),('action','Action'),('mesure','Mesure')],string=u"Niveau d\'agrégation",)
-    agregation_level_parent_parent_id = fields.Many2one('phpevaluation.agregation_level',string='Niveau d Agregation Parent', ondelete='SET NULL')
-    agregation_level_childs_ids = fields.One2many('phpevaluation.agregation_level','agregation_level_parent_parent_id',string=u"Niveaux d\'agrégation fils ")
-    indicator_ids = fields.One2many('phpevaluation.indicator','agregation_level_id',string='indicators')
+    # agregation_level_parent_parent_id = fields.Many2one('phpevaluation.agregation_level',string='Niveau d Agregation Parent', ondelete='SET NULL')
+    # agregation_level_childs_ids = fields.One2many('phpevaluation.agregation_level','agregation_level_parent_parent_id',string=u"Niveaux d\'agrégation fils ")
+    # indicator_ids = fields.One2many('phpevaluation.indicator','agregation_level_id',string='indicators')
     
     #instances_ids = fields.One2many('phpevaluation.agregation_level_instance','agregation_level_id',string='Instances')
 
@@ -22,7 +22,7 @@ class AxePNC(models.Model):
     description = fields.Char(u"Description de l\'axe")
     focus = fields.Char('Focus de l\'Axe',required=True, translate=True)
     budget_estime = fields.Float(u"Budget Estimé")
-    pnc_program_id = fields.Many2one('php_evaluation.pnc_program',string=u"Programme PNC")
+    pnc_program_id = fields.Many2one('phpevaluation.pnc_program',string=u"Programme PNC")
     objectifs_ids = fields.One2many('phpevaluation.objectifpnc','axelie_id',u"Objectifs")
     action_programs_ids = fields.Many2many('phpevaluation.pa',string="Programmes d\'actions")
 
@@ -31,28 +31,28 @@ class ObjectifPNC(models.Model):
     _description = u"Objectif du plan national cancer"
     name = fields.Char(u"Intitulé de de l\'objectif")
     numero = fields.Integer(u"Numéro de l\'objectif",required=True, translate=True)
-    axelie_id = fields.Many2one('php_evaluation.axe_pnc',string='Axe lié', ondelete='SET NULL')
-    actions_ids = fields.One2many('php_evaluation.actionpnc','objectiflie_id',string="Actions")
+    axelie_id = fields.Many2one('phpevaluation.axe_pnc',string='Axe lié', ondelete='SET NULL')
+    actions_ids = fields.One2many('phpevaluation.actionpnc','objectiflie_id',string="Actions")
     action_programs_ids = fields.Many2many('phpevaluation.pa',string="Programmes d\'actions")
 
     # add  pnc_program_idd 
    
 class ActionPNC(models.Model):
-    _name = 'php_evaluation.actionpnc'
+    _name = 'phpevaluation.actionpnc'
     _description = u"Action du plan national cancer"
     name = fields.Char(u"Intitulé de l\'action",required=True, translate=True)
     numero = fields.Integer(u"Numéro de l\'action")
-    objectiflie_id = Many2one('php_evaluation.objectif_pncc',string='Objectif lié', ondelete='SET NULL')
-    mesures_ids = fields.One2many('php_evaluation.mesurepnc','actionlie_id',string="Mesures")
+    objectiflie_id = fields.Many2one('phpevaluation.objectifpnc',string='Objectif lié', ondelete='SET NULL')
+    mesures_ids = fields.One2many('phpevaluation.mesurepnc','actionlie_id',string="Mesures")
     #suivi 
     action_program_ids = fields.Many2many('phpevaluation.action_program',string=u"Programmes d\'action")
 
 class MesurePNC(models.Model):
-    _name = 'php_evaluation.mesurepnc'
+    _name = 'phpevaluation.mesurepnc'
     _description = u"Objectif du plan national cancer"
     name = fields.Char('Intitulé de de la mesure')
     numero = fields.Integer(u"Numéro de la mesure")
-    actionlie_id = fields.Many2one('php_evaluation.action_pnc',string='Action liée', ondelete='SET NULL')
+    actionlie_id = fields.Many2one('phpevaluation.actionpnc',string='Action liée', ondelete='SET NULL')
     # add  pnc_program_idd 
 
 class Indicator(models.Model):
@@ -63,9 +63,9 @@ class Indicator(models.Model):
     parent_indicator_id = fields.Many2one('phpevaluation.indicator',
             string='indicateur parent', ondelete='SET NULL')
     child_indicators_ids = fields.One2many('phpevaluation.indicator','parent_indicator_id',string='Sous indicateurs')
-    questions = fields.One2many('survey.question', 'indicator_id',
-                                string='Questions', copy=True)
-    agregation_level_id=fields.Many2one('phpevaluation.agregation_level',string=u"Niveau d\'agrégation", ondelete='SET NULL')
+    # questions = fields.One2many('survey.question', 'indicator_id',
+    #                             string='Questions', copy=True)
+    #agregation_level_id=fields.Many2one('phpevaluation.agregation_level',string=u"Niveau d\'agrégation", ondelete='SET NULL')
     calculation_function=fields.Many2one('ir.actions.server',string='Fonction de calcul', ondelete='SET NULL')
     weight=fields.Integer('Poids de l\'indicator', default=1)
     max_value=fields.Float("Valeur Max", default=0.0)
@@ -118,11 +118,10 @@ class formulaire_moe(models.Model):
      _description = "Formulaire de mise en oeuvre"
      date = fields.Date(u"Date")
      rapport_moe_id = fields.Many2one('phpevaluation.rmo',string=u"Rapport de mise en oeuvre associé")
-     action_realisee = fields.Many2one('phpevaluation.agregation_level',string = u"Niveau d\'agrégation",domain = [('level','=','action')])
+     action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      resultats_attendus= fields.Text(u"Résultats Attendus")
      manniere_moe = fields.Text(u"Décrire la manière dont l\'action à été mise ne oeuvre")
-     #partie prenante
-     
+     parties_impliquee = fields.Text(u"Parties impliquée")
      descriptions_res = fields.Text(u"Description des résultats obtenus")
      dates_cles_ids = fields.One2many('phpevaluation.date_cle','form_moe_id',string=u"Dates clés de l\'Action")
      probleme_ronc = fields.Text(u"Problèmes rencontrés : écart entre l\'action prévue et l\'action réalisée, le cas échéant")
@@ -135,27 +134,34 @@ class date_cle(models.Model):
 class rapport_evalution(models.Model):
      _name = 'phpevaluation.re'
      _description = u"Rapport d\'évaluation"
+     date_elaboration = fields.Date(u"Date d\'élaboration")
      name = fields.Char(u"Initulé du rapport")
-     formulaires_evaluation_ids = fields.One2many('phpevaluation.fe','rapport_evaluation_id',string=u"Formulaires d\'évaluation")
-     formulaires_inspection_ids = fields.One2many('phpevaluation.finspection','rapport_evaluation_id',string=u"Formulaires d\'inspection")
+    #  formulaires_evaluation_ids = fields.One2many('phpevaluation.fe','rapport_evaluation_id',string=u"Formulaires d\'évaluation")
+    #  formulaires_inspection_ids = fields.One2many('phpevaluation.finspection','rapport_evaluation_id',string=u"Formulaires d\'inspection")
 class formulaire_evaluation(models.Model):
      _name = 'phpevaluation.fe'
      _description = u"Formulaire d\'évaluation"
-     rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
-     action_realisee = fields.Many2one('phpevaluation.agregation_level',string = u"Niveau d\'agrégation",domain = [('level','=','action')])
-     etat = fields.Selection(selection=[(1,u"Complètement réalisée"),(2,u"Partiellement réalisée"),(3,u"Pas d\'information / pas mentionnée")],string='Etat de l\'action')
+     #rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
+     action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
+
+     etat = fields.Selection(selection=[(3,u"Finalisée"),(2,u"En cours")(1,u"En préparation")],string='Etat de l\'action')
      realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string='L\'Action a été')
      res_attend = fields.Selection(selection= [(1,u"Moin satisfaisants"),(2,u"Plus ou moin satisfaisants"),(3,u"Satisfaisants"),(4,u"Plus que satisfaisants")],string=u"Résultats attendus / résultats obtenus")
      inspection = fields.Boolean(u"Nécessité d\'inspection")
-     date_debut_p = fields.Date(u"Date de début prévue")
-     date_debut_r = fields.Date(u"Date de début réelle")
+     date_debut_p = fields.Date(u"Date début prévue")
+     date_debut_r = fields.Date(u"Date début réelle")
+ #code ajoute
+     datefin_p = fields.Date(u"Date fin prévue")
+     datefin_r = fields.Date(u"Date fin réelle")
+     retard = fields.Boolean(u"Retard entre dates prevues et reélles")
+     inspection = fields.Boolean(u"Nécessité d\'inspection")
      appreciation = fields.Float(u"Appréciation")
      remarques = fields.Text(u"Remarques")
 class formulaire_inspection(models.Model):
      _name = 'phpevaluation.finspection'
      _description = u"Formulaire d\'inspection"
-     rapport_evaluation_id = fields.Many2one('phpevaluation.re',string= u"Rapport d\'évaluation")
-     action_realisee = fields.Many2one('phpevaluation.agregation_level',string = u"Niveau d\'agrégation",domain = [('level','=','action')])
+     #rapport_evaluation_id = fields.Many2one('phpevaluation.re',string= u"Rapport d\'évaluation")
+     action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      #groupe_inspection
      #personne chargée
      date = fields.Date(u"Date de l\'inspection")

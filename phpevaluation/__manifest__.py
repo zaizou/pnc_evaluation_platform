@@ -26,12 +26,12 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/pnc_documents.xml',
-        'views/pnc_stakeholders.xml',
-        'views/pnc_menus.xml',
-        'views/php_templates.xml',
-        'views/indicator_report.xml'
+        # 'views/views.xml',
+        # 'views/pnc_documents.xml',
+        # 'views/pnc_stakeholders.xml',
+        # 'views/pnc_menus.xml',
+        # 'views/php_templates.xml',
+        # 'views/indicator_report.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
