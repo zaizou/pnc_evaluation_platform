@@ -1,10 +1,106 @@
 <odoo>
   <data>
 
+  <!-- Axe views-->
+
+   <record model="ir.ui.view" id="axepnc_form_view">
+			<field name="name">axepnc.form</field>
+			<field name="model">phpevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<form string="Axe Formulaire">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="numero" />
+							<field name="focus" />
+							<field name="budget_estime" />
+						</group>
+						<group>
+							<field name="objectifs_ids"  widget="many2many_tags"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	 <record model="ir.ui.view" id="axepnc_tree_view">
+			<field name="name">axepnc.tree</field>
+			<field name="model">phpevaluation.axepnc</field>
+			<field name="arch" type="xml">
+					<tree string="Axe">
+                            <field name="name" />
+							<field name="focus" />
+							<field name="budget_estime" />
+					</tree>
+			</field>
+		</record>
+
+
+
+
+	<!-- Objectif views-->
+
+   <record model="ir.ui.view" id="objectifpnc_form_view">
+			<field name="name">objectifpnc.form</field>
+			<field name="model">phpevaluation.objectifpnc</field>
+			<field name="arch" type="xml">
+				<form string="Objectif Formulaire">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="numero" />
+						</group>
+						<group>
+							<field name="actions_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+	<!-- Action views-->
+
+   <record model="ir.ui.view" id="actionpnc_form_view">
+			<field name="name">actionpnc.form</field>
+			<field name="model">phpevaluation.actionpnc</field>
+			<field name="arch" type="xml">
+				<form string="Action Formulaire">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="numero" />
+						</group>
+						<group>
+							<field name="mesures_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+<!-- Mesure views-->
+
+   <record model="ir.ui.view" id="mesurepnc_form_view">
+			<field name="name">mesurepnc.form</field>
+			<field name="model">phpevaluation.mesurepnc</field>
+			<field name="arch" type="xml">
+				<form string="Mesure Formulaire">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="numero" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
 
 <!-- PNC views and actions -->
-
-        
     <record model="ir.ui.view" id="pnc_form_view">
 			<field name="name">pnc.form</field>
 			<field name="model">phpevaluation.pnc</field>
@@ -13,6 +109,7 @@
 					<sheet>
 						<group>
                             <field name="name" />
+							<field name="axes_ids"/>
 						</group>
 					</sheet>
 				</form>
