@@ -317,10 +317,12 @@
 					<sheet>
 						<group>
                             <field name="name" />
-							<!--
+							<field name="date_elaboration" />
+						</group>
+
+						<group>
 							<field name="formulaires_evaluation_ids" />
 							<field name="formulaires_inspection_ids" />
-							-->
 						</group>
 					</sheet>
 				</form>
@@ -336,6 +338,7 @@
 				<tree string="Rapports d'évaluation'">
 					<field name="id"/>
 					<field name="name"/>
+					<field name="date_elaboration" />
 				</tree>
 			</field>
 		</record>
@@ -346,6 +349,220 @@
             <field name="view_id" ref="re_tree_view"/>
 			<field name="view_mode">form,tree,graph</field>
 		</record>
+<!-- fe views and actions -->
+			<record model="ir.ui.view" id="fe_form_view">
+			<field name="name">fe.form</field>
+			<field name="model">phpevaluation.fe</field>
+			<field name="arch" type="xml">
+				<form string="Formulaire d'évaluation'">
+					<sheet>
+						<group>
+                            <field name="date" />
+							<field name="action_realisee"/>
+						</group>
+						<group>
+							<field name="date_debut_p"/>
+							<field name="date_debut_r"/>
+							<field name="datefin_p"/>
+							<field name="datefin_r"/>
+							<field name="retard"/>
+						</group>
+						<group>
+							<field name="etat"/>
+							<field name="realisation"/>
+							<field name="res_attend"/>
+							<field name="inspection"/>
+							<field name="appreciation" widget="progressbar"/>
+							<field name="remarques"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		
+        <record model="ir.ui.view" id="fe_tree_view">
+			<field name="name">fe.tree</field>
+			<field name="model">phpevaluation.fe</field>
+			<field name="arch" type="xml">
+				<tree string="Formulaire d'évaluation">
+					<field name="id"/>
+					<field name="date"/>
+					<field name="action_realisee" />
+				</tree>
+			</field>
+		</record>
+        
+
+
+
+<!-- finspection views and actions -->		
+	<record model="ir.ui.view" id="finspection_form_view">
+			<field name="name">finspection.form</field>
+			<field name="model">phpevaluation.finspection</field>
+			<field name="arch" type="xml">
+				<form string="Formulaire d'inspection'">
+					<sheet>
+						<group>
+                            <field name="date" />
+							<field name="action_realisee"/>
+						</group>
+						<group>
+							<field name="region"/>
+							<field name="lieu"/>
+							<field name="constat"/>
+							<field name="realisation"/>
+							<field name="progress"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="finspection_tree_view">
+			<field name="name">finspection.tree</field>
+			<field name="model">phpevaluation.finspection</field>
+			<field name="arch" type="xml">
+				<tree string="Formulaires d'inspection">
+					<field name="id"/>
+					<field name="date"/>
+					<field name="action_realisee" />
+				</tree>
+			</field>
+		</record>
+<!-- region wilaya views and actions -->		
+	<record model="ir.ui.view" id="region_form_view">
+			<field name="name">region.form</field>
+			<field name="model">phpevaluation.region</field>
+			<field name="arch" type="xml">
+				<form string="Région">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="code"/>
+						</group>
+						<group>
+							<field name="wilayas_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wilaya_form_view">
+			<field name="name">wilaya.form</field>
+			<field name="model">phpevaluation.wilaya</field>
+			<field name="arch" type="xml">
+				<form string="Wilaya">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="matricule"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+<!-- partie prenante views and actions -->		
+	<record model="ir.ui.view" id="partieprenante_form_view">
+			<field name="name">partieprenante.form</field>
+			<field name="model">phpevaluation.partieprenante</field>
+			<field name="arch" type="xml">
+				<form string="Partie prenante">
+					<sheet>
+						<group>
+                            <field name="name" />
+						</group>
+						<group>
+							<field name="groupes_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="partieprenante_tree_view">
+			<field name="name">partieprenante.tree</field>
+			<field name="model">phpevaluation.partieprenante</field>
+			<field name="arch" type="xml">
+				<tree string="Parties prenantes">
+					<field name="id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="phpevaluation_partieprenante">
+			<field name="name">Parties prenantes</field>
+			<field name="res_model">phpevaluation.partieprenante</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+<!-- groupe pnc views and actions -->		
+		<record model="ir.ui.view" id="groupe_form_view">
+			<field name="name">groupe.form</field>
+			<field name="model">phpevaluation.groupe</field>
+			<field name="arch" type="xml">
+				<form string="Groupe">
+					<sheet>
+						<group>
+                            <field name="name" />
+						</group>
+						<group>
+							<field name="contributeurs_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="groupe_tree_view">
+			<field name="name">groupe.tree</field>
+			<field name="model">phpevaluation.groupe</field>
+			<field name="arch" type="xml">
+				<tree string="Parties prenantes">
+					<field name="id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+<!-- contributeur pnc views and actions -->		
+		<record model="ir.ui.view" id="contributeur_form_view">
+			<field name="name">contributeur.form</field>
+			<field name="model">phpevaluation.contributeur</field>
+			<field name="arch" type="xml">
+				<form string="Contributeur">
+					<sheet>
+						<group>
+                            <field name="nom" />
+							<field name="prenom" />
+							<field name="specialite" />
+							<field name="poids" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="contributeur_tree_view">
+			<field name="name">contributeur.tree</field>
+			<field name="model">phpevaluation.contributeur</field>
+			<field name="arch" type="xml">
+				<tree string="Contributeurs">
+					<field name="id"/>
+					<field name="nom"/>
+					<field name="prenom"/>
+				</tree>
+			</field>
+		</record>
+
+
 
 		
   </data>

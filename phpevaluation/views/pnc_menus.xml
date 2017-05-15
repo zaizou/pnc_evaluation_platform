@@ -19,8 +19,9 @@
          <menuitem name="Evaluations" id="pnc_evaluation"
 		 action="phpevaluation_re" parent="pnc_documents" sequence="30"/>
 
+
          <menuitem name="Parties Prenantes" id="pnc_evaluation_stakeholders"
-		 action="" parent="pnc_documents" sequence="40"/>
+		 action="phpevaluation_partieprenante" parent="pnc_documents" sequence="40"/>
 
 
          <menuitem name="Suivi du Plan Cancer" id="pnc_suivi"

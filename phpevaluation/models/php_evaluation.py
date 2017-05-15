@@ -136,12 +136,13 @@ class rapport_evalution(models.Model):
      _description = u"Rapport d\'évaluation"
      date_elaboration = fields.Date(u"Date d\'élaboration")
      name = fields.Char(u"Initulé du rapport")
-    #  formulaires_evaluation_ids = fields.One2many('phpevaluation.fe','rapport_evaluation_id',string=u"Formulaires d\'évaluation")
-    #  formulaires_inspection_ids = fields.One2many('phpevaluation.finspection','rapport_evaluation_id',string=u"Formulaires d\'inspection")
+     formulaires_evaluation_ids = fields.One2many('phpevaluation.fe','rapport_evaluation_id',string=u"Formulaires d\'évaluation")
+     formulaires_inspection_ids = fields.One2many('phpevaluation.finspection','rapport_evaluation_id',string=u"Formulaires d\'inspection")
 class formulaire_evaluation(models.Model):
      _name = 'phpevaluation.fe'
      _description = u"Formulaire d\'évaluation"
-     #rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
+     date = fields.Date(u"Date")
+     rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      etat = fields.Selection(selection=[(3,u"Finalisée"),(2,u"En cours"),(1,u"En préparation")],string=u"Etat de l\'action",)
      realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string=u"L\'Action a été",)
@@ -159,46 +160,67 @@ class formulaire_evaluation(models.Model):
 class formulaire_inspection(models.Model):
      _name = 'phpevaluation.finspection'
      _description = u"Formulaire d\'inspection"
-     #rapport_evaluation_id = fields.Many2one('phpevaluation.re',string= u"Rapport d\'évaluation")
+     rapport_evaluation_id = fields.Many2one('phpevaluation.re',string= u"Rapport d\'évaluation")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      #groupe_inspection
      #personne chargée
      date = fields.Date(u"Date de l\'inspection")
      #model region
-     region = fields.Char(u"Région")
+     region = fields.Many2one('phpevaluation.region',string=u"Région concernée")
      lieu = fields.Char(u"Lieu(x)")
      #Model Mission Inspection
      constat = fields.Text(u"Constat")
      realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string='L\'Action a été')
      progress = fields.Text(u"Progrès accomplis")
+
+class region(models.Model):
+     _name = 'phpevaluation.region'
+     _description = u"Région"
+     name = fields.Char(u"Intitulé de la région")
+     code = fields.Char(u"Code de la région")
+     wilayas_ids = fields.One2many('phpevaluation.wilaya','region_id',string=u"Wilayas concernées")
+
+class wilaya(models.Model):
+     _name = 'phpevaluation.wilaya'
+     _description = u"Wilaya"
+     name = fields.Char(u"Intitulé Wilaya")
+     matricule = fields.Char(u"Matricule")
+     region_id = fields.Many2one('phpevaluation.region',string=u"Région")
+
      
+class partie_prenante(models.Model):
+     _name = 'phpevaluation.partieprenante'
+     _description = u"Partie Prenante"
+     name = fields.Char(u"Intitulé")
+     groupes_ids = fields.One2many('phpevaluation.groupe','partie_prenante_id',string=u"Groupes")
+
+
+
+
 class pnc_groupe(models.Model):
-     _inherit = 'hr.department'
-     name = 'phpevaluation.groupe'
+     _name = 'phpevaluation.groupe'
      _description = u"Les Groupes du Plan Cancer "
-     groupes_ids = fields.One2many('hr.department','groupe_parent_id',string=u"Sous groupes")
-     groupe_parent_id = fields.Many2one('hr.department',string=u"Groupe parent")
-     type_groupe_id = fields.Many2one('phpevaluation.grouptype',string=u"Type du groupe (Groupe de travail, Inspection, Assiciation ...)")
+     name = fields.Char(u"Intitulé du groupe")
+     partie_prenante_id = fields.Many2one('phpevaluation.partieprenante',string=u"Partie prenante")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
 
 
-
-class type_groupe(models.Model):
-     name = 'phpevaluation.grouptype'
-     intitule = fields.Char(u"Intitulé du type")
-
 class pnc_contributeur(models.Model):
-     _inherit = 'hr.employee'
      _name = 'phpevaluation.contributeur'
-     contributions_ids = fields.Many2many('phpevaluation.contribution',string=u"Contributions")
+     _description = u"Contributeur Plan Cancer "
+     nom = fields.Char(u"Nom")
+     prenom = fields.Char(u"Prénom")
+     specialite = fields.Char(u"Spécialité")
+     poids = fields.Float(u"Poids du contributeur")
+     #informations PNC
      groups_ids = fields.Many2many('phpevaluation.groupe',string=u"Groupes")
+     contributions_ids = fields.Many2many('phpevaluation.contribution',string=u"Contributions")
      reunions_coordination_ids = fields.Many2many('phpevaluation.reu_coor',string=u"Réunions de coordinnations")
      reunions_coordination_invitation_ids = fields.Many2many('phpevaluation.reu_coor',string=u"Invitations aux Réunions de coordinnations")
-
      reunions_evaluation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Réunions d évaluation ")
      reunions_evaluation_invitation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Invitations aux réunions d évaluation")
-     #specialite = fields.Char(u"Spécialité")
-     #informations PNC
+     
+     
 
 #Partie 02 : Suivi 
 
