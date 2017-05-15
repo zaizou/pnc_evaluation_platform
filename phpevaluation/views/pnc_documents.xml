@@ -501,7 +501,7 @@
 			<field name="res_model">phpevaluation.partieprenante</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
-<!-- groupe pnc views and actions -->		
+<!--groupe pnc views and actions -->		
 		<record model="ir.ui.view" id="groupe_form_view">
 			<field name="name">groupe.form</field>
 			<field name="model">phpevaluation.groupe</field>
@@ -510,6 +510,7 @@
 					<sheet>
 						<group>
                             <field name="name" />
+							<field name="tag" />
 						</group>
 						<group>
 							<field name="contributeurs_ids"/>
@@ -530,6 +531,23 @@
 				</tree>
 			</field>
 		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_groupe_inspection">
+			<field name="name">Groupes d'inspection</field>
+			<field name="res_model">phpevaluation.groupe</field>
+			<field name="domain">[["tag","=","inspection"]]</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="phpevaluation_groupe_eval_subj">
+			<field name="name">Groupes d'évaluations subjectives</field>
+			<field name="res_model">phpevaluation.groupe</field>
+			<field name="domain">[["tag","=","evaluation_subjective"]]</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+		
+
 
 <!-- contributeur pnc views and actions -->		
 		<record model="ir.ui.view" id="contributeur_form_view">

@@ -41,17 +41,19 @@
         <menuitem name="Evaluation du Plan Cancer" id="pnc_evaluation_section"
 		  parent="menu_php_evaluation" sequence="20"/>
 
-             <menuitem name="Réunions d'évaluation'" id="reunions_eval_form"
+             <menuitem name="Réunions d'évaluation" id="reunions_eval_form"
 		  action="phpevaluation_reueval" parent="pnc_evaluation_section" sequence="1"/>
 
-        <menuitem name="Rapports d'évaluation' " id="pnc_re"
+        <menuitem name="Rapports d'évaluation" id="pnc_re"
 		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
 
+         <menuitem name="Groupes d'inspection" id="groupe_inspection_menu"
+		 action="phpevaluation_groupe_inspection" parent="pnc_evaluation_section" sequence="1"/>
 
+          <menuitem name="Groupes d'évaluations subjectives" id="groupe_es_menu"
+		 action="phpevaluation_groupe_eval_subj" parent="pnc_evaluation_section" sequence="1"/>
 
-        <menuitem name="Réunions d'évaluation'" id="reunions_gt"
-		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
-
+     
         <menuitem name="Plannifiation des Inspections" id="reunions_gt"
 		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
 

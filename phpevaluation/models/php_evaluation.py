@@ -201,6 +201,7 @@ class pnc_groupe(models.Model):
      _name = 'phpevaluation.groupe'
      _description = u"Les Groupes du Plan Cancer "
      name = fields.Char(u"Intitulé du groupe")
+     tag = fields.Selection(selection=[('all','membre'),('inspection','Inspection'),('evaluation_subjective',u"Evaluation Subjective"),('pilotage',u"Comité de pilotage")],string=u"Etiquette")
      partie_prenante_id = fields.Many2one('phpevaluation.partieprenante',string=u"Partie prenante")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
 
