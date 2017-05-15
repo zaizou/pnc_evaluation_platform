@@ -218,8 +218,8 @@ class pnc_contributeur(models.Model):
      contributions_ids = fields.Many2many('phpevaluation.contribution',string=u"Contributions")
      reunions_coordination_ids = fields.Many2many('phpevaluation.reucoor',string=u"Réunions de coordinnations")
      reunions_coordination_invitation_ids = fields.Many2many('phpevaluation.reucoor',string=u"Invitations aux Réunions de coordinnations")
-     reunions_evaluation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Réunions d évaluation ")
-     reunions_evaluation_invitation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Invitations aux réunions d évaluation")
+     reunions_evaluation_ids = fields.Many2many('phpevaluation.reueval',string=u"Réunions d évaluation ")
+     reunions_evaluation_invitation_ids = fields.Many2many('phpevaluation.reueval',string=u"Invitations aux réunions d évaluation")
      
      
 
@@ -240,6 +240,7 @@ class contribution(models.Model):
      type_contribution = fields.Selection(selection=[('doc','Documentation'),('rea',u"Réalisation")],string=u"Type de la contribution")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
      reunion_coordination_id = fields.Many2one('phpevaluation.reucoor',string=u"Réunion")
+     reunion_evaluation_id = fields.Many2one('phpevaluation.reueval',string=u"Réunion")
      #Axe 
      #
      #
@@ -271,16 +272,21 @@ class projetEvaluation(models.Model):
      _name = 'phpevaluation.evaluationproject'
      tasks = fields.One2many('phpevaluation.evaluationsubjective','project_id',string=u"Tâches")
 class evaluationSubjective(models.Model):
-     _inherit = 'project.task'
+     #_inherit = 'project.task'
      _name = 'phpevaluation.evaluationsubjective'
      project_id = fields.Many2one('phpevaluation.evaluationproject',string=u"Projet")
 
 class inspection(models.Model):
-     _inherit = 'project.task'
+     #_inherit = 'project.task'
      _name = 'phpevaluation.inspection'   
 class reunion_evaluation(models.Model):
-     _inherit = 'calendar.event'
-     _name = 'phpevaluation.reu_eval'   
+     #_inherit = 'calendar.event'
+     _name = 'phpevaluation.reueval'  
+     date = fields.Date("Date")
+     start = fields.Datetime(u"Début")
+     stop = fields.Datetime(u"Fin")
+     name = fields.Char(u"Objet de la réunion")
+     contributions_ids = fields.One2many('phpevaluation.contribution','reunion_evaluation_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('phpevaluation.pvreunionevaluation',string=u"PV de la réunion")

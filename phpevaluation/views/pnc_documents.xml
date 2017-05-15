@@ -633,6 +633,45 @@
 			</field>
 		</record>
 
+<!-- reunion evaluation views and actions -->		
+		<record model="ir.ui.view" id="reueval_form_view">
+			<field name="name">reueval.form</field>
+			<field name="model">phpevaluation.reueval</field>
+			<field name="arch" type="xml">
+				<form string="Réunion d'évaluation'">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="start"/>
+							<field name="stop"/>
+							<field name="contributeurs_invites_ids" />
+							<field name="contributeurs_presents_ids" />
+							<field name="contributions_ids" />
+							<field name="pv_reunion_ids" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="reueval_tree_view">
+			<field name="name">reueval.tree</field>
+			<field name="model">phpevaluation.reueval</field>
+			<field name="arch" type="xml">
+				<tree string="Réunions d'évaluation">
+					<field name="name"/>
+					<field name="start"/>
+					<field name="stop"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_reueval">
+			<field name="name">Réunions d'évaluation</field>
+			<field name="res_model">phpevaluation.reueval</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
 
 
 
