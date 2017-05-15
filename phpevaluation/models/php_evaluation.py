@@ -246,14 +246,13 @@ class contribution(models.Model):
      #
     
 class reunionCoordination(models.Model):
-     _inherit = 'calendar.event'
+     #_inherit = 'calendar.event'
      _name = 'phpevaluation.reucoor'
      #TODO date
      date = fields.Date("Date")
      start = fields.Datetime(u"Début")
      stop = fields.Datetime(u"Fin")
      name = fields.Char(u"Objet de la réunion")
-     partner_ids = fields.Char("partner")
      #state = fields.Selection(selection_add=[('done', "Terminée")])
      contributions_ids = fields.One2many('phpevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")
@@ -285,6 +284,10 @@ class reunion_evaluation(models.Model):
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('phpevaluation.pvreunionevaluation',string=u"PV de la réunion")
+
+     
+
+
 class pv_reunion_evaluation(models.Model):
      _name = 'phpevaluation.pvreunionevaluation'   
      name = fields.Char(u"Intitulé du PV ")

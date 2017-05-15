@@ -570,7 +570,6 @@
 				<form string="Réunion de coordination">
 					<sheet>
 						<group>
-							<field name="state" invisible="1"/>
 							<field name="name"/>
 							<field name="start"/>
 							<field name="stop"/>
