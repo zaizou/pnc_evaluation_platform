@@ -206,6 +206,7 @@ class pnc_groupe(models.Model):
 
 
 class pnc_contributeur(models.Model):
+     _inherit = 'res.partner'
      _name = 'phpevaluation.contributeur'
      _description = u"Contributeur Plan Cancer "
      nom = fields.Char(u"Nom")
@@ -215,8 +216,8 @@ class pnc_contributeur(models.Model):
      #informations PNC
      groups_ids = fields.Many2many('phpevaluation.groupe',string=u"Groupes")
      contributions_ids = fields.Many2many('phpevaluation.contribution',string=u"Contributions")
-     reunions_coordination_ids = fields.Many2many('phpevaluation.reu_coor',string=u"Réunions de coordinnations")
-     reunions_coordination_invitation_ids = fields.Many2many('phpevaluation.reu_coor',string=u"Invitations aux Réunions de coordinnations")
+     reunions_coordination_ids = fields.Many2many('phpevaluation.reucoor',string=u"Réunions de coordinnations")
+     reunions_coordination_invitation_ids = fields.Many2many('phpevaluation.reucoor',string=u"Invitations aux Réunions de coordinnations")
      reunions_evaluation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Réunions d évaluation ")
      reunions_evaluation_invitation_ids = fields.Many2many('phpevaluation.reu_eval',string=u"Invitations aux réunions d évaluation")
      
@@ -238,18 +239,22 @@ class contribution(models.Model):
      name = fields.Char(u"Intitulé de la contribution")
      type_contribution = fields.Selection(selection=[('doc','Documentation'),('rea',u"Réalisation")],string=u"Type de la contribution")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
-     reunion_coordination_id = fields.Many2one('phpevaluation.reu_coor',string=u"Réunion")
+     reunion_coordination_id = fields.Many2one('phpevaluation.reucoor',string=u"Réunion")
      #Axe 
      #
      #
      #
-     
-
     
 class reunionCoordination(models.Model):
      _inherit = 'calendar.event'
-     _name = 'phpevaluation.reu_coor'
+     _name = 'phpevaluation.reucoor'
      #TODO date
+     date = fields.Date("Date")
+     start = fields.Datetime(u"Début")
+     stop = fields.Datetime(u"Fin")
+     name = fields.Char(u"Objet de la réunion")
+     partner_ids = fields.Char("partner")
+     #state = fields.Selection(selection_add=[('done', "Terminée")])
      contributions_ids = fields.One2many('phpevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs invités")
@@ -257,6 +262,7 @@ class reunionCoordination(models.Model):
 
 class pv_reunion_action(models.Model):
      _name = 'phpevaluation.pvreunionaction'
+     date = fields.Date("Date")
      name = fields.Char(u"Intitulé du PV ")
 
 #Partie 03 :  Evaluation

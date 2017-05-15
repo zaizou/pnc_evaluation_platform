@@ -562,6 +562,79 @@
 			</field>
 		</record>
 
+<!-- contribution views and actions -->		
+		<record model="ir.ui.view" id="reucoor_form_view">
+			<field name="name">reucoor.form</field>
+			<field name="model">phpevaluation.reucoor</field>
+			<field name="arch" type="xml">
+				<form string="Réunion de coordination">
+					<sheet>
+						<group>
+							<field name="state" invisible="1"/>
+							<field name="name"/>
+							<field name="start"/>
+							<field name="stop"/>
+							<field name="contributeurs_invites_ids" />
+							<field name="contributeurs_presents_ids" />
+							<field name="contributions_ids" />
+							<field name="pv_reunion_ids" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="reucoor_tree_view">
+			<field name="name">reucoor.tree</field>
+			<field name="model">phpevaluation.reucoor</field>
+			<field name="arch" type="xml">
+				<tree string="Réunions de coordination">
+					<field name="name"/>
+					<field name="start"/>
+					<field name="stop"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_reucoor">
+			<field name="name">Réunions de coordination</field>
+			<field name="res_model">phpevaluation.reucoor</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+
+<!-- contribution views and actions -->		
+
+		<record model="ir.ui.view" id="pvreunionaction_form_view">
+			<field name="name">pvreunionaction.form</field>
+			<field name="model">phpevaluation.pvreunionaction</field>
+			<field name="arch" type="xml">
+				<form string="PV  de réunion">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="date"/>
+							
+
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="pvreunionaction_tree_view">
+			<field name="name">pvreunionaction.tree</field>
+			<field name="model">phpevaluation.pvreunionaction</field>
+			<field name="arch" type="xml">
+				<tree string="PV de réunion">
+					<field name="name" />
+					<field name="date"/>
+				</tree>
+			</field>
+		</record>
+
+
 
 
 		

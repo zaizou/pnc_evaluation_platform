@@ -2,7 +2,7 @@
   <data>
       
 
-        <menuitem name="PNC Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="phpevaluation,static/description/icon.png"/>
+        <menuitem name="Plan Cancer Suivi et Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="phpevaluation,static/description/icon.png"/>
 
         <menuitem name="Le Plan National Cancer" id="pnc_documents"
 		  parent="menu_php_evaluation" sequence="0"/>
@@ -24,14 +24,17 @@
 		 action="phpevaluation_partieprenante" parent="pnc_documents" sequence="40"/>
 
 
+
+<!--- Suivi du PNC -->
+
          <menuitem name="Suivi du Plan Cancer" id="pnc_suivi"
 		  parent="menu_php_evaluation" sequence="10"/>
 
           <menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
 		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
 
-          <menuitem name="Réunions groupes de travail" id="reunions_gt"
-		 action="survey.action_survey_form" parent="pnc_suivi" sequence="1"/>
+          <menuitem name="Réunions de coordination" id="reunions_coord_form"
+		 action="phpevaluation_reucoor" parent="pnc_suivi" sequence="1"/>
 
 
 

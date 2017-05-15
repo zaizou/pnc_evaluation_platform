@@ -1,28 +1,22 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "pnc_evaluation",
+    'name': "Plan Cancer Suivi et Evaluation",
     'version' :'1.0',
-    'summary': """
-        Le module permettant de realiser 
-        l'évaluation du Plan National Cancer
-        """,
-
-    'description': """
-        Evaluation du Plan National Cancer
-    """,
-
-    'author': "ESI",
+    'summary': "Le module permettant de realiser l\'évaluation du Plan National Cancer",
+    'version': "0.2",
+    'category': 'Health Management',
+    'description': 'Evaluation du Plan National Cancer',
+    'author': "Bouzid MEDJDOUB , Aicha BACHIRI ",
     'website': "http://www.esi.dz",
-
+    "license": "LGPL-3",
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Health Management',
-    'version': '0.1',
+    
+    
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web_esi','web_gantt8','board','document','hr','calendar','project'], 
-
+    'depends': ['base','web_esi','web_gantt8','board','document','hr','calendar','project'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
