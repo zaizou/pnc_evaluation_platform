@@ -56,9 +56,10 @@ odoo.define('web_esi.esi', function(require) {
             $(table).append(head);
             var head_line = document.createElement('tr');
             $(head).append(head_line);
-            $(head_line).append('<th>Action</th>');
-            $(head_line).append('<th>Stat</th>');
-            $(head_line).append('<th>Commentaire</th>');
+            $(head_line).append('<th>Domaine</th>');
+            $(head_line).append('<th>KPI</th>');
+            $(head_line).append('<th>Valeur</th>');
+            $(head_line).append('<th>Observation</th>');
             $(table).append(elemBody);
         },
         do_search: function(domains, contexts, group_bys) {
@@ -79,13 +80,43 @@ odoo.define('web_esi.esi', function(require) {
                     console.log("data is :  " + data);
                     console.log(data);
                     $(elemBody).empty();
+                    var line = document.createElement('tr');
+                    $(elemBody).append(line);
+                    var tdDomaine = document.createElement('td');
+                    $(tdDomaine).append("<h2>Avancement<h2/>")
+                    $(line).append(tdDomaine);
+
+                    var tdKpi = document.createElement('td');
+                    $(tdKpi).append('<h3>Réunions de Coordination<h3/>');
+                    $(tdKpi).append('<h3>Réunions d\'évaluation<h3/>');
+                    $(tdKpi).append('<h3>Contributions<h3/>');
+                    $(line).append(tdKpi);
+
+                    var tdValeur = document.createElement('td');
+                    $(tdValeur).append('<h3>10<h3/>');
+                    $(tdValeur).append('<h3>10<h3/>');
+                    $(tdValeur).append('<h3>15<h3/>');
+                    $(line).append(tdValeur);
+
+                    var tdObservation = document.createElement('td');
+                    $(tdObservation).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
+                    $(line).append(tdObservation);
+                    $(tdObservation).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
+                    $(line).append(tdObservation);
+                    $(tdObservation).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
+                    $(line).append(tdObservation);
+
+
+
+
+
                     //var img = (ecart > 0) ? "up.png" : "down.png";
-                    for (var i = 0; i < data.length; i++) {
-                        var line = document.createElement('tr');
-                        $(elemBody).append(line);
-                        $(line).append("<td>" + data[i].id +
-                            "</td><td>" + data[i].display_name + "</td><td class=\"gra" + i + "\"><img src=\"/web_esi/static/src/img/arrow/up.png\" /></td>");
-                    }
+                    /* for (var i = 0; i < data.length; i++) {
+                         var line = document.createElement('tr');
+                         $(elemBody).append(line);
+                         $(line).append("<td>" + data[i].id +
+                             "</td><td>" + data[i].display_name + "</td><td class=\"gra" + i + "\"><img src=\"/web_esi/static/src/img/arrow/up.png\" /></td>");
+                     }*/
                     //return self.on_data_loaded(data, n_group_bys);
                 });
             });

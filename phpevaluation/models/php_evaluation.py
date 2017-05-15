@@ -292,12 +292,34 @@ class reunion_evaluation(models.Model):
      contributeurs_invites_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('phpevaluation.pvreunionevaluation',string=u"PV de la réunion")
 
-     
-
-
 class pv_reunion_evaluation(models.Model):
      _name = 'phpevaluation.pvreunionevaluation'   
      name = fields.Char(u"Intitulé du PV ")
+
+class rapportBI(models.Model):
+     _name = 'phpevaluation.reportbi'   
+     name = fields.Char(u"Intitulé du rapport")
+
+class kpi(models.Model):
+     _name = 'phpevaluation.kpi'   
+     name = fields.Char(u"Intitulé du KPI")
+     value = fields.Many2one(u"Value")
+     data_source = fields.Many2one('phpevaluation.sourcefield',string=u"Source de données")
+     field_level = fields.Boolean(u"Niveau Attribut")
+
+
+class DateValue(models.Model):
+     _name = 'phpevaluation.datevalue'   
+     date = fields.Date(u"Date")
+     value = fields.Float(u"Valeur")
+class DataSource(models.Model):
+     _name = 'phpevaluation.sourcefield'   
+     name = fields.Char(u"FieldName")
+     model_source = fields.Many2one('ir.model',string=u"Modèle source")
+     model_agreg  = fields.Many2one('ir.model',string=u"Modèle agrégation")
+     field_source = fields.Char(u"Attribut source")
+
+
 
 
 
