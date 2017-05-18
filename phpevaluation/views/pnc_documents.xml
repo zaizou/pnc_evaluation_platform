@@ -358,6 +358,7 @@
 					<sheet>
 						<group>
                             <field name="date" />
+							<field name="contributeur" />
 							<field name="action_realisee"/>
 						</group>
 						<group>
@@ -406,6 +407,7 @@
 					<sheet>
 						<group>
                             <field name="date" />
+							<field name="contributeur" />
 							<field name="action_realisee"/>
 						</group>
 						<group>

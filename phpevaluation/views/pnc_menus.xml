@@ -50,11 +50,14 @@
         <menuitem name="Rapports d'évaluation" id="pnc_re"
 		 action="survey.action_survey_form" parent="pnc_evaluation_section" sequence="1"/>
 
+          <menuitem name="Groupes" id="groupes_menu"
+		  parent="pnc_evaluation_section" sequence="1"/>
+
          <menuitem name="Groupes d'inspection" id="groupe_inspection_menu"
-		 action="phpevaluation_groupe_inspection" parent="pnc_evaluation_section" sequence="1"/>
+		 action="phpevaluation_groupe_inspection" parent="groupes_menu" sequence="1"/>
 
           <menuitem name="Groupes d'évaluations subjectives" id="groupe_es_menu"
-		 action="phpevaluation_groupe_eval_subj" parent="pnc_evaluation_section" sequence="1"/>
+		 action="phpevaluation_groupe_eval_subj" parent="groupes_menu" sequence="1"/>
 
      
         <menuitem name="Plannifiation des Inspections" id="reunions_gt"

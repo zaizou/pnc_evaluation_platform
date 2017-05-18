@@ -141,6 +141,7 @@ class rapport_evalution(models.Model):
 class formulaire_evaluation(models.Model):
      _name = 'phpevaluation.fe'
      _description = u"Formulaire d\'évaluation"
+     contributeur = fields.Many2one('phpevaluation.contributeur',string="Contributeur")
      date = fields.Date(u"Date")
      rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
@@ -160,6 +161,7 @@ class formulaire_evaluation(models.Model):
 class formulaire_inspection(models.Model):
      _name = 'phpevaluation.finspection'
      _description = u"Formulaire d\'inspection"
+     contributeur = fields.Many2one('phpevaluation.contributeur',string="Contributeur")
      rapport_evaluation_id = fields.Many2one('phpevaluation.re',string= u"Rapport d\'évaluation")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      #groupe_inspection
