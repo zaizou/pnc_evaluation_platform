@@ -36,6 +36,9 @@
           <menuitem name="Réunions de coordination" id="reunions_coord_form"
 		 action="phpevaluation_reucoor" parent="pnc_suivi" sequence="1"/>
 
+           <menuitem name="Contributions" id="contribution_menu"
+		 action="phpevaluation_contribution" parent="pnc_suivi" sequence="1"/>
+
 
 
         <menuitem name="Evaluation du Plan Cancer" id="pnc_evaluation_section"

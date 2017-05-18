@@ -580,7 +580,52 @@
 			</field>
 		</record>
 
-<!-- contribution views and actions -->		
+<!-- conrtibution views and actions -->
+		<record model="ir.ui.view" id="contribution_form_view">
+			<field name="name">contribution.form</field>
+			<field name="model">phpevaluation.contribution</field>
+			<field name="arch" type="xml">
+				<form string="Contribution">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="date"/>
+							<field name="type_contribution"/>
+						</group>
+						<group>
+							<field name="axe_id"/>
+							<field name="objectifs_ids"/>
+							<field name="actions_ids"/>
+							<field name="plan_action_ids"/>
+						</group>
+						<group>
+							<field name="contributeurs_ids"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="contribution_tree_view">
+			<field name="name">contribution.tree</field>
+			<field name="model">phpevaluation.contribution</field>
+			<field name="arch" type="xml">
+				<tree string="Contributions">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="type_contribution"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_contribution">
+			<field name="name">Contributions</field>
+			<field name="res_model">phpevaluation.contribution</field>
+			<field name="view_mode">tree,form,kanban,graph</field>
+		</record>
+
+
+<!-- reucoor views and actions -->		
 		<record model="ir.ui.view" id="reucoor_form_view">
 			<field name="name">reucoor.form</field>
 			<field name="model">phpevaluation.reucoor</field>

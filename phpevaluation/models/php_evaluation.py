@@ -238,10 +238,17 @@ class tachePlanAction(models.Model):
 class contribution(models.Model):
      _name = 'phpevaluation.contribution'
      name = fields.Char(u"Intitulé de la contribution")
+     date = fields.Date("Date")
      type_contribution = fields.Selection(selection=[('doc','Documentation'),('rea',u"Réalisation")],string=u"Type de la contribution")
      contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
      reunion_coordination_id = fields.Many2one('phpevaluation.reucoor',string=u"Réunion")
      reunion_evaluation_id = fields.Many2one('phpevaluation.reueval',string=u"Réunion")
+     plan_action_ids = fields.Many2many('phpevaluation.pa',string=u"La contribution s\'inscrit dans les Plan d\'action :")
+     axe_id = fields.Many2one('phpevaluation.axepnc',string=u"Axe concerné")
+     objectifs_ids = fields.Many2many('phpevaluation.objectifpnc',string=u"Objectifs concernés :")
+     actions_ids = fields.Many2many('phpevaluation.actionpnc',string=u"Actions concernées :")
+
+      
      #Axe 
      #
      #
