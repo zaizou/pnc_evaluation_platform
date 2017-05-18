@@ -153,7 +153,7 @@
 							<field name="date" />
 						</group>
 						<group>
-							<field name="axes_ids"  widget="many2many_tags"/>
+							<field name="axe_id" />
 							<field name="objectifs_ids"  widget="many2many_tags"/>
 							<field name="action_ids"  widget="many2many_tags"/>
 						</group>
@@ -589,6 +589,7 @@
 					<sheet>
 						<group>
 							<field name="name"/>
+							<field name="axe"/>
 							<field name="start"/>
 							<field name="stop"/>
 							<field name="contributeurs_invites_ids" />
@@ -617,7 +618,7 @@
 		<record model="ir.actions.act_window" id="phpevaluation_reucoor">
 			<field name="name">Réunions de coordination</field>
 			<field name="res_model">phpevaluation.reucoor</field>
-			<field name="view_mode">tree,form,kanban</field>
+			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
 
 <!-- contribution views and actions -->		
@@ -631,8 +632,6 @@
 						<group>
 							<field name="name" />
 							<field name="date"/>
-							
-
 						</group>
 					</sheet>
 				</form>

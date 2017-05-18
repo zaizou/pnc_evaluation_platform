@@ -191,8 +191,6 @@ odoo.define('bi_view_editor', function (require) {
                             .click(clickHandler)
                             .wrap("<div class=\"class-container\"></div>").parent();
                 self.$el.find(".class-list").append(item);
-                //alert("Hi :)");
-                console.log(item);
 
                 var index = self.activeModelMenus.indexOf(item.find(".class").data('model-data').id);
                 if(index !== -1 && !self.get("effective_readonly")) {

@@ -18,13 +18,13 @@ class AxePNC(models.Model):
     _name = 'phpevaluation.axepnc'
     _description = u"Axe du plan national cancer"
     name = fields.Char(u"Intitulé de l\'axe",required=True, translate=True)
-    numero = fields.Integer(u"Numéro de l\'axe")
+    numero = fields.Integer(u"Numéro de l axe")
     description = fields.Char(u"Description de l\'axe")
     focus = fields.Char('Focus de l\'Axe',required=True, translate=True)
     budget_estime = fields.Float(u"Budget Estimé")
     pnc_program_id = fields.Many2one('phpevaluation.pnc_program',string=u"Programme PNC")
     objectifs_ids = fields.One2many('phpevaluation.objectifpnc','axelie_id',u"Objectifs")
-    action_programs_ids = fields.Many2many('phpevaluation.pa',string="Programmes d\'actions")
+    action_programs_ids = fields.One2many('phpevaluation.pa','axe_id',string="Programmes d\'actions")
 
 class ObjectifPNC(models.Model):
     _name = 'phpevaluation.objectifpnc'
@@ -104,7 +104,7 @@ class action_program(models.Model):
      date = fields.Date(u"Date d'établissement du Plan")
     #  TODO ajout du modèle plan d'action 
      action_ids = fields.Many2many('phpevaluation.actionpnc',string = "Actions concernées")
-     axes_ids = fields.Many2many('phpevaluation.axepnc',string="Axes concernés")
+     axe_id = fields.Many2one('phpevaluation.axepnc',string="Axes concernés",ondelete='SET NULL')
      objectifs_ids = fields.Many2many('phpevaluation.objectifpnc',string=u"Objectifs concernés")
 
 class rapport_meo(models.Model):
@@ -250,11 +250,13 @@ class contribution(models.Model):
 class reunionCoordination(models.Model):
      #_inherit = 'calendar.event'
      _name = 'phpevaluation.reucoor'
+     _description = "reunion"
      #TODO date
      date = fields.Date("Date")
      start = fields.Datetime(u"Début")
      stop = fields.Datetime(u"Fin")
      name = fields.Char(u"Objet de la réunion")
+     axe = fields.Many2one('phpevaluation.axepnc',string="axe")
      #state = fields.Selection(selection_add=[('done', "Terminée")])
      contributions_ids = fields.One2many('phpevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs Présents")

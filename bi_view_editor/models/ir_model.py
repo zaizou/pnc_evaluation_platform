@@ -5,10 +5,6 @@
 from odoo import api, models
 from odoo.modules.registry import RegistryManager
 
-import logging
-_logger = logging.getLogger(__name__)
-
-
 NO_BI_MODELS = [
     'temp.range',
     'account.statement.operation.template',
@@ -62,7 +58,6 @@ class IrModel(models.Model):
 
         def _check_name(model_model):
             if model_model in NO_BI_MODELS:
-                _logger.warning("_check_name  %s",model_model)    
                 return 1
             return 0
 
@@ -70,8 +65,7 @@ class IrModel(models.Model):
             if model_model.startswith('workflow') or \
                     model_model.startswith('ir.') or \
                     model_model.startswith('base_'):
-                        _logger.warning("_check_startswith %s",model_model)    
-                        return 1
+                return 1
             return 0
 
         def _check_contains(model_model):
@@ -79,19 +73,16 @@ class IrModel(models.Model):
                     '_' in model_model or \
                     'report' in model_model or \
                     'edi.' in model_model:
-                _logger.warning("_check_contains %s",model_model)  
                 return 1
             return 0
 
         def _check_unknow(model_name):
             if model_name == 'Unknow' or '.' in model_name:
-                _logger.warning("_check_unknow %s",model_model)    
                 return 1
             return 0
 
         model_model = model['model']
-        model_name = u""+model['name'].replace("'","\\'")
-        _logger.warning("--------------------->model model :  %s",model_model)
+        model_name = model['name']
         count_check = 0
         count_check += _check_name(model_model)
         count_check += _check_startswith(model_model)
@@ -295,7 +286,8 @@ class IrModel(models.Model):
         # # update registry
         if self._context.get('bve'):
             # setup models; this reloads custom models in registry
-            self.env.setup_models(self._cr, partial=(not self.env.ready))
+            self.pool.setup_models(self._cr, partial=(not self.pool.ready))
+
             # signal that registry has changed
             RegistryManager.signal_registry_change(self.env.cr.dbname)
 
