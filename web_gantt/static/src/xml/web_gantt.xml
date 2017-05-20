@@ -2,11 +2,28 @@
 
 <templates>
     <t t-name="GanttView">
-        <div>
-            <div t-att-id="widget.chart_id" class="oe_gantt"/>
-        </div>
+        <div t-attf-class="o_gantt_view chart_id_{{widget.chart_id}}"></div>
     </t>
-    <t t-name="GanttView-create-button">
-        <button class="oe_button oe_gantt_button_create">Create</button>
+
+    <t t-name="GanttView.buttons">
+    	<div class="o_gantt_button_dates">
+    		<button class="o_gantt_button_left btn btn-primary">
+    			<span class="fa fa-arrow-left"/>
+    		</button>
+
+    		<button class="o_gantt_button_today btn btn-primary">Today</button>
+
+    		<button class="o_gantt_button_right btn btn-primary"><span class="fa fa-arrow-right"/></button>
+    	</div>
+
+    	<div t-attf-class="btn-group btn-sm">
+    		<button class="o_gantt_button_scale btn btn-sm btn-default" type="button" value="day">Day</button>
+    		<button class="o_gantt_button_scale btn btn-sm btn-default" type="button" value="week">Day</button>
+    		<button class="o_gantt_button_scale btn btn-sm btn-default" type="button" value="month">Day</button>
+    		<button class="o_gantt_button_scale btn btn-sm btn-default" type="button" value="year">Day</button>
+    	</div>
+
+
+
     </t>
 </templates>

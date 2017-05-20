@@ -20,6 +20,7 @@ class AxePNC(models.Model):
     name = fields.Char(u"Intitulé de l\'axe",required=True, translate=True)
     numero = fields.Integer(u"Numéro de l axe")
     description = fields.Char(u"Description de l\'axe")
+    budgets_ids = fields.One2many('phpevaluation.budgetpnc','axe_id',u"Budgets")
     focus = fields.Char('Focus de l\'Axe',required=True, translate=True)
     budget_estime = fields.Float(u"Budget Estimé")
     pnc_program_id = fields.Many2one('phpevaluation.pnc_program',string=u"Programme PNC")
@@ -141,9 +142,11 @@ class rapport_evalution(models.Model):
 class formulaire_evaluation(models.Model):
      _name = 'phpevaluation.fe'
      _description = u"Formulaire d\'évaluation"
+     name = fields.Char(u"Intitulé du formulaire")
      contributeur = fields.Many2one('phpevaluation.contributeur',string="Contributeur")
      date = fields.Date(u"Date")
      rapport_evaluation_id = fields.Many2one('phpevaluation.re',string=u"Rapport d\'évaluation")
+     axe_id = fields.Many2one('phpevaluation.axepnc',string=u"Axe concerné")
      action_realisee = fields.Many2one('phpevaluation.actionpnc',string = u"Action réalisée")
      etat = fields.Selection(selection=[(3,u"Finalisée"),(2,u"En cours"),(1,u"En préparation")],string=u"Etat de l\'action",)
      realisation = fields.Selection(selection=[(1,u"Mal réalisée"),(2,u"Plus ou moin bien réalisée"),(3,u"Bien réalisée"),(4,u"Très bien réalisée")],string=u"L\'Action a été",)
@@ -209,16 +212,16 @@ class pnc_groupe(models.Model):
 
 
 class pnc_contributeur(models.Model):
-     _inherit = 'res.partner'
+     #_inherit = 'res.partner'
      _name = 'phpevaluation.contributeur'
      _description = u"Contributeur Plan Cancer "
-     nom = fields.Char(u"Nom")
+     name = fields.Char(u"Nom")
      prenom = fields.Char(u"Prénom")
      specialite = fields.Char(u"Spécialité")
      poids = fields.Float(u"Poids du contributeur")
      #informations PNC
      groups_ids = fields.Many2many('phpevaluation.groupe',string=u"Groupes")
-     contributions_ids = fields.Many2many('phpevaluation.contribution',string=u"Contributions")
+     contributions_ids = fields.One2many('phpevaluation.contribution','contributeur_id',string=u"Contributions")
      reunions_coordination_ids = fields.Many2many('phpevaluation.reucoor',string=u"Réunions de coordinnations")
      reunions_coordination_invitation_ids = fields.Many2many('phpevaluation.reucoor',string=u"Invitations aux Réunions de coordinnations")
      reunions_evaluation_ids = fields.Many2many('phpevaluation.reueval',string=u"Réunions d évaluation ")
@@ -242,7 +245,7 @@ class contribution(models.Model):
      name = fields.Char(u"Intitulé de la contribution")
      date = fields.Date("Date")
      type_contribution = fields.Selection(selection=[('doc','Documentation'),('rea',u"Réalisation")],string=u"Type de la contribution")
-     contributeurs_ids = fields.Many2many('phpevaluation.contributeur',string=u"Contributeurs")
+     contributeur_id = fields.Many2one('phpevaluation.contributeur',string=u"Contributeurs")
      reunion_coordination_id = fields.Many2one('phpevaluation.reucoor',string=u"Réunion")
      reunion_evaluation_id = fields.Many2one('phpevaluation.reueval',string=u"Réunion")
      plan_action_ids = fields.Many2many('phpevaluation.pa',string=u"La contribution s\'inscrit dans les Plan d\'action :")
@@ -329,6 +332,24 @@ class DataSource(models.Model):
      model_source = fields.Many2one('ir.model',string=u"Modèle source")
      model_agreg  = fields.Many2one('ir.model',string=u"Modèle agrégation")
      field_source = fields.Char(u"Attribut source")
+
+     
+class DateBudget(models.Model):
+     _name = 'phpevaluation.budgetpnc'
+     _description = "Budget"
+     name = fields.Char(u"Intitulé")
+     date = fields.Date(u"Année")
+     budget_estime = fields.Float(u"Budget estimé")
+     budget_reel = fields.Float(u"Budget réel")
+     rubriques_ids = fields.One2many('phpevaluation.rubriquebudget','budget_id',string="Rubriques")
+     axe_id = fields.Many2one('phpevaluation.axepnc',string="Axe")
+class rubriqueBudget(models.Model):
+     _name = 'phpevaluation.rubriquebudget'
+     _description = "Rubrique"
+     name = fields.Char(u"Intitulé de la rubrique")
+     budget_id = fields.Many2one('phpevaluation.budgetpnc',string="Budget")
+     estime = fields.Float(u"Estimé")
+     reel = fields.Float(u"Réel")
 
 
 

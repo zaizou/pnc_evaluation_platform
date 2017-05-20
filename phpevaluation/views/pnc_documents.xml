@@ -13,7 +13,7 @@
                             <field name="name" />
 							<field name="numero" />
 							<field name="focus" />
-							<field name="budget_estime" />
+							<field name="budgets_ids" />
 						</group>
 						<group>
 							<field name="objectifs_ids"  widget="many2many_tags"/>
@@ -359,6 +359,7 @@
 						<group>
                             <field name="date" />
 							<field name="contributeur" />
+							<field name="axe_id"/>
 							<field name="action_realisee"/>
 						</group>
 						<group>
@@ -373,13 +374,16 @@
 							<field name="realisation"/>
 							<field name="res_attend"/>
 							<field name="inspection"/>
-							<field name="appreciation" widget="progressbar"/>
+							<field name="appreciation" /> 
 							<field name="remarques"/>
 						</group>
 					</sheet>
 				</form>
 			</field>
 		</record>
+
+		
+
 
 
 		
@@ -393,6 +397,12 @@
 					<field name="action_realisee" />
 				</tree>
 			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_fe">
+			<field name="name">Inspection</field>
+			<field name="res_model">phpevaluation.fe</field>
+			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
         
 
@@ -433,6 +443,12 @@
 					<field name="action_realisee" />
 				</tree>
 			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_finspection">
+			<field name="name">Inspection</field>
+			<field name="res_model">phpevaluation.finspection</field>
+			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
 <!-- region wilaya views and actions -->		
 	<record model="ir.ui.view" id="region_form_view">
@@ -559,7 +575,7 @@
 				<form string="Contributeur">
 					<sheet>
 						<group>
-                            <field name="nom" />
+                            <field name="name" />
 							<field name="prenom" />
 							<field name="specialite" />
 							<field name="poids" />
@@ -576,7 +592,7 @@
 			<field name="arch" type="xml">
 				<tree string="Contributeurs">
 					<field name="id"/>
-					<field name="nom"/>
+					<field name="name"/>
 					<field name="prenom"/>
 				</tree>
 			</field>
@@ -601,7 +617,7 @@
 							<field name="plan_action_ids"/>
 						</group>
 						<group>
-							<field name="contributeurs_ids"/>
+							<field name="contributeur_id"/>
 						</group>
 					</sheet>
 				</form>
@@ -620,6 +636,7 @@
 			</field>
 		</record>
 
+	 
 		<record model="ir.actions.act_window" id="phpevaluation_contribution">
 			<field name="name">Contributions</field>
 			<field name="res_model">phpevaluation.contribution</field>
@@ -735,6 +752,92 @@
 			<field name="name">Réunions d'évaluation</field>
 			<field name="res_model">phpevaluation.reueval</field>
 			<field name="view_mode">tree,form,kanban</field>
+		</record>
+
+
+<!-- budget  views and actions -->		
+		<record model="ir.ui.view" id="budgetpnc_form_view">
+			<field name="name">budgetpnc.form</field>
+			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="arch" type="xml">
+				<form string="Budget">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="date"/>
+							<field name="budget_estime"/>
+							<field name="budget_reel"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="budgetpnc_menu_form_view">
+			<field name="name">budgetpnc.form</field>
+			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="arch" type="xml">
+				<form string="Budget">
+					<sheet>
+						<group>
+							<field name="date"/>
+							<field name="axe_id"/>
+							<field name="budget_estime"/>
+							<field name="budget_reel"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="budgetpnc_tree_view">
+			<field name="name">budgetpnc.tree</field>
+			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="arch" type="xml">
+				<tree string="Budget">
+					<field name="date"/>
+					<field name="budget_estime"/>
+					<field name="budget_reel"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="phpevaluation_budgetpnc">
+			<field name="name">Budgets</field>
+			<field name="res_model">phpevaluation.budgetpnc</field>
+			<field name="view_mode">tree,form,kanban,graph,pivot</field>
+		</record>
+
+
+<!-- rubriquebudget  views and actions -->		
+		<record model="ir.ui.view" id="rubriquebudget_form_view">
+			<field name="name">rubriquebudget.form</field>
+			<field name="model">phpevaluation.rubriquebudget</field>
+			<field name="arch" type="xml">
+				<form string="Rubrique">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="estime"/>
+							<field name="reel"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+			<record model="ir.ui.view" id="rubriquebudget_tree_view">
+			<field name="name">rubriquebudget.tree</field>
+			<field name="model">phpevaluation.rubriquebudget</field>
+			<field name="arch" type="xml">
+				<tree string="Rubriques">
+					<field name="name"/>
+					<field name="estime"/>
+					<field name="reel"/>
+				</tree>
+			</field>
 		</record>
 
 
