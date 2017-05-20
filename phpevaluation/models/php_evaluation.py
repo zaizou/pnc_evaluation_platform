@@ -129,7 +129,7 @@ class formulaire_moe(models.Model):
 class date_cle(models.Model):
      _name = 'phpevaluation.date_cle'
      _description = u"Date Clé"
-     date = fields.Date(u"Date de l\'évènement")
+     date = fields.Date(u"Date de l\'évènement :")
      comment = fields.Text(u"Commentaire")
      form_moe_id = fields.Many2one(u"Formulaire de mise en oeuvre")
 class rapport_evalution(models.Model):
