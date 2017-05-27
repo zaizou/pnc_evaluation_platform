@@ -23,7 +23,7 @@ class action_program(models.Model):
      evaluations_ids = fields.One2many('phpevaluation.evaluationpa','plan_action_id',u"Evalutions")
      kpi_ids = fields.One2many('phpevaluation.kpi','plan_action_id',string=u"Indicateurs de performance")
      mediatisation = fields.Many2one('phpevaluation.mediatisation',string=u"Médiatisation")
-
+     structures_pilotage = fields.One2many('phpevaluation.structure','plan_action_id',string=u"Structures de pilotage")
 
      
 
@@ -104,6 +104,7 @@ class Structure(models.Model):
      affiliation_id = fields.Many2one('phpevaluation.partieprenante',string=u"Affiliation")
      controle_qualite_ids = fields.One2many('phpevaluation.conrtoleq','structure_chargee_id',string=u"Contrôles de qualité")
      evaluations_pa_ids = fields.One2many('phpevaluation.evaluationpa','structure_chargee_id',string=u"Evaluation Plan d\'action")
+     plan_action_id = fields.Many2one('phpevaluation.pa',string=u"Plan d\'action")
 
 class ActionPlanAction(models.Model):
      _name = 'phpevaluation.actionpa'

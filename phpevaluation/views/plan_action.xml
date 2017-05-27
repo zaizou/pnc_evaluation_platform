@@ -1,0 +1,90 @@
+<odoo>
+  <data>
+
+  <!-- Axe views-->
+
+  <!--Plans d'action views and actions' -->
+        <record model="ir.ui.view" id="pa_form_view">
+			<field name="name">pa.form</field>
+			<field name="model">phpevaluation.pa</field>
+			<field name="arch" type="xml">
+				<form string="Plan d'action'">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="date" />
+							<field name="cancers_ids" widget="many2many_tags" />
+							<field name="donnees_epidemiologiques" />
+
+						</group>
+						<group>
+							<field name="axe_id" />
+							<field name="objectifs_ids"  widget="many2many_tags"/>
+							<field name="action_ids"  widget="many2many_tags"/>
+						</group>
+						<group>
+							<field name="objectifs_ids" />
+							<field name="actions_ids" />
+							<field name="dispositions_reglementaires_ids" />
+							<field name="structures_pilotage"  widget="many2many_tags" />
+						</group>
+						<group>
+							<field name="controles_qualite_ids" />
+							<field name="evaluations_ids" />
+							<field name="kpi_ids" />
+						</group>
+
+						<group>
+							<field name="mediatisation" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+        
+
+
+        <record model="ir.ui.view" id="pa_tree_view">
+			<field name="name">pa.tree</field>
+			<field name="model">phpevaluation.pa</field>
+			<field name="arch" type="xml">
+				<tree string="Plan National Cancer">
+					<field name="id"/>
+					<field name="name"/>
+					<field name="date"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="pa_gantt_view">
+			<field name="name">pa.gantt</field>
+			<field name="model">phpevaluation.pa</field>
+			<field name="arch" type="xml">
+				<gantt></gantt>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="pa_esi_view">
+			<field name="name">pa.esi</field>
+			<field name="model">phpevaluation.pa</field>
+			<field name="arch" type="xml">
+				<esi></esi>
+			</field>
+		</record>
+
+
+
+        <record model="ir.actions.act_window" id="phpevaluation_pa">
+			<field name="name">Plan Cancer</field>
+			<field name="res_model">phpevaluation.pa</field>
+            <field name="view_id" ref="pa_tree_view"/>
+			<field name="view_mode">kanban,esi,tree,form,graph</field>
+		</record>
+
+
+
+
+		
+  </data>
+</odoo>

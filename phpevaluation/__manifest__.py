@@ -21,7 +21,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/pnc_documents.xml',
-        'views/pnc_stakeholders.xml',
+        'views/plan_action.xml',
         'views/pnc_menus.xml',
         'views/php_templates.xml',
         'views/indicator_report.xml'
