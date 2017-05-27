@@ -13,6 +13,7 @@
                             <field name="name" />
 							<field name="numero" />
 							<field name="focus" />
+							<field name="color"/>
 							<field name="budgets_ids" />
 						</group>
 						<group>
@@ -33,6 +34,21 @@
 							<field name="budget_estime" />
 					</tree>
 			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_esi_view">
+			<field name="name">axepnc.esi</field>
+			<field name="model">phpevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<esi></esi>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="phpevaluation_axes">
+			<field name="name">Axes d'orientation</field>
+			<field name="res_model">phpevaluation.axepnc</field>
+			<field name="view_mode">kanban,esi,tree,form,graph</field>
 		</record>
 
 
@@ -59,6 +75,14 @@
 		</record>
 
 
+	
+		<record model="ir.actions.act_window" id="phpevaluation_objs">
+			<field name="name">Objectifs</field>
+			<field name="res_model">phpevaluation.objectifpnc</field>
+			<field name="view_mode">kanban,tree,form,graph</field>
+		</record>
+
+
 
 	<!-- Action views-->
 
@@ -80,6 +104,13 @@
 			</field>
 		</record>
 
+		
+		<record model="ir.actions.act_window" id="phpevaluation_actions">
+			<field name="name">Actions</field>
+			<field name="res_model">phpevaluation.actionpnc</field>
+			<field name="view_mode">kanban,tree,form,graph</field>
+		</record>
+
 
 
 <!-- Mesure views-->
@@ -98,6 +129,15 @@
 				</form>
 			</field>
 		</record>
+
+
+				
+		<record model="ir.actions.act_window" id="phpevaluation_mesures">
+			<field name="name">Actions</field>
+			<field name="res_model">phpevaluation.mesurepnc</field>
+			<field name="view_mode">kanban,tree,form,graph</field>
+		</record>
+
 
 
 <!-- PNC views and actions -->
@@ -357,7 +397,7 @@
 				<form string="Formulaire d'évaluation'">
 					<sheet>
 						<group>
-                            <field name="date" />
+                            <field name="date"/>
 							<field name="contributeur" />
 							<field name="axe_id"/>
 							<field name="action_realisee"/>
@@ -653,7 +693,7 @@
 					<sheet>
 						<group>
 							<field name="name"/>
-							<field name="axe"/>
+							<field name="user_id"/>
 							<field name="start"/>
 							<field name="stop"/>
 							<field name="contributeurs_invites_ids" />
@@ -679,10 +719,23 @@
 			</field>
 		</record>
 
+
+		<record id="view_reucoor_calendar" model="ir.ui.view">
+            <field name="name">reucoor.calendar</field>
+            <field name="model">phpevaluation.reucoor</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar  color="user_id" date_start="start" date_stop="stop" string="Réunions" mode="month" >
+					<field name="id"/>
+					<field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
 		<record model="ir.actions.act_window" id="phpevaluation_reucoor">
 			<field name="name">Réunions de coordination</field>
 			<field name="res_model">phpevaluation.reucoor</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
+			<field name="view_mode">calendar,tree,form,kanban,graph</field>
 		</record>
 
 <!-- contribution views and actions -->		

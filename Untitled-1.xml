@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<form string="Budget">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="date" format="y"/>
+							<field name="budget_estime"/>
+							<field name="budget_reel"/>
+						</group>
+					</sheet>
+				</form>
+			

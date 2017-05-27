@@ -16,7 +16,7 @@
     
 
     # any module necessary for this one to work correctly
-    'depends': ['base','web_esi','web_gantt8','board','document','hr','calendar','project'],
+    'depends': ['base','web_esi','web_gantt8','board','document','calendar','project'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
