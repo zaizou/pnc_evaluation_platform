@@ -5,7 +5,7 @@
 
    <record model="ir.ui.view" id="axepnc_form_view">
 			<field name="name">axepnc.form</field>
-			<field name="model">phpevaluation.axepnc</field>
+			<field name="model">pncevaluation.axepnc</field>
 			<field name="arch" type="xml">
 				<form string="Axe Formulaire">
 					<sheet>
@@ -26,7 +26,7 @@
 
 	 <record model="ir.ui.view" id="axepnc_tree_view">
 			<field name="name">axepnc.tree</field>
-			<field name="model">phpevaluation.axepnc</field>
+			<field name="model">pncevaluation.axepnc</field>
 			<field name="arch" type="xml">
 					<tree string="Axe">
                             <field name="name" />
@@ -38,16 +38,16 @@
 
 		<record model="ir.ui.view" id="axepnc_esi_view">
 			<field name="name">axepnc.esi</field>
-			<field name="model">phpevaluation.axepnc</field>
+			<field name="model">pncevaluation.axepnc</field>
 			<field name="arch" type="xml">
 				<esi></esi>
 			</field>
 		</record>
 
 
-		<record model="ir.actions.act_window" id="phpevaluation_axes">
+		<record model="ir.actions.act_window" id="pncevaluation_axes">
 			<field name="name">Axes d'orientation</field>
-			<field name="res_model">phpevaluation.axepnc</field>
+			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="view_mode">kanban,esi,tree,form,graph</field>
 		</record>
 
@@ -58,7 +58,7 @@
 
    <record model="ir.ui.view" id="objectifpnc_form_view">
 			<field name="name">objectifpnc.form</field>
-			<field name="model">phpevaluation.objectifpnc</field>
+			<field name="model">pncevaluation.objectifpnc</field>
 			<field name="arch" type="xml">
 				<form string="Objectif Formulaire">
 					<sheet>
@@ -76,9 +76,9 @@
 
 
 	
-		<record model="ir.actions.act_window" id="phpevaluation_objs">
+		<record model="ir.actions.act_window" id="pncevaluation_objs">
 			<field name="name">Objectifs</field>
-			<field name="res_model">phpevaluation.objectifpnc</field>
+			<field name="res_model">pncevaluation.objectifpnc</field>
 			<field name="view_mode">kanban,tree,form,graph</field>
 		</record>
 
@@ -88,7 +88,7 @@
 
    <record model="ir.ui.view" id="actionpnc_form_view">
 			<field name="name">actionpnc.form</field>
-			<field name="model">phpevaluation.actionpnc</field>
+			<field name="model">pncevaluation.actionpnc</field>
 			<field name="arch" type="xml">
 				<form string="Action Formulaire">
 					<sheet>
@@ -105,9 +105,9 @@
 		</record>
 
 		
-		<record model="ir.actions.act_window" id="phpevaluation_actions">
+		<record model="ir.actions.act_window" id="pncevaluation_actions">
 			<field name="name">Actions</field>
-			<field name="res_model">phpevaluation.actionpnc</field>
+			<field name="res_model">pncevaluation.actionpnc</field>
 			<field name="view_mode">kanban,tree,form,graph</field>
 		</record>
 
@@ -117,7 +117,7 @@
 
    <record model="ir.ui.view" id="mesurepnc_form_view">
 			<field name="name">mesurepnc.form</field>
-			<field name="model">phpevaluation.mesurepnc</field>
+			<field name="model">pncevaluation.mesurepnc</field>
 			<field name="arch" type="xml">
 				<form string="Mesure Formulaire">
 					<sheet>
@@ -132,9 +132,9 @@
 
 
 				
-		<record model="ir.actions.act_window" id="phpevaluation_mesures">
+		<record model="ir.actions.act_window" id="pncevaluation_mesures">
 			<field name="name">Actions</field>
-			<field name="res_model">phpevaluation.mesurepnc</field>
+			<field name="res_model">pncevaluation.mesurepnc</field>
 			<field name="view_mode">kanban,tree,form,graph</field>
 		</record>
 
@@ -143,7 +143,7 @@
 <!-- PNC views and actions -->
     <record model="ir.ui.view" id="pnc_form_view">
 			<field name="name">pnc.form</field>
-			<field name="model">phpevaluation.pnc</field>
+			<field name="model">pncevaluation.pnc</field>
 			<field name="arch" type="xml">
 				<form string="Plan National Cancer">
 					<sheet>
@@ -160,7 +160,7 @@
 
         <record model="ir.ui.view" id="pnc_report_tree_view">
 			<field name="name">pnc_report.tree</field>
-			<field name="model">phpevaluation.pnc</field>
+			<field name="model">pncevaluation.pnc</field>
 			<field name="arch" type="xml">
 				<tree string="Plan National Cancer">
 					<field name="id"/>
@@ -169,9 +169,9 @@
 			</field>
 		</record>
 
-        <record model="ir.actions.act_window" id="phpevaluation_pnc">
+        <record model="ir.actions.act_window" id="pncevaluation_pnc">
 			<field name="name">Plan Cancer</field>
-			<field name="res_model">phpevaluation.pnc</field>
+			<field name="res_model">pncevaluation.pnc</field>
 			<field name="res_id">1</field>
 			<field name="view_mode">kanban,form,tree,graph</field>
 			
@@ -184,7 +184,7 @@
 <!-- RMO views and actions -->
 		<record model="ir.ui.view" id="rmo_form_view">
 			<field name="name">rmo.form</field>
-			<field name="model">phpevaluation.rmo</field>
+			<field name="model">pncevaluation.rmo</field>
 			<field name="arch" type="xml">
 				<form string="Rapport de mise en oeuvre">
 					<sheet>
@@ -204,7 +204,7 @@
 
         <record model="ir.ui.view" id="rmo_tree_view">
 			<field name="name">rmo.tree</field>
-			<field name="model">phpevaluation.rmo</field>
+			<field name="model">pncevaluation.rmo</field>
 			<field name="arch" type="xml">
 				<tree string="Rapports de mise en oeuvre">
 					<field name="id"/>
@@ -214,9 +214,9 @@
 			</field>
 		</record>
 
-        <record model="ir.actions.act_window" id="phpevaluation_rmo">
+        <record model="ir.actions.act_window" id="pncevaluation_rmo">
 			<field name="name">Plan Cancer</field>
-			<field name="res_model">phpevaluation.rmo</field>
+			<field name="res_model">pncevaluation.rmo</field>
             <field name="view_id" ref="rmo_tree_view"/>
 			<field name="view_mode">form,tree,graph</field>
 		</record>
@@ -225,7 +225,7 @@
 <!-- Formulaire MO views and actions -->
 <record model="ir.ui.view" id="fmo_form_view">
 			<field name="name">fmo.form</field>
-			<field name="model">phpevaluation.fmo</field>
+			<field name="model">pncevaluation.fmo</field>
 			<field name="arch" type="xml">
 				<form string="Formulaire de mise en oeuvre">
 					<sheet>
@@ -250,7 +250,7 @@
 		
  <record model="ir.ui.view" id="fmo_tree_view">
 			<field name="name">fmo.tree</field>
-			<field name="model">phpevaluation.fmo</field>
+			<field name="model">pncevaluation.fmo</field>
 			<field name="arch" type="xml">
 				<tree string="Formulaire de mise en oeuvre">
 					<field name="date"/>
@@ -262,7 +262,7 @@
 <!-- Date cle views and actions -->
 	<record model="ir.ui.view" id="date_cle_form_view">
 			<field name="name">date_cle.form</field>
-			<field name="model">phpevaluation.date_cle</field>
+			<field name="model">pncevaluation.date_cle</field>
 			<field name="arch" type="xml">
 				<form string="Date clé">
 					<sheet>
@@ -279,7 +279,7 @@
 		
  <record model="ir.ui.view" id="date_cle_tree_view">
 			<field name="name">date_cle.tree</field>
-			<field name="model">phpevaluation.date_cle</field>
+			<field name="model">pncevaluation.date_cle</field>
 			<field name="arch" type="xml">
 				<tree string="Formulaire de mise en oeuvre">
 					<field name="date"/>
@@ -290,7 +290,7 @@
 <!-- re views and actions -->
 		<record model="ir.ui.view" id="re_form_view">
 			<field name="name">re.form</field>
-			<field name="model">phpevaluation.re</field>
+			<field name="model">pncevaluation.re</field>
 			<field name="arch" type="xml">
 				<form string="Rapport d'évaluation'">
 					<sheet>
@@ -312,7 +312,7 @@
 
         <record model="ir.ui.view" id="re_tree_view">
 			<field name="name">re.tree</field>
-			<field name="model">phpevaluation.re</field>
+			<field name="model">pncevaluation.re</field>
 			<field name="arch" type="xml">
 				<tree string="Rapports d'évaluation'">
 					<field name="id"/>
@@ -322,16 +322,16 @@
 			</field>
 		</record>
 
-        <record model="ir.actions.act_window" id="phpevaluation_re">
+        <record model="ir.actions.act_window" id="pncevaluation_re">
 			<field name="name">Plan Cancer</field>
-			<field name="res_model">phpevaluation.re</field>
+			<field name="res_model">pncevaluation.re</field>
             <field name="view_id" ref="re_tree_view"/>
 			<field name="view_mode">form,tree,graph</field>
 		</record>
 <!-- fe views and actions -->
 			<record model="ir.ui.view" id="fe_form_view">
 			<field name="name">fe.form</field>
-			<field name="model">phpevaluation.fe</field>
+			<field name="model">pncevaluation.fe</field>
 			<field name="arch" type="xml">
 				<form string="Formulaire d'évaluation'">
 					<sheet>
@@ -368,7 +368,7 @@
 		
         <record model="ir.ui.view" id="fe_tree_view">
 			<field name="name">fe.tree</field>
-			<field name="model">phpevaluation.fe</field>
+			<field name="model">pncevaluation.fe</field>
 			<field name="arch" type="xml">
 				<tree string="Formulaire d'évaluation">
 					<field name="id"/>
@@ -378,9 +378,9 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_fe">
+		<record model="ir.actions.act_window" id="pncevaluation_fe">
 			<field name="name">Inspection</field>
-			<field name="res_model">phpevaluation.fe</field>
+			<field name="res_model">pncevaluation.fe</field>
 			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
         
@@ -390,7 +390,7 @@
 <!-- finspection views and actions -->		
 	<record model="ir.ui.view" id="finspection_form_view">
 			<field name="name">finspection.form</field>
-			<field name="model">phpevaluation.finspection</field>
+			<field name="model">pncevaluation.finspection</field>
 			<field name="arch" type="xml">
 				<form string="Formulaire d'inspection'">
 					<sheet>
@@ -414,7 +414,7 @@
 
 		<record model="ir.ui.view" id="finspection_tree_view">
 			<field name="name">finspection.tree</field>
-			<field name="model">phpevaluation.finspection</field>
+			<field name="model">pncevaluation.finspection</field>
 			<field name="arch" type="xml">
 				<tree string="Formulaires d'inspection">
 					<field name="id"/>
@@ -424,15 +424,15 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_finspection">
+		<record model="ir.actions.act_window" id="pncevaluation_finspection">
 			<field name="name">Inspection</field>
-			<field name="res_model">phpevaluation.finspection</field>
+			<field name="res_model">pncevaluation.finspection</field>
 			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
 <!-- region wilaya views and actions -->		
 	<record model="ir.ui.view" id="region_form_view">
 			<field name="name">region.form</field>
-			<field name="model">phpevaluation.region</field>
+			<field name="model">pncevaluation.region</field>
 			<field name="arch" type="xml">
 				<form string="Région">
 					<sheet>
@@ -450,7 +450,7 @@
 
 		<record model="ir.ui.view" id="wilaya_form_view">
 			<field name="name">wilaya.form</field>
-			<field name="model">phpevaluation.wilaya</field>
+			<field name="model">pncevaluation.wilaya</field>
 			<field name="arch" type="xml">
 				<form string="Wilaya">
 					<sheet>
@@ -465,7 +465,7 @@
 <!-- partie prenante views and actions -->		
 	<record model="ir.ui.view" id="partieprenante_form_view">
 			<field name="name">partieprenante.form</field>
-			<field name="model">phpevaluation.partieprenante</field>
+			<field name="model">pncevaluation.partieprenante</field>
 			<field name="arch" type="xml">
 				<form string="Partie prenante">
 					<sheet>
@@ -483,7 +483,7 @@
 
 			<record model="ir.ui.view" id="partieprenante_tree_view">
 			<field name="name">partieprenante.tree</field>
-			<field name="model">phpevaluation.partieprenante</field>
+			<field name="model">pncevaluation.partieprenante</field>
 			<field name="arch" type="xml">
 				<tree string="Parties prenantes">
 					<field name="id"/>
@@ -493,15 +493,15 @@
 		</record>
 
 
-		<record model="ir.actions.act_window" id="phpevaluation_partieprenante">
+		<record model="ir.actions.act_window" id="pncevaluation_partieprenante">
 			<field name="name">Parties prenantes</field>
-			<field name="res_model">phpevaluation.partieprenante</field>
+			<field name="res_model">pncevaluation.partieprenante</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
 <!--groupe pnc views and actions -->		
 		<record model="ir.ui.view" id="groupe_form_view">
 			<field name="name">groupe.form</field>
-			<field name="model">phpevaluation.groupe</field>
+			<field name="model">pncevaluation.groupe</field>
 			<field name="arch" type="xml">
 				<form string="Groupe">
 					<sheet>
@@ -520,7 +520,7 @@
 
 			<record model="ir.ui.view" id="groupe_tree_view">
 			<field name="name">groupe.tree</field>
-			<field name="model">phpevaluation.groupe</field>
+			<field name="model">pncevaluation.groupe</field>
 			<field name="arch" type="xml">
 				<tree string="Parties prenantes">
 					<field name="id"/>
@@ -529,17 +529,17 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_groupe_inspection">
+		<record model="ir.actions.act_window" id="pncevaluation_groupe_inspection">
 			<field name="name">Groupes d'inspection</field>
-			<field name="res_model">phpevaluation.groupe</field>
+			<field name="res_model">pncevaluation.groupe</field>
 			<field name="domain">[["tag","=","inspection"]]</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
 
 
-		<record model="ir.actions.act_window" id="phpevaluation_groupe_eval_subj">
+		<record model="ir.actions.act_window" id="pncevaluation_groupe_eval_subj">
 			<field name="name">Groupes d'évaluations subjectives</field>
-			<field name="res_model">phpevaluation.groupe</field>
+			<field name="res_model">pncevaluation.groupe</field>
 			<field name="domain">[["tag","=","evaluation_subjective"]]</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
@@ -549,7 +549,7 @@
 <!-- contributeur pnc views and actions -->		
 		<record model="ir.ui.view" id="contributeur_form_view">
 			<field name="name">contributeur.form</field>
-			<field name="model">phpevaluation.contributeur</field>
+			<field name="model">pncevaluation.contributeur</field>
 			<field name="arch" type="xml">
 				<form string="Contributeur">
 					<sheet>
@@ -567,7 +567,7 @@
 
 			<record model="ir.ui.view" id="contributeur_tree_view">
 			<field name="name">contributeur.tree</field>
-			<field name="model">phpevaluation.contributeur</field>
+			<field name="model">pncevaluation.contributeur</field>
 			<field name="arch" type="xml">
 				<tree string="Contributeurs">
 					<field name="id"/>
@@ -580,7 +580,7 @@
 <!-- conrtibution views and actions -->
 		<record model="ir.ui.view" id="contribution_form_view">
 			<field name="name">contribution.form</field>
-			<field name="model">phpevaluation.contribution</field>
+			<field name="model">pncevaluation.contribution</field>
 			<field name="arch" type="xml">
 				<form string="Contribution">
 					<sheet>
@@ -605,7 +605,7 @@
 
 		<record model="ir.ui.view" id="contribution_tree_view">
 			<field name="name">contribution.tree</field>
-			<field name="model">phpevaluation.contribution</field>
+			<field name="model">pncevaluation.contribution</field>
 			<field name="arch" type="xml">
 				<tree string="Contributions">
 					<field name="name"/>
@@ -616,9 +616,9 @@
 		</record>
 
 	 
-		<record model="ir.actions.act_window" id="phpevaluation_contribution">
+		<record model="ir.actions.act_window" id="pncevaluation_contribution">
 			<field name="name">Contributions</field>
-			<field name="res_model">phpevaluation.contribution</field>
+			<field name="res_model">pncevaluation.contribution</field>
 			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
 
@@ -626,7 +626,7 @@
 <!-- reucoor views and actions -->		
 		<record model="ir.ui.view" id="reucoor_form_view">
 			<field name="name">reucoor.form</field>
-			<field name="model">phpevaluation.reucoor</field>
+			<field name="model">pncevaluation.reucoor</field>
 			<field name="arch" type="xml">
 				<form string="Réunion de coordination">
 					<sheet>
@@ -648,7 +648,7 @@
 
 			<record model="ir.ui.view" id="reucoor_tree_view">
 			<field name="name">reucoor.tree</field>
-			<field name="model">phpevaluation.reucoor</field>
+			<field name="model">pncevaluation.reucoor</field>
 			<field name="arch" type="xml">
 				<tree string="Réunions de coordination">
 					<field name="name"/>
@@ -661,7 +661,7 @@
 
 		<record id="view_reucoor_calendar" model="ir.ui.view">
             <field name="name">reucoor.calendar</field>
-            <field name="model">phpevaluation.reucoor</field>
+            <field name="model">pncevaluation.reucoor</field>
             <field eval="2" name="priority"/>
             <field name="arch" type="xml">
                 <calendar  color="user_id" date_start="start" date_stop="stop" string="Réunions" mode="month" >
@@ -671,9 +671,9 @@
             </field>
         </record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_reucoor">
+		<record model="ir.actions.act_window" id="pncevaluation_reucoor">
 			<field name="name">Réunions de coordination</field>
-			<field name="res_model">phpevaluation.reucoor</field>
+			<field name="res_model">pncevaluation.reucoor</field>
 			<field name="view_mode">calendar,tree,form,kanban,graph</field>
 		</record>
 
@@ -681,7 +681,7 @@
 
 		<record model="ir.ui.view" id="pvreunionaction_form_view">
 			<field name="name">pvreunionaction.form</field>
-			<field name="model">phpevaluation.pvreunionaction</field>
+			<field name="model">pncevaluation.pvreunionaction</field>
 			<field name="arch" type="xml">
 				<form string="PV  de réunion">
 					<sheet>
@@ -697,7 +697,7 @@
 
 			<record model="ir.ui.view" id="pvreunionaction_tree_view">
 			<field name="name">pvreunionaction.tree</field>
-			<field name="model">phpevaluation.pvreunionaction</field>
+			<field name="model">pncevaluation.pvreunionaction</field>
 			<field name="arch" type="xml">
 				<tree string="PV de réunion">
 					<field name="name" />
@@ -709,7 +709,7 @@
 <!-- reunion evaluation views and actions -->		
 		<record model="ir.ui.view" id="reueval_form_view">
 			<field name="name">reueval.form</field>
-			<field name="model">phpevaluation.reueval</field>
+			<field name="model">pncevaluation.reueval</field>
 			<field name="arch" type="xml">
 				<form string="Réunion d'évaluation'">
 					<sheet>
@@ -730,7 +730,7 @@
 
 			<record model="ir.ui.view" id="reueval_tree_view">
 			<field name="name">reueval.tree</field>
-			<field name="model">phpevaluation.reueval</field>
+			<field name="model">pncevaluation.reueval</field>
 			<field name="arch" type="xml">
 				<tree string="Réunions d'évaluation">
 					<field name="name"/>
@@ -740,9 +740,9 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_reueval">
+		<record model="ir.actions.act_window" id="pncevaluation_reueval">
 			<field name="name">Réunions d'évaluation</field>
-			<field name="res_model">phpevaluation.reueval</field>
+			<field name="res_model">pncevaluation.reueval</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
 
@@ -750,7 +750,7 @@
 <!-- budget  views and actions -->		
 		<record model="ir.ui.view" id="budgetpnc_form_view">
 			<field name="name">budgetpnc.form</field>
-			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="model">pncevaluation.budgetpnc</field>
 			<field name="arch" type="xml">
 				<form string="Budget">
 					<sheet>
@@ -767,7 +767,7 @@
 
 		<record model="ir.ui.view" id="budgetpnc_menu_form_view">
 			<field name="name">budgetpnc.form</field>
-			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="model">pncevaluation.budgetpnc</field>
 			<field name="arch" type="xml">
 				<form string="Budget">
 					<sheet>
@@ -785,7 +785,7 @@
 
 			<record model="ir.ui.view" id="budgetpnc_tree_view">
 			<field name="name">budgetpnc.tree</field>
-			<field name="model">phpevaluation.budgetpnc</field>
+			<field name="model">pncevaluation.budgetpnc</field>
 			<field name="arch" type="xml">
 				<tree string="Budget">
 					<field name="date"/>
@@ -795,9 +795,9 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window" id="phpevaluation_budgetpnc">
+		<record model="ir.actions.act_window" id="pncevaluation_budgetpnc">
 			<field name="name">Budgets</field>
-			<field name="res_model">phpevaluation.budgetpnc</field>
+			<field name="res_model">pncevaluation.budgetpnc</field>
 			<field name="view_mode">tree,form,kanban,graph,pivot</field>
 		</record>
 
@@ -805,7 +805,7 @@
 <!-- rubriquebudget  views and actions -->		
 		<record model="ir.ui.view" id="rubriquebudget_form_view">
 			<field name="name">rubriquebudget.form</field>
-			<field name="model">phpevaluation.rubriquebudget</field>
+			<field name="model">pncevaluation.rubriquebudget</field>
 			<field name="arch" type="xml">
 				<form string="Rubrique">
 					<sheet>
@@ -822,7 +822,7 @@
 
 			<record model="ir.ui.view" id="rubriquebudget_tree_view">
 			<field name="name">rubriquebudget.tree</field>
-			<field name="model">phpevaluation.rubriquebudget</field>
+			<field name="model">pncevaluation.rubriquebudget</field>
 			<field name="arch" type="xml">
 				<tree string="Rubriques">
 					<field name="name"/>

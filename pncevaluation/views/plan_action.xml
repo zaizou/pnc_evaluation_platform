@@ -6,7 +6,7 @@
   <!--Plans d'action views and actions' -->
         <record model="ir.ui.view" id="pa_form_view">
 			<field name="name">pa.form</field>
-			<field name="model">phpevaluation.pa</field>
+			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
 				<form string="Plan d'action'">
 					<sheet>
@@ -47,7 +47,7 @@
 
         <record model="ir.ui.view" id="pa_tree_view">
 			<field name="name">pa.tree</field>
-			<field name="model">phpevaluation.pa</field>
+			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
 				<tree string="Plan National Cancer">
 					<field name="id"/>
@@ -59,7 +59,7 @@
 
 		<record model="ir.ui.view" id="pa_gantt_view">
 			<field name="name">pa.gantt</field>
-			<field name="model">phpevaluation.pa</field>
+			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
 				<gantt></gantt>
 			</field>
@@ -67,7 +67,7 @@
 
 		<record model="ir.ui.view" id="pa_esi_view">
 			<field name="name">pa.esi</field>
-			<field name="model">phpevaluation.pa</field>
+			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
 				<esi></esi>
 			</field>
@@ -75,9 +75,9 @@
 
 
 
-        <record model="ir.actions.act_window" id="phpevaluation_pa">
+        <record model="ir.actions.act_window" id="pncevaluation_pa">
 			<field name="name">Plan Cancer</field>
-			<field name="res_model">phpevaluation.pa</field>
+			<field name="res_model">pncevaluation.pa</field>
             <field name="view_id" ref="pa_tree_view"/>
 			<field name="view_mode">kanban,esi,tree,form,graph</field>
 		</record>

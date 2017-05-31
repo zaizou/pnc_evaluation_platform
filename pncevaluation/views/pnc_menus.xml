@@ -2,7 +2,7 @@
   <data>
       
 
-        <menuitem name="Plan Cancer Suivi et Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="phpevaluation,static/description/icon.png"/>
+        <menuitem name="Plan Cancer Suivi et Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="pncevaluation,static/description/icon.png"/>
 
           <menuitem name="Le Plan" id="pnc_plan"
 		  parent="menu_php_evaluation" sequence="0"/>
@@ -11,16 +11,16 @@
 		  parent="pnc_plan" sequence="0"/>
 
         <menuitem name="Axes d'orientation" id="axes_menu"
-		  action="phpevaluation_axes" parent="pnc_structure" sequence="0"/>
+		  action="pncevaluation_axes" parent="pnc_structure" sequence="0"/>
 
         <menuitem name="Objectifs" id="objs_menu"
-		  action="phpevaluation_objs" parent="pnc_structure" sequence="0"/>
+		  action="pncevaluation_objs" parent="pnc_structure" sequence="0"/>
 
         <menuitem name="Actions" id="actions_menu"
-		  action="phpevaluation_actions" parent="pnc_structure" sequence="0"/>
+		  action="pncevaluation_actions" parent="pnc_structure" sequence="0"/>
 
         <menuitem name="Mesures" id="mesures_menu"
-		    action="phpevaluation_mesures" parent="pnc_structure" sequence="0"/>
+		    action="pncevaluation_mesures" parent="pnc_structure" sequence="0"/>
 
 
         <menuitem name="Le Plan National Cancer" id="pnc_documents"
@@ -28,14 +28,14 @@
 
 
          <menuitem name="Plan Cancer 2015 - 2019" id="pnc_programs_current"
-		 action="phpevaluation_pnc" parent="pnc_documents" sequence="0"/>
+		 action="pncevaluation_pnc" parent="pnc_documents" sequence="0"/>
 
 
         
 
 
          <menuitem name="Parties Prenantes" id="pnc_evaluation_stakeholders"
-		 action="phpevaluation_partieprenante" parent="pnc_documents" sequence="40"/>
+		 action="pncevaluation_partieprenante" parent="pnc_documents" sequence="40"/>
 
 
 
@@ -49,22 +49,22 @@
 		 action="survey.action_survey_form" parent="pnc_suivi" sequence="0"/>
 
                <menuitem name="Plans d'action" id="plan_action"
-		 action="phpevaluation_pa" parent="pnc_suivi" sequence="10"/>
+		 action="pncevaluation_pa" parent="pnc_suivi" sequence="10"/>
       
                 <menuitem name="Suivi du Budget" id="suivi_budget"
-		 action="phpevaluation_budgetpnc" parent="pnc_suivi" sequence="20"/>
+		 action="pncevaluation_budgetpnc" parent="pnc_suivi" sequence="20"/>
 
      
 
          <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
-		 action="phpevaluation_rmo" parent="pnc_suivi" sequence="30"/>
+		 action="pncevaluation_rmo" parent="pnc_suivi" sequence="30"/>
 
 
           <menuitem name="Réunions de coordination" id="reunions_coord_form"
-		 action="phpevaluation_reucoor" parent="pnc_suivi" sequence="40"/>
+		 action="pncevaluation_reucoor" parent="pnc_suivi" sequence="40"/>
 
            <menuitem name="Contributions" id="contribution_menu"
-		 action="phpevaluation_contribution" parent="pnc_suivi" sequence="50"/>
+		 action="pncevaluation_contribution" parent="pnc_suivi" sequence="50"/>
 
 
 
@@ -80,20 +80,20 @@
 		 action="survey.action_survey_form" parent="eval_plannifications" sequence="10"/>
 
         <menuitem name="Réunions d'évaluation" id="reunions_eval_form"
-		  action="phpevaluation_reueval" parent="eval_plannifications" sequence="20"/>
+		  action="pncevaluation_reueval" parent="eval_plannifications" sequence="20"/>
         
 <!--    Evaluation  -->
         <menuitem name="Evaluation" id="pnc_evaluation"
 		  parent="pnc_evaluation_section" sequence="20"/>
 
        <menuitem name="Evaluations" id="pnc_evaluations"
-		 action="phpevaluation_re" parent="pnc_evaluation" sequence="1"/>
+		 action="pncevaluation_re" parent="pnc_evaluation" sequence="1"/>
 
         <menuitem name="Formulaires d'évaluation subjective'" id="pnc_evaluations_fes"
-		 action="phpevaluation_fe" parent="pnc_evaluation" sequence="1"/>
+		 action="pncevaluation_fe" parent="pnc_evaluation" sequence="1"/>
 
        <menuitem name="Formulaires d'inspection'" id="pnc_evaluations_fi"
-		 action="phpevaluation_finspection" parent="pnc_evaluation" sequence="1"/>
+		 action="pncevaluation_finspection" parent="pnc_evaluation" sequence="1"/>
 
 
 <!--    Groupes  -->
@@ -102,10 +102,10 @@
 		  parent="pnc_evaluation_section" sequence="30"/>
 
          <menuitem name="Groupes d'inspection" id="groupe_inspection_menu"
-		 action="phpevaluation_groupe_inspection" parent="groupes_menu" sequence="1"/>
+		 action="pncevaluation_groupe_inspection" parent="groupes_menu" sequence="1"/>
 
           <menuitem name="Groupes d'évaluations subjectives" id="groupe_es_menu"
-		 action="phpevaluation_groupe_eval_subj" parent="groupes_menu" sequence="1"/>
+		 action="pncevaluation_groupe_eval_subj" parent="groupes_menu" sequence="1"/>
 
 
 
@@ -122,7 +122,7 @@
 
 <!--
          <menuitem name="Tableau de bord M" id="pnc_dash_test"
-		 action="phpevaluation_dash" parent="menu_pnc_dashboard" sequence="10"/>
+		 action="pncevaluation_dash" parent="menu_pnc_dashboard" sequence="10"/>
 -->
 
          

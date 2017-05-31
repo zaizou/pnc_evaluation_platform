@@ -9,31 +9,21 @@
     'author': "Bouzid MEDJDOUB , Aicha BACHIRI ",
     'website': "http://www.esi.dz",
     "license": "LGPL-3",
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
-    # for the full list
     
-    
+    'depends': ['base','web_esi','web_gantt8','board','document','calendar'],
 
-    # any module necessary for this one to work correctly
-    'depends': ['base','web_esi','web_gantt8','board','document','calendar','project'],
-    # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        #  'security/ir.model.access.csv',
         'views/pnc_documents.xml',
         'views/plan_action.xml',
         'views/pnc_menus.xml',
-        'views/php_templates.xml',
-        'views/indicator_report.xml'
     ],
-    # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
     'installable': True,
     'auto_install': False,
     'application': True,
-    'sequence': 105,
-    
+    'sequence': 105,   
 
 }

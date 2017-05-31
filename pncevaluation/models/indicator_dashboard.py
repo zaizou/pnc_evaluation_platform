@@ -3,8 +3,8 @@ from odoo import models, api, _, fields
 from odoo.tools.misc import formatLang
 
 
-class agregation_level(models.Model):
-    _inherit = "phpevaluation.agregation_level"
+class indicator_dashboard(models.Model):
+    _inherit = "pncevaluation.indicator"
 
     @api.one
     def _kanban_dashboard(self):
@@ -16,7 +16,7 @@ class agregation_level(models.Model):
         
     kanban_dashboard = fields.Text(compute='_kanban_dashboard')
     kanban_dashboard_graph = fields.Text(compute='_kanban_dashboard_graph')
-    show_on_dashboard = fields.Boolean(string='Show journal on dashboard', help="Whether this agregation level should be displayed on the dashboard or not", default=True)
+    show_on_dashboard = fields.Boolean(string='Show journal on dashboard', help="Whether this journal should be displayed on the dashboard or not", default=True)
 
     @api.multi
     def toggle_favorite(self):
@@ -26,10 +26,10 @@ class agregation_level(models.Model):
     @api.multi
     def get_bar_graph_datas(self):
         data = []
-        for agreg in self:
-            for indic in agreg.indicateur_ids:
-                ker=indic.valeur
-                data.append({'label': _('Past'), 'value':ker, 'type': 'past'})
+        for ind in self:
+            ker=ind.valeur
+        data.append({'label': _('Past'), 'value':ker, 'type': 'past'})
+        
         return [{'values': data}]
 
     @api.one
