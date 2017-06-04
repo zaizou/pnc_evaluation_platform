@@ -67,7 +67,7 @@
 							<field name="numero" />
 						</group>
 						<group>
-							<field name="actions_ids"/>
+							<field name="actions_ids" widget="many2many_tags"/>
 						</group>
 					</sheet>
 				</form>
@@ -95,6 +95,12 @@
 						<group>
                             <field name="name" />
 							<field name="numero" />
+
+							<field name="date_debut_p" />
+							<field name="date_debut_r" />
+							<field name="datefin_p" />
+							<field name="datefin_r" />
+
 						</group>
 						<group>
 							<field name="mesures_ids"/>
@@ -169,11 +175,20 @@
 			</field>
 		</record>
 
+		<record model="ir.ui.view" id="pnc_report_esi_view">
+			<field name="name">pnc_report.esi</field>
+			<field name="model">pncevaluation.pnc</field>
+			<field name="arch" type="xml">
+				<esi></esi>
+			</field>
+		</record>
+
+
         <record model="ir.actions.act_window" id="pncevaluation_pnc">
 			<field name="name">Plan Cancer</field>
 			<field name="res_model">pncevaluation.pnc</field>
 			<field name="res_id">1</field>
-			<field name="view_mode">kanban,form,tree,graph</field>
+			<field name="view_mode">kanban,esi,form,tree,graph</field>
 			
 		</record>
 
@@ -339,15 +354,16 @@
                             <field name="date"/>
 							<field name="contributeur" />
 							<field name="axe_id"/>
-							<field name="action_realisee"/>
+							<field name="action_realisee" />
 						</group>
-						<group>
+						<!--<group>
 							<field name="date_debut_p"/>
 							<field name="date_debut_r"/>
 							<field name="datefin_p"/>
 							<field name="datefin_r"/>
 							<field name="retard"/>
 						</group>
+						 -->
 						<group>
 							<field name="etat"/>
 							<field name="realisation"/>

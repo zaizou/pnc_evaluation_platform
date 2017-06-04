@@ -42,8 +42,33 @@ class ActionPNC(models.Model):
     numero = fields.Integer(u"Numéro de l\'action")
     objectiflie_id = fields.Many2one('pncevaluation.objectifpnc',string='Objectif lié', ondelete='SET NULL')
     mesures_ids = fields.One2many('pncevaluation.mesurepnc','actionlie_id',string="Mesures")
+
+    date_debut_p = fields.Date(u"Date début prévue")
+    date_debut_r = fields.Date(u"Date début réelle")
+    datefin_p = fields.Date(u"Date fin prévue")
+    datefin_r = fields.Date(u"Date fin réelle")
     #suivi 
     action_program_ids = fields.Many2many('pncevaluation.action_program',string=u"Programmes d\'action")
+    forms_eval_subj = fields.One2many('pncevaluation.fe','action_realisee',string=u"Formulaires d\'evaluaion subjective")
+    forms_inspection = fields.One2many('pncevaluation.finspection','action_realisee',string=u"Forms Inspection")
+
+    nb_etat_fin = fields.Integer("Etats fin");
+    nb_etat_current  =fields.Integer("Etats en cours")
+    nb_etat_prep = fields.Integer("Etats en prep")
+
+    nb_qualite_mal = fields.Integer("nb mal")
+    nb_qualite_pom = fields.Integer("nb pom")
+    nb_qualite_br = fields.Integer("nb br")
+    nb_qualite_tb = fields.Integer("nb tb")
+
+    nb_res_ms = fields.Integer("ms")
+    nb_res_pms = fields.Integer("pms")
+    nb_res_s = fields.Integer("s")
+    nb_res_ps = fields.Integer("ps")
+
+
+
+    
 
 class MesurePNC(models.Model):
     _name = 'pncevaluation.mesurepnc'

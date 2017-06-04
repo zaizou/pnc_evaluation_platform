@@ -1,6 +1,5 @@
 <odoo>
   <data>
-      
 
         <menuitem name="Plan Cancer Suivi et Evaluation" id="menu_php_evaluation" sequence="70"   web_icon="pncevaluation,static/description/icon.png"/>
 
@@ -43,10 +42,10 @@
 
 
          <menuitem name="Suivi du Plan Cancer" id="pnc_suivi"
-		  parent="menu_php_evaluation" sequence="10"/>
+		  parent="menu_php_evaluation"  sequence="10"/>
 
-          <menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
-		 action="survey.action_survey_form" parent="pnc_suivi" sequence="0"/>
+          <!--<menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
+		 action="survey.action_survey_form" parent="pnc_suivi" sequence="0"/>-->
 
                <menuitem name="Plans d'action" id="plan_action"
 		 action="pncevaluation_pa" parent="pnc_suivi" sequence="10"/>
@@ -76,8 +75,8 @@
         <menuitem name="Plannification" id="eval_plannifications"
 		   parent="pnc_evaluation_section" sequence="10"/>
 
-   <menuitem name="Plannifiation des Inspections" id="reunions_gt"
-		 action="survey.action_survey_form" parent="eval_plannifications" sequence="10"/>
+   <!--<menuitem name="Plannifiation des Inspections" id="reunions_gt"
+		 action="survey.action_survey_form" parent="eval_plannifications" sequence="10"/>-->
 
         <menuitem name="Réunions d'évaluation" id="reunions_eval_form"
 		  action="pncevaluation_reueval" parent="eval_plannifications" sequence="20"/>
