@@ -13,6 +13,8 @@ odoo.define('pncevaluation.axes', function(require) {
 
     var table;
     var elemBody;
+    var axes_ids;
+    var axesTable;
 
 
 
@@ -72,18 +74,41 @@ odoo.define('pncevaluation.axes', function(require) {
                     $(head).append(head_line);
                     $(head_line).append('<th>.</th>');
                     $(head_line).append('<th>KPI</th>');
-                    for (var i = 0; i < data.length; i++)
-                        $(head_line).append('<th><h2>' + data[i].name + '</h2></th>');
+                    axes_ids = new Array();
+                    axesTable = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        $(head_line).append('<th><h2> Axe 0' + data[i].numero + '</h2></th>');
+                        axes_ids[i] = data[i].id;
+                        axesTable[i] = data[i];
+                    }
+
                     $(elemBody).empty();
-                    draw_avancement_line(data);
-                    draw_evaliation_line(data);
+                    self.rpc('/pncevaluation/get_axes_stats', { axes_ids: axes_ids, date_debut: "1", date_fin: "2" }).done(function(result) {
+                        console.log("table");
+                        console.log(result);
+
+                        for (var i = 0; i < axesTable.length; i++)
+                            for (var j = 0; j < result.length; j++)
+                                if (axesTable[i].id == result[j].axe_id)
+                                    axesTable[i].stats = result[j];
+
+                        console.log(axesTable);
+                        draw_avancement_line(axesTable);
+                        draw_comprehension(axesTable);
+                        draw_budget(axesTable);
+                        draw_realisation(axesTable);
+                        draw_evaliation_line(axesTable);
+
+                    });
 
 
                 });
+
+
             });
-        },
 
 
+        }
     });
 
     function draw_avancement_line(axes) {
@@ -103,6 +128,50 @@ odoo.define('pncevaluation.axes', function(require) {
             $(axeCt).append('<tr><td><h4>' + axes[i].action_programs_ids.length + '</h4></td></tr>');
         }
 
+    }
+
+    function draw_comprehension(axes) {
+        var avn_line = document.createElement('tr');
+        $(elemBody).append(avn_line);
+        $(avn_line).append('<td><h2>Compréhension</h2></td>');
+        var kpi_cont = document.createElement('td');
+        $(avn_line).append(kpi_cont);
+        $(kpi_cont).append('<tr><td><h4>Résultats satisfaisants</h4></td></tr>');
+        for (var i = 0; i < axes.length; i++) {
+            var axeCt = document.createElement('td');
+            $(avn_line).append(axeCt);
+            $(axeCt).append('<tr><td><h4>' + axes[i].stats.compre + '</h4> </td></tr> ');
+        }
+    }
+
+    function draw_budget(axes) {
+        var avn_line = document.createElement('tr');
+        $(elemBody).append(avn_line);
+        $(avn_line).append('<td><h2>Budget</h2></td>');
+        var kpi_cont = document.createElement('td');
+        $(avn_line).append(kpi_cont);
+        $(kpi_cont).append('<tr><td><h4>Budget Estimé</h4></td></tr>');
+        $(kpi_cont).append('<tr><td><h4>Budget Réel</h4></td></tr>');
+        for (var i = 0; i < axes.length; i++) {
+            var axeCt = document.createElement('td');
+            $(avn_line).append(axeCt);
+            $(axeCt).append('<tr><td><h4>' + axes[i].stats.budget_estim + '</h4> </td></tr> ');
+            $(axeCt).append('<tr><td><h4>' + axes[i].stats.budget_reel + '</h4></td></tr>');
+        }
+    }
+
+    function draw_realisation(axes) {
+        var avn_line = document.createElement('tr');
+        $(elemBody).append(avn_line);
+        $(avn_line).append('<td><h2>Réalisation</h2></td>');
+        var kpi_cont = document.createElement('td');
+        $(avn_line).append(kpi_cont);
+        $(kpi_cont).append('<tr><td><h4>Taux de réalisation</h4></td></tr>');
+        for (var i = 0; i < axes.length; i++) {
+            var axeCt = document.createElement('td');
+            $(avn_line).append(axeCt);
+            $(axeCt).append('<tr><td><h4>' + axes[i].stats.taux_real + ' %</h4> </td></tr> ');
+        }
     }
 
     function draw_evaliation_line(axes) {

@@ -15,7 +15,7 @@ class AxePNC(models.Model):
     _name = 'pncevaluation.axepnc'
     _description = u"Axe du plan national cancer"
     name = fields.Char(u"Intitulé de l\'axe",required=True, translate=True)
-    numero = fields.Integer(u"Numéro de l axe")
+    numero = fields.Integer(u"Numéro de l axe",required=True)
     description = fields.Char(u"Description de l\'axe")
     color = fields.Integer(u"Couleur",default=1)
     budgets_ids = fields.One2many('pncevaluation.budgetpnc','axe_id',u"Budgets")

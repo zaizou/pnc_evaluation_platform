@@ -35,10 +35,6 @@ odoo.define('web_esi.esi', function(require) {
                 console.log("this.dataset");
                 console.log(self.dataset);
                 console.log(self.fields);
-
-
-
-
                 self.has_been_loaded.resolve();
             });
 

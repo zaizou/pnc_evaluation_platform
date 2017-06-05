@@ -47,9 +47,6 @@ odoo.define('web_esi.esi', function(require) {
             var container = document.createElement('div');
             $(container).addClass("axe_summary");
             $(self.$el).append(container);
-            $(container).append('<input class="datepicker" data-date-format="mm/yyyy">')
-
-
             $(container).append('<h1>Axe 01 : Prévention </h1>');
             var table = document.createElement('table');
             $(container).append(table);
@@ -77,7 +74,7 @@ odoo.define('web_esi.esi', function(require) {
                     domain: domains,
                     context: contexts
                 }).then(function(data) {
-                    $('.datepicker').datepicker();
+
 
                     console.log("calling on_data_loaded");
                     console.log("data is :  " + data);
@@ -106,8 +103,6 @@ odoo.define('web_esi.esi', function(require) {
                                 iteration++;
                             }
                         }
-
-
                         self.rpc('/pncevaluation/get_actions_stats', { actions_ids: tabIdActions, date_debut: "1", date_fin: "2" }).done(function(result) {
                             console.log("table");
                             console.log(result);
@@ -151,7 +146,10 @@ odoo.define('web_esi.esi', function(require) {
 
 
                                             var objectif = document.createElement('td');
-                                            var strO = "<h2>" + objectifsD[i].name + "<h2/>";
+                                            if (typeof objectifsD[i].numero !== 'undefined')
+                                                var strO = "<h2> Objectif 0" + objectifsD[i].numero + "<h2/>";
+                                            else
+                                                var strO = "<h2> Objectif<h2/>";
                                             $(objectif).append(strO);
                                             $(line).append(objectif);
 

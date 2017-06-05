@@ -81,9 +81,62 @@ class PNC_Evaluation(Controller):
             nb_res_pms = 0
             nb_res_s = 0
             nb_res_ps = 0
-            
-            
-
-
         return elements
+        
+    @route('/pncevaluation/get_axes_stats', type='json', auth='user')
+    def get_stats_axes(self,axes_ids,date_debut,date_fin):
+        #2Budget #1resultat satifaisants #   realisation
+        elements = []
+        for axe_id in axes_ids:
+            reORM = request.env['pncevaluation.reucoor']
+            reunsC = reORM.search([('axe_id', '=', axe_id)])
+
+            re_ev_ORM = request.env['pncevaluation.reueval']
+            reunsE = re_ev_ORM.search([('axe_id', '=', axe_id)])
+
+            paORM = request.env['pncevaluation.pa']
+            pas = paORM.search([('axe_id', '=', axe_id)])
+
+            budORM = request.env['pncevaluation.budgetpnc']
+            buds = budORM.search([('axe_id', '=', axe_id)])
+            
+            budgeEst = sum(bud.budget_estime for bud in buds)
+            budgetReel = sum(bud.budget_reel for bud in buds)
+            
+            appORM = request.env['pncevaluation.fe']
+            fes = appORM.search([('axe_id', '=', axe_id)])
+            apppreciation_axe = sum(fe.appreciation for fe in fes)
+            if len(fes):
+                apppreciation_axe = apppreciation_axe/len(fes)
+            evals = len(fes)
+            
+            inspORM = request.env['pncevaluation.finspection']
+            insp = inspORM.search([('axe_id', '=', axe_id)])
+
+            compre1 = appORM.search([('axe_id', '=', axe_id),('res_attend','=',u"satisfaisants")])
+            compre2 =appORM.search([('axe_id', '=', axe_id),('res_attend','=',u"plus que satisfaisants")])
+            compre3=compre1 | compre2
+
+
+
+            ret = {
+                'axe_id':axe_id,
+                'reunions_coord': len(reunsC),
+                'reunions_eval': len(reunsE),
+                'plans_action': len(pas),
+                'budget_estim': budgeEst,
+                'budget_reel': budgetReel,
+                'taux_real':apppreciation_axe,
+                'eval_sub':evals,
+                'inspec':len(insp),
+                'compre':len(compre3)
+            }
+            elements.append(ret)
+        return elements
+
+
+
+        
+        
+    
 
