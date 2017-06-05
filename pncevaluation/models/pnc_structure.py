@@ -24,6 +24,12 @@ class AxePNC(models.Model):
     pnc_program_id = fields.Many2one('pncevaluation.pnc_program',string=u"Programme PNC")
     objectifs_ids = fields.One2many('pncevaluation.objectifpnc','axelie_id',u"Objectifs")
     action_programs_ids = fields.One2many('pncevaluation.pa','axe_id',string="Programmes d\'actions")
+    contributions_ids = fields.One2many('pncevaluation.contribution','axe_id',string="Contributions")
+    reunion_coor_ids = fields.One2many('pncevaluation.reucoor','axe_id',string=u"Réunions de coordination")
+    reunion_eval_ids = fields.One2many('pncevaluation.reueval','axe_id',string=u"Réunions  d\'évaluation")
+    fe_ids =  fields.One2many('pncevaluation.fe','axe_id',string=u"Formulaires d\'évaluation")
+    fi_ids = fields.One2many('pncevaluation.finspection','axe_id',string=u"Formualires d\'inspection")
+    
 
 class ObjectifPNC(models.Model):
     _name = 'pncevaluation.objectifpnc'

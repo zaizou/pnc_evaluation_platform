@@ -44,11 +44,19 @@
 			</field>
 		</record>
 
+		<record model="ir.ui.view" id="axepnc_axes_view">
+			<field name="name">axepnc.axes</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axes></axes>
+			</field>
+		</record>
+
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes">
 			<field name="name">Axes d'orientation</field>
 			<field name="res_model">pncevaluation.axepnc</field>
-			<field name="view_mode">kanban,esi,tree,form,graph</field>
+			<field name="view_mode">kanban,esi,axes,tree,form,graph</field>
 		</record>
 
 
@@ -651,6 +659,7 @@
 							<field name="user_id"/>
 							<field name="start"/>
 							<field name="stop"/>
+							<field name="axe_id"/>
 							<field name="contributeurs_invites_ids" />
 							<field name="contributeurs_presents_ids" />
 							<field name="contributions_ids" />
@@ -690,7 +699,7 @@
 		<record model="ir.actions.act_window" id="pncevaluation_reucoor">
 			<field name="name">Réunions de coordination</field>
 			<field name="res_model">pncevaluation.reucoor</field>
-			<field name="view_mode">calendar,tree,form,kanban,graph</field>
+			<field name="view_mode">tree,calendar,form,kanban,graph</field>
 		</record>
 
 <!-- contribution views and actions -->		
@@ -733,6 +742,7 @@
 							<field name="name"/>
 							<field name="start"/>
 							<field name="stop"/>
+							<field name="axe_id"/>
 							<field name="contributeurs_invites_ids" />
 							<field name="contributeurs_presents_ids" />
 							<field name="contributions_ids" />

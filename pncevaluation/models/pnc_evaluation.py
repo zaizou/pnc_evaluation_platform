@@ -121,6 +121,7 @@ class formulaire_inspection(models.Model):
      _description = u"Formulaire d\'inspection"
      contributeur = fields.Many2one('pncevaluation.contributeur',string="Contributeur")
      rapport_evaluation_id = fields.Many2one('pncevaluation.re',string= u"Rapport d\'évaluation")
+     axe_id = fields.Many2one('pncevaluation.axepnc',string=u"Axe concerné")
      action_realisee = fields.Many2one('pncevaluation.actionpnc',string = u"Action réalisée")
      #groupe_inspection
      #personne chargée
@@ -154,6 +155,7 @@ class reunion_evaluation(models.Model):
      start = fields.Datetime(u"Début")
      stop = fields.Datetime(u"Fin")
      name = fields.Char(u"Objet de la réunion")
+     axe_id = fields.Many2one('pncevaluation.axepnc',string="axe")
      contributions_ids = fields.One2many('pncevaluation.contribution','reunion_evaluation_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs invités")

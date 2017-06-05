@@ -27,11 +27,9 @@ class PNC_Evaluation(Controller):
             #attributes_ids = attributes_obj.search(cr, uid, [('attribute_line_ids.product_tmpl_id', 'in', product_ids)], context=context)
             feORM = request.env['pncevaluation.fe']
             fes = feORM.search([('action_realisee', '=', action_id)])
-            #fes = F.search([['action_realisee','=',action_id]])
-            _logger.warning("pnc.FE")
-            _logger.warning("pnc.FE")
-            _logger.warning("pnc.FE")
-            _logger.warning(fes)
+            empty=False
+            if( len(fes) == 0 ):
+                empty = True
             for fe in fes:
                 _logger.warning(fe.etat)
                 if(fe.etat == u"finalisée"):
@@ -58,6 +56,7 @@ class PNC_Evaluation(Controller):
                     nb_res_ps = nb_res_ps +1
             ret = {
                 'action':action_id,
+                'isEmpty':empty,
                 'nb_etat_fin':nb_etat_fin,
                 'nb_etat_current':nb_etat_current,
                 'nb_etat_prep':nb_etat_prep,

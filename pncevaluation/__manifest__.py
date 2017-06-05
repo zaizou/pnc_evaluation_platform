@@ -17,6 +17,7 @@
         'views/pnc_documents.xml',
         'views/plan_action.xml',
         'views/pnc_menus.xml',
+        'views/pnc_evaluation_templates.xml'
         # 'data/pnc_groups.xml'
     ],
     'demo': [
