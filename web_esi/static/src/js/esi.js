@@ -15,6 +15,7 @@ odoo.define('web_esi.esi', function(require) {
     var iteration;
     var tabActions = new Array();
     var actionsStats;
+    var title;
 
 
     var MyView = View.extend({
@@ -46,22 +47,28 @@ odoo.define('web_esi.esi', function(require) {
             var self = this;
             var container = document.createElement('div');
             $(container).addClass("axe_summary");
+            $(container).addClass("wrapper");
             $(self.$el).append(container);
-            $(container).append('<h1>Axe 01 : Prévention </h1>');
+            title = document.createElement('div');
+            $(container).append(title);
+
             var table = document.createElement('table');
+            $(container).addClass("table");
             $(container).append(table);
             var head = document.createElement('thead');
             elemBody = document.createElement('tbody');
             $(table).append(head);
             var head_line = document.createElement('tr');
+            $(head).addClass("row header");
             $(head).append(head_line);
-            $(head_line).append('<th>Objectif</th>');
-            $(head_line).append('<th>Action</th>');
-            $(head_line).append('<th>Etat (Contributeurs)</th>');
-            $(head_line).append('<th>Qualité de réalisation (Contributeurs)</th>');
-            $(head_line).append('<th>Résultats (Contributeurs)</th>');
-            $(head_line).append('<th>Retard (début)</th>');
-            $(head_line).append('<th>Retard (fin)</th>');
+            $(head_line).append('<th class="cell">Objectif</th>');
+            $(head_line).append('<th class="cell">Action</th>');
+            $(head_line).append('<th class="cell">Etat (Contributeurs)</th>');
+            $(head_line).append('<th class="cell">Qualité de réalisation (Contributeurs)</th>');
+            $(head_line).append('<th class="cell">Résultats (Contributeurs)</th>');
+            $(head_line).append('<th class="cell">.</th>');
+            $(head_line).append('<th class="cell">Retard (début)</th>');
+            $(head_line).append('<th class="cell">Retard (fin)</th>');
             $(table).append(elemBody);
         },
         do_search: function(domains, contexts, group_bys) {
@@ -74,8 +81,8 @@ odoo.define('web_esi.esi', function(require) {
                     domain: domains,
                     context: contexts
                 }).then(function(data) {
-
-
+                    $(title).empty();
+                    $(title).append('<h1>' + data[0].name + '</h1>');
                     console.log("calling on_data_loaded");
                     console.log("data is :  " + data);
                     console.log(data);
@@ -159,10 +166,12 @@ odoo.define('web_esi.esi', function(require) {
                                             var retardft = document.createElement('td');
                                             var qualitet = document.createElement('td');
                                             var resultatt = document.createElement('td');
+                                            var res_icon = document.createElement('td');
                                             $(line).append(actionst);
                                             $(line).append(etatst);
                                             $(line).append(qualitet);
                                             $(line).append(resultatt);
+                                            $(line).append(res_icon);
                                             $(line).append(retarddt);
                                             $(line).append(retardft);
 
@@ -189,38 +198,53 @@ odoo.define('web_esi.esi', function(require) {
                                                 $(etatst).append(etatLine);
                                                 var etat = document.createElement('td');
                                                 if (objectifsD[i].actions[j].stats.nb_etat_fin)
-                                                    $(etat).append('<h5>Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') <h5/>');
+                                                    $(etat).append('<h5 class="fina">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') <h5/>');
                                                 if (objectifsD[i].actions[j].stats.nb_etat_current)
-                                                    $(etat).append('<h5>En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )<h5/>');
+                                                    $(etat).append('<h5 class="encours">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )<h5/>');
                                                 if (objectifsD[i].actions[j].stats.nb_etat_prep)
-                                                    $(etat).append('<h5>En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )<h5/>');
+                                                    $(etat).append('<h5 class="enprep">En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )<h5/>');
                                                 $(etatLine).append(etat);
 
                                                 var qualiteLine = document.createElement('tr');
                                                 $(qualitet).append(qualiteLine);
                                                 var qualite = document.createElement('td');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_tb)
-                                                    $(qualite).append('<h5>Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="tbr">Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )<h5/>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_br)
-                                                    $(qualite).append('<h5>Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="br">Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )<h5/>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_pom)
-                                                    $(qualite).append('<h5>Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="pobr">Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )<h5/>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_mal)
-                                                    $(qualite).append('<h5>Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="mr">Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )<h5/>');
                                                 $(qualiteLine).append(qualite);
 
                                                 var resLine = document.createElement('tr');
+                                                var resIconLine = document.createElement('tr');
                                                 $(resultatt).append(resLine);
+                                                $(res_icon).append(resIconLine);
                                                 var resultat = document.createElement('td');
-                                                if (objectifsD[i].actions[j].stats.nb_res_ps)
-                                                    $(resultat).append('<h5>Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )<h5/>');
-                                                if (objectifsD[i].actions[j].stats.nb_res_s)
-                                                    $(resultat).append('<h5>Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )<h5/>');
-                                                if (objectifsD[i].actions[j].stats.nb_res_pms)
-                                                    $(resultat).append('<h5>Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' )<h5/>');
-                                                if (objectifsD[i].actions[j].stats.nb_res_ms)
-                                                    $(resultat).append('<h5>Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )<h5/>');
+                                                var resultatIcon = document.createElement('td');
+                                                if (objectifsD[i].actions[j].stats.nb_res_ps) {
+                                                    $(resultat).append('<h5 class="tsat">Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )<h5/>');
+                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_tsat.png\" /></h5>');
+                                                }
+                                                if (objectifsD[i].actions[j].stats.nb_res_s) {
+                                                    $(resultat).append('<h5 class="sat">Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )<h5/>');
+                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_sat.png\" /></h5>');
+                                                }
+
+                                                if (objectifsD[i].actions[j].stats.nb_res_pms) {
+                                                    $(resultat).append('<h5 class="pms">Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) <h5/>');
+                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_pmsat.png\" /></h5>');
+                                                }
+
+                                                if (objectifsD[i].actions[j].stats.nb_res_ms) {
+                                                    $(resultat).append('<h5 class="ns">Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  <h5/>');
+                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_nsat.png\" /></h5>');
+                                                }
+
                                                 $(resLine).append(resultat);
+                                                $(resIconLine).append(resultatIcon);
 
 
                                                 /* var retarddl = document.createElement('tr');
