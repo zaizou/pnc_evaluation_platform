@@ -58,10 +58,12 @@ odoo.define('web_esi.esi', function(require) {
             var head = document.createElement('thead');
             elemBody = document.createElement('tbody');
             $(table).append(head);
+            $(table).addClass("pnc_overview");
             var head_line = document.createElement('tr');
             $(head).addClass("row header");
             $(head).append(head_line);
-            $(head_line).append('<th class="cell">Objectif</th>');
+
+            $(head_line).append('<th class="cell pnc_overview">Objectif</th>');
             $(head_line).append('<th class="cell">Action</th>');
             $(head_line).append('<th class="cell">Etat (Contributeurs)</th>');
             $(head_line).append('<th class="cell">Qualité de réalisation (Contributeurs)</th>');
@@ -90,7 +92,7 @@ odoo.define('web_esi.esi', function(require) {
                     var actions = new Model('pncevaluation.actionpnc');
                     actionsD = new Array();
 
-                    return objects.query(['id', 'name', 'actions_ids']).filter(
+                    return objects.query(['id', 'numero', 'name', 'actions_ids']).filter(
                         [
                             ['id', 'in', data[0].objectifs_ids]
                         ]
@@ -115,7 +117,7 @@ odoo.define('web_esi.esi', function(require) {
                             console.log(result);
                             actionsStats = result;
 
-                            var res = actions.query(['name', 'objectiflie_id', 'nb_etat_fin', 'nb_etat_prep', 'nb_etat_current', 'nb_qualite_mal', 'nb_qualite_pom', 'nb_qualite_br',
+                            var res = actions.query(['name', 'numero', 'objectiflie_id', 'nb_etat_fin', 'nb_etat_prep', 'nb_etat_current', 'nb_qualite_mal', 'nb_qualite_pom', 'nb_qualite_br',
                                     'nb_qualite_tb', 'nb_res_ms', 'nb_res_pms', 'nb_res_s', 'nb_res_ps'
                                 ])
                                 .filter(
@@ -149,10 +151,13 @@ odoo.define('web_esi.esi', function(require) {
 
                                         if (obj) {
                                             var line = document.createElement('tr');
+                                            $(line).addClass("pnc_overview");
                                             $(elemBody).append(line);
 
 
                                             var objectif = document.createElement('td');
+                                            $(objectif).addClass("pnc_overview");
+
                                             if (typeof objectifsD[i].numero !== 'undefined')
                                                 var strO = "<h2> Objectif 0" + objectifsD[i].numero + "<h2/>";
                                             else
@@ -168,12 +173,19 @@ odoo.define('web_esi.esi', function(require) {
                                             var resultatt = document.createElement('td');
                                             var res_icon = document.createElement('td');
                                             $(line).append(actionst);
+                                            $(actionst).addClass("pnc_overview");
                                             $(line).append(etatst);
+                                            $(etatst).addClass("pnc_overview");
                                             $(line).append(qualitet);
+                                            $(qualitet).addClass("pnc_overview");
                                             $(line).append(resultatt);
+                                            $(resultatt).addClass("pnc_overview");
                                             $(line).append(res_icon);
+                                            $(res_icon).addClass("pnc_overview");
                                             $(line).append(retarddt);
+                                            $(retarddt).addClass("pnc_overview");
                                             $(line).append(retardft);
+                                            $(retardft).addClass("pnc_overview");
 
 
                                             console.log("OBJD");
@@ -188,34 +200,42 @@ odoo.define('web_esi.esi', function(require) {
                                                 $(actionst).append(action_line);
 
                                                 var action = document.createElement('td');
-                                                var strA = "<h2>" + objectifsD[i].actions[j].name + "<h2/>";
+                                                var strA;
+                                                if (objectifsD[i].actions[j].numero < 10 && objectifsD[i].actions[j].numero > 0)
+                                                    strA = "<h2> Action 0" + objectifsD[i].actions[j].numero + "<h2/>";
+                                                else
+                                                    strA = "<h2> Action " + objectifsD[i].actions[j].numero + "<h2/>";
                                                 $(action).append(strA);
                                                 $(action_line).append(action);
+                                                $(action).addClass("gris");
+                                                if (j != objectifsD[i].actions.length - 1)
+                                                    $(action).addClass("bas");
 
 
 
                                                 var etatLine = document.createElement('tr');
                                                 $(etatst).append(etatLine);
                                                 var etat = document.createElement('td');
+                                                //$(etat).attr("align", "center");
                                                 if (objectifsD[i].actions[j].stats.nb_etat_fin)
-                                                    $(etat).append('<h5 class="fina">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') <h5/>');
+                                                    $(etat).append('<tr><td><h5 class="fina ">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') </h5></td></tr>');
                                                 if (objectifsD[i].actions[j].stats.nb_etat_current)
-                                                    $(etat).append('<h5 class="encours">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )<h5/>');
+                                                    $(etat).append('<tr><td><h5 class="encours ">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )</h5></td></tr>');
                                                 if (objectifsD[i].actions[j].stats.nb_etat_prep)
-                                                    $(etat).append('<h5 class="enprep">En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )<h5/>');
+                                                    $(etat).append('<tr><td><h5 class="enprep ">En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )</h5></td></tr>');
                                                 $(etatLine).append(etat);
 
                                                 var qualiteLine = document.createElement('tr');
                                                 $(qualitet).append(qualiteLine);
                                                 var qualite = document.createElement('td');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_tb)
-                                                    $(qualite).append('<h5 class="tbr">Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="tbr">Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )</h5>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_br)
-                                                    $(qualite).append('<h5 class="br">Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="br">Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )</h5>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_pom)
-                                                    $(qualite).append('<h5 class="pobr">Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="pobr">Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )</h5>');
                                                 if (objectifsD[i].actions[j].stats.nb_qualite_mal)
-                                                    $(qualite).append('<h5 class="mr">Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )<h5/>');
+                                                    $(qualite).append('<h5 class="mr">Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )</h5>');
                                                 $(qualiteLine).append(qualite);
 
                                                 var resLine = document.createElement('tr');
@@ -225,21 +245,21 @@ odoo.define('web_esi.esi', function(require) {
                                                 var resultat = document.createElement('td');
                                                 var resultatIcon = document.createElement('td');
                                                 if (objectifsD[i].actions[j].stats.nb_res_ps) {
-                                                    $(resultat).append('<h5 class="tsat">Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )<h5/>');
+                                                    $(resultat).append('<h5 class="tsat">Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )</h5>');
                                                     $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_tsat.png\" /></h5>');
                                                 }
                                                 if (objectifsD[i].actions[j].stats.nb_res_s) {
-                                                    $(resultat).append('<h5 class="sat">Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )<h5/>');
+                                                    $(resultat).append('<h5 class="sat">Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )</h5>');
                                                     $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_sat.png\" /></h5>');
                                                 }
 
                                                 if (objectifsD[i].actions[j].stats.nb_res_pms) {
-                                                    $(resultat).append('<h5 class="pms">Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) <h5/>');
+                                                    $(resultat).append('<h5 class="pms">Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) </h5>');
                                                     $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_pmsat.png\" /></h5>');
                                                 }
 
                                                 if (objectifsD[i].actions[j].stats.nb_res_ms) {
-                                                    $(resultat).append('<h5 class="ns">Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  <h5/>');
+                                                    $(resultat).append('<h5 class="ns">Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  </h5>');
                                                     $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_nsat.png\" /></h5>');
                                                 }
 

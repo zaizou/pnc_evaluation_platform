@@ -33,7 +33,6 @@ base_import
 base_import_module
 base_setup
 base_vat
-board
 bus
 calendar
 contacts

@@ -1,6 +1,7 @@
-table {
+table.pnc {
     border-collapse: collapse;
     border: 1;
+    width: 100%;
 }
 
 div.axe_summary {
@@ -16,16 +17,15 @@ h5.sat {
     color: green
 }
 
-th,
-td {
+th.pnc,
+td.pnc {
     text-align: left;
-    padding: 0px;
     text-align: center;
     vertical-align: middle;
 }
 
-tr:nth-child(even),
-td:nth-child(even) {
+tr.pnc:nth-child(even),
+td.pnc:nth-child(even) {
     text-align: center;
     vertical-align: middle;
 }
@@ -52,10 +52,9 @@ td:nth-child(even) {
     vertical-align: middle;
 }
 
-th {
+th.pnc {
     background-color: #4CAF50;
     color: white;
-    padding: 3px;
 }
 
 .cat1 {
@@ -66,4 +65,13 @@ th {
 .cat2 {
     margin-left: 3px;
     margin-right: 3px
+}
+
+.pnc_overview {
+    border: 1px solid green;
+}
+
+.bas {
+    border-bottom: 1px solid green;
+    ;
 }

@@ -59,6 +59,12 @@
 			<field name="view_mode">kanban,esi,axes,tree,form,graph</field>
 		</record>
 
+		<record model="ir.actions.act_window" id="pncevaluation_axes_ve">
+			<field name="name">Vue d'ensemble des axes</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">esi,axes</field>
+		</record>
+
 
 
 
@@ -769,7 +775,7 @@
 		<record model="ir.actions.act_window" id="pncevaluation_reueval">
 			<field name="name">Réunions d'évaluation</field>
 			<field name="res_model">pncevaluation.reueval</field>
-			<field name="view_mode">tree,form,kanban</field>
+			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
 
 

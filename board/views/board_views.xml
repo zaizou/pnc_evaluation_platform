@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--My Dashboard-->
+        <record model="ir.ui.view" id="board_my_dash_view">
+            <field name="name">My Dashboard</field>
+            <field name="model">board.board</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="board_my_dash_viewone">
+            <field name="name">My Dashboard One</field>
+            <field name="model">board.boardone</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+      
+
+        <!--My Dashboard Action-->
+        <record model="ir.actions.act_window" id="open_board_my_dash_action">
+            <field name="name">My Dashboard</field>
+            <field name="res_model">board.board</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_view"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionone">
+            <field name="name">My Dashboard One</field>
+            <field name="res_model">board.boardone</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_viewone"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_vietwo">
+            <field name="name">My Dashboard two</field>
+            <field name="model">board.boardtwo</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actiontwo">
+            <field name="name">My Dashboard Two</field>
+            <field name="res_model">board.boardtwo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_vietwo"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_viethree">
+            <field name="name">My Dashboard thre</field>
+            <field name="model">board.boardthree</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionthree">
+            <field name="name">My Dashboard three</field>
+            <field name="res_model">board.boardthree</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_viethree"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_viefour">
+            <field name="name">My Dashboard four</field>
+            <field name="model">board.boardfour</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionfour">
+            <field name="name">My Dashboard four</field>
+            <field name="res_model">board.boardfour</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_viefour"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_viefive">
+            <field name="name">My Dashboard five</field>
+            <field name="model">board.boardfive</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionfive">
+            <field name="name">My Dashboard five</field>
+            <field name="res_model">board.boardfive</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_viefive"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_viesix">
+            <field name="name">My Dashboard six</field>
+            <field name="model">board.boardsix</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionsix">
+            <field name="name">My Dashboard six</field>
+            <field name="res_model">board.boardsix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_viesix"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_vieseven">
+            <field name="name">My Dashboard seven</field>
+            <field name="model">board.boardseven</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actionseven">
+            <field name="name">My Dashboard seven</field>
+            <field name="res_model">board.boardseven</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_vieseven"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+
+
+
+        <record model="ir.ui.view" id="board_my_dash_vieeight">
+            <field name="name">My Dashboard eight</field>
+            <field name="model">board.boardeight</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="2-1">
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_board_my_dash_actioneight">
+            <field name="name">My Dashboard eight</field>
+            <field name="res_model">board.boardeight</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="board_my_dash_vieeight"/>
+            <field name="help" type="html">
+              <div class="oe_empty_custom_dashboard">
+                  <p>
+                    <b>Your personal dashboard is empty.</b>
+                  </p><p>
+                    To add your first report into this dashboard, go to any
+                    menu, switch to list or graph view, and click <i>'Add to
+                    Dashboard'</i> in the extended search options.
+                  </p><p>
+                    You can filter and group data before inserting into the
+                    dashboard using the search options.
+                  </p>
+              </div>
+            </field>
+        </record> 
+
+        <!--My Dashboard Menu-->
+        <menuitem 
+            id="menu_board_my_dash"
+            parent="base.menu_board_root"
+            action="open_board_my_dash_action"
+            sequence="5"/>
+    </data>
+</odoo>

@@ -88,10 +88,10 @@
        <menuitem name="Evaluations" id="pnc_evaluations"
 		 action="pncevaluation_re" parent="pnc_evaluation" sequence="1"/>
 
-        <menuitem name="Formulaires d'évaluation subjective'" id="pnc_evaluations_fes"
+        <menuitem name="Formulaires d'évaluation subjective" id="pnc_evaluations_fes"
 		 action="pncevaluation_fe" parent="pnc_evaluation" sequence="1"/>
 
-       <menuitem name="Formulaires d'inspection'" id="pnc_evaluations_fi"
+       <menuitem name="Formulaires d'inspection" id="pnc_evaluations_fi"
 		 action="pncevaluation_finspection" parent="pnc_evaluation" sequence="1"/>
 
 
@@ -118,6 +118,35 @@
 -->
          <menuitem name="Tableau de bord" id="pnc_dash"
 		 action="board.open_board_my_dash_action" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
+		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone"
+		 action="board.open_board_my_dash_actionone" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 02 : Tableau de bord" id="pnc_dash_ve_axetwo"
+		 action="board.open_board_my_dash_actiontwo" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 03 : Tableau de bord" id="pnc_dash_ve_axethree"
+		 action="board.open_board_my_dash_actionthree" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 04 : Tableau de bord" id="pnc_dash_ve_axefour"
+		 action="board.open_board_my_dash_actionfour" parent="menu_pnc_dashboard" sequence="9"/>
+
+
+         <menuitem name="Axe 05 : Tableau de bord" id="pnc_dash_ve_axefive"
+		 action="board.open_board_my_dash_actionfive" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 06 : Tableau de bord" id="pnc_dash_ve_axesix"
+		 action="board.open_board_my_dash_actionsix" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 07 : Tableau de bord" id="pnc_dash_ve_axeseven"
+		 action="board.open_board_my_dash_actionseven" parent="menu_pnc_dashboard" sequence="9"/>
+
+         <menuitem name="Axe 08 : Tableau de bord" id="pnc_dash_ve_axeeight"
+		 action="board.open_board_my_dash_actioneight" parent="menu_pnc_dashboard" sequence="9"/>
+
 
 <!--
          <menuitem name="Tableau de bord M" id="pnc_dash_test"
