@@ -84,11 +84,16 @@
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/import_bootstrap.less"/>
 
         <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css"/>
+        <link rel="stylesheet" type="text/css" href="/web/static/lib/gauge.css"/>
+        
+
         <link rel="stylesheet" type="text/css" href="/base/static/src/css/modules.css"/>
 
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/bootstrap_overridden.less"/>
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/webclient_extra.less"/>
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/webclient_layout.less"/>
+
+        
 
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/webclient.less"/>
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/datepicker.less"/>
@@ -119,6 +124,8 @@
         <script type="text/javascript" src="/web/static/lib/jquery.scrollTo/jquery.scrollTo.js"></script>
         <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js"></script>
         <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js"></script>
+        
+        <script type="text/javascript" src="/web/static/lib/gauge.js"></script>
         <script type="text/javascript" src="/web/static/lib/backbone/backbone.js"></script>
         <script type="text/javascript" src="/web/static/lib/fuzzy-master/fuzzy.js"></script>
 

@@ -12,6 +12,7 @@ class PlanAction(models.Model):
     #  TODO ajout du modèle plan d'action 
      action_ids = fields.Many2many('pncevaluation.actionpnc',string = "Actions concernées")
      axe_id = fields.Many2one('pncevaluation.axepnc',string="Axes concernés",ondelete='SET NULL')
+     numero_axe = fields.Integer(related='axe_id.numero')
      objectifs_ids = fields.Many2many('pncevaluation.objectifpnc',string=u"Objectifs concernés")
 
      donnees_epidemiologiques = fields.One2many('pncevaluation.de','plan_action_id',string=u"Données Epidémiologiques")

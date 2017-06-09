@@ -49,6 +49,7 @@ class reunionCoordination(models.Model):
      axe = fields.Many2one('pncevaluation.axepnc',string="axe")
      axe_id = fields.Many2one('pncevaluation.axepnc',string="axe")
      user_id = fields.Many2one('pncevaluation.axepnc',string="Axe")
+     numero_axe = fields.Integer(related='user_id.numero')
      #state = fields.Selection(selection_add=[('done', "Terminée")])
      contributions_ids = fields.One2many('pncevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
@@ -78,6 +79,7 @@ class BudgetPNC(models.Model):
      budget_reel = fields.Float(u"Budget réel")
      rubriques_ids = fields.One2many('pncevaluation.rubriquebudget','budget_id',string="Rubriques")
      axe_id = fields.Many2one('pncevaluation.axepnc',string="Axe")
+     numero_axe = fields.Integer(related='axe_id.numero')
 class rubriqueBudget(models.Model):
      _name = 'pncevaluation.rubriquebudget'
      _description = "Rubrique"
