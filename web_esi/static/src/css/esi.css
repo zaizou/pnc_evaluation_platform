@@ -1,7 +1,6 @@
 table.pnc {
-    border-collapse: collapse;
-    border: 1;
     width: 100%;
+    padding: 1em
 }
 
 div.axe_summary {
@@ -17,9 +16,8 @@ h5.sat {
     color: green
 }
 
-th.pnc,
-td.pnc {
-    text-align: left;
+table.pnc th,
+table.pnc td {
     text-align: center;
     vertical-align: middle;
 }
@@ -46,12 +44,6 @@ td.pnc:nth-child(even) {
     vertical-align: middle;
 }
 
-.vert {
-    color: green;
-    text-align: center;
-    vertical-align: middle;
-}
-
 th.pnc {
     background-color: #4CAF50;
     color: white;
@@ -68,10 +60,30 @@ th.pnc {
 }
 
 .pnc_overview {
-    border: 1px solid green;
+    border: 2px solid green;
 }
 
-.bas {
-    border-bottom: 1px solid green;
-    ;
+.objectif {
+    background-color: #4CAF50;
+    -webkit-text-fill-color: #f2f2f2;
+}
+
+.cell_pnc {
+    padding: 5px
+}
+
+.cell_indic {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+}
+.cell_indic img {
+    text-align: center;
 }

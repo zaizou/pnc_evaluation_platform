@@ -16,6 +16,9 @@ odoo.define('web_esi.esi', function(require) {
     var tabActions = new Array();
     var actionsStats;
     var title;
+    var headerAspect;
+    var headerObject;
+    var headerAction;
 
 
     var MyView = View.extend({
@@ -59,18 +62,20 @@ odoo.define('web_esi.esi', function(require) {
             elemBody = document.createElement('tbody');
             $(table).append(head);
             $(table).addClass("pnc_overview");
+            $(table).attr("cellspacing", 10);
             var head_line = document.createElement('tr');
+            $(head_line).addClass("pnc_overview");
             $(head).addClass("row header");
             $(head).append(head_line);
-
-            $(head_line).append('<th class="cell pnc_overview">Objectif</th>');
-            $(head_line).append('<th class="cell">Action</th>');
-            $(head_line).append('<th class="cell">Etat (Contributeurs)</th>');
-            $(head_line).append('<th class="cell">Qualité de réalisation (Contributeurs)</th>');
-            $(head_line).append('<th class="cell">Résultats (Contributeurs)</th>');
-            $(head_line).append('<th class="cell">.</th>');
-            $(head_line).append('<th class="cell">Retard (début)</th>');
-            $(head_line).append('<th class="cell">Retard (fin)</th>');
+            $(head_line).append('<td></td>');
+            // $(head_line).append('<th class="cell pnc_overview">Objectif</th>');
+            // $(head_line).append('<th class="cell">Action</th>');
+            $(head_line).append('<th class="pnc_overview" id="etatHead" class="cell"><h4>Etat (Contributeurs)</h4></th>');
+            $(head_line).append('<th class="pnc_overview" id="qualiteHead" class="cell">Qualité de réalisation (Contributeurs)</th>');
+            $(head_line).append('<th  class="pnc_overview" id="resultatHead" class="cell">Résultats (Contributeurs)</th>');
+            $(head_line).append('<th class="pnc_overview" id="res_iconHead" class="cell">.</th>');
+            $(head_line).append('<th class="pnc_overview" id="retarddHead" class="cell">Retard (début)</th>');
+            $(head_line).append('<th class="pnc_overview" id="retardfHead" class="cell">Retard (fin)</th>');
             $(table).append(elemBody);
         },
         do_search: function(domains, contexts, group_bys) {
@@ -150,138 +155,179 @@ odoo.define('web_esi.esi', function(require) {
 
 
                                         if (obj) {
-                                            var line = document.createElement('tr');
-                                            $(line).addClass("pnc_overview");
-                                            $(elemBody).append(line);
-
-
-                                            var objectif = document.createElement('td');
+                                            var lineObj = document.createElement('tr');
+                                            $(elemBody).append(lineObj);
+                                            var objectif = document.createElement('th');
                                             $(objectif).addClass("pnc_overview");
+                                            $(objectif).addClass("span");
+                                            $(objectif).addClass("objectif");
+                                            $(objectif).attr("colspan", "7");
+                                            $(objectif).attr("scope", "colgroup");
+                                            $(objectif).attr("scope", "colgroup");
+                                            headerObject = "object" + i;
+                                            $(objectif).attr("id", headerObject);
+
+
+
 
                                             if (typeof objectifsD[i].numero !== 'undefined')
                                                 var strO = "<h2> Objectif 0" + objectifsD[i].numero + "<h2/>";
                                             else
                                                 var strO = "<h2> Objectif<h2/>";
                                             $(objectif).append(strO);
-                                            $(line).append(objectif);
-
-                                            var actionst = document.createElement('td');
-                                            var etatst = document.createElement('td');
-                                            var retarddt = document.createElement('td');
-                                            var retardft = document.createElement('td');
-                                            var qualitet = document.createElement('td');
-                                            var resultatt = document.createElement('td');
-                                            var res_icon = document.createElement('td');
-                                            $(line).append(actionst);
-                                            $(actionst).addClass("pnc_overview");
-                                            $(line).append(etatst);
-                                            $(etatst).addClass("pnc_overview");
-                                            $(line).append(qualitet);
-                                            $(qualitet).addClass("pnc_overview");
-                                            $(line).append(resultatt);
-                                            $(resultatt).addClass("pnc_overview");
-                                            $(line).append(res_icon);
-                                            $(res_icon).addClass("pnc_overview");
-                                            $(line).append(retarddt);
-                                            $(retarddt).addClass("pnc_overview");
-                                            $(line).append(retardft);
-                                            $(retardft).addClass("pnc_overview");
-
+                                            $(lineObj).append(objectif);
 
                                             console.log("OBJD");
                                             console.log(objectifsD[i]);
 
-
-                                            //console.log(tabActions);
-
                                             for (var j = 0; j < objectifsD[i].actions.length; j++) {
-
-                                                var action_line = document.createElement('tr');
-                                                $(actionst).append(action_line);
-
-                                                var action = document.createElement('td');
-                                                var strA;
-                                                if (objectifsD[i].actions[j].numero < 10 && objectifsD[i].actions[j].numero > 0)
-                                                    strA = "<h2> Action 0" + objectifsD[i].actions[j].numero + "<h2/>";
-                                                else
-                                                    strA = "<h2> Action " + objectifsD[i].actions[j].numero + "<h2/>";
-                                                $(action).append(strA);
-                                                $(action_line).append(action);
-                                                $(action).addClass("gris");
-                                                if (j != objectifsD[i].actions.length - 1)
-                                                    $(action).addClass("bas");
+                                                if (!objectifsD[i].actions[j].stats.isEmpty) {
+                                                    console.log("isEmpty");
+                                                    console.log(objectifsD[i].actions[j].stats.isEmpty);
+                                                    var line = document.createElement('tr');
+                                                    //$(line).addClass("pnc_overview");
+                                                    $(elemBody).append(line);
+                                                    var actionst = document.createElement('th');
+                                                    headerAction = headerObject + ".act" + j;
+                                                    $(actionst).attr("id", headerAction);
+                                                    $(actionst).attr("headers", headerObject);
+                                                    $(actionst).addClass("pnc_overview");
 
 
 
-                                                var etatLine = document.createElement('tr');
-                                                $(etatst).append(etatLine);
-                                                var etat = document.createElement('td');
-                                                //$(etat).attr("align", "center");
-                                                if (objectifsD[i].actions[j].stats.nb_etat_fin)
-                                                    $(etat).append('<tr><td><h5 class="fina ">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') </h5></td></tr>');
-                                                if (objectifsD[i].actions[j].stats.nb_etat_current)
-                                                    $(etat).append('<tr><td><h5 class="encours ">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )</h5></td></tr>');
-                                                if (objectifsD[i].actions[j].stats.nb_etat_prep)
-                                                    $(etat).append('<tr><td><h5 class="enprep ">En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )</h5></td></tr>');
-                                                $(etatLine).append(etat);
 
-                                                var qualiteLine = document.createElement('tr');
-                                                $(qualitet).append(qualiteLine);
-                                                var qualite = document.createElement('td');
-                                                if (objectifsD[i].actions[j].stats.nb_qualite_tb)
-                                                    $(qualite).append('<h5 class="tbr">Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )</h5>');
-                                                if (objectifsD[i].actions[j].stats.nb_qualite_br)
-                                                    $(qualite).append('<h5 class="br">Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )</h5>');
-                                                if (objectifsD[i].actions[j].stats.nb_qualite_pom)
-                                                    $(qualite).append('<h5 class="pobr">Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )</h5>');
-                                                if (objectifsD[i].actions[j].stats.nb_qualite_mal)
-                                                    $(qualite).append('<h5 class="mr">Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )</h5>');
-                                                $(qualiteLine).append(qualite);
+                                                    var etatst = document.createElement('td');
+                                                    $(etatst).attr("headers", headerObject + " " + headerAction + " " + "etatHead");
+                                                    $(etatst).addClass("pnc_overview");
+                                                    var retarddt = document.createElement('td');
+                                                    $(retarddt).attr("headers", headerObject + " " + headerAction + " " + "retarddHead");
+                                                    $(retarddt).addClass("pnc_overview");
+                                                    var retardft = document.createElement('td');
+                                                    $(retardft).attr("headers", headerObject + " " + headerAction + " " + "retardfHead");
+                                                    $(retardft).addClass("pnc_overview");
+                                                    var qualitet = document.createElement('td');
+                                                    $(qualitet).attr("headers", headerObject + " " + headerAction + " " + "qualiteHead");
+                                                    $(qualitet).addClass("pnc_overview");
+                                                    var resultatt = document.createElement('td');
+                                                    $(resultatt).attr("headers", headerObject + " " + headerAction + " " + "resultatHead");
+                                                    $(resultatt).addClass("pnc_overview");
+                                                    var res_icon = document.createElement('td');
+                                                    $(res_icon).attr("headers", headerObject + " " + headerAction + " " + "res_iconHead");
+                                                    $(res_icon).addClass("pnc_overview");
+                                                    $(line).append(actionst);
+                                                    // $(actionst).addClass("pnc_overview");
+                                                    $(line).append(etatst);
+                                                    $(line).append(qualitet);
+                                                    $(line).append(resultatt);
+                                                    $(line).append(res_icon);
+                                                    $(line).append(retarddt);
+                                                    $(line).append(retardft);
 
-                                                var resLine = document.createElement('tr');
-                                                var resIconLine = document.createElement('tr');
-                                                $(resultatt).append(resLine);
-                                                $(res_icon).append(resIconLine);
-                                                var resultat = document.createElement('td');
-                                                var resultatIcon = document.createElement('td');
-                                                if (objectifsD[i].actions[j].stats.nb_res_ps) {
-                                                    $(resultat).append('<h5 class="tsat">Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )</h5>');
-                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_tsat.png\" /></h5>');
+
+                                                    var action = document.createElement('td');
+                                                    $(action).addClass("cell_pnc");
+                                                    var strA;
+                                                    if (objectifsD[i].actions[j].numero < 10 && objectifsD[i].actions[j].numero > 0)
+                                                        strA = "<h2> Action 0" + objectifsD[i].actions[j].numero + "<h2/>";
+                                                    else
+                                                        strA = "<h2> Action " + objectifsD[i].actions[j].numero + "<h2/>";
+                                                    $(action).append(strA);
+                                                    // $(action_line).append(action);
+                                                    //$(action).addClass("gris");
+                                                    if (j != objectifsD[i].actions.length - 1)
+                                                        $(action).addClass("bas");
+                                                    $(actionst).append(action);
+
+                                                    // var etatLine = document.createElement('tr');
+                                                    // $(etatst).append(etatLine);
+
+
+                                                    var etat = document.createElement('td');
+                                                    $(etat).addClass("cell_pnc");
+                                                    //$(etat).attr("align", "center");
+                                                    if (objectifsD[i].actions[j].stats.nb_etat_fin)
+                                                        $(etat).append('<h4 class="fina ">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') </h4>');
+                                                    if (objectifsD[i].actions[j].stats.nb_etat_current)
+                                                        $(etat).append('<h4 class="encours ">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )</h4>');
+                                                    if (objectifsD[i].actions[j].stats.nb_etat_prep)
+                                                        $(etat).append('<h4 class="enprep ">En préparation ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' )</h4>');
+                                                    $(etatst).append(etat);
+                                                    // $(etatLine).append(etat);
+
+                                                    // var qualiteLine = document.createElement('tr');
+                                                    // $(qualitet).append(qualiteLine);
+
+                                                    var qualite = document.createElement('td');
+                                                    $(qualite).addClass("cell_pnc");
+                                                    if (objectifsD[i].actions[j].stats.nb_qualite_tb)
+                                                        $(qualite).append('<h4 class="tbr">Très bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )</h4>');
+                                                    if (objectifsD[i].actions[j].stats.nb_qualite_br)
+                                                        $(qualite).append('<h4 class="br">Bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )</h4>');
+                                                    if (objectifsD[i].actions[j].stats.nb_qualite_pom)
+                                                        $(qualite).append('<h4 class="pobr">Plus ou moin bien réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )</h4>');
+                                                    if (objectifsD[i].actions[j].stats.nb_qualite_mal)
+                                                        $(qualite).append('<h4 class="mr">Mal réalisée ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )</h4>');
+                                                    // $(qualiteLine).append(qualite);
+                                                    $(qualitet).append(qualite);
+
+                                                    // var resLine = document.createElement('tr');
+                                                    // var resIconLine = document.createElement('tr');
+                                                    // $(resultatt).append(resLine);
+                                                    // $(res_icon).append(resIconLine);
+                                                    var resultat = document.createElement('td');
+                                                    $(qualite).addClass("cell_pnc_res");
+                                                    var resultatIcon = document.createElement('td');
+                                                    $(resultatIcon).addClass("cell_pnc_res_icon");
+                                                    if (objectifsD[i].actions[j].stats.nb_res_ps) {
+                                                        $(resultat).append('<h4 class="tsat">Très Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )</h4>');
+                                                        $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_tsat.png\" /></h4>');
+                                                    }
+                                                    if (objectifsD[i].actions[j].stats.nb_res_s) {
+                                                        $(resultat).append('<h4 class="sat">Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )</h4>');
+                                                        $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_sat.png\" /></h4>');
+                                                    }
+
+                                                    if (objectifsD[i].actions[j].stats.nb_res_pms) {
+                                                        $(resultat).append('<h4 class="pms">Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) </h4>');
+                                                        $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_pmsat.png\" /></h4>');
+                                                    }
+
+                                                    if (objectifsD[i].actions[j].stats.nb_res_ms) {
+                                                        $(resultat).append('<h4 class="ns">Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  </h4>');
+                                                        $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_nsat.png\" /></h4>');
+                                                    }
+                                                    $(resultatt).append(resultat);
+                                                    $(res_icon).append(resultatIcon);
+
+                                                    // $(resLine).append(resultat);
+                                                    // $(resIconLine).append(resultatIcon);
+
+
+
+                                                    var retardd = document.createElement('td');
+                                                    $(retardd).addClass("cell_indic");
+                                                    if (objectifsD[i].actions[j].stats.retard_debut > 365)
+                                                        $(retardd).append('<h3><img src=\"/web_esi/static/src/img/indic/rouge/rouge_24.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_debut < 365 && objectifsD[i].actions[j].stats.retard_debut > 182)
+                                                        $(retardd).append('<h3><img src=\"/web_esi/static/src/img/indic/orange.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_debut <= 182 && objectifsD[i].actions[j].stats.retard_debut > -1)
+                                                        $(retardd).append('<h3><img src=\"/web_esi/static/src/img/indic/vert.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_debut == -1)
+                                                        $(retardd).append('<h3><img src=\"/web_esi/static/src/img/indic/gris.png\" /></h3>');
+                                                    $(retarddt).append(retardd);
+
+                                                    var retardf = document.createElement('td');
+                                                    $(retardf).addClass("cell_indic");
+                                                    if (objectifsD[i].actions[j].stats.retard_fin > 365)
+                                                        $(retardf).append('<h3><img src=\"/web_esi/static/src/img/indic/rouge/rouge_24.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_fin < 365 && objectifsD[i].actions[j].stats.retard_fin > 182)
+                                                        $(retardf).append('<h3><img src=\"/web_esi/static/src/img/indic/orange.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_fin <= 182 && objectifsD[i].actions[j].stats.retard_fin > -1)
+                                                        $(retardf).append('<h3><img src=\"/web_esi/static/src/img/indic/vert.png\" /></h3>');
+                                                    if (objectifsD[i].actions[j].stats.retard_fin == -1)
+                                                        $(retardf).append('<h3><img src=\"/web_esi/static/src/img/indic/gris.png\" /></h3>');
+                                                    $(retardft).append(retardf);
                                                 }
-                                                if (objectifsD[i].actions[j].stats.nb_res_s) {
-                                                    $(resultat).append('<h5 class="sat">Satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )</h5>');
-                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_sat.png\" /></h5>');
-                                                }
-
-                                                if (objectifsD[i].actions[j].stats.nb_res_pms) {
-                                                    $(resultat).append('<h5 class="pms">Plus ou moin satisfaisants  ( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) </h5>');
-                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_pmsat.png\" /></h5>');
-                                                }
-
-                                                if (objectifsD[i].actions[j].stats.nb_res_ms) {
-                                                    $(resultat).append('<h5 class="ns">Non satisfaisants ( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  </h5>');
-                                                    $(resultatIcon).append('<h5><img src=\"/web_esi/static/src/img/res/rsz_nsat.png\" /></h5>');
-                                                }
-
-                                                $(resLine).append(resultat);
-                                                $(resIconLine).append(resultatIcon);
-
-
-                                                /* var retarddl = document.createElement('tr');
-                                                 $(retarddt).append(retarddl);
-                                                 var retardd = document.createElement('td');
-                                                 $(retardd).append('<h3>10<h3/>');
-                                                 $(retardd).append('<h3>10<h3/>');
-                                                 $(retardd).append('<h3>15<h3/>');
-                                                 $(retarddl).append(retardd);
-
-                                                 var retardfl = document.createElement('tr');
-                                                 $(retardft).append(retardfl);
-                                                 var retardf = document.createElement('td');
-                                                 $(retardf).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
-                                                 $(retardf).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
-                                                 $(retardf).append('<h3><img src=\"/web_esi/static/src/img/arrow/up.png\" /></h3>');
-                                                 $(retardfl).append(retardf);*/
                                             }
 
                                         }

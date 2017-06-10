@@ -2,6 +2,7 @@
 import logging
 from odoo import registry
 from odoo import http
+from datetime import datetime
 from odoo.http import Controller, route, request
 _logger = logging.getLogger(__name__)
 
@@ -21,10 +22,60 @@ class PNC_Evaluation(Controller):
         nb_res_pms = 0
         nb_res_s = 0
         nb_res_ps = 0
+
+        retard_debut = 0
+        retard_fin = 0
+        var_retard_debut = 0
+        var_retard_fin = 0
+
         for action_id in actions_ids:
-            #fes = registry['pncevaluation.fe'].search([['action_realisee','=',action_id]])
-            #F = http.request.env['pncevaluation.fe']
-            #attributes_ids = attributes_obj.search(cr, uid, [('attribute_line_ids.product_tmpl_id', 'in', product_ids)], context=context)
+            
+            action_orm = request.env['pncevaluation.actionpnc']
+            action_objects = action_orm.search([('id', '=', action_id)])
+            for action_object in action_objects:
+                _logger.warning("----- Retard")
+                _logger.warning("----- Action")
+                _logger.warning(action_object.name)
+                _logger.warning(u"----- Débuts")
+                _logger.warning(action_object.date_debut_p)
+                _logger.warning(action_object.date_debut_r)
+                _logger.warning(u"----- Fin")
+                _logger.warning(action_object.datefin_p)
+                _logger.warning(action_object.datefin_r)
+                fmt = '%Y-%m-%d'
+                if( action_object.date_debut_r and action_object.date_debut_p):
+                    d1 = datetime.strptime(action_object.date_debut_r, fmt)
+                    d2 = datetime.strptime(action_object.date_debut_p , fmt)
+                    retard_debut = d1 - d2
+                    var_retard_debut = retard_debut.days
+                else:
+                    var_retard_debut = -1
+                    
+                if( action_object.datefin_r and action_object.datefin_p):
+                    d1 = datetime.strptime(action_object.datefin_r, fmt)
+                    d2 = datetime.strptime(action_object.datefin_p , fmt)
+                    retard_fin = d1 - d2 
+                    var_retard_fin= retard_fin.days
+                else:
+                    var_retard_fin= -1
+
+                if(retard_debut.days < 365):
+                    _logger.warning(u"----- Retard Début < 1 an green")
+                if(retard_debut.days > 365):
+                    _logger.warning(u"----- Retard Début < 1 an red")
+                if(retard_fin.days < 365):
+                    _logger.warning(u"----- Retard Fin < 1 an green")
+                if(retard_fin.days > 365):
+                    _logger.warning(u"----- Retard Fin < 1 an red")
+                _logger.warning(u"----- Retard Début")
+                _logger.warning(retard_debut)
+                _logger.warning(u"----- Retard Fin")
+                _logger.warning(retard_fin)
+                _logger.warning(u"----- Retard Début Days")
+                _logger.warning(retard_debut.days)
+                _logger.warning(u"----- Retard Fin Days")
+                _logger.warning(retard_fin.days)
+
             feORM = request.env['pncevaluation.fe']
             fes = feORM.search([('action_realisee', '=', action_id)])
             empty=False
@@ -67,7 +118,9 @@ class PNC_Evaluation(Controller):
                 'nb_res_ms' :nb_res_ms,
                 'nb_res_pms' :nb_res_pms,
                 'nb_res_s' :nb_res_s,
-                'nb_res_ps':nb_res_ps
+                'nb_res_ps':nb_res_ps,
+                'retard_debut':var_retard_debut,
+                'retard_fin':var_retard_fin
             }
             elements.append(ret)
             nb_etat_fin = 0

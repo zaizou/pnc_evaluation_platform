@@ -49,9 +49,9 @@ class ActionPNC(models.Model):
     objectiflie_id = fields.Many2one('pncevaluation.objectifpnc',string='Objectif lié', ondelete='SET NULL')
     mesures_ids = fields.One2many('pncevaluation.mesurepnc','actionlie_id',string="Mesures")
 
-    date_debut_p = fields.Date(u"Date début prévue")
+    date_debut_p = fields.Date(u"Date début prévue",required=True)
     date_debut_r = fields.Date(u"Date début réelle")
-    datefin_p = fields.Date(u"Date fin prévue")
+    datefin_p = fields.Date(u"Date fin prévue",required=True)
     datefin_r = fields.Date(u"Date fin réelle")
     #suivi 
     action_program_ids = fields.Many2many('pncevaluation.action_program',string=u"Programmes d\'action")

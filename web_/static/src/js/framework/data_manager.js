@@ -214,9 +214,6 @@ odoo.define('web.DataManager', function(require) {
          */
         _postprocess_fvg: function(fields_view) {
             var self = this;
-
-            console.log(fields_view);
-            alert('hello');
             // Parse and process arch
             var doc = $.parseXML(fields_view.arch).documentElement;
             var fields = fields_view.fields;
