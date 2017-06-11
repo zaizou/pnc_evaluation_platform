@@ -607,6 +607,14 @@
 			</field>
 		</record>
 
+
+		<record model="ir.actions.act_window" id="pncevaluation_contributeur_action_js">
+			<field name="name">Conrtibuteurs</field>
+			<field name="target">new</field>
+			<field name="res_model">pncevaluation.contributeur</field>
+			<field name="view_mode">tree</field>
+		</record>
+
 <!-- conrtibution views and actions -->
 		<record model="ir.ui.view" id="contribution_form_view">
 			<field name="name">contribution.form</field>

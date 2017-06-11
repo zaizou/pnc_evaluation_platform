@@ -79,6 +79,7 @@ odoo.define('web_esi.esi', function(require) {
             $(table).append(elemBody);
         },
         do_search: function(domains, contexts, group_bys) {
+
             var self = this;
             var fields = _.compact(_.map(["id", "name"], function(key) {
                 return self.fields_view.arch.attrs[key] || '';
@@ -246,7 +247,7 @@ odoo.define('web_esi.esi', function(require) {
                                                     $(etat).addClass("cell_pnc");
                                                     //$(etat).attr("align", "center");
                                                     if (objectifsD[i].actions[j].stats.nb_etat_fin)
-                                                        $(etat).append('<h4 class="fina ">Finalisée ( ' + objectifsD[i].actions[j].stats.nb_etat_fin + ') </h4>');
+                                                        $(etat).append('<h4 class="fina ">Finalisée ( <a class="get_contrib" href="get_contributeur">' + objectifsD[i].actions[j].stats.nb_etat_fin + '<a> ) </h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_etat_current)
                                                         $(etat).append('<h4 class="encours ">En cours ( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' )</h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_etat_prep)
@@ -334,6 +335,28 @@ odoo.define('web_esi.esi', function(require) {
 
                                     }
 
+                                    $(document).on("click", "a.get_contrib", function(e) {
+                                        e.preventDefault();
+                                        var url = $(this).attr("href");
+                                        console.log(url);
+                                        // do something, like make an ajax request to get the url
+                                        // self.rpc('/pncevaluation/get_contribs_view', { actions_ids: 1, date_debut: "1", date_fin: "2" }).done(function(result) {
+                                        //     console.log("done from get contributeurs");
+                                        // });
+                                        self.rpc("/web/action/load", { action_id: "pncevaluation.pncevaluation_contributeur_action_js" }).done(function(result) {
+                                            self.getParent().do_action(result, {
+                                                additional_context: {
+                                                    //HERE WE ARE TRYING SOME OPTIONS.
+                                                },
+                                            });
+                                        });
+                                        //var v = new instance.web.View;
+                                        //v.reload();
+                                        //View.reload();
+
+
+                                    });
+
 
 
                                     return act;
@@ -358,6 +381,8 @@ odoo.define('web_esi.esi', function(require) {
         }
 
     });
+
+
 
     core.view_registry.add('esi', MyView);
 

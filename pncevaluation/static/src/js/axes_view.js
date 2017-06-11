@@ -9,14 +9,10 @@ odoo.define('pncevaluation.axes', function(require) {
     var time = require('web.time');
     var parse_value = require('web.web_client');
     var form_common = require('web.form_common');
-
-
     var table;
     var elemBody;
     var axes_ids;
     var axesTable;
-
-
 
 
     var MyView = View.extend({
@@ -36,10 +32,6 @@ odoo.define('pncevaluation.axes', function(require) {
             return self.alive(new Model(this.dataset.model)
                 .call('fields_get')).then(function(fields) {
                 self.fields = fields;
-                /*console.log("this.dataset.model : " + self.dataset.model);
-                console.log("this.dataset");
-                console.log(self.dataset);
-                console.log(self.fields);*/
                 self.has_been_loaded.resolve();
             });
 
@@ -168,8 +160,9 @@ odoo.define('pncevaluation.axes', function(require) {
             var axeCt = document.createElement('td');
             $(avn_line).append(axeCt);
             $(axeCt).addClass("pnc");
-            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + axes[i].stats.budget_estim + '</h5> </td></tr> ');
-            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + axes[i].stats.budget_reel + '</h5></td></tr>');
+            var ecartBudg = axes[i].stats.budget_estim - axes[i].stats.budget_reel
+            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + +'</h5> </td></tr> ');
+            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + +'</h5></td></tr>');
         }
     }
 

@@ -116,6 +116,28 @@ class pnc_contributeur(models.Model):
      reunions_evaluation_ids = fields.Many2many('pncevaluation.reueval',string=u"Réunions d évaluation ")
      reunions_evaluation_invitation_ids = fields.Many2many('pncevaluation.reueval',string=u"Invitations aux réunions d évaluation")
 
+
+     @api.multi
+     def get_contributs(self):
+        #    compose_form = self.env.ref('pncevaluation.contributeur_form_view', False)
+        #    return {
+        #     'name': "Contributeurs",
+        #     'type': 'ir.actions.act_window',
+        #     'view_type': 'form',
+        #     'view_mode': 'form',
+        #     'res_model': 'pncevaluation.contributeur',
+        #     'views': [(compose_form.id, 'form')],
+        #     'view_id': compose_form.id,
+        #     'target': 'new',
+        # }
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'pncevaluation.contributeur',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
 class contribution(models.Model):
      _name = 'pncevaluation.contribution'
      name = fields.Char(u"Intitulé de la contribution")

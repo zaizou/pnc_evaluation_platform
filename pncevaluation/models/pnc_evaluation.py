@@ -61,7 +61,7 @@ class formulaire_inspection(models.Model):
 #Partie 03 :  Evaluation
 
 class projetEvaluation(models.Model):
-     _inherit = 'project.project'
+    #  _inherit = 'project.project'
      _name = 'pncevaluation.evaluationproject'
      tasks = fields.One2many('pncevaluation.evaluationsubjective','project_id',string=u"Tâches")
 class evaluationSubjective(models.Model):

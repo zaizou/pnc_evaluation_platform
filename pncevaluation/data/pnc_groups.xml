@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data  noupdate="0">
+<data  noupdate="0">
 
 <record model="ir.module.category" id="pncevaluation_management">
   <field name="name">Plan Cancer Evaluation et Suivi</field>
   <field name="description">Gestion des accès au module</field>
-  <field name="sequence">1</field>
+  <field name="sequence">200</field>
 </record>
 
 
-<record id="pnc_user" model="res.groups">
-     <field name="name">PNC User</field>
-     <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-     <field name="users" eval="[(4, ref('base.user_root'))]"/>
-     <field name="category_id" ref="pncevaluation.pncevaluation_management"/>
- </record>
-
-<record id="pnc_manager" model="res.groups">
-      <field name="name">Manager</field>
-      <field name="implied_ids" eval="[(4, ref('pncevaluation.pnc_user'))]"/>
-      <field name="category_id" ref="pncevaluation.pncevaluation_management"/>
+<record id="group_pnc_evaluation" model="res.groups">
+  <field name="name">Groupe Evaluation</field>
+  <field name="category_id" ref="pncevaluation_management"/>
 </record>
 
-      </data>
+<record id="group_pnc_evaluation_subjective" model="res.groups">
+  <field name="name">Groupe Evaluation Subjective</field>
+  <field name="implied_ids" eval="[(4,ref('pncevaluation.group_pnc_evaluation'))]"/>
+  <field name="category_id" ref="pncevaluation_management"/>
+</record>
+
+<record id="pnc_inspection" model="res.groups">
+  <field name="name">Groupe Inspection</field>
+  <field name="implied_ids" eval="[(4,ref('pncevaluation.group_pnc_evaluation'))]"/>
+  <field name="category_id" ref="pncevaluation_management"/>
+</record>
+
+<record id="pnc_comite_pilotage" model="res.groups">
+  <field name="name">Comité de Pilotage</field>
+  <field name="category_id" ref="pncevaluation_management"/>
+</record>
+
+<record id="pnc_commission_moe" model="res.groups">
+  <field name="name">Commission de mise en oeuvre</field>
+  <field name="category_id" ref="pncevaluation_management"/>
+</record>
+
+<record id="pnc_groupe_travail" model="res.groups">
+  <field name="name">Groupe de Travail</field>
+  <field name="implied_ids" eval="[(4,ref('pncevaluation.group_pnc_evaluation'))]"/>
+  <field name="category_id" ref="pncevaluation_management"/>
+</record>
+
+
+</data>
 </odoo>

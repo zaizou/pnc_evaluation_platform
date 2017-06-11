@@ -8,6 +8,21 @@ _logger = logging.getLogger(__name__)
 
 
 class PNC_Evaluation(Controller):
+
+
+    @route('/pncevaluation/get_contribs_view', type='json', auth='user')
+    def get_contribs_view(self,actions_ids,date_debut,date_fin):
+        # conrt_orm = request.env['pncevaluation.contributeur']
+        # conrt_objects = conrt_orm.search([])
+        # return conrt_objects.get_contributs()
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'pncevaluation.contributeur',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     @route('/pncevaluation/get_actions_stats', type='json', auth='user')
     def get_stats(self,actions_ids,date_debut,date_fin):
         elements = []
