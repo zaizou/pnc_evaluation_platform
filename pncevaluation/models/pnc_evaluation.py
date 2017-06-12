@@ -80,6 +80,7 @@ class reunion_evaluation(models.Model):
      stop = fields.Datetime(u"Fin")
      name = fields.Char(u"Objet de la réunion")
      axe_id = fields.Many2one('pncevaluation.axepnc',string="axe")
+     user_id = fields.Many2one('pncevaluation.axepnc',string="axe")
      numero_axe = fields.Integer(related='axe_id.numero')
      contributions_ids = fields.One2many('pncevaluation.contribution','reunion_evaluation_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")

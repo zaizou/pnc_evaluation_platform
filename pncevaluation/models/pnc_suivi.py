@@ -95,6 +95,17 @@ class reunionCoordination(models.Model):
      def _computeStart(self):
          self.date_start = self.start
 
+     @api.model
+     def create(self, vals):
+        _logger.warning("----- Reunion Vals")
+        _logger.warning(vals)
+        return super(reunionCoordination, self).create(vals)
+
+    #  @api.multi
+    #  def write(self, vals):
+    #     tools.image_resize_images(vals)
+    #     return super(pnc_contributeur, self).write(vals)
+
 class pv_reunion_action(models.Model):
      _name = 'pncevaluation.pvreunionaction'
      date = fields.Date("Date")

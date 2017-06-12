@@ -1,0 +1,74 @@
+        <record id="view_contributeur_form" model="ir.ui.view">
+            <field name="name">contributeur.form</field>
+            <field name="model">pncevaluation.contributeur</field>
+            <field name="arch" type="xml">
+                <form string="Contributeur">
+                    <sheet>
+                        <!--<div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="hr.group_hr_user"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                    options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>-->
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Nom du contributeur"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page name="public" string="Information Générales">
+                                <group>
+                                    <group string="Contact Information">
+                                        <field name="address_id"
+                                            context="{'show_address': 1}"
+                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                        <field name="mobile_phone"/>
+                                        <field name="work_location"/>
+                                        <field name="work_email" widget="email"/>
+                                        <field name="work_phone"/>
+                                    </group>
+                                    <group string="Position">
+                                        <field name="fonction"/>
+                                        <field name="specialite"/>
+                                    </group>
+                                </group>
+                                <field name="notes" placeholder="Other Information ..." colspan="4"/>
+                            </page>
+                            <page name="personal_information" string="Informations Personnelles">
+                                <group>
+                                    <group string="Nationnalité">
+                                        <field name="country_id" options='{"no_open": True, "no_create": True}'/>
+                                    </group>
+                                    <group string="Informations de contact">
+                                        <field name="address_home_id"
+                                            context="{'show_address': 1}"
+                                            options='{"always_reload": True, "highlight_first_line": True}'/>
+                                    </group>
+                                    <group string="Status">
+                                        <field name="gender"/>
+                                        <field name="marital"/>
+                                    </group>
+                                    <group string="Birth">
+                                        <field name="birthday"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="hr_settings" string="Utilisateur" >
+                                <group>
+                                    <group string='Etat' >
+                                        <field name="user_id" string="Utilisateur lié"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>

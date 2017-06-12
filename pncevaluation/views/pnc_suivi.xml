@@ -357,7 +357,7 @@
 		<record model="ir.actions.act_window" id="pncevaluation_reucoor">
 			<field name="name">Réunions de coordination</field>
 			<field name="res_model">pncevaluation.reucoor</field>
-			<field name="view_mode">tree,calendar,form,kanban,graph</field>
+			<field name="view_mode">calendar,tree,form,kanban,graph</field>
 		</record>
 
 <!-- contribution views and actions -->		

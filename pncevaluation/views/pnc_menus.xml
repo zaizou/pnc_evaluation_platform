@@ -54,23 +54,25 @@
           <!--<menuitem name="Plannification Plan Cancer 2015 -2019" id="pnc_plannification"
 		 action="survey.action_survey_form" parent="pnc_suivi" sequence="0"/>-->
 
-               <menuitem name="Plans d'action" id="plan_action"
-		 action="pncevaluation_pa" parent="pnc_suivi" sequence="10"/>
+
+        <menuitem name="Planification" id="planification_menu" parent="pnc_suivi" sequence="9"/>
+
+        <menuitem name="Réunions de coordination" id="reunions_coord_form" 
+        action="pncevaluation_reucoor" parent="planification_menu" sequence="40"/>
+
+        <menuitem name="Suivi" id="suivi_menu" parent="pnc_suivi" sequence="10"/>
+
+
+        <menuitem name="Programmes d'action" id="plan_action" action="pncevaluation_pa" parent="suivi_menu" sequence="10"/>
+
+        <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
+		    action="pncevaluation_rmo" parent="suivi_menu" sequence="30"/>
       
-                <menuitem name="Suivi du Budget" id="suivi_budget"
-		 action="pncevaluation_budgetpnc" parent="pnc_suivi" sequence="20"/>
+        <menuitem name="Suivi du Budget" id="suivi_budget"
+		     action="pncevaluation_budgetpnc" parent="suivi_menu" sequence="20"/>
 
-     
-
-         <menuitem name="Rapports de mise en oeuvre" id="pnc_rmo"
-		 action="pncevaluation_rmo" parent="pnc_suivi" sequence="30"/>
-
-
-          <menuitem name="Réunions de coordination" id="reunions_coord_form"
-		 action="pncevaluation_reucoor" parent="pnc_suivi" sequence="40"/>
-
-           <menuitem name="Contributions" id="contribution_menu"
-		 action="pncevaluation_contribution" parent="pnc_suivi" sequence="50"/>
+        <menuitem name="Contributions" id="contribution_menu"
+		 action="pncevaluation_contribution" parent="suivi_menu" sequence="50"/>
 
 
 
@@ -92,7 +94,7 @@
         <menuitem name="Evaluation" id="pnc_evaluation"
 		  parent="pnc_evaluation_section" sequence="20"/>
 
-       <menuitem name="Evaluations" id="pnc_evaluations"
+       <menuitem name="Rapports d'évaluations" id="pnc_evaluations"
 		 action="pncevaluation_re" parent="pnc_evaluation" sequence="1"/>
 
         <menuitem name="Formulaires d'évaluation subjective" id="pnc_evaluations_fes"

@@ -95,7 +95,7 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_fe">
-			<field name="name">Formulaires d'évaluations</field>
+			<field name="name">Formulaires d'évaluation</field>
 			<field name="res_model">pncevaluation.fe</field>
 			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
@@ -141,7 +141,7 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_finspection">
-			<field name="name">Inspection</field>
+			<field name="name">Formulaires d'inspection</field>
 			<field name="res_model">pncevaluation.finspection</field>
 			<field name="view_mode">tree,form,kanban,graph</field>
 		</record>
@@ -192,7 +192,7 @@
 							<field name="name"/>
 							<field name="start"/>
 							<field name="stop"/>
-							<field name="axe_id"/>
+							<field name="user_id"/>
 							<field name="contributeurs_invites_ids" />
 							<field name="contributeurs_presents_ids" />
 							<field name="contributions_ids" />
@@ -216,10 +216,22 @@
 			</field>
 		</record>
 
+		<record id="view_reueval_calendar" model="ir.ui.view">
+            <field name="name">reueval.calendar</field>
+            <field name="model">pncevaluation.reueval</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar  color="user_id" date_start="start" date_stop="stop" string="Réunions" mode="month" >
+					<field name="id"/>
+					<field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
 		<record model="ir.actions.act_window" id="pncevaluation_reueval">
 			<field name="name">Réunions d'évaluation</field>
 			<field name="res_model">pncevaluation.reueval</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
+			<field name="view_mode">calendar,tree,form,kanban,graph</field>
 		</record>
 
 

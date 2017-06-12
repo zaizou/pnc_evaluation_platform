@@ -117,7 +117,7 @@
 
 						</group>
 						<group>
-							<field name="mesures_ids"/>
+							<field name="mesures_ids" widget="many2many_tags"/>
 						</group>
 					</sheet>
 				</form>
@@ -169,7 +169,7 @@
 					<sheet>
 						<group>
                             <field name="name" />
-							<field name="axes_ids"/>
+							<field name="axes_ids" widget="many2many_tags"/>
 						</group>
 					</sheet>
 				</form>
@@ -218,7 +218,7 @@
                             <field name="name" />
 						</group>
 						<group>
-							<field name="groupes_ids"/>
+							<field name="groupes_ids" widget="many2many_tags"/>
 							<field name="structures_ids"  widget="many2many_tags"/>
 						</group>
 					</sheet>
@@ -336,7 +336,7 @@
 
 
 <!-- contributeur pnc views and actions -->		
-		<record model="ir.ui.view" id="contributeur_form_view">
+		<!--<record model="ir.ui.view" id="contributeur_form_view">
 			<field name="name">contributeur.form</field>
 			<field name="model">pncevaluation.contributeur</field>
 			<field name="arch" type="xml">
@@ -347,11 +347,12 @@
 							<field name="prenom" />
 							<field name="specialite" />
 							<field name="poids" />
+							<field name="related_user_id" />
 						</group>
 					</sheet>
 				</form>
 			</field>
-		</record>
+		</record>-->
 
 
 			<record model="ir.ui.view" id="contributeur_tree_view">

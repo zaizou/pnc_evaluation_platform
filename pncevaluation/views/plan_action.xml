@@ -8,22 +8,20 @@
 			<field name="name">pa.form</field>
 			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
-				<form string="Plan d'action'">
+				<form string="Programme d'action">
 					<sheet>
 						<group>
                             <field name="name" />
 							<field name="date" />
 							<field name="cancers_ids" widget="many2many_tags" />
 							<field name="donnees_epidemiologiques" />
-
 						</group>
 						<group>
 							<field name="axe_id" />
-							<field name="objectifs_ids"  widget="many2many_tags"/>
+							<field name="objectifs_ids"  />
 							<field name="action_ids"  widget="many2many_tags"/>
 						</group>
 						<group>
-							<field name="objectifs_ids" />
 							<field name="actions_ids" />
 							<field name="dispositions_reglementaires_ids" />
 							<field name="structures_pilotage"  widget="many2many_tags" />
@@ -44,7 +42,6 @@
 		</record>
         
 
-
         <record model="ir.ui.view" id="pa_tree_view">
 			<field name="name">pa.tree</field>
 			<field name="model">pncevaluation.pa</field>
@@ -56,6 +53,7 @@
 				</tree>
 			</field>
 		</record>
+
 
 		<record model="ir.ui.view" id="pa_gantt_view">
 			<field name="name">pa.gantt</field>
@@ -76,11 +74,485 @@
 
 
         <record model="ir.actions.act_window" id="pncevaluation_pa">
-			<field name="name">Plans d'action </field>
+			<field name="name">Programme d'action </field>
 			<field name="res_model">pncevaluation.pa</field>
             <field name="view_id" ref="pa_tree_view"/>
 			<field name="view_mode">kanban,esi,tree,form,graph</field>
 		</record>
+
+
+
+
+
+		<record model="ir.ui.view" id="de_form_view">
+			<field name="name">de.form</field>
+			<field name="model">pncevaluation.de</field>
+			<field name="arch" type="xml">
+				<form string="Données épidémiologique">
+					<sheet>
+						<group>
+                            <field name="typeDonnee" />
+							<field name="valeur_reelle" />
+							<field name="valeur_chaine"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="donnepi_tree_view">
+			<field name="name">de.tree</field>
+			<field name="model">pncevaluation.de</field>
+			<field name="arch" type="xml">
+				<tree string="Données épidémilogiques">
+					<field name="typeDonnee"/>
+					<field name="valeur_reelle"/>
+					<field name="valeur_chaine"/>
+				</tree>
+			</field>
+		</record>
+
+<!--Objectif pa views -->
+
+		<record model="ir.ui.view" id="objectifpa_form_view">
+			<field name="name">objectifpa.form</field>
+			<field name="model">pncevaluation.objectifpa</field>
+			<field name="arch" type="xml">
+				<form string="Objectif Plan d'action">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="description" />
+							<field name="donnes_epi_ciblees"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="objectifpa_tree_view">
+			<field name="name">objectifpa.tree</field>
+			<field name="model">pncevaluation.objectifpa</field>
+			<field name="arch" type="xml">
+				<tree string="Objectifs Programme d'action">
+					<field name="name"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+
+<!--action pa pa views -->
+
+		<record model="ir.ui.view" id="actionpa_form_view">
+			<field name="name">actionpa.form</field>
+			<field name="model">pncevaluation.actionpa</field>
+			<field name="arch" type="xml">
+				<form string="Action Plan d'action">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="description" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="actionpa_tree_view">
+			<field name="name">actionpa.tree</field>
+			<field name="model">pncevaluation.actionpa</field>
+			<field name="arch" type="xml">
+				<tree string="Actions Plan d'action">
+					<field name="name"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+
+<!--dispreglementaire views -->
+
+		<record model="ir.ui.view" id="dispreglementaire_form_view">
+			<field name="name">dispreglementaire.form</field>
+			<field name="model">pncevaluation.dispreglementaire</field>
+			<field name="arch" type="xml">
+				<form string="Disposition règlementtaire">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="date" />
+							<field name="texte"  />
+							<field name="etat"  />
+							<field name="lois_ids" widget="many2many_tags"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="dispreglementaire_tree_view">
+			<field name="name">dispreglementaire.tree</field>
+			<field name="model">pncevaluation.dispreglementaire</field>
+			<field name="arch" type="xml">
+				<tree string="Dispositions règlementtaires">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="etat"/>
+				</tree>
+			</field>
+		</record>
+
+<!--conrtoleqa views -->
+
+		<record model="ir.ui.view" id="conrtoleq_form_view">
+			<field name="name">conrtoleq.form</field>
+			<field name="model">pncevaluation.conrtoleq</field>
+			<field name="arch" type="xml">
+				<form string="Contrôle de qualité">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="description" />
+							<field name="periodicite"  />
+							<field name="typeControle"  />
+							<field name="structure_chargee_id"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="conrtoleq_tree_view">
+			<field name="name">conrtoleq.tree</field>
+			<field name="model">pncevaluation.conrtoleq</field>
+			<field name="arch" type="xml">
+				<tree string="Contrôles de qualité">
+					<field name="name"/>
+					<field name="description"/>
+					<field name="typeControle"/>
+				</tree>
+			</field>
+		</record>
+
+
+<!--evaluationpa views -->
+
+		<record model="ir.ui.view" id="evaluationpa_form_view">
+			<field name="name">evaluationpa.form</field>
+			<field name="model">pncevaluation.evaluationpa</field>
+			<field name="arch" type="xml">
+				<form string="Evaluation du programme d'action">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="date" />
+							<field name="description"  />
+							<field name="typeEvaluation"  />
+							<field name="structure_chargee_id"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="evaluationpa_tree_view">
+			<field name="name">evaluationpa.tree</field>
+			<field name="model">pncevaluation.evaluationpa</field>
+			<field name="arch" type="xml">
+				<tree string="Evaluations du programme d'action">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="typeEvaluation"/>
+				</tree>
+			</field>
+		</record>
+	
+<!--kpi views -->
+
+		<record model="ir.ui.view" id="kpi_form_view">
+			<field name="name">kpi.form</field>
+			<field name="model">pncevaluation.kpi</field>
+			<field name="arch" type="xml">
+				<form string="Indicateur de performance">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="valeur" />
+							<field name="valeur_min"  />
+							<field name="valeu_max"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="kpi_tree_view">
+			<field name="name">kpi.tree</field>
+			<field name="model">pncevaluation.kpi</field>
+			<field name="arch" type="xml">
+				<tree string="Indicateurs de performance">
+					<field name="name"/>
+					<field name="valeur"/>
+				</tree>
+			</field>
+		</record>
+
+<!--mediatisation views -->
+
+		<record model="ir.ui.view" id="mediatisation_form_view">
+			<field name="name">mediatisation.form</field>
+			<field name="model">pncevaluation.mediatisation</field>
+			<field name="arch" type="xml">
+				<form string="Projet de médiatisation">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="description" />
+						</group>
+						<group>
+							<field name="populations_ciblees"  />
+							<field name="medias_ids"  />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="mediatisation_tree_view">
+			<field name="name">mediatisation.tree</field>
+			<field name="model">pncevaluation.mediatisation</field>
+			<field name="arch" type="xml">
+				<tree string="Projets de médiatisation">
+					<field name="name"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+
+
+<!--media views -->
+
+		<record model="ir.ui.view" id="media_form_view">
+			<field name="name">media.form</field>
+			<field name="model">pncevaluation.media</field>
+			<field name="arch" type="xml">
+				<form string="Média">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="impact_estime" />
+							<field name="impact_realise" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="media_tree_view">
+			<field name="name">media.tree</field>
+			<field name="model">pncevaluation.media</field>
+			<field name="arch" type="xml">
+				<tree string="Médias">
+					<field name="name"/>
+					<field name="impact_estime" />
+							<field name="impact_realise" />
+				</tree>
+			</field>
+		</record>
+
+
+<!--population views -->
+
+		<record model="ir.ui.view" id="population_form_view">
+			<field name="name">population.form</field>
+			<field name="model">pncevaluation.population</field>
+			<field name="arch" type="xml">
+				<form string="Population">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="sexe" />
+						</group>
+						<group>
+							<field name="tranches_age_ids" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="population_tree_view">
+			<field name="name">population.tree</field>
+			<field name="model">pncevaluation.population</field>
+			<field name="arch" type="xml">
+				<tree string="Populations">
+					<field name="name"/>
+					<field name="sexe" />
+				</tree>
+			</field>
+		</record>
+
+<!--trancheage views -->
+
+		<record model="ir.ui.view" id="trancheage_form_view">
+			<field name="name">trancheage.form</field>
+			<field name="model">pncevaluation.trancheage</field>
+			<field name="arch" type="xml">
+				<form string="Tranche d'age">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="age_min" />
+							<field name="age_max" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="trancheage_tree_view">
+			<field name="name">trancheage.tree</field>
+			<field name="model">pncevaluation.trancheage</field>
+			<field name="arch" type="xml">
+				<tree string="Tranches d'age">
+					<field name="name" />
+					<field name="age_min" />
+					<field name="age_max" />
+				</tree>
+			</field>
+		</record>
+
+
+
+
+<!--trancheage views -->
+
+		<record model="ir.ui.view" id="typede_form_view">
+			<field name="name">typede.form</field>
+			<field name="model">pncevaluation.typede</field>
+			<field name="arch" type="xml">
+				<form string="Type données épidémiologiques">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="unite" />
+						</group>
+						<group>
+							<field name="population_concernees" />
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="typede_tree_view">
+			<field name="name">typede.tree</field>
+			<field name="model">pncevaluation.typede</field>
+			<field name="arch" type="xml">
+				<tree string="Types DE">
+					<field name="name" />
+					<field name="unite" />
+				</tree>
+			</field>
+		</record>
+
+<!--trancheage views -->
+
+		<record model="ir.ui.view" id="cancer_form_view">
+			<field name="name">cancer.form</field>
+			<field name="model">pncevaluation.cancer</field>
+			<field name="arch" type="xml">
+				<form string="Cancer">
+					<sheet>
+						<group>
+                            <field name="name" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="cancer_tree_view">
+			<field name="name">cancer.tree</field>
+			<field name="model">pncevaluation.cancer</field>
+			<field name="arch" type="xml">
+				<tree string="Cancers">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+<!--trancheage views -->
+
+		<record model="ir.ui.view" id="lois_form_view">
+			<field name="name">lois.form</field>
+			<field name="model">pncevaluation.lois</field>
+			<field name="arch" type="xml">
+				<form string="Loi">
+					<sheet>
+						<group>
+                            <field name="name" />
+							<field name="texte" />
+							<field name="date_elaboraion" />
+							<field name="code" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record model="ir.ui.view" id="lois_tree_view">
+			<field name="name">lois.tree</field>
+			<field name="model">pncevaluation.lois</field>
+			<field name="arch" type="xml">
+				<tree string="Lois">
+					<field name="name" />
+					<field name="date_elaboraion" />
+					<field name="code" />
+				</tree>
+			</field>
+		</record>
+
+
+
+
+
+
+
+
+
+		
 
 
 		

@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 class PlanAction(models.Model):
      _name = 'pncevaluation.pa'
      _description = "Programme d\'Action"
-     name = fields.Char(u"Intitulé du plan d'action")
+     name = fields.Char(u"Intitulé du programme d'action")
      date = fields.Date(u"Date d'établissement du Plan")
     #  TODO ajout du modèle plan d'action 
      action_ids = fields.Many2many('pncevaluation.actionpnc',string = "Actions concernées")
@@ -59,7 +59,7 @@ class KPI(models.Model):
 
 class EvaluationPlanAction(models.Model):
      _name = 'pncevaluation.evaluationpa'
-     _description = u"Evaluation Plan Action"
+     _description = u"Evaluation Programme d\'Action"
      name = fields.Char(u"Intitulé")
      date = fields.Date("Date")
      description = fields.Text(u"Description")
