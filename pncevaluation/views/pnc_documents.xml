@@ -153,7 +153,7 @@
 
 				
 		<record model="ir.actions.act_window" id="pncevaluation_mesures">
-			<field name="name">Actions</field>
+			<field name="name">Mesures</field>
 			<field name="res_model">pncevaluation.mesurepnc</field>
 			<field name="view_mode">kanban,tree,form,graph</field>
 		</record>
@@ -207,291 +207,6 @@
 		</record>
 
 
-
-      
-
-<!-- RMO views and actions -->
-		<record model="ir.ui.view" id="rmo_form_view">
-			<field name="name">rmo.form</field>
-			<field name="model">pncevaluation.rmo</field>
-			<field name="arch" type="xml">
-				<form string="Rapport de mise en oeuvre">
-					<sheet>
-						<group>
-                            <field name="name" />
-							<field name="date_elaboration" />
-						</group>
-						<group>
-							<field name="formulaires_ids" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-        
-
-
-        <record model="ir.ui.view" id="rmo_tree_view">
-			<field name="name">rmo.tree</field>
-			<field name="model">pncevaluation.rmo</field>
-			<field name="arch" type="xml">
-				<tree string="Rapports de mise en oeuvre">
-					<field name="id"/>
-					<field name="name"/>
-					<field name="date_elaboration"/>
-				</tree>
-			</field>
-		</record>
-
-        <record model="ir.actions.act_window" id="pncevaluation_rmo">
-			<field name="name">Plan Cancer</field>
-			<field name="res_model">pncevaluation.rmo</field>
-            <field name="view_id" ref="rmo_tree_view"/>
-			<field name="view_mode">form,tree,graph</field>
-		</record>
-
-
-<!-- Formulaire MO views and actions -->
-<record model="ir.ui.view" id="fmo_form_view">
-			<field name="name">fmo.form</field>
-			<field name="model">pncevaluation.fmo</field>
-			<field name="arch" type="xml">
-				<form string="Formulaire de mise en oeuvre">
-					<sheet>
-						<group>
-                            <field name="date" />
-						</group>
-						<group>
-							<field name="action_realisee" />
-							<field name="manniere_moe" />
-							<field name="parties_impliquee" />
-							<field name="dates_cles_ids" />
-						</group>
-						<group>
-                            <field name="resultats_attendus" />
-							<field name="descriptions_res" />
-							<field name="probleme_ronc" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-		
- <record model="ir.ui.view" id="fmo_tree_view">
-			<field name="name">fmo.tree</field>
-			<field name="model">pncevaluation.fmo</field>
-			<field name="arch" type="xml">
-				<tree string="Formulaire de mise en oeuvre">
-					<field name="date"/>
-					<field name="action_realisee"/>
-				</tree>
-			</field>
-		</record>
-
-<!-- Date cle views and actions -->
-	<record model="ir.ui.view" id="date_cle_form_view">
-			<field name="name">date_cle.form</field>
-			<field name="model">pncevaluation.date_cle</field>
-			<field name="arch" type="xml">
-				<form string="Date clé">
-					<sheet>
-						<group>
-                            <field name="date" />
-						</group>
-						<group>
-                            <field name="comment" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-		
- <record model="ir.ui.view" id="date_cle_tree_view">
-			<field name="name">date_cle.tree</field>
-			<field name="model">pncevaluation.date_cle</field>
-			<field name="arch" type="xml">
-				<tree string="Formulaire de mise en oeuvre">
-					<field name="date"/>
-					<field name="comment"/>
-				</tree>
-			</field>
-		</record>
-<!-- re views and actions -->
-		<record model="ir.ui.view" id="re_form_view">
-			<field name="name">re.form</field>
-			<field name="model">pncevaluation.re</field>
-			<field name="arch" type="xml">
-				<form string="Rapport d'évaluation'">
-					<sheet>
-						<group>
-                            <field name="name" />
-							<field name="date_elaboration" />
-						</group>
-
-						<group>
-							<field name="formulaires_evaluation_ids" />
-							<field name="formulaires_inspection_ids" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-        
-
-
-        <record model="ir.ui.view" id="re_tree_view">
-			<field name="name">re.tree</field>
-			<field name="model">pncevaluation.re</field>
-			<field name="arch" type="xml">
-				<tree string="Rapports d'évaluation'">
-					<field name="id"/>
-					<field name="name"/>
-					<field name="date_elaboration" />
-				</tree>
-			</field>
-		</record>
-
-        <record model="ir.actions.act_window" id="pncevaluation_re">
-			<field name="name">Plan Cancer</field>
-			<field name="res_model">pncevaluation.re</field>
-            <field name="view_id" ref="re_tree_view"/>
-			<field name="view_mode">form,tree,graph</field>
-		</record>
-<!-- fe views and actions -->
-			<record model="ir.ui.view" id="fe_form_view">
-			<field name="name">fe.form</field>
-			<field name="model">pncevaluation.fe</field>
-			<field name="arch" type="xml">
-				<form string="Formulaire d'évaluation'">
-					<sheet>
-						<group>
-                            <field name="date"/>
-							<field name="contributeur" />
-							<field name="axe_id"/>
-							<field name="action_realisee" />
-						</group>
-						<!--<group>
-							<field name="date_debut_p"/>
-							<field name="date_debut_r"/>
-							<field name="datefin_p"/>
-							<field name="datefin_r"/>
-							<field name="retard"/>
-						</group>
-						 -->
-						<group>
-							<field name="etat"/>
-							<field name="realisation"/>
-							<field name="res_attend"/>
-							<field name="inspection"/>
-							<field name="appreciation" /> 
-							<field name="remarques"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-		
-
-
-
-		
-        <record model="ir.ui.view" id="fe_tree_view">
-			<field name="name">fe.tree</field>
-			<field name="model">pncevaluation.fe</field>
-			<field name="arch" type="xml">
-				<tree string="Formulaire d'évaluation">
-					<field name="id"/>
-					<field name="date"/>
-					<field name="action_realisee" />
-				</tree>
-			</field>
-		</record>
-
-		<record model="ir.actions.act_window" id="pncevaluation_fe">
-			<field name="name">Inspection</field>
-			<field name="res_model">pncevaluation.fe</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
-		</record>
-        
-
-
-
-<!-- finspection views and actions -->		
-	<record model="ir.ui.view" id="finspection_form_view">
-			<field name="name">finspection.form</field>
-			<field name="model">pncevaluation.finspection</field>
-			<field name="arch" type="xml">
-				<form string="Formulaire d'inspection'">
-					<sheet>
-						<group>
-                            <field name="date" />
-							<field name="contributeur" />
-							<field name="action_realisee"/>
-						</group>
-						<group>
-							<field name="region"/>
-							<field name="lieu"/>
-							<field name="constat"/>
-							<field name="realisation"/>
-							<field name="progress"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-		<record model="ir.ui.view" id="finspection_tree_view">
-			<field name="name">finspection.tree</field>
-			<field name="model">pncevaluation.finspection</field>
-			<field name="arch" type="xml">
-				<tree string="Formulaires d'inspection">
-					<field name="id"/>
-					<field name="date"/>
-					<field name="action_realisee" />
-				</tree>
-			</field>
-		</record>
-
-		<record model="ir.actions.act_window" id="pncevaluation_finspection">
-			<field name="name">Inspection</field>
-			<field name="res_model">pncevaluation.finspection</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
-		</record>
-<!-- region wilaya views and actions -->		
-	<record model="ir.ui.view" id="region_form_view">
-			<field name="name">region.form</field>
-			<field name="model">pncevaluation.region</field>
-			<field name="arch" type="xml">
-				<form string="Région">
-					<sheet>
-						<group>
-                            <field name="name" />
-							<field name="code"/>
-						</group>
-						<group>
-							<field name="wilayas_ids"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-		<record model="ir.ui.view" id="wilaya_form_view">
-			<field name="name">wilaya.form</field>
-			<field name="model">pncevaluation.wilaya</field>
-			<field name="arch" type="xml">
-				<form string="Wilaya">
-					<sheet>
-						<group>
-                            <field name="name" />
-							<field name="matricule"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
 <!-- partie prenante views and actions -->		
 	<record model="ir.ui.view" id="partieprenante_form_view">
 			<field name="name">partieprenante.form</field>
@@ -504,6 +219,7 @@
 						</group>
 						<group>
 							<field name="groupes_ids"/>
+							<field name="structures_ids"  widget="many2many_tags"/>
 						</group>
 					</sheet>
 				</form>
@@ -528,6 +244,49 @@
 			<field name="res_model">pncevaluation.partieprenante</field>
 			<field name="view_mode">tree,form,kanban</field>
 		</record>
+
+<!-- Strcutures affiliee au plan national cancer-->
+		<record model="ir.ui.view" id="structure_form_view">
+			<field name="name">structure.form</field>
+			<field name="model">pncevaluation.structure</field>
+			<field name="arch" type="xml">
+				<form string="Structure">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="responsable_id"/>
+							<field name="affiliation_id"/>
+
+						</group>
+						<group>
+							<field name="personnel_ids"  widget="many2many_tags"/>
+							
+
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="structure_tree_view">
+			<field name="name">structure.tree</field>
+			<field name="model">pncevaluation.structure</field>
+			<field name="arch" type="xml">
+				<tree string="Structures Affiliées au Plan Cancer">
+					<field name="id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_structures">
+			<field name="name">Structures affiliées au Plan National Cancer</field>
+			<field name="res_model">pncevaluation.structure</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+
+
 <!--groupe pnc views and actions -->		
 		<record model="ir.ui.view" id="groupe_form_view">
 			<field name="name">groupe.form</field>
@@ -607,6 +366,12 @@
 			</field>
 		</record>
 
+		<record model="ir.actions.act_window" id="pncevaluation_contributeur">
+			<field name="name">Conrtibuteurs</field>
+			<field name="res_model">pncevaluation.contributeur</field>
+			<field name="view_mode">tree,kanban,form</field>
+		</record>
+
 
 		<record model="ir.actions.act_window" id="pncevaluation_contributeur_action_js">
 			<field name="name">Conrtibuteurs</field>
@@ -614,264 +379,6 @@
 			<field name="res_model">pncevaluation.contributeur</field>
 			<field name="view_mode">tree</field>
 		</record>
-
-<!-- conrtibution views and actions -->
-		<record model="ir.ui.view" id="contribution_form_view">
-			<field name="name">contribution.form</field>
-			<field name="model">pncevaluation.contribution</field>
-			<field name="arch" type="xml">
-				<form string="Contribution">
-					<sheet>
-						<group>
-							<field name="name"/>
-							<field name="date"/>
-							<field name="type_contribution"/>
-						</group>
-						<group>
-							<field name="axe_id"/>
-							<field name="objectifs_ids"/>
-							<field name="actions_ids"/>
-							<field name="plan_action_ids"/>
-						</group>
-						<group>
-							<field name="contributeur_id"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-		<record model="ir.ui.view" id="contribution_tree_view">
-			<field name="name">contribution.tree</field>
-			<field name="model">pncevaluation.contribution</field>
-			<field name="arch" type="xml">
-				<tree string="Contributions">
-					<field name="name"/>
-					<field name="date"/>
-					<field name="type_contribution"/>
-				</tree>
-			</field>
-		</record>
-
-	 
-		<record model="ir.actions.act_window" id="pncevaluation_contribution">
-			<field name="name">Contributions</field>
-			<field name="res_model">pncevaluation.contribution</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
-		</record>
-
-
-<!-- reucoor views and actions -->		
-		<record model="ir.ui.view" id="reucoor_form_view">
-			<field name="name">reucoor.form</field>
-			<field name="model">pncevaluation.reucoor</field>
-			<field name="arch" type="xml">
-				<form string="Réunion de coordination">
-					<sheet>
-						<group>
-							<field name="name"/>
-							<field name="user_id"/>
-							<field name="start"/>
-							<field name="stop"/>
-							<field name="contributeurs_invites_ids" />
-							<field name="contributeurs_presents_ids" />
-							<field name="contributions_ids" />
-							<field name="pv_reunion_ids" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-			<record model="ir.ui.view" id="reucoor_tree_view">
-			<field name="name">reucoor.tree</field>
-			<field name="model">pncevaluation.reucoor</field>
-			<field name="arch" type="xml">
-				<tree string="Réunions de coordination">
-					<field name="name"/>
-					<field name="start"/>
-					<field name="stop"/>
-				</tree>
-			</field>
-		</record>
-
-
-		<record id="view_reucoor_calendar" model="ir.ui.view">
-            <field name="name">reucoor.calendar</field>
-            <field name="model">pncevaluation.reucoor</field>
-            <field eval="2" name="priority"/>
-            <field name="arch" type="xml">
-                <calendar  color="user_id" date_start="start" date_stop="stop" string="Réunions" mode="month" >
-					<field name="id"/>
-					<field name="name"/>
-                </calendar>
-            </field>
-        </record>
-
-		<record model="ir.actions.act_window" id="pncevaluation_reucoor">
-			<field name="name">Réunions de coordination</field>
-			<field name="res_model">pncevaluation.reucoor</field>
-			<field name="view_mode">tree,calendar,form,kanban,graph</field>
-		</record>
-
-<!-- contribution views and actions -->		
-
-		<record model="ir.ui.view" id="pvreunionaction_form_view">
-			<field name="name">pvreunionaction.form</field>
-			<field name="model">pncevaluation.pvreunionaction</field>
-			<field name="arch" type="xml">
-				<form string="PV  de réunion">
-					<sheet>
-						<group>
-							<field name="name" />
-							<field name="date"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-			<record model="ir.ui.view" id="pvreunionaction_tree_view">
-			<field name="name">pvreunionaction.tree</field>
-			<field name="model">pncevaluation.pvreunionaction</field>
-			<field name="arch" type="xml">
-				<tree string="PV de réunion">
-					<field name="name" />
-					<field name="date"/>
-				</tree>
-			</field>
-		</record>
-
-<!-- reunion evaluation views and actions -->		
-		<record model="ir.ui.view" id="reueval_form_view">
-			<field name="name">reueval.form</field>
-			<field name="model">pncevaluation.reueval</field>
-			<field name="arch" type="xml">
-				<form string="Réunion d'évaluation'">
-					<sheet>
-						<group>
-							<field name="name"/>
-							<field name="start"/>
-							<field name="stop"/>
-							<field name="axe_id"/>
-							<field name="contributeurs_invites_ids" />
-							<field name="contributeurs_presents_ids" />
-							<field name="contributions_ids" />
-							<field name="pv_reunion_ids" />
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-			<record model="ir.ui.view" id="reueval_tree_view">
-			<field name="name">reueval.tree</field>
-			<field name="model">pncevaluation.reueval</field>
-			<field name="arch" type="xml">
-				<tree string="Réunions d'évaluation">
-					<field name="name"/>
-					<field name="start"/>
-					<field name="stop"/>
-				</tree>
-			</field>
-		</record>
-
-		<record model="ir.actions.act_window" id="pncevaluation_reueval">
-			<field name="name">Réunions d'évaluation</field>
-			<field name="res_model">pncevaluation.reueval</field>
-			<field name="view_mode">tree,form,kanban,graph</field>
-		</record>
-
-
-<!-- budget  views and actions -->		
-		<record model="ir.ui.view" id="budgetpnc_form_view">
-			<field name="name">budgetpnc.form</field>
-			<field name="model">pncevaluation.budgetpnc</field>
-			<field name="arch" type="xml">
-				<form string="Budget">
-					<sheet>
-						<group>
-							<field name="name"/>
-							<field name="date"/>
-							<field name="budget_estime"/>
-							<field name="budget_reel"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-		<record model="ir.ui.view" id="budgetpnc_menu_form_view">
-			<field name="name">budgetpnc.form</field>
-			<field name="model">pncevaluation.budgetpnc</field>
-			<field name="arch" type="xml">
-				<form string="Budget">
-					<sheet>
-						<group>
-							<field name="date"/>
-							<field name="axe_id"/>
-							<field name="budget_estime"/>
-							<field name="budget_reel"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-			<record model="ir.ui.view" id="budgetpnc_tree_view">
-			<field name="name">budgetpnc.tree</field>
-			<field name="model">pncevaluation.budgetpnc</field>
-			<field name="arch" type="xml">
-				<tree string="Budget">
-					<field name="date"/>
-					<field name="budget_estime"/>
-					<field name="budget_reel"/>
-				</tree>
-			</field>
-		</record>
-
-		<record model="ir.actions.act_window" id="pncevaluation_budgetpnc">
-			<field name="name">Budgets</field>
-			<field name="res_model">pncevaluation.budgetpnc</field>
-			<field name="view_mode">tree,form,kanban,graph,pivot</field>
-		</record>
-
-
-<!-- rubriquebudget  views and actions -->		
-		<record model="ir.ui.view" id="rubriquebudget_form_view">
-			<field name="name">rubriquebudget.form</field>
-			<field name="model">pncevaluation.rubriquebudget</field>
-			<field name="arch" type="xml">
-				<form string="Rubrique">
-					<sheet>
-						<group>
-							<field name="name"/>
-							<field name="estime"/>
-							<field name="reel"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
-
-
-			<record model="ir.ui.view" id="rubriquebudget_tree_view">
-			<field name="name">rubriquebudget.tree</field>
-			<field name="model">pncevaluation.rubriquebudget</field>
-			<field name="arch" type="xml">
-				<tree string="Rubriques">
-					<field name="name"/>
-					<field name="estime"/>
-					<field name="reel"/>
-				</tree>
-			</field>
-		</record>
-
-
 
 		
   </data>

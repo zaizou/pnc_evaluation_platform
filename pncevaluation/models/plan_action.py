@@ -101,7 +101,7 @@ class Structure(models.Model):
      _description = u"Structure"
      name = fields.Char(u"Intitulé")
      responsable_id = fields.Many2one('pncevaluation.contributeur',string="Responsable")
-     #personnel
+     personnel_ids = fields.One2many('pncevaluation.contributeur','structure_id',string=u"Personnel attaché au PNC")
      affiliation_id = fields.Many2one('pncevaluation.partieprenante',string=u"Affiliation")
      controle_qualite_ids = fields.One2many('pncevaluation.conrtoleq','structure_chargee_id',string=u"Contrôles de qualité")
      evaluations_pa_ids = fields.One2many('pncevaluation.evaluationpa','structure_chargee_id',string=u"Evaluation Plan d\'action")
@@ -113,6 +113,7 @@ class ActionPlanAction(models.Model):
      name = fields.Char(u"Intitulé")
      description = fields.Text(u"Description de l\'action")
      plan_action_id = fields.Many2one('pncevaluation.pa',string=u"Plan d\'action")
+     realisation_id = fields.Many2many('pncevaluation.r_actpa',string=u"Réalisations de l\'action au niveau de la mise en oeuvre")
 
 class ObjectifPlanAction(models.Model):
      _name = 'pncevaluation.objectifpa'

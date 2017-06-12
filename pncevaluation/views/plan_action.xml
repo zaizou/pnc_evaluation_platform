@@ -49,7 +49,7 @@
 			<field name="name">pa.tree</field>
 			<field name="model">pncevaluation.pa</field>
 			<field name="arch" type="xml">
-				<tree string="Plan National Cancer">
+				<tree string="Plans d'action">
 					<field name="id"/>
 					<field name="name"/>
 					<field name="date"/>
@@ -76,11 +76,14 @@
 
 
         <record model="ir.actions.act_window" id="pncevaluation_pa">
-			<field name="name">Plan Cancer</field>
+			<field name="name">Plans d'action </field>
 			<field name="res_model">pncevaluation.pa</field>
             <field name="view_id" ref="pa_tree_view"/>
 			<field name="view_mode">kanban,esi,tree,form,graph</field>
 		</record>
+
+
+		
 
 
 

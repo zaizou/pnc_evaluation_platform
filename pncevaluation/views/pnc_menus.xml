@@ -36,6 +36,13 @@
          <menuitem name="Parties Prenantes" id="pnc_evaluation_stakeholders"
 		 action="pncevaluation_partieprenante" parent="pnc_documents" sequence="40"/>
 
+         <menuitem name="Structures Sanitaires Attachées" id="pnc_evaluation_structures"
+		 action="pncevaluation_structures" parent="pnc_documents" sequence="41"/>
+
+     
+         <menuitem name="Contributeurs" id="pnc_evaluation_contribs"
+		 action="pncevaluation_contributeur" parent="pnc_documents" sequence="50"/>
+
 
 
 <!--- Suivi du PNC -->

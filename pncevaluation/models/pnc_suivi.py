@@ -13,6 +13,7 @@ class rapport_meo(models.Model):
      name = fields.Char(u"Intitulé du rapport")
      date_elaboration = fields.Date(u"Date d\'élaboration")
      formulaires_ids = fields.One2many('pncevaluation.fmo','rapport_moe_id',string=u"Formulaires de mise en oeuvre ") 
+     forms_pa_moe_ids = fields.One2many('pncevaluation.fpamoe','rapport_meo_id',string=u"Formulaires de correspondance")
 class formulaire_moe(models.Model):
      _name = 'pncevaluation.fmo'
      _description = "Formulaire de mise en oeuvre"
@@ -25,6 +26,35 @@ class formulaire_moe(models.Model):
      descriptions_res = fields.Text(u"Description des résultats obtenus")
      dates_cles_ids = fields.One2many('pncevaluation.date_cle','form_moe_id',string=u"Dates clés de l\'Action")
      probleme_ronc = fields.Text(u"Problèmes rencontrés : écart entre l\'action prévue et l\'action réalisée, le cas échéant")
+
+class formulairePAMOE(models.Model):
+     _name = 'pncevaluation.fpamoe'
+     _description = "Formulaire Plan d\'action/Mise en oeuvre"
+     name = fields.Char(u"Intitulé") 
+     date = fields.Date(u"Date")
+     realisations_ids = fields.One2many('pncevaluation.r_actpa','form_pa_moe_id',string=u"Action plan d\'action")
+     rapport_meo_id = fields.Many2one('pncevaluation.rmo',string=u"Rapprot de mise en oeuvre")
+
+
+
+
+class realisationAction(models.Model):
+     _name = 'pncevaluation.r_actpa'
+     _description = "Réalisation action Plan d\'action"
+     name = fields.Char(u"Intitulé")
+     plan_action_id = fields.Many2one('pncevaluation.pa',string="Plan d\'action")
+     action_pa_ids = fields.Many2many('pncevaluation.actionpa',string="Action du plan d\'action")
+     etat = fields.Selection(selection=[(u"finalisée",u"Finalisée"),(u"en cours",u"En cours"),(u"en préparation",u"En préparation"),(u"non entammée",u"Non entammée")],string=u"Etat de l\'action",required=True)
+     appreciation = fields.Selection(selection=[(u"import,facile",u"Importante, facile à réaliser"),(u"import,difficile",u"Importante, difficile à réaliser"),(u"moin import,facile",u"Moin importante, facile à réaliser"),(u"moin import,difficile",u"Moin importante, difficile à réaliser")],string=u"Appréciation",required=True)
+     form_pa_moe_id = fields.Many2one('pncevaluation.fpamoe',string="Formulaire correspondance")
+
+
+
+
+
+
+
+
 class date_cle(models.Model):
      _name = 'pncevaluation.date_cle'
      _description = u"Date Clé"

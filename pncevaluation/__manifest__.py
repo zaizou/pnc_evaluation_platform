@@ -13,8 +13,10 @@
     'depends': ['base','web_esi','web_gantt8','board','document','calendar'],
 
     'data': [
-      'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/pnc_documents.xml',
+        'views/pnc_evaluation.xml',
+        'views/pnc_suivi.xml',
         'views/plan_action.xml',
         'views/pnc_menus.xml',
         'views/pnc_evaluation_templates.xml',

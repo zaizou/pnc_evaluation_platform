@@ -48,6 +48,7 @@ class ActionPNC(models.Model):
     numero = fields.Integer(u"Numéro de l\'action")
     objectiflie_id = fields.Many2one('pncevaluation.objectifpnc',string='Objectif lié', ondelete='SET NULL')
     mesures_ids = fields.One2many('pncevaluation.mesurepnc','actionlie_id',string="Mesures")
+    
 
     date_debut_p = fields.Date(u"Date début prévue",required=True)
     date_debut_r = fields.Date(u"Date début réelle")
@@ -57,21 +58,9 @@ class ActionPNC(models.Model):
     action_program_ids = fields.Many2many('pncevaluation.action_program',string=u"Programmes d\'action")
     forms_eval_subj = fields.One2many('pncevaluation.fe','action_realisee',string=u"Formulaires d\'evaluaion subjective")
     forms_inspection = fields.One2many('pncevaluation.finspection','action_realisee',string=u"Forms Inspection")
+    
 
-    nb_etat_fin = fields.Integer("Etats fin");
-    nb_etat_current  =fields.Integer("Etats en cours")
-    nb_etat_prep = fields.Integer("Etats en prep")
-
-    nb_qualite_mal = fields.Integer("nb mal")
-    nb_qualite_pom = fields.Integer("nb pom")
-    nb_qualite_br = fields.Integer("nb br")
-    nb_qualite_tb = fields.Integer("nb tb")
-
-    nb_res_ms = fields.Integer("ms")
-    nb_res_pms = fields.Integer("pms")
-    nb_res_s = fields.Integer("s")
-    nb_res_ps = fields.Integer("ps")
-
+    
 
 
     
@@ -90,6 +79,7 @@ class partie_prenante(models.Model):
      _description = u"Partie Prenante"
      name = fields.Char(u"Intitulé")
      groupes_ids = fields.One2many('pncevaluation.groupe','partie_prenante_id',string=u"Groupes")
+     structures_ids = fields.One2many('pncevaluation.structure','affiliation_id',string=u"Structures Affiliées")
 
 
 class pnc_groupe(models.Model):
@@ -110,11 +100,13 @@ class pnc_contributeur(models.Model):
      poids = fields.Float(u"Poids du contributeur")
      #informations PNC
      groups_ids = fields.Many2many('pncevaluation.groupe',string=u"Groupes")
+     structure_id = fields.Many2one('pncevaluation.structure',string=u"Affiliation (Structure) :")
      contributions_ids = fields.One2many('pncevaluation.contribution','contributeur_id',string=u"Contributions")
      reunions_coordination_ids = fields.Many2many('pncevaluation.reucoor',string=u"Réunions de coordinnations")
      reunions_coordination_invitation_ids = fields.Many2many('pncevaluation.reucoor',string=u"Invitations aux Réunions de coordinnations")
      reunions_evaluation_ids = fields.Many2many('pncevaluation.reueval',string=u"Réunions d évaluation ")
      reunions_evaluation_invitation_ids = fields.Many2many('pncevaluation.reueval',string=u"Invitations aux réunions d évaluation")
+
 
 
      @api.multi
