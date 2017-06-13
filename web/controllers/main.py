@@ -916,8 +916,16 @@ class View(http.Controller):
 
     @http.route('/web/view/add_custom', type='json', auth="user")
     def add_custom(self, view_id, arch,board_name):
+
         strN = "ir.ui.view.custom"+board_name;
         CustomView = request.env[strN]
+
+        reORM = request.env[strN]
+        views = reORM.search([])
+        for view in views:
+            view.unlink()
+
+        
         CustomView.create({
             'user_id': request.session.uid,
             'ref_id': view_id,

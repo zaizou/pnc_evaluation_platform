@@ -58,6 +58,7 @@ odoo.define('board.dashboard', function(require) {
         },
         init: function(view, node) {
             this._super(view, node);
+
             this.form_template = 'DashBoard';
             this.actions_attrs = {};
             this.action_managers = [];
@@ -68,8 +69,8 @@ odoo.define('board.dashboard', function(require) {
             var self = this;
             this._super.apply(this, arguments);
             this.$el.addClass('o_dashboard');
-            console.log("Board ::");
-            console.log(self.view.model);
+            console.log("Board definition :");
+            console.log(this);
 
             this.set_title = "Tableau de bord  Axe : " + setBoardNumber(self.view.model);
 
@@ -218,6 +219,8 @@ odoo.define('board.dashboard', function(require) {
                 arch: arch,
                 board_name: boardNumber
             });
+            //this.init(this.view, this.node);
+            //this.start();
         },
         on_load_action: function(result, index, action_attrs) {
             var self = this,
