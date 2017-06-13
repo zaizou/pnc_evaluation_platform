@@ -13,6 +13,38 @@ odoo.define('board.dashboard', function(require) {
 
     var _t = core._t;
     var QWeb = core.qweb;
+    var boardNumber;
+
+
+
+    function setBoardNumber(model) {
+        switch (model) {
+            case "board.boardone":
+                boardNumber = "one";
+                return "01";
+            case "board.boardtwo":
+                boardNumber = "two";
+                return "02";
+            case "board.boardthree":
+                boardNumber = "tree";
+                return "03";
+            case "board.boardfour":
+                boardNumber = "four";
+                return "04";
+            case "board.boardfive":
+                boardNumber = "five";
+                return "05";
+            case "board.boardsix":
+                boardNumber = "six";
+                return "06";
+            case "board.boardseven":
+                boardNumber = "seven";
+                return "07";
+            case "board.boardeight":
+                boardNumber = "eight";
+                return "08";
+        }
+    }
 
     var DashBoard = form_common.FormWidget.extend({
         events: {
@@ -29,12 +61,17 @@ odoo.define('board.dashboard', function(require) {
             this.form_template = 'DashBoard';
             this.actions_attrs = {};
             this.action_managers = [];
+
             this.set_title = _t('My Dashboard');
         },
         start: function() {
             var self = this;
             this._super.apply(this, arguments);
             this.$el.addClass('o_dashboard');
+            console.log("Board ::");
+            console.log(self.view.model);
+
+            this.set_title = "Tableau de bord  Axe : " + setBoardNumber(self.view.model);
 
             this.$('.oe_dashboard_column').sortable({
                 connectWith: '.oe_dashboard_column',
@@ -105,10 +142,15 @@ odoo.define('board.dashboard', function(require) {
         do_change_layout: function(new_layout) {
             var $dashboard = this.$el.find('.oe_dashboard');
             var current_layout = $dashboard.attr('data-layout');
+            console.log("current_layout");
+            console.log(current_layout);
+            console.log("new_layout");
+            console.log(new_layout);
             if (current_layout != new_layout) {
                 var clayout = current_layout.split('-').length,
                     nlayout = new_layout.split('-').length,
                     column_diff = clayout - nlayout;
+                console.log(column_diff);
                 if (column_diff > 0) {
                     var $last_column = $();
                     $dashboard.find('.oe_dashboard_column').each(function(k, v) {
@@ -173,7 +215,8 @@ odoo.define('board.dashboard', function(require) {
             var arch = QWeb.render('DashBoard.xml', board);
             this.rpc('/web/view/add_custom', {
                 view_id: this.view.fields_view.view_id,
-                arch: arch
+                arch: arch,
+                board_name: boardNumber
             });
         },
         on_load_action: function(result, index, action_attrs) {
