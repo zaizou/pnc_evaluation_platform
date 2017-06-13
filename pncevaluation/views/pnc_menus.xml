@@ -125,8 +125,7 @@
   <!--       <menuitem name="Génération d'un rapport" id="report_gen"
 		 action="bi_view_editor.action_bi_view_editor_view_form" parent="menu_pnc_dashboard" sequence="0"/>
 -->
-         <menuitem name="Tableau de bord" id="pnc_dash"
-		 action="board.open_board_my_dash_action" parent="menu_pnc_dashboard" sequence="9"/>
+     
 
          <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
 		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="9"/>

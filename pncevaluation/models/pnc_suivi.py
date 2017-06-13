@@ -64,7 +64,7 @@ class date_cle(models.Model):
 
 
 class reunionCoordination(models.Model):
-     #_inherit = 'calendar.event'
+     _inherit = 'mail.thread'
      _name = 'pncevaluation.reucoor'
      _description = "reunion"
      #TODO date
@@ -83,7 +83,10 @@ class reunionCoordination(models.Model):
      #state = fields.Selection(selection_add=[('done', "Terminée")])
      contributions_ids = fields.One2many('pncevaluation.contribution','reunion_coordination_id',string=u"Contributions")
      contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
-     contributeurs_invites_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs invités")
+     contributeurs_presents_ids = fields.Many2many(comodel_name='pncevaluation.contributeur',
+                            relation='reucoor_contribut_present',string=u"Contributeurs présents")
+     contributeurs_invites_ids = fields.Many2many(comodel_name='pncevaluation.contributeur',
+                            relation='reucoor_contribut_invite',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('pncevaluation.pvreunionaction',string=u"PV de la réunion")
 
      @api.one
@@ -99,12 +102,82 @@ class reunionCoordination(models.Model):
      def create(self, vals):
         _logger.warning("----- Reunion Vals")
         _logger.warning(vals)
+        _logger.warning("----- Table[0][length-1]")
+        if(len(vals.get(u'contributeurs_invites_ids')) >0):
+            contribs = self.env['pncevaluation.contributeur'].browse(  vals.get(u'contributeurs_invites_ids')[0][2]  )
+            recipient_partners = []
+            message_debut = vals.get(u'start')
+            message_fin = vals.get(u'stop')
+            message_body = u""
+            message_body = message_body + u"Vous êtes invités à assiter une réunion de coordination "
+            message_body = message_body +"<br>"
+            if( vals.get(u'name') ):
+                message_body = message_body + u"<strong>Objet de la réunion : </strong> " +  vals.get(u'name')
+                message_body = message_body +"<br>"
+            message_body = message_body + u"<strong>Début de la rénion : </strong>"
+            message_body = message_body + str(message_debut)
+            message_body = message_body + "<br>"
+            message_body = message_body +u"<strong>Fin de la réunion :</strong>"
+            message_body = message_body + str(message_fin)
+            message_body = message_body +u"<br><strong>Salutations. </strong>"
+            
+
+            for contributeur in contribs:
+                if(contributeur.user_id):
+                    recipient_partners.append(  (4,contributeur.user_id.partner_id.id)  )
+            post_vars = {'subject': u"Réunion de Coordination",
+                        'body': message_body,
+                        'partner_ids': recipient_partners,}
+            thread_pool = self.env['mail.thread']
+            thread_pool.message_post(**post_vars)
+
+
+        #self.send_mail("test","cb_medjdoub@esi.dz",message_body)
+
+        
+
+        # mail_message = self.env['mail.message']
+        # mail_message_subtype = self.env['mail.message.subtype']
+        # [discussion_id] = mail_message_subtype.browse([('name','=','Discussions')])
+        # #users = oe.pool.get('res.users').search(cr, uid, user_ids)
+        # subject ="test message 2"
+        # body = "hello 2"
+
+
+        # self.message_post(body=body,
+        # subtype='notification',
+        # partner_ids=recipient_partners,
+        # )
+
+        # mail_message.create(values=dict(
+        #     partner_ids=recipient_partners,
+        #     subject=subject,
+        #     body=body,
+        #     ))
+
+        # _logger.warning(vals.contributeurs_invites_ids[0][ len(vals.contributeurs_invites_ids[0])-1 ] )
         return super(reunionCoordination, self).create(vals)
 
     #  @api.multi
     #  def write(self, vals):
     #     tools.image_resize_images(vals)
     #     return super(pnc_contributeur, self).write(vals)
+
+     def send_mail(self,subject,email_to,body_html):
+        email_template_obj = self.env['mail.template']
+        template_ids = email_template_obj.search( [('model_id.model', '=','your.object.name')]) 
+        if template_ids:
+            values = email_template_obj.generate_email( template_ids[0] )
+            values['subject'] = subject 
+            values['email_to'] = email_to
+            values['body_html'] = body_html
+            values['body'] = body_html
+            values['res_id'] = False
+            mail_mail_obj = self.env['mail.mail']
+            msg_id = mail_mail_obj.create(values)
+            if msg_id:
+                    mail_mail_obj.send([msg_id]) 
+        return True
 
 class pv_reunion_action(models.Model):
      _name = 'pncevaluation.pvreunionaction'

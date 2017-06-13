@@ -73,7 +73,7 @@ class inspection(models.Model):
      #_inherit = 'project.task'
      _name = 'pncevaluation.inspection'   
 class reunion_evaluation(models.Model):
-     #_inherit = 'calendar.event'
+     _inherit = 'mail.thread'
      _name = 'pncevaluation.reueval'  
      date = fields.Date("Date")
      start = fields.Datetime(u"Début")
@@ -86,6 +86,42 @@ class reunion_evaluation(models.Model):
      contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
      contributeurs_invites_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('pncevaluation.pvreunionevaluation',string=u"PV de la réunion")
+
+
+     @api.model
+     def create(self, vals):
+        _logger.warning("----- Reunion Vals")
+        _logger.warning(vals)
+        #for invitId in vals.get(u'contributeurs_invites_ids')[0][2]:
+        if(len(vals.get(u'contributeurs_invites_ids')) >0):
+            contribs = self.env['pncevaluation.contributeur'].browse(  vals.get(u'contributeurs_invites_ids')[0][2]  )
+            recipient_partners = []
+            message_debut = vals.get(u'start')
+            message_fin = vals.get(u'stop')
+            message_body = u""
+            message_body = message_body + u"Vous êtes invités à assiter une réunion d\'évaluation "
+            message_body = message_body +"<br>"
+            if( vals.get(u'name') ):
+                message_body = message_body + u"<strong>Objet de la réunion : </strong> " +  vals.get(u'name')
+                message_body = message_body +"<br>"
+            message_body = message_body + u"<strong>Début de la rénion : </strong>"
+            message_body = message_body + str(message_debut)
+            message_body = message_body + "<br>"
+            message_body = message_body +u"<strong>Fin de la réunion :</strong>"
+            message_body = message_body + str(message_fin)
+            message_body = message_body +u"<br><strong>Salutations. </strong>"
+            
+
+            for contributeur in contribs:
+                if(contributeur.user_id):
+                    recipient_partners.append(  (4,contributeur.user_id.partner_id.id)  )
+            post_vars = {'subject': u"Réunion de Coordination",
+                        'body': message_body,
+                        'partner_ids': recipient_partners,}
+            thread_pool = self.env['mail.thread']
+            thread_pool.message_post(**post_vars)
+
+        return super(reunion_evaluation, self).create(vals)
 
 class pv_reunion_evaluation(models.Model):
      _name = 'pncevaluation.pvreunionevaluation'   
