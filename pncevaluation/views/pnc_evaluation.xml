@@ -113,6 +113,7 @@
 						<group>
                             <field name="date" />
 							<field name="contributeur" />
+							<field name="axe_id"/>
 							<field name="action_realisee"/>
 						</group>
 						<group>

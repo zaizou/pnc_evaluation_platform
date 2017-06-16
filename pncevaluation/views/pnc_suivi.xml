@@ -182,6 +182,7 @@
 						<group>
 							<field name="name"/>
 							<field name="date"/>
+							<field name="axe_id"/>
 							<field name="budget_estime"/>
 							<field name="budget_reel"/>
 						</group>

@@ -543,6 +543,7 @@
         </ul>
     </div>
     <div class="btn-group btn-group-sm">
+        <button class="btn btn-default fa fa-bar-chart-o o_graph_button" title="Budget Bar Chart" data-mode="budget_bar_chart"/>
         <button class="btn btn-default fa fa-bar-chart-o o_graph_button" title="Bar Chart" data-mode="gauge_chart"/>
         <button class="btn btn-default fa fa-bar-chart-o o_graph_button" title="Bar Chart" data-mode="bar"/>
         <button class="btn btn-default fa fa-line-chart o_graph_button" title="Line Chart" data-mode="line"/>

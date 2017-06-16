@@ -85,6 +85,15 @@
 
         <link rel="stylesheet" type="text/css" href="/web/static/lib/nvd3/nv.d3.css"/>
         <link rel="stylesheet" type="text/css" href="/web/static/lib/gauge.css"/>
+        <link rel="stylesheet" type="text/css" href="/web/static/lib/treeview/bootstrap-treeview.css"/>
+
+
+        <!--<link rel="stylesheet" type="text/css" href="/web/static/lib/app_1.min.css"/>-->
+
+        <!--<link rel="stylesheet" type="text/css" href="/web/static/lib/app1.css"/>
+        <link rel="stylesheet" type="text/css" href="/web/static/lib/app2.css"/>-->
+
+        
         
 
         <link rel="stylesheet" type="text/css" href="/base/static/src/css/modules.css"/>
@@ -121,6 +130,11 @@
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/form_view_layout_extra.less"/>
         <link rel="stylesheet" type="text/less" href="/web/static/src/less/search_view_extra.less"/>
 
+        <link  type="text/javascript" href="/web/static/lib/material_dashboard/js/chartist.min.js"/>
+
+        
+
+
         <script type="text/javascript" src="/web/static/lib/jquery.scrollTo/jquery.scrollTo.js"></script>
         <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js"></script>
         <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js"></script>
@@ -128,6 +142,22 @@
         <script type="text/javascript" src="/web/static/lib/gauge.js"></script>
         <script type="text/javascript" src="/web/static/lib/backbone/backbone.js"></script>
         <script type="text/javascript" src="/web/static/lib/fuzzy-master/fuzzy.js"></script>
+
+        <script type="text/javascript" src="/web/static/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="/web/static/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="/web/static/lib/highchart/modules/data.js"></script>
+        <script type="text/javascript" src="/web/static/lib/highchart/modules/drilldown.js"></script>
+
+        <script type="text/javascript" src="/web/static/lib/treeview/bootstrap-treeview.js"></script>
+
+        
+        
+
+        
+
+
+
+
 
         <script type="text/javascript" charset="utf-8">
             odoo._modules = <t t-raw="get_modules_order()"/>;

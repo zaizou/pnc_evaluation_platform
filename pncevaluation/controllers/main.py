@@ -96,6 +96,7 @@ class PNC_Evaluation(Controller):
             empty=False
             if( len(fes) == 0 ):
                 empty = True
+            empty=False
             for fe in fes:
                 _logger.warning(fe.etat)
                 if(fe.etat == u"finalisée"):
@@ -201,6 +202,63 @@ class PNC_Evaluation(Controller):
             }
             elements.append(ret)
         return elements
+    
+    @route('/pncevaluation/get_budgets', type='json', auth='user')
+    def get_budgets(self,axe_num):
+        reORM = request.env['pncevaluation.budgetpnc']
+        listV = reORM.get_budgets_date(axe_num)
+        if len(listV) == 0:
+            listV.append({
+                'axe_id' : [0,'axe X'],
+                'budget_estime' :0,
+                'budget_reel' : 0,
+                'date' : 'Indéfinie'
+            })
+        return  listV
+        #read_group(domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True)
+
+    @route('/pncevaluation/get_action_pa_rea', type='json', auth='user')
+    def get_pa_rea(self):
+        axesORM = request.env['pncevaluation.axepnc']
+        planActionORM = request.env['pncevaluation.pa']
+        actionPaORM = request.env['pncevaluation.actionpa']
+        axes = axesORM.search([])
+        axesCount = []
+        i = 0
+        pActions = []
+        for axe in axes:
+            axeCount = 0
+            _logger.warning(u"----- Axes PAs")
+            _logger.warning(axe.action_programs_ids)
+            # plans = planActionORM.browse(axe.action_programs_ids)
+            # _logger.warning("-----plan")
+            # _logger.warning(plans)
+            for plan in axe.action_programs_ids:
+                planCount = plan.getActionPaRe()
+                axeCount = axeCount + planCount
+                pActions.append({
+                    'plan_id':plan.id,
+                    'plan_intitule':plan.name,
+                    'plan_actions_count':planCount,
+                })
+            axesCount.append({
+                'numero' : axe.numero,
+                'paCount': pActions,
+                'axeCount': axeCount,
+            
+            })    
+
+
+        _logger.warning(u"----- Axes Counts")
+        _logger.warning(axesCount)
+        return axesCount
+    @route('/pncevaluation/get_reunions', type='json', auth='user')
+    def get_statistics(self):
+        reORM = request.env['pncevaluation.reucoor']
+        listV = reORM.get_reunions_date()
+        return listV
+        
+
 
 
 

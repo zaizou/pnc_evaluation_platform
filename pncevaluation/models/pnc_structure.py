@@ -39,6 +39,7 @@ class ObjectifPNC(models.Model):
     _description = u"Objectif du plan national cancer"
     name = fields.Char(u"Intitulé de de l\'objectif")
     numero = fields.Integer(u"Numéro de l\'objectif",required=True, translate=True)
+    description = fields.Char(u"Description")
     axelie_id = fields.Many2one('pncevaluation.axe_pnc',string='Axe lié', ondelete='SET NULL')
     actions_ids = fields.One2many('pncevaluation.actionpnc','objectiflie_id',string="Actions")
     action_programs_ids = fields.Many2many('pncevaluation.pa',string="Programmes d\'actions")

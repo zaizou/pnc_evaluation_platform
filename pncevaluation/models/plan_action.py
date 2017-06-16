@@ -11,7 +11,7 @@ class PlanAction(models.Model):
      date = fields.Date(u"Date d'établissement du Plan")
     #  TODO ajout du modèle plan d'action 
      action_ids = fields.Many2many('pncevaluation.actionpnc',string = "Actions concernées")
-     axe_id = fields.Many2one('pncevaluation.axepnc',string="Axes concernés",ondelete='SET NULL')
+     axe_id = fields.Many2one('pncevaluation.axepnc',string="Axe concerné",ondelete='SET NULL',required=True)
      numero_axe = fields.Integer(related='axe_id.numero')
      objectifs_ids = fields.Many2many('pncevaluation.objectifpnc',string=u"Objectifs concernés")
 
@@ -25,6 +25,16 @@ class PlanAction(models.Model):
      kpi_ids = fields.One2many('pncevaluation.kpi','plan_action_id',string=u"Indicateurs de performance")
      mediatisation = fields.Many2one('pncevaluation.mediatisation',string=u"Médiatisation")
      structures_pilotage = fields.One2many('pncevaluation.structure','plan_action_id',string=u"Structures de pilotage")
+
+
+     @api.model
+     def getActionPaRe(self):
+        # actionsPa = self.env['pncevaluation.actionpa'].search( ['id','in',self.actions_ids] )
+        paCount = 0
+        for actionPa in self.actions_ids:
+            if len(actionPa.realisation_id):
+                paCount = paCount + 1
+        return paCount
 
      
 
@@ -114,6 +124,7 @@ class ActionPlanAction(models.Model):
      description = fields.Text(u"Description de l\'action")
      plan_action_id = fields.Many2one('pncevaluation.pa',string=u"Plan d\'action")
      realisation_id = fields.Many2many('pncevaluation.r_actpa',string=u"Réalisations de l\'action au niveau de la mise en oeuvre")
+
 
 class ObjectifPlanAction(models.Model):
      _name = 'pncevaluation.objectifpa'

@@ -128,7 +128,7 @@
      
 
          <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
-		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="8"/>
 
          <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone"
 		 action="board.open_board_my_dash_actionone" parent="menu_pnc_dashboard" sequence="9"/>

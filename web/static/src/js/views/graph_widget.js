@@ -9,6 +9,11 @@ odoo.define('web.GraphWidget', function(require) {
 
     var _t = core._t;
     var QWeb = core.qweb;
+    var names;
+    var data_source;
+    var avance;
+    var tabOnes;
+    var tabSeries;
 
     // hide top legend when too many item for device size
     var MAX_LEGEND_LENGTH = 25 * (1 + config.device.size_class);
@@ -61,13 +66,19 @@ odoo.define('web.GraphWidget', function(require) {
                 is_count = this.measure === '__count__';
             var data_pt, j, values, value;
 
+            // console.log("Arguments");
+            // console.log(arguments);
             this.data = [];
+            this.fulldata = [];
+            // console.log("raw data");
+            // console.log(raw_data);
             for (var i = 0; i < raw_data.length; i++) {
                 data_pt = raw_data[i].attributes;
                 values = [];
                 if (this.groupbys.length === 1) data_pt.value = [data_pt.value];
                 for (j = 0; j < data_pt.value.length; j++) {
                     values[j] = this.sanitize_value(data_pt.value[j], data_pt.grouped_on[j]);
+
                 }
                 value = is_count ? data_pt.length : data_pt.aggregates[this.measure];
                 this.data.push({
@@ -77,6 +88,7 @@ odoo.define('web.GraphWidget', function(require) {
             }
         },
         sanitize_value: function(value, field) {
+            console.log()
             if (value === false) return _t("Undefined");
             if (value instanceof Array) return value[1];
             if (field && this.fields[field] && (this.fields[field].type === 'selection')) {
@@ -153,45 +165,428 @@ odoo.define('web.GraphWidget', function(require) {
                     current_serie = { values: [], key: series[i] };
                     for (j = 0; j < xlabels.length; j++) {
                         current_serie.values.push({
-                            x: xlabels[j],
+                            name: xlabels[j],
                             y: values[series[i]][xlabels[j]] || 0,
+                            drilldown: null
                         });
                     }
                     data.push(current_serie);
                 }
             }
-            var svg = d3.select(this.$el[0]).append('svg');
-            svg.datum(data);
+            data_source = this.data;
 
-            svg.transition().duration(0);
+            console.log("rana hna");
+            console.log(data);
 
-            var chart = nv.models.multiBarChart();
-            chart.options({
-                margin: { left: 120, bottom: 60 },
-                delay: 250,
-                transition: 10,
-                showLegend: _.size(data) <= MAX_LEGEND_LENGTH,
-                showXAxis: true,
-                showYAxis: true,
-                rightAlignYAxis: false,
-                stacked: this.stacked,
-                reduceXTicks: false,
-                rotateLabels: -20,
-                showControls: (this.groupbys.length > 1)
-            });
-            chart.yAxis.tickFormat(function(d) {
-                return formats.format_value(d, {
-                    type: 'float',
-                    digits: self.fields[self.measure] && self.fields[self.measure].digits || [69, 2],
+            if (this.groupbys.length == 2) {
+                tabOnes = new Array();
+                tabSeries = new Array();
+                var headers = new Array();
+                for (var i = 0; i < data_source.length; i++) {
+                    var oneName = data_source[i].labels[0];
+                    var subs = new Array();
+                    var y = 0;
+                    for (var j = 0; j < data_source.length; j++) {
+                        if (oneName == data_source[j].labels[0]) {
+                            y += data_source[j].value;
+                            subs.push([data_source[j].labels[1], data_source[j].value])
+                        }
+                    }
+
+                    if (headers.indexOf(oneName) < 0) {
+                        tabOnes.push({
+                            name: data_source[i].labels[0],
+                            y: y,
+                            drilldown: data_source[i].labels[0]
+                        });
+
+                        tabSeries.push({
+                            id: data_source[i].labels[0],
+                            data: subs
+                        });
+                        headers.push(oneName);
+                    }
+
+
+                }
+                console.log("this.datat");
+                console.log(this.data);
+                console.log("tabs");
+                console.log(tabOnes);
+                console.log(tabSeries);
+                $(this.$el[0]).highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+
+                    legend: {
+                        enabled: false
+                    },
+
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+
+                    series: [{
+                        name: 'Haut',
+                        colorByPoint: true,
+                        data: tabOnes
+                    }],
+                    drilldown: {
+                        series: tabSeries
+                    }
                 });
+
+            } else {
+
+                console.log("data to be :");
+                console.log(data);
+                var tabb = new Array();
+                for (var j = 0; j < data[0].values.length; j++)
+                    tabb.push([data[0].values[j].x[0], data[0].values[j].y]);
+
+                console.log("atbb");
+                console.log(tabb);
+
+
+                $(this.$el[0]).highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        type: 'category',
+                        labels: {
+                            rotation: -45,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: '' + data[0].key
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: ': <b>{point.y} </b>'
+                    },
+                    series: [{
+                        name: 'Population',
+                        data: tabb,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            format: '{point.y}', // one decimal
+                            y: 10, // 10 pixels down from the top
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    }]
+                });
+
+                // var svg = d3.select(this.$el[0]).append('svg');
+                // svg.datum(data);
+
+                // svg.transition().duration(0);
+
+                // var chart = nv.models.multiBarChart();
+                // chart.options({
+                //     margin: { left: 120, bottom: 60 },
+                //     delay: 250,
+                //     transition: 10,
+                //     showLegend: _.size(data) <= MAX_LEGEND_LENGTH,
+                //     showXAxis: true,
+                //     showYAxis: true,
+                //     rightAlignYAxis: false,
+                //     stacked: this.stacked,
+                //     reduceXTicks: false,
+                //     rotateLabels: -20,
+                //     showControls: (this.groupbys.length > 1)
+                // });
+                // chart.yAxis.tickFormat(function(d) {
+                //     return formats.format_value(d, {
+                //         type: 'float',
+                //         digits: self.fields[self.measure] && self.fields[self.measure].digits || [69, 2],
+                //     });
+                // });
+
+                // chart(svg);
+                // this.to_remove = chart.update;
+                // nv.utils.onWindowResize(chart.update);
+
+                // return chart;
+
+
+
+            }
+
+
+
+
+
+
+
+        },
+        display_budget_bar_chart: function() {
+
+            console.log("the datdat");
+            console.log(this);
+
+
+
+
+            //this.context.params.model
+
+            var data, values,
+                measure = this.fields[this.measure].string,
+                self = this;
+            $(this.$el[0]).attr("id", "power-bar");
+
+            var tab = document.createElement('table');
+            var line = document.createElement('tr');
+            $(this.$el[0]).append(tab);
+            $(tab).append(line);
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
+            $(line).append(td1);
+            $(line).append(td2);
+            $(line).append(td3);
+            $(line).append(td4);
+
+            var idv = document.createElement('div');
+            $(idv).attr("id", "cont1");
+            var idv2 = document.createElement('div');
+            $(idv2).attr("id", "cont2");
+            var idv3 = document.createElement('div');
+            $(idv3).attr("id", "cont3");
+            var idv4 = document.createElement('div');
+            $(idv4).attr("id", "cont4");
+            $(td1).append(idv);
+            $(td2).append(idv2);
+            $(td3).append(idv3);
+            $(td4).append(idv4);
+
+
+            //this.domain[0][0]="numero_axe"
+            var axe = -1;
+
+            if (this.domain[0])
+                if (this.domain[0][0] == "numero_axe")
+                    axe = this.domain[0][2];
+
+
+            self.rpc('/pncevaluation/get_budgets', { axe_num: axe }).done(function(result) {
+                console.log("result");
+                console.log(result);
+
+
+                var index = 0;
+                var cate = [];
+                var budgets_estim = [];
+                var budgets_reel = [];
+                var ecarts = [];
+                for (var i = 0; i < result.length; i++) {
+
+                    if (cate.indexOf(result[i].date) < 0) {
+                        cate[index] = result[i].date;
+                        budgets_estim[index] = result[i].budget_estime;
+                        budgets_reel[index] = result[i].budget_reel;
+                        ecarts[index] = budgets_reel[index] - budgets_estim[index];
+                        index++;
+                    } else {
+                        budgets_estim[cate.indexOf(result[i].date)] += result[i].budget_estime;
+                        budgets_reel[cate.indexOf(result[i].date)] += result[i].budget_reel;
+                        ecarts[cate.indexOf(result[i].date)] = budgets_reel[cate.indexOf(result[i].date)] - budgets_estim[cate.indexOf(result[i].date)];
+
+                    }
+
+
+
+                }
+                // if (result.length == 0) {
+                //     cate[0] = 'Indéfinie'
+                //     budgets_estim[0] = 0;
+                //     budgets_reel[0] = 0;
+                //     ecarts[0] = 0;
+                // }
+                var strV
+                if (axe > 0)
+                    strV = "Suivi des Budgets de l\'axe : 0" + axe;
+                else
+                    strV = "Suivi global des Budgets "
+                Highcharts.chart('cont1', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: strV
+                    },
+                    xAxis: {
+                        categories: cate
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Budget Estimé',
+                        data: budgets_estim
+                    }, {
+                        name: 'Budget réel',
+                        data: budgets_reel
+                    }, {
+                        name: 'Ecart',
+                        data: ecarts
+                    }],
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 300
+                            },
+                            chartOptions: {
+                                legend: {
+                                    align: 'center',
+                                    verticalAlign: 'bottom',
+                                    layout: 'horizontal'
+                                },
+                                yAxis: {
+                                    labels: {
+                                        align: 'left',
+                                        x: 0,
+                                        y: -5
+                                    },
+                                    title: {
+                                        text: null
+                                    }
+                                },
+                                subtitle: {
+                                    text: null
+                                },
+                                credits: {
+                                    enabled: false
+                                }
+                            }
+                        }]
+                    }
+
+                });
+
+                // Highcharts.chart('cont2', {
+                //     chart: {
+                //         type: 'column'
+                //     },
+                //     title: {
+                //         text: 'Column chart with negative values'
+                //     },
+                //     xAxis: {
+                //         categories: cate
+                //     },
+                //     credits: {
+                //         enabled: false
+                //     },
+                //     series: [{
+                //         name: 'Budget Estimé',
+                //         data: budgets_estim
+                //     }, {
+                //         name: 'Budget réel',
+                //         data: budgets_reel
+                //     }, {
+                //         name: 'Ecart',
+                //         data: ecarts
+                //     }]
+                // });
+
+                // Highcharts.chart('cont3', {
+                //     chart: {
+                //         type: 'column'
+                //     },
+                //     title: {
+                //         text: 'Column chart with negative values'
+                //     },
+                //     xAxis: {
+                //         categories: cate
+                //     },
+                //     credits: {
+                //         enabled: false
+                //     },
+                //     series: [{
+                //         name: 'Budget Estimé',
+                //         data: budgets_estim
+                //     }, {
+                //         name: 'Budget réel',
+                //         data: budgets_reel
+                //     }, {
+                //         name: 'Ecart',
+                //         data: ecarts
+                //     }]
+                // });
+
+                // Highcharts.chart('cont4', {
+                //     chart: {
+                //         type: 'column'
+                //     },
+                //     title: {
+                //         text: 'Column chart with negative values'
+                //     },
+                //     xAxis: {
+                //         categories: cate
+                //     },
+                //     credits: {
+                //         enabled: false
+                //     },
+                //     series: [{
+                //         name: 'Budget Estimé',
+                //         data: budgets_estim
+                //     }, {
+                //         name: 'Budget réel',
+                //         data: budgets_reel
+                //     }, {
+                //         name: 'Ecart',
+                //         data: ecarts
+                //     }]
+                // });
+
+
+
+
+
+
+
+
             });
 
-            chart(svg);
-            this.to_remove = chart.update;
-            nv.utils.onWindowResize(chart.update);
 
-            return chart;
+
         },
+
         display_pie: function() {
             var data = [],
                 all_negative = true,
@@ -221,30 +616,249 @@ odoo.define('web.GraphWidget', function(require) {
             }
             if (this.groupbys.length) {
                 data = this.data.map(function(datapt) {
-                    return { x: datapt.labels.join("/"), y: datapt.value };
+                    return { name: datapt.labels.join("/"), y: datapt.value };
                 });
+                console.log("grouped by");
+                console.log(data);
+                console.log("this data");
+                console.log(this.data);
+                names = data[0].name.split("/");
+                data_source = this.data;
+
+
+
             }
-            var svg = d3.select(this.$el[0]).append('svg');
-            svg.datum(data);
+            //setTimeout(function() { debugger; }, 5000);
 
-            svg.transition().duration(100);
+            // if (this.groupbys.length > 1)
+            //     console.log(createThe(0, 0, data_source.length));
 
-            var legend_right = config.device.size_class > config.device.SIZES.XS;
+            console.log("inf <<");
 
-            var chart = nv.models.pieChart();
-            chart.options({
-                delay: 250,
-                showLegend: legend_right || _.size(data) <= MAX_LEGEND_LENGTH,
-                legendPosition: legend_right ? 'right' : 'top',
-                transition: 100,
-                color: d3.scale.category10().range(),
-            });
+            if (this.groupbys.length == 2) {
+                doTwoLevel(this.$el[0])
+            } else {
 
-            chart(svg);
-            this.to_remove = chart.update;
-            nv.utils.onWindowResize(chart.update);
+                $(this.$el[0]).attr("id", "power-pie");
+                $(this.$el[0]).highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Title',
+                        colorByPoint: true,
+                        data: data
+                    }]
+                });
 
-            return chart;
+            }
+
+            function doTwoLevel(get) {
+                tabOnes = new Array();
+                tabSeries = new Array();
+                var headers = new Array();
+                for (var i = 0; i < data_source.length; i++) {
+                    var oneName = data_source[i].labels[0];
+                    var subs = new Array();
+                    var y = 0;
+
+
+                    for (var j = 0; j < data_source.length; j++) {
+                        if (oneName == data_source[j].labels[0]) {
+                            y += data_source[j].value;
+                            subs.push([data_source[j].labels[1], data_source[j].value])
+                        }
+                    }
+
+                    if (headers.indexOf(oneName) < 0) {
+                        tabOnes.push({
+                            name: data_source[i].labels[0],
+                            y: y,
+                            drilldown: data_source[i].labels[0]
+                        });
+
+                        tabSeries.push({
+                            name: data_source[i].labels[0],
+                            id: data_source[i].labels[0],
+                            data: subs
+                        });
+                        headers.push(oneName);
+                    }
+
+
+                }
+
+                $(get).highcharts({
+                    chart: {
+                        type: 'pie'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.name}: {point.y}'
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+                    },
+
+                    series: [{
+                        name: 'Haut',
+                        colorByPoint: true,
+                        data: tabOnes
+                    }],
+                    drilldown: {
+                        series: tabSeries
+                    }
+                });
+
+
+
+
+            }
+
+
+
+
+            function createThe(niveau, begin, end) {
+
+
+                if (niveau == 0) {
+                    var current_label = data_source[begin].labels[niveau];
+                    var yy = 0;
+                    var name = names[niveau];
+                    var subs = new Array();
+                    var i = 0;
+                    // avance = 0; //
+                    console.log("Niveau ------->");
+                    console.log(niveau);
+                    for (i = begin; i <= end; i++) {
+                        console.log("data_source[i].labels[niveau] :")
+                        console.log(data_source[i].labels[niveau])
+                        console.log("current_label:");
+                        console.log(current_label);
+
+                        if (data_source[i].labels[niveau] == current_label)
+                            yy += data_source[i].value;
+                        else
+                            break;
+                        current_label = data_source[i].labels[niveau];
+                    }
+                    avance = i;
+                    while (avance < data_source.length) {
+                        subs = createThe(niveau + 1, begin, avance);
+                    }
+
+                    return {
+                        name: name,
+                        y: yy,
+                        subs: subs
+                    }
+                }
+
+                if (niveau == names.length - 1) {
+                    var yy = 0;
+                    var namee = names[niveau];
+                    for (var i = begin; i <= end; i++) {
+                        yy += data_source[i].value;
+                    }
+                    return {
+                        name: namee,
+                        y: yy
+
+                    }
+
+                } else {
+                    var current_label = data_source[begin].labels[niveau];
+                    var yy = 0;
+                    var name = names[niveau];
+                    var subs = new Array();
+                    var i = 0;
+                    // avance = 0; //
+                    for (i = begin; i <= end; i++) {
+                        if (data_source[i].labels[niveau] == current_label)
+                            yy += data_source[i].value;
+                        else
+                            break;
+                        current_label = data_source[i].labels[niveau];
+                    }
+                    avance = i;
+                    while (avance < data_source.length) {
+                        if (niveau == 0)
+                            subs = createThe(niveau + 1, begin, avance);
+                        else
+                            subs = createThe(niveau + 1, avance, avance);
+                    }
+
+                    return {
+                        name: name,
+                        y: yy,
+                        subs: subs
+                    }
+
+                }
+            }
+
+
+
+
+
+
+            // var svg = d3.select(this.$el[0]).append('svg');
+            // console.log("Pie data");
+            // console.log(data);
+            // svg.datum(data);
+
+            // svg.transition().duration(100);
+
+            // var legend_right = config.device.size_class > config.device.SIZES.XS;
+
+            // var chart = nv.models.pieChart();
+            // chart.options({
+            //     delay: 250,
+            //     showLegend: legend_right || _.size(data) <= MAX_LEGEND_LENGTH,
+            //     legendPosition: legend_right ? 'right' : 'top',
+            //     transition: 100,
+            //     color: d3.scale.category10().range(),
+            // });
+
+            // chart(svg);
+            // this.to_remove = chart.update;
+            // nv.utils.onWindowResize(chart.update);
+
+            // return chart;
         },
         display_line: function() {
             if (this.data.length < 2) {

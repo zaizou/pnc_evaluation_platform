@@ -4,6 +4,8 @@
             <xpath expr="." position="inside">
             	<link rel="stylesheet" href="/pncevaluation/static/src/css/axes_view.css"/>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_view.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_graph.js"></script>
+                
             </xpath>
         </template>
 </odoo>

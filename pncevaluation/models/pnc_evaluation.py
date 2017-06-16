@@ -42,14 +42,15 @@ class formulaire_evaluation(models.Model):
 class formulaire_inspection(models.Model):
      _name = 'pncevaluation.finspection'
      _description = u"Formulaire d\'inspection"
+     name = fields.Char(u"Intitulé")
      contributeur = fields.Many2one('pncevaluation.contributeur',string="Contributeur")
      rapport_evaluation_id = fields.Many2one('pncevaluation.re',string= u"Rapport d\'évaluation")
-     axe_id = fields.Many2one('pncevaluation.axepnc',string=u"Axe concerné")
+     axe_id = fields.Many2one('pncevaluation.axepnc',string=u"Axe concerné",required=True)
      numero_axe = fields.Integer(related='axe_id.numero')
-     action_realisee = fields.Many2one('pncevaluation.actionpnc',string = u"Action réalisée")
+     action_realisee = fields.Many2one('pncevaluation.actionpnc',string = u"Action réalisée",required=True)
      #groupe_inspection
      #personne chargée
-     date = fields.Date(u"Date de l\'inspection")
+     date = fields.Date(u"Date de l\'inspection",required=True)
      #model region
      region = fields.Many2one('pncevaluation.region',string=u"Région concernée")
      lieu = fields.Char(u"Lieu(x)")

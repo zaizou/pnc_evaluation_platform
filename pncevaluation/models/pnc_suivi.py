@@ -89,6 +89,12 @@ class reunionCoordination(models.Model):
                             relation='reucoor_contribut_invite',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('pncevaluation.pvreunionaction',string=u"PV de la réunion")
 
+     @api.multi
+     def get_reunions_date(self):
+         listV = self.read_group([], ['user_id','start'], ['user_id','start'], lazy=False)
+         _logger.warning(u"----- Budgets in the model")
+         _logger.warning(listV)
+         return listV
      @api.one
      def _computeStop(self):
          self.date_stop = self.stop
@@ -132,30 +138,7 @@ class reunionCoordination(models.Model):
             thread_pool.message_post(**post_vars)
 
 
-        #self.send_mail("test","cb_medjdoub@esi.dz",message_body)
-
         
-
-        # mail_message = self.env['mail.message']
-        # mail_message_subtype = self.env['mail.message.subtype']
-        # [discussion_id] = mail_message_subtype.browse([('name','=','Discussions')])
-        # #users = oe.pool.get('res.users').search(cr, uid, user_ids)
-        # subject ="test message 2"
-        # body = "hello 2"
-
-
-        # self.message_post(body=body,
-        # subtype='notification',
-        # partner_ids=recipient_partners,
-        # )
-
-        # mail_message.create(values=dict(
-        #     partner_ids=recipient_partners,
-        #     subject=subject,
-        #     body=body,
-        #     ))
-
-        # _logger.warning(vals.contributeurs_invites_ids[0][ len(vals.contributeurs_invites_ids[0])-1 ] )
         return super(reunionCoordination, self).create(vals)
 
     #  @api.multi
@@ -179,6 +162,8 @@ class reunionCoordination(models.Model):
                     mail_mail_obj.send([msg_id]) 
         return True
 
+     
+
 class pv_reunion_action(models.Model):
      _name = 'pncevaluation.pvreunionaction'
      date = fields.Date("Date")
@@ -192,8 +177,21 @@ class BudgetPNC(models.Model):
      budget_estime = fields.Float(u"Budget estimé")
      budget_reel = fields.Float(u"Budget réel")
      rubriques_ids = fields.One2many('pncevaluation.rubriquebudget','budget_id',string="Rubriques")
-     axe_id = fields.Many2one('pncevaluation.axepnc',string="Axe")
+     axe_id = fields.Many2one('pncevaluation.axepnc',string="Axe",required=True)
      numero_axe = fields.Integer(related='axe_id.numero')
+
+     @api.multi
+     def get_budgets_date(self,axe_num):
+         if axe_num > 0 :
+            listV = self.read_group([('numero_axe','=',axe_num)], ['date','axe_id' ,'name','budget_estime','budget_reel'], ['axe_id','date'], lazy=False)
+         else:
+            listV = self.read_group([], ['date','axe_id' ,'name','budget_estime','budget_reel'], ['axe_id','date'], lazy=False)
+         _logger.warning(u"----- Budgets in the model")
+         _logger.warning(listV)
+         return listV
+
+
+
 class rubriqueBudget(models.Model):
      _name = 'pncevaluation.rubriquebudget'
      _description = "Rubrique"
