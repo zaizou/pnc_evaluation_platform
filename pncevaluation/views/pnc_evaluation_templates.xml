@@ -5,6 +5,8 @@
             	<link rel="stylesheet" href="/pncevaluation/static/src/css/axes_view.css"/>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_view.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_graph.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_one.js"></script>
+
                 
             </xpath>
         </template>

@@ -115,6 +115,7 @@ class pnc_contributeur(models.Model):
      reunions_coordination_invitation_ids = fields.Many2many('pncevaluation.reucoor',string=u"Invitations aux Réunions de coordinnations")
      reunions_evaluation_ids = fields.Many2many('pncevaluation.reueval',string=u"Réunions d évaluation ")
      reunions_evaluation_invitation_ids = fields.Many2many('pncevaluation.reueval',string=u"Invitations aux réunions d évaluation")
+     fevaluation_ids = fields.One2many('pncevaluation.finspection','contributeur',string=u"Formulaires d\'évaluation subjective :")
 
      @api.model
      def _default_image(self):

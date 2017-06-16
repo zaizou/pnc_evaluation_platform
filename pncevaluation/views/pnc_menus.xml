@@ -130,30 +130,43 @@
          <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
 		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="8"/>
 
+         <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone_dash"
+		 action="pncevaluation_axe_one" parent="menu_pnc_dashboard" sequence="9"/>
+
+      
+
+
+     <menuitem name="Rapports" id="menu_pnc_reporting"
+		  parent="menu_php_evaluation" sequence="30"/>
+
+
+     
+
          <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone"
-		 action="board.open_board_my_dash_actionone" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionone" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 02 : Tableau de bord" id="pnc_dash_ve_axetwo"
-		 action="board.open_board_my_dash_actiontwo" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actiontwo" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 03 : Tableau de bord" id="pnc_dash_ve_axethree"
-		 action="board.open_board_my_dash_actionthree" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionthree" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 04 : Tableau de bord" id="pnc_dash_ve_axefour"
-		 action="board.open_board_my_dash_actionfour" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionfour" parent="menu_pnc_reporting" sequence="9"/>
 
 
          <menuitem name="Axe 05 : Tableau de bord" id="pnc_dash_ve_axefive"
-		 action="board.open_board_my_dash_actionfive" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionfive" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 06 : Tableau de bord" id="pnc_dash_ve_axesix"
-		 action="board.open_board_my_dash_actionsix" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionsix" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 07 : Tableau de bord" id="pnc_dash_ve_axeseven"
-		 action="board.open_board_my_dash_actionseven" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actionseven" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 08 : Tableau de bord" id="pnc_dash_ve_axeeight"
-		 action="board.open_board_my_dash_actioneight" parent="menu_pnc_dashboard" sequence="9"/>
+		 action="board.open_board_my_dash_actioneight" parent="menu_pnc_reporting" sequence="9"/>
+
 
 
 <!--

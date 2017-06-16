@@ -10,18 +10,7 @@ _logger = logging.getLogger(__name__)
 class PNC_Evaluation(Controller):
 
 
-    @route('/pncevaluation/get_contribs_view', type='json', auth='user')
-    def get_contribs_view(self,actions_ids,date_debut,date_fin):
-        # conrt_orm = request.env['pncevaluation.contributeur']
-        # conrt_objects = conrt_orm.search([])
-        # return conrt_objects.get_contributs()
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'pncevaluation.contributeur',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'target': 'new',
-        }
+
 
     @route('/pncevaluation/get_actions_stats', type='json', auth='user')
     def get_stats(self,actions_ids,date_debut,date_fin):
@@ -44,7 +33,6 @@ class PNC_Evaluation(Controller):
         var_retard_fin = 0
 
         for action_id in actions_ids:
-            
             action_orm = request.env['pncevaluation.actionpnc']
             action_objects = action_orm.search([('id', '=', action_id)])
             for action_object in action_objects:
@@ -257,12 +245,117 @@ class PNC_Evaluation(Controller):
         reORM = request.env['pncevaluation.reucoor']
         listV = reORM.get_reunions_date()
         return listV
+
+
+
+
+
+    @route('/pncevaluation/get_contribs_view', type='json', auth='user')
+    def get_contribs_view(self):
+        action = {
+            'type': 'ir.actions.act_window',
+            'res_model': 'pncevaluation.contributeur',
+            'view_type': 'tree',
+            'view_mode': 'tree',
+            'target': 'new',
+            'domain': [('id', '=', 1)]
+        }
+        action.setdefault('flags', {})  
+        action_type = action.setdefault('type', 'ir.actions.act_window_close')
+        if action_type == 'ir.actions.act_window':
+            if not action.get('views'):
+                view_id = action.get('view_id') or False
+                if isinstance(view_id, (list, tuple)):
+                    view_id = view_id[0]
+
+                # providing at least one view mode is a requirement, not an option
+                view_modes = action['view_mode'].split(',')
+
+                if len(view_modes) > 1:
+                    if view_id:
+                        raise ValueError('Non-db action dictionaries should provide '
+                                'either multiple view modes or a single view '
+                                'mode and an optional view id.\n\n Got view '
+                                'modes %r and view id %r for action %r' % (view_modes, view_id, action))
+                    action['views'] = [(False, mode) for mode in view_modes]
+                    action['views'] = [(view_id, view_modes[0])]
+
+                # if action.pop('view_type', 'form') == 'form':
+                #     if 'view_mode' in action:
+                #         action['view_mode'] = ','.join(mode if mode != 'tree' else 'list' for mode in action['view_mode'].split(','))
+                #     action['views'] = [[id, mode if mode != 'tree' else 'list'] for id, mode in action['views'] ]
+            
+
+        return action
+
         
-
-
-
-
         
-        
-    
+    @route('/pncevaluation/get_dashboard_stats', type='json', auth='user')
+    def get_statistics(self,numero_axe):
+        feORM = request.env['pncevaluation.fe']
+        listV = feORM.count_qualite(numero_axe)
 
+        budORM = request.env['pncevaluation.budgetpnc']
+        budglistV = budORM.search([('numero_axe', '=', numero_axe)])
+        #somme budget
+
+        ActORM = request.env['pncevaluation.pa']
+        pas = ActORM.search([('numero_axe', '=', numero_axe)])
+        count_correspondence = 0
+        count_total = 0
+        for pa in pas:
+            count_correspondence = count_correspondence + pa.getActionPaRe()
+            count_total = count_total + len( pa.actions_ids )
+        if count_total>0:
+            count_correspondence = count_correspondence/count_total
+
+        #reunions coordination
+        coorORM = request.env['pncevaluation.reucoor']
+        reu_coor = coorORM.search([('numero_axe', '=', numero_axe)])
+
+        #reunions evaluation
+        evalORM = request.env['pncevaluation.reueval']
+        reu_eval = evalORM.search([('numero_axe', '=', numero_axe)])
+
+        axe_orm = request.env['pncevaluation.axepnc']
+        axe_objects = axe_orm.search([])
+        fmt = '%Y-%m-%d'
+        retard_debut = 0
+        retard_fin = 0
+        var_retard_debut = 0
+        var_retard_fin = 0
+        #
+        count_actions_ret_debut = 0
+        count_actions_ret_fin = 0
+        
+        for axe in axe_objects:
+            for objectp in axe.objectifs_ids:
+                for act in objectp.actions_ids:
+                        if( act.date_debut_r and act.date_debut_p):
+                                d1 = datetime.strptime(act.date_debut_r, fmt)
+                                d2 = datetime.strptime(act.date_debut_p , fmt)
+                                retard_debut = d1 - d2
+                                
+                        if( act.datefin_r and act.datefin_p):
+                                d1 = datetime.strptime(act.datefin_r, fmt)
+                                d2 = datetime.strptime(act.datefin_p , fmt)
+                                retard_fin = d1 - d2 
+
+                        if(retard_debut.days > 365):
+                                count_actions_ret_debut = count_actions_ret_debut + 1 
+                        if(retard_fin.days > 365):
+                                count_actions_ret_fin = count_actions_ret_fin + 1
+        
+        return{
+            'num_axe': numero_axe,
+            'nb_reu_coor': len( reu_coor),
+            'nb_reu_eval' : len(reu_eval) ,
+            'count_qualite': listV,
+            'correspond': count_correspondence,
+            'count_retard_debut':count_actions_ret_debut,
+            'count_retard_fin':count_actions_ret_fin
+
+        }
+
+
+        return listV

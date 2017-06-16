@@ -35,6 +35,40 @@ class formulaire_evaluation(models.Model):
      appreciation = fields.Float(u"Appréciation",group_operator = 'avg' )
      remarques = fields.Text(u"Remarques")
 
+     @api.multi
+     def count_qualite(self,numero_axe):
+         count_tbr = 0
+         count_br = 0
+         count_pmbr = 0
+         count_ml = 0
+         count = 0
+         avgAppr = 0
+         for fEval in self:
+             if fEval.numero_axe == numero_axe:
+                avgAppr = avgAppr + fEval.appreciation
+                count = count + 1
+                _logger.warning(u"----- Appreciation")
+                _logger.warning(avgAppr)
+                if fEval.realisation == u"mal réalisée":
+                    count_ml = count_ml + 1
+                if fEval.realisation == u"plus ou moin bien réalisée":
+                    count_pmbr = count_pmbr + 1
+                if fEval.realisation == u"bien réalisée":
+                    count_br = count_br + 1
+                if fEval.realisation == u"très bien réalisée":
+                    count_ml = count_tbr + 1
+         if count >0:
+             avgAppr = avgAppr / count
+         return{
+             'count_tbr':count_tbr,
+             'count_br':count_br,
+             'count_pmbr':count_pmbr,
+             'count_ml':count_ml,
+             'appreciation':avgAppr
+         }
+                 
+
+
 
 
 

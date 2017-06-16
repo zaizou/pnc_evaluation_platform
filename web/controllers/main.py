@@ -365,13 +365,8 @@ def fix_view_modes(action):
         return action
 
     if 'view_mode' in action:
-        action['view_mode'] = ','.join(
-            mode if mode != 'tree' else 'list'
-            for mode in action['view_mode'].split(','))
-    action['views'] = [
-        [id, mode if mode != 'tree' else 'list']
-        for id, mode in action['views']
-    ]
+        action['view_mode'] = ','.join(mode if mode != 'tree' else 'list' for mode in action['view_mode'].split(','))
+    action['views'] = [[id, mode if mode != 'tree' else 'list'] for id, mode in action['views'] ]
 
     return action
 

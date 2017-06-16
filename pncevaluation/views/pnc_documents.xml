@@ -60,6 +60,20 @@
 			</field>
 		</record>
 
+		<record model="ir.ui.view" id="axepnc_axe_one">
+			<field name="name">axepnc.axe_one</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_one></axe_one>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_one">
+			<field name="name">Axe 01 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_one</field>
+		</record>
+
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes">
 			<field name="name">Axes d'orientation</field>

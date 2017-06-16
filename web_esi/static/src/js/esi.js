@@ -218,11 +218,11 @@ odoo.define('web_esi.esi', function(require) {
                                                     var etat = document.createElement('td');
                                                     //$(etat).attr("align", "center");
                                                     if (objectifsD[i].actions[j].stats.nb_etat_fin)
-                                                        $(etat).append('<h4 class="fina ">Finalisée  <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_etat_fin + '<a> ) </h4>');
+                                                        $(etat).append('<h4 class="fina ">Finalisée  <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-fina-etat">( ' + objectifsD[i].actions[j].stats.nb_etat_fin + '<a> ) </h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_etat_current)
-                                                        $(etat).append('<h4 class="encours ">En cours   <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' <a> )</h4>');
+                                                        $(etat).append('<h4 class="encours ">En cours   <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-current-etat">( ' + objectifsD[i].actions[j].stats.nb_etat_current + ' <a> )</h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_etat_prep)
-                                                        $(etat).append('<h4 class="enprep ">En préparation ( <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '"> ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' <a> )</h4>');
+                                                        $(etat).append('<h4 class="enprep ">En préparation ( <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-prep-etat"> ( ' + objectifsD[i].actions[j].stats.nb_etat_prep + ' <a> )</h4>');
                                                     if (!objectifsD[i].actions[j].stats.nb_etat_fin && !objectifsD[i].actions[j].stats.nb_etat_current && !objectifsD[i].actions[j].stats.nb_etat_prep) {
                                                         $(etat).append('<h4 class="noneval ">Non évaluée </h4>');
 
@@ -233,13 +233,13 @@ odoo.define('web_esi.esi', function(require) {
 
                                                     var qualite = document.createElement('td');
                                                     if (objectifsD[i].actions[j].stats.nb_qualite_tb)
-                                                        $(qualite).append('<h4 class="tbr">Très bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )</a></h4>');
+                                                        $(qualite).append('<h4 class="tbr">Très bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-tb-qual">( ' + objectifsD[i].actions[j].stats.nb_qualite_tb + ' )</a></h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_qualite_br)
-                                                        $(qualite).append('<h4 class="br">Bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )</a></h4>');
+                                                        $(qualite).append('<h4 class="br">Bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-br-qual">( ' + objectifsD[i].actions[j].stats.nb_qualite_br + ' )</a></h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_qualite_pom)
-                                                        $(qualite).append('<h4 class="pobr">Plus ou moin bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )</a> </h4>');
+                                                        $(qualite).append('<h4 class="pobr">Plus ou moin bien réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-pom-qual">( ' + objectifsD[i].actions[j].stats.nb_qualite_pom + ' )</a> </h4>');
                                                     if (objectifsD[i].actions[j].stats.nb_qualite_mal)
-                                                        $(qualite).append('<h4 class="mr">Mal réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '"> ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )</a> </h4>');
+                                                        $(qualite).append('<h4 class="mr">Mal réalisée <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-mal-qual"> ( ' + objectifsD[i].actions[j].stats.nb_qualite_mal + ' )</a> </h4>');
                                                     if (!objectifsD[i].actions[j].stats.nb_qualite_tb && !objectifsD[i].actions[j].stats.nb_qualite_br && !objectifsD[i].actions[j].stats.nb_qualite_pom && !objectifsD[i].actions[j].stats.nb_qualite_mal) {
                                                         $(qualite).append('<pre style="background-color:#FFFFFF;border:0px;font-size:300%;">   -</pre> ');
                                                     }
@@ -249,21 +249,21 @@ odoo.define('web_esi.esi', function(require) {
                                                     var resultat = document.createElement('td');
                                                     var resultatIcon = document.createElement('td');
                                                     if (objectifsD[i].actions[j].stats.nb_res_ps) {
-                                                        $(resultat).append('<h4 class="tsat"> Très Satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )</a></h4>');
+                                                        $(resultat).append('<h4 class="tsat"> Très Satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-ps-res">( ' + objectifsD[i].actions[j].stats.nb_res_ps + ' )</a></h4>');
                                                         // $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_tsat.png\" /></h4>');
                                                     }
                                                     if (objectifsD[i].actions[j].stats.nb_res_s) {
-                                                        $(resultat).append('<h4 class="sat">Satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )</a></h4>');
+                                                        $(resultat).append('<h4 class="sat">Satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-sat-res">( ' + objectifsD[i].actions[j].stats.nb_res_s + ' )</a></h4>');
                                                         // $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_sat.png\" /></h4>');
                                                     }
 
                                                     if (objectifsD[i].actions[j].stats.nb_res_pms) {
-                                                        $(resultat).append('<h4 class="pms">Plus ou moin satisfaisants  <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) </a></h4>');
+                                                        $(resultat).append('<h4 class="pms">Plus ou moin satisfaisants  <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-pms-res">( ' + objectifsD[i].actions[j].stats.nb_res_pms + ' ) </a></h4>');
                                                         // $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_pmsat.png\" /></h4>');
                                                     }
 
                                                     if (objectifsD[i].actions[j].stats.nb_res_ms) {
-                                                        $(resultat).append('<h4 class="ns">Non satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '">( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  </a></h4>');
+                                                        $(resultat).append('<h4 class="ns">Non satisfaisants <a class="get_contrib" href="get_contributeur-' + objectifsD[i].actions[j].id + '-' + objectifsD[i].actions[j].objectiflie_id[0] + '-ms-res">( ' + objectifsD[i].actions[j].stats.nb_res_ms + ' )  </a></h4>');
                                                         // $(resultatIcon).append('<h4><img src=\"/web_esi/static/src/img/res/rsz_nsat.png\" /></h4>');
                                                     }
                                                     if (!objectifsD[i].actions[j].stats.nb_res_ps && !objectifsD[i].actions[j].stats.nb_res_s && !objectifsD[i].actions[j].stats.nb_res_pms && !objectifsD[i].actions[j].stats.nb_res_ms) {
@@ -322,17 +322,92 @@ odoo.define('web_esi.esi', function(require) {
                                         var url = $(this).attr("href");
                                         console.log("url");
                                         console.log(url);
+                                        console.log("id action");
+                                        console.log(url.split('-')[1])
+                                        console.log("id objectif");
+                                        console.log(url.split('-')[2])
+
                                         // do something, like make an ajax request to get the url
                                         // self.rpc('/pncevaluation/get_contribs_view', { actions_ids: 1, date_debut: "1", date_fin: "2" }).done(function(result) {
                                         //     console.log("done from get contributeurs");
                                         // });
+
+
+                                        /*return this.do_action({
+
+                                            type: 'ir.actions.act_window',
+
+                                            name: 'pncevaluation.pncevaluation_contributeur_action_js',
+
+                                            res_model: 'pncevaluation.contributeur',
+
+                                            views: ['tree'],
+
+                                            target: 'new',
+
+
+                                        });*/
+
+
+
+                                        // self.rpc("/pncevaluation/get_contribs_view").done(function(result) {
+                                        //     console.log(result);
+                                        //     var self = this;
+                                        //     // you can pass in other data using the context dictionary variable
+                                        //     var context = {
+                                        //         'id': this.id,
+                                        //     };
+                                        //     // the action dictionary variable sends data in the "self.do_action" method
+                                        //     var action = {
+                                        //         type: 'ir.actions.act_window',
+                                        //         res_model: 'pncevaluation.contributeu',
+                                        //         view_mode: 'form',
+                                        //         view_type: 'tree',
+                                        //         views: [
+                                        //             [false, 'tree']
+                                        //         ],
+                                        //         target: 'new',
+                                        //         context: context,
+                                        //     };
+                                        //     // self.do_action accepts the action parameter and opens the new view
+                                        //     self.getParent().do_action(action);
+
+
+                                        //     /*self.getParent().do_action(result, {
+                                        //         additional_context: {
+                                        //             //HERE WE ARE TRYING SOME OPTIONS.
+                                        //         },
+                                        //     });*/
+
+                                        // });
+
+
+                                        /*  self.getParent().do_action({
+
+                                              type: 'ir.actions.act_window',
+
+                                              res_model: 'pncevaluation.contributeur',
+
+                                              views: ['tree'],
+
+
+                                              domain: [('id', '=', '1')],
+
+                                          });*/
+
+
                                         self.rpc("/web/action/load", { action_id: "pncevaluation.pncevaluation_contributeur_action_js" }).done(function(result) {
+                                            console.log(result);
                                             self.getParent().do_action(result, {
                                                 additional_context: {
                                                     //HERE WE ARE TRYING SOME OPTIONS.
+
                                                 },
                                             });
                                         });
+
+
+
                                         //var v = new instance.web.View;
                                         //v.reload();
                                         //View.reload();
@@ -342,7 +417,7 @@ odoo.define('web_esi.esi', function(require) {
 
 
 
-                                    return act;
+                                    // return act;
                                 });
                             return true;
 

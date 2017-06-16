@@ -8,6 +8,10 @@ _logger = logging.getLogger(__name__)
 
 class Board(Controller):
 
+    # @route('/board/get_view', type='html', auth='user')
+    # def get_view(self):
+    #     return 0
+
     @route('/board/add_to_dashboard', type='json', auth='user')
     def add_to_dashboard(self, action_id, context_to_save, domain, view_mode,board_name, name=''):
         # Retrieve the 'My Dashboard_name' action from its xmlid
