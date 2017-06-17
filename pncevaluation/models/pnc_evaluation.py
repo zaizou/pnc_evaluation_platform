@@ -37,17 +37,24 @@ class formulaire_evaluation(models.Model):
 
      @api.multi
      def count_qualite(self,numero_axe):
+         
          count_tbr = 0
          count_br = 0
          count_pmbr = 0
          count_ml = 0
          count = 0
          avgAppr = 0
-         for fEval in self:
+         _logger.warning("----- Count Qualite")
+         _logger.warning("----- Numero Axe")
+         _logger.warning(numero_axe)
+         _logger.warning(self)
+         for fEval in self.search([('numero_axe','=',numero_axe)]):
+             _logger.warning("----- Numero Axe FEVAL")
+             _logger.warning(fEval.numero_axe)
              if fEval.numero_axe == numero_axe:
                 avgAppr = avgAppr + fEval.appreciation
                 count = count + 1
-                _logger.warning(u"----- Appreciation")
+                _logger.warning(u"----- Appreciation in fEVAL")
                 _logger.warning(avgAppr)
                 if fEval.realisation == u"mal réalisée":
                     count_ml = count_ml + 1

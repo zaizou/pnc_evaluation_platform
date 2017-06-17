@@ -9,18 +9,9 @@ odoo.define('pncevaluation.axe_one', function(require) {
     var time = require('web.time');
     var parse_value = require('web.web_client');
     var form_common = require('web.form_common');
-    var elemBody;
-    var objectifsD;
-    var actionsD;
-    var iteration;
-    var tabActions = new Array();
-    var actionsStats;
     var title;
-    var headerAspect;
-    var headerObject;
-    var headerAction;
-
     var container;
+    var data_source;
 
 
     var MyView = View.extend({
@@ -50,11 +41,6 @@ odoo.define('pncevaluation.axe_one', function(require) {
         },
         start: function() {
             var self = this;
-            container = document.createElement('div');
-            $(container).addClass("axe_summary");
-            $(container).addClass("wrapper");
-            //$(self.$el).append(container);
-
 
         },
         do_search: function(domains, contexts, group_bys) {
@@ -70,43 +56,15 @@ odoo.define('pncevaluation.axe_one', function(require) {
                     domain: domains,
                     context: contexts
                 }).then(function(data) {
-                    $(title).empty();
-                    $(title).append('<h1>' + data[0].name + '</h1>');
-                    container = document.createElement('div');
-                    $(container).addClass("axe_summary");
-                    $(container).addClass("wrapper content");
-                    $(self.$el).append(container);
-                    var container_fluid = document.createElement('div');
-                    $(container_fluid).addClass("container-fluid");
-                    $(container).append(container_fluid);
-
-                    var rowQualite = document.createElement('div');
-                    $(rowQualite).addClass("row");
-                    $(container_fluid).append(rowQualite);
-                    draw_row_qualite(rowQualite);
-
-                    //data_title, data, unit, icon, color
-
-
-
-
-
-                    var rowStats = document.createElement('div');
-                    $(rowStats).addClass("row");
-                    $(container_fluid).append(rowStats);
-                    draw_row_stats(rowStats);
-
-                    var rowAdds = document.createElement('div');
-                    $(rowAdds).addClass("row");
-                    $(container_fluid).append(rowAdds);
-                    draw_row_add(rowAdds, "purple");
-                    draw_row_add2(rowAdds, "green");
-
-
                     self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 1 }).done(function(result) {
                         console.log("Stats Axe 01 :::");
                         console.log(result);
-
+                        container = document.createElement('div');
+                        $(container).addClass("axe_summary");
+                        $(container).addClass("wrapper content");
+                        $(self.$el).append(container);
+                        data_source = data;
+                        draw_dashboard(data[0].name, container);
                     });
 
 
@@ -115,6 +73,33 @@ odoo.define('pncevaluation.axe_one', function(require) {
         }
 
     });
+
+
+    function draw_dashboard(dashboard_name, container) {
+        $(title).empty();
+        $(title).append('<h1>' + dashboard_name + '</h1>');
+
+        var container_fluid = document.createElement('div');
+        $(container_fluid).addClass("container-fluid");
+        $(container).append(container_fluid);
+        //
+        var rowQualite = document.createElement('div');
+        $(rowQualite).addClass("row");
+        $(container_fluid).append(rowQualite);
+        draw_row_qualite(rowQualite);
+        //
+        var rowStats = document.createElement('div');
+        $(rowStats).addClass("row");
+        $(container_fluid).append(rowStats);
+        draw_row_stats(rowStats);
+        //
+        var rowAdds = document.createElement('div');
+        $(rowAdds).addClass("row");
+        $(container_fluid).append(rowAdds);
+        draw_row_add(rowAdds, "purple");
+        draw_row_add2(rowAdds, "green");
+
+    }
 
     function draw_row_add(rowAdds, color) {
         var divReunions = document.createElement('div');
@@ -310,10 +295,10 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(divQf).addClass("col-lg-3 col-md-6 col-sm-6");
         $(rowQualite).append(divQf);
 
-        draw_elem_qualite(divQo, "TBR", "156", "Appr", "content_copy", "orange");
-        draw_elem_qualite(divQt, "TBR", "156", "Appr", "content_copy", "red");
-        draw_elem_qualite(divQth, "TBR", "156", "Appr", "content_copy", "green");
-        draw_elem_qualite(divQf, "TBR", "156", "Appr", "content_copy", "blue");
+        draw_elem_qualite(divQo, "Très bien réalisées", "156", "Actions", "star_rate", "green");
+        draw_elem_qualite(divQt, "Bien réalisées", "156", "Actions", "thumb_up", "blue");
+        draw_elem_qualite(divQth, "Plus ou moin bien réalisées", "156", "Actions", "thumbs_up_down", "orange");
+        draw_elem_qualite(divQf, "Mal réalisées", "156", "Actions", "thumb_down", "red");
     }
 
 
@@ -341,7 +326,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         var title = document.createElement('h3');
         $(title).addClass("title");
-        var str2 = data + '<smal>' + unit + '</smal>'
+        var str2 = data + '<smal>  ' + unit + '</smal>'
         $(title).append(str2);
 
         $(cardOContent).append(category);
