@@ -3,9 +3,13 @@
         <template id="assets_backend" name="pncevaluation assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
             	<link rel="stylesheet" href="/pncevaluation/static/src/css/axes_view.css"/>
+                <link rel="stylesheet" href="/pncevaluation/static/src/css/mat_icon.css"/>
+                <link rel="stylesheet" href="/pncevaluation/static/src/css/cards.css"/>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_view.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_graph.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_one.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/material.min.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/chartist.min.js"></script>
 
                 
             </xpath>

@@ -53,7 +53,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
             container = document.createElement('div');
             $(container).addClass("axe_summary");
             $(container).addClass("wrapper");
-            $(self.$el).append(container);
+            //$(self.$el).append(container);
 
 
         },
@@ -72,6 +72,36 @@ odoo.define('pncevaluation.axe_one', function(require) {
                 }).then(function(data) {
                     $(title).empty();
                     $(title).append('<h1>' + data[0].name + '</h1>');
+                    container = document.createElement('div');
+                    $(container).addClass("axe_summary");
+                    $(container).addClass("wrapper content");
+                    $(self.$el).append(container);
+                    var container_fluid = document.createElement('div');
+                    $(container_fluid).addClass("container-fluid");
+                    $(container).append(container_fluid);
+
+                    var rowQualite = document.createElement('div');
+                    $(rowQualite).addClass("row");
+                    $(container_fluid).append(rowQualite);
+                    draw_row_qualite(rowQualite);
+
+                    //data_title, data, unit, icon, color
+
+
+
+
+
+                    var rowStats = document.createElement('div');
+                    $(rowStats).addClass("row");
+                    $(container_fluid).append(rowStats);
+                    draw_row_stats(rowStats);
+
+                    var rowAdds = document.createElement('div');
+                    $(rowAdds).addClass("row");
+                    $(container_fluid).append(rowAdds);
+                    draw_row_add(rowAdds, "purple");
+                    draw_row_add2(rowAdds, "green");
+
 
                     self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 1 }).done(function(result) {
                         console.log("Stats Axe 01 :::");
@@ -85,6 +115,249 @@ odoo.define('pncevaluation.axe_one', function(require) {
         }
 
     });
+
+    function draw_row_add(rowAdds, color) {
+        var divReunions = document.createElement('div');
+        $(divReunions).addClass("col-lg-6 col-md-12");
+        $(rowAdds).append(divReunions);
+
+        var cardReunions = document.createElement('div');
+        $(cardReunions).addClass("card card-nav-tabs");
+        $(divReunions).append(cardReunions);
+
+        var cardHeader = document.createElement('div');
+        $(cardHeader).addClass("card-header");
+        $(cardHeader).attr("data-background-color", color);
+        $(cardReunions).append(cardHeader);
+
+        var nav_tabs_navigation = document.createElement('div');
+        $(nav_tabs_navigation).addClass("nav-tabs-navigation");
+        $(cardHeader).append(nav_tabs_navigation);
+
+        var nav_tabs_wrapper = document.createElement('div');
+        $(nav_tabs_wrapper).addClass("nav-tabs-wrapper");
+        $(nav_tabs_navigation).append(nav_tabs_wrapper);
+
+        var nav_tabs_title = document.createElement('span');
+        $(nav_tabs_title).append("Réunions");
+        $(nav_tabs_wrapper).append(nav_tabs_title);
+
+        var nav_tabs = document.createElement('ul');
+        $(nav_tabs).addClass("nav nav-tabs");
+        $(nav_tabs).attr("data-tabs", "tabs");
+        $(nav_tabs_wrapper).append(nav_tabs);
+
+        $(nav_tabs).append('<li><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Bugs<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="true"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
+
+
+
+        var cardContent = document.createElement('div');
+        $(cardContent).addClass("card-content");
+        $(cardReunions).append(cardContent);
+
+        var tab_content = document.createElement('div');
+        $(cardContent).addClass("tab-content");
+        $(cardContent).append(tab_content);
+
+        $(tab_content).append('<div class="tab-pane active" id="coordination"></class>');
+        $(tab_content).append('<div class="tab-pane" id="evaluation"></class>');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    function draw_row_add2(rowAdds, color) {
+        var divStats = document.createElement('div');
+        $(divStats).addClass("col-lg-6 col-md-12");
+        $(rowAdds).append(divStats);
+        var cardStats = document.createElement('div');
+        $(cardStats).addClass("card");
+        $(divStats).append(cardStats);
+
+        var cardOHeader = document.createElement('div');
+        $(cardOHeader).addClass("card-header");
+        $(cardOHeader).attr("data-background-color", color);
+        $(cardStats).append(cardOHeader);
+
+        var category = document.createElement('p');
+        $(category).addClass("category");
+        $(category).append("Statistiques sur les actions et l\'avancement");
+        var title = document.createElement('h3');
+        $(title).append("Statistiques");
+        $(cardOHeader).append(title);
+        $(cardOHeader).append(category);
+
+
+
+        var cardOContent = document.createElement('div');
+        $(cardOContent).addClass("card-content");
+        $(cardStats).append(cardOContent);
+
+
+
+
+    }
+
+
+
+    function draw_row_stats(rowStats) {
+        var divBudget = document.createElement('div');
+        $(divBudget).addClass("col-md-4");
+        $(rowStats).append(divBudget);
+
+        var divReal = document.createElement('div');
+        $(divReal).addClass("col-md-4");
+        $(rowStats).append(divReal);
+
+        var divCorr = document.createElement('div');
+        $(divCorr).addClass("col-md-4");
+        $(rowStats).append(divCorr);
+
+        draw_elem_stats(divBudget, "budget_chart", "Hausse", "data", "unit", "content_copy", "red ");
+        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "content_copy", "green ");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "content_copy", "yellow ");
+
+    }
+
+    function draw_elem_stats(divStat, chart_id, data_title, data, unit, icon, color) {
+        var cardQo = document.createElement('div');
+        $(cardQo).addClass("card");
+        $(divStat).append(cardQo);
+
+        var cardOHeader = document.createElement('div');
+        if (icon) {
+            $(cardOHeader).addClass("card-header");
+            $(cardOHeader).attr("data-background-color", color);
+            $(cardQo).append(cardOHeader);
+
+            var str = '<i class="material-icons">' + icon + '</i>'
+            $(cardOHeader).append(str)
+        } else {
+            $(cardOHeader).addClass("card-header card-chart");
+            $(cardOHeader).attr("data-background-color", color);
+            var chart = document.createElement('div');
+            $(chart).addClass("ct-chart");
+            $(chart).attr("id", chart_id);
+            $(cardQo).append(cardOHeader);
+            $(cardOHeader).append(chart)
+        }
+
+
+        var cardOContent = document.createElement('div');
+        $(cardOContent).addClass("card-content");
+        $(cardQo).append(cardOContent);
+
+        var category = document.createElement('p');
+        $(category).addClass("category");
+        var sClass = 'text-success'
+        var iClass = 'fa fa fa-long-arrow-up'
+        var sPourc = '55%'
+        var strP = '<span class="' + sClass + '"><i class="' + iClass + '"></i>' + sPourc + '</span>'
+        strP += "  " + data_title
+        $(category).append(strP);
+
+        var title = document.createElement('h3');
+        $(title).addClass("title");
+        var str2 = data + '<smal>' + unit + '</smal>'
+        $(title).append(str2);
+
+
+        $(cardOContent).append(title);
+        $(cardOContent).append(category);
+
+
+
+
+
+        var cardOFooter = document.createElement('div');
+        $(cardOFooter).addClass("card-footer");
+        $(cardQo).append(cardOFooter);
+
+    }
+
+
+    function draw_row_qualite(rowQualite) {
+        var divQo = document.createElement('div');
+        $(divQo).addClass("col-lg-3 col-md-6 col-sm-6");
+        $(rowQualite).append(divQo);
+
+
+        var divQt = document.createElement('div');
+        $(divQt).addClass("col-lg-3 col-md-6 col-sm-6");
+        $(rowQualite).append(divQt);
+
+        var divQth = document.createElement('div');
+        $(divQth).addClass("col-lg-3 col-md-6 col-sm-6");
+        $(rowQualite).append(divQth);
+
+        var divQf = document.createElement('div');
+        $(divQf).addClass("col-lg-3 col-md-6 col-sm-6");
+        $(rowQualite).append(divQf);
+
+        draw_elem_qualite(divQo, "TBR", "156", "Appr", "content_copy", "orange");
+        draw_elem_qualite(divQt, "TBR", "156", "Appr", "content_copy", "red");
+        draw_elem_qualite(divQth, "TBR", "156", "Appr", "content_copy", "green");
+        draw_elem_qualite(divQf, "TBR", "156", "Appr", "content_copy", "blue");
+    }
+
+
+    function draw_elem_qualite(divQo, data_title, data, unit, icon, color) {
+        var cardQo = document.createElement('div');
+        $(cardQo).addClass("card card-stats");
+        $(divQo).append(cardQo);
+
+        var cardOHeader = document.createElement('div');
+        $(cardOHeader).addClass("card-header");
+        $(cardOHeader).attr("data-background-color", color);
+        $(cardQo).append(cardOHeader);
+
+        var str = '<i class="material-icons">' + icon + '</i>'
+        $(cardOHeader).append(str)
+
+
+        var cardOContent = document.createElement('div');
+        $(cardOContent).addClass("card-content");
+        $(cardQo).append(cardOContent);
+
+        var category = document.createElement('p');
+        $(category).addClass("category");
+        $(category).append(data_title);
+
+        var title = document.createElement('h3');
+        $(title).addClass("title");
+        var str2 = data + '<smal>' + unit + '</smal>'
+        $(title).append(str2);
+
+        $(cardOContent).append(category);
+        $(cardOContent).append(title);
+
+
+
+
+        var cardOFooter = document.createElement('div');
+        $(cardOFooter).addClass("card-footer");
+        $(cardQo).append(cardOFooter);
+
+
+
+    }
+
 
 
 
