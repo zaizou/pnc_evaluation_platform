@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #Partie 02 : Suivi 
 import logging
+from datetime import datetime
 from odoo import models, fields, api
 _logger = logging.getLogger(__name__)
 
@@ -173,12 +174,41 @@ class BudgetPNC(models.Model):
      _name = 'pncevaluation.budgetpnc'
      _description = "Budget"
      name = fields.Char(u"Intitulé")
-     date = fields.Date(u"Année")
+     date = fields.Date(u"Année",required=True)
+     annne = fields.Integer(u"Annee")
      budget_estime = fields.Float(u"Budget estimé")
      budget_reel = fields.Float(u"Budget réel")
      rubriques_ids = fields.One2many('pncevaluation.rubriquebudget','budget_id',string="Rubriques")
      axe_id = fields.Many2one('pncevaluation.axepnc',string="Axe",required=True)
      numero_axe = fields.Integer(related='axe_id.numero')
+
+
+     @api.model
+     def create(self,vals):
+         fmt = '%Y-%m-%d'
+         dat = datetime.strptime(vals['date'], fmt)
+         recs = self.search(['&',('annne','=',dat.year),('axe_id','=',vals['axe_id'])])
+         _logger.warning("----- Budget VALS calculation ---")
+         _logger.warning(vals)
+         _logger.warning(dat.year)
+         if len(recs):
+             for rec in recs:
+                 rec.budget_estime = rec.budget_estime + vals['budget_estime']
+                 rec.budget_reel = rec.budget_reel + vals['budget_reel']
+             return rec
+         else:
+             vals['annne'] = dat.year
+             return super(BudgetPNC, self).create(vals)
+
+
+     @api.depends('date')
+     def _compute_year(self):
+         for record in self:
+            _logger.warning("----- Budget Annee calculation ****")
+            _logger.warning(self.date)
+            fmt = '%Y-%m-%d'
+            dat = datetime.strptime(record.date, fmt)
+            record.annne = dat.year
 
      @api.multi
      def get_budgets_date(self,axe_num):

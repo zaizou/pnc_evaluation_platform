@@ -298,6 +298,13 @@ class PNC_Evaluation(Controller):
         budORM = request.env['pncevaluation.budgetpnc']
         budglistV = budORM.search([('numero_axe', '=', numero_axe)])
         #somme budget
+        ecarts = []
+        for budget in budglistV :
+            ecarts.append({
+                'ecart': budget.budget_reel - budget.budget_estime,
+                'annee' : budget.annne
+            })
+
 
         ActORM = request.env['pncevaluation.pa']
         pas = ActORM.search([('numero_axe', '=', numero_axe)])
@@ -347,6 +354,7 @@ class PNC_Evaluation(Controller):
                                 count_actions_ret_fin = count_actions_ret_fin + 1
         
         return{
+            'budgets':ecarts,
             'num_axe': numero_axe,
             'nb_reu_coor': len( reu_coor),
             'nb_reu_eval' : len(reu_eval) ,

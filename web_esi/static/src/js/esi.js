@@ -164,12 +164,6 @@ odoo.define('web_esi.esi', function(require) {
                                             $(cardHeader).append('<br/>');
                                             $(cardHeader).append(headerSubTitle);
                                         }
-
-
-
-
-
-
                                         var cardContent = document.createElement('div');
                                         $(cardContent).addClass("card-content table-responsive");
                                         $(cardView).append(cardContent);
@@ -285,13 +279,13 @@ odoo.define('web_esi.esi', function(require) {
                                                     $(ActionLine).append(retardd);
 
                                                     var retardf = document.createElement('td');
-                                                    if (objectifsD[i].actions[j].stats.retard_debut > 365)
+                                                    if (objectifsD[i].actions[j].stats.retard_fin > 365)
                                                         $(retardf).append('<svg xmlns="http://www.w3.org/2000/svg" version="1.1"   class="retard-red" width="50" height="50"><circle  r="25 " cx="25 " cy="25 " fill="red " /> </svg>');
-                                                    if (objectifsD[i].actions[j].stats.retard_debut < 365 && objectifsD[i].actions[j].stats.retard_debut > 182)
+                                                    if (objectifsD[i].actions[j].stats.retard_fin < 365 && objectifsD[i].actions[j].stats.retard_fin > 182)
                                                         $(retardf).append('<svg xmlns="http://www.w3.org/2000/svg" version="1.1"   class="retard-orange" width="50" height="50"><circle  r="25 " cx="25 " cy="25 " fill="orange " /> </svg>');
-                                                    if (objectifsD[i].actions[j].stats.retard_debut <= 182 && objectifsD[i].actions[j].stats.retard_debut > -1)
+                                                    if (objectifsD[i].actions[j].stats.retard_fin <= 182 && objectifsD[i].actions[j].stats.retard_fin > -1)
                                                         $(retardf).append('<svg xmlns="http://www.w3.org/2000/svg" version="1.1"   class="retard-green" width="50" height="50"><circle  r="25 " cx="25 " cy="25 " fill="green" /> </svg>');
-                                                    if (objectifsD[i].actions[j].stats.retard_debut == -1)
+                                                    if (objectifsD[i].actions[j].stats.retard_fin == -1)
                                                         $(retardf).append('<svg xmlns="http://www.w3.org/2000/svg" version="1.1"   class="retard-grey" width="50" height="50"><circle  r="25 " cx="25 " cy="25 " fill="grey" /> </svg>');
                                                     $(ActionLine).append(retardf);
 

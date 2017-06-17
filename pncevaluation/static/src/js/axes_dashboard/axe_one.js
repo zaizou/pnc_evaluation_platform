@@ -13,6 +13,14 @@ odoo.define('pncevaluation.axe_one', function(require) {
     var container;
     var data_source;
 
+    Array.prototype.max = function() {
+        return Math.max.apply(null, this);
+    };
+
+    Array.prototype.min = function() {
+        return Math.min.apply(null, this);
+    };
+
 
     var MyView = View.extend({
         icon: 'fa-briefcase',
@@ -63,7 +71,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
                         $(container).addClass("axe_summary");
                         $(container).addClass("wrapper content");
                         $(self.$el).append(container);
-                        data_source = data;
+                        data_source = result;
                         draw_dashboard(data[0].name, container);
                     });
 
@@ -214,10 +222,37 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(divCorr).addClass("col-md-4");
         $(rowStats).append(divCorr);
 
-        draw_elem_stats(divBudget, "budget_chart", "Hausse", "data", "unit", "content_copy", "red ");
+        draw_elem_stats(divBudget, "budget_chart", "Hausse", "data", "unit", "", "red ");
         draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "content_copy", "green ");
         draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "content_copy", "yellow ");
 
+    }
+
+    function draw_budget_chart() {
+        var labels = []
+        var series = []
+        console.log("ds in draw_budget_chart");
+        console.log(data_source);
+        for (var i = 0; i < data_source.budgets.length; i++) {
+            labels.push('' + data_source.budgets[i].annee);
+            series.push(data_source.budgets[i].ecart);
+        }
+        var budgetChart = {
+            labels: labels,
+            series: [
+                series
+            ]
+        };
+        var optionsbudget = {
+            lineSmooth: Chartist.Interpolation.cardinal({
+                tension: 0
+            }),
+            low: series.min(),
+            high: series.max(), // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+        }
+        var budget = new Chartist.Line('#budget_chart', budgetChart, optionsbudget);
+        //md.startAnimationForLineChart(budget);
     }
 
     function draw_elem_stats(divStat, chart_id, data_title, data, unit, icon, color) {
@@ -237,10 +272,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
             $(cardOHeader).addClass("card-header card-chart");
             $(cardOHeader).attr("data-background-color", color);
             var chart = document.createElement('div');
+            //data_source
             $(chart).addClass("ct-chart");
             $(chart).attr("id", chart_id);
             $(cardQo).append(cardOHeader);
-            $(cardOHeader).append(chart)
+            $(cardOHeader).append(chart);
+            if (chart_id == "budget_chart")
+                draw_budget_chart();
         }
 
 
