@@ -222,17 +222,16 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(divCorr).addClass("col-md-4");
         $(rowStats).append(divCorr);
 
-        draw_elem_stats(divBudget, "budget_chart", "Hausse", "data", "unit", "", "red ");
-        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "content_copy", "green ");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "content_copy", "yellow ");
+        draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
+        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "content_copy", "green");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "content_copy", "yellow");
 
     }
 
     function draw_budget_chart() {
         var labels = []
         var series = []
-        console.log("ds in draw_budget_chart");
-        console.log(data_source);
+
         for (var i = 0; i < data_source.budgets.length; i++) {
             labels.push('' + data_source.budgets[i].annee);
             series.push(data_source.budgets[i].ecart);
@@ -243,17 +242,53 @@ odoo.define('pncevaluation.axe_one', function(require) {
                 series
             ]
         };
+        console.log("high");
+        console.log(series.max());
+        console.log("min");
+        console.log(series.min());
         var optionsbudget = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: series.min(),
-            high: series.max(), // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+            axisX: {
+                showGrid: false
+            },
+            axisY: {
+                showGrid: false,
+                labelInterpolationFnc: function(value) {
+                    if (value > 1000000000)
+                        return '' + value / 1000000000 + 'Mr';
+                    else
+                    if (value > 1000000)
+                        return '' + value / 1000000 + 'M';
+                    else if (value > 1000)
+                        return '' + value / 1000 + 'K';
+
+                }
+            },
+            low: series.min() - Math.abs(series.min()) * 0.5,
+            high: series.max() + series.max() * 0.5, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: { top: 0, right: 0, bottom: 0, left: 5 },
         }
-        var budget = new Chartist.Line('#budget_chart', budgetChart, optionsbudget);
+
+        var responsiveOptions = [
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 5,
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return value[0];
+                    }
+                }
+            }]
+        ];
+
+
+        console.log("series in draw_budget_chart");
+        console.log(series);
+        var budget = new Chartist.Line('#budget_chart', budgetChart, optionsbudget, responsiveOptions);
         //md.startAnimationForLineChart(budget);
     }
+
+
+
+
 
     function draw_elem_stats(divStat, chart_id, data_title, data, unit, icon, color) {
         var cardQo = document.createElement('div');
@@ -288,6 +323,12 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         var category = document.createElement('p');
         $(category).addClass("category");
+
+        //if (chart_id == "budget_chart")
+        var currentTime = new Date();
+        var year = currentTime.getFullYear();
+
+
         var sClass = 'text-success'
         var iClass = 'fa fa fa-long-arrow-up'
         var sPourc = '55%'
