@@ -10,6 +10,7 @@
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_one.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/material.min.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/chartist.min.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/material-dashboard.js"></script>
 
                 
             </xpath>

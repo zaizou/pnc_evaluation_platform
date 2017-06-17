@@ -299,9 +299,13 @@ class PNC_Evaluation(Controller):
         budglistV = budORM.search([('numero_axe', '=', numero_axe)])
         #somme budget
         ecarts = []
+        ecart = 0
         for budget in budglistV :
+            if budget.budget_estime >0 :
+                ecart = ( budget.budget_estime  - budget.budget_reel ) / budget.budget_estime 
+            
             ecarts.append({
-                'ecart': budget.budget_reel - budget.budget_estime,
+                'ecart': ecart,
                 'annee' : budget.annne
             })
 

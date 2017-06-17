@@ -72,6 +72,14 @@ odoo.define('pncevaluation.axe_one', function(require) {
                         $(container).addClass("wrapper content");
                         $(self.$el).append(container);
                         data_source = result;
+
+
+                        function sortNumber(a, b) {
+                            return a.annee - b.annee;
+                        }
+                        if (typeof data_source.budgets != 'undefined')
+                            data_source.budgets.sort(sortNumber);
+
                         draw_dashboard(data[0].name, container);
                     });
 
@@ -155,24 +163,6 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         $(tab_content).append('<div class="tab-pane active" id="coordination"></class>');
         $(tab_content).append('<div class="tab-pane" id="evaluation"></class>');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     function draw_row_add2(rowAdds, color) {
@@ -223,8 +213,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(rowStats).append(divCorr);
 
         draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
-        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "content_copy", "green");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "content_copy", "yellow");
+        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "", "green");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "", "yellow");
 
     }
 
@@ -248,24 +238,18 @@ odoo.define('pncevaluation.axe_one', function(require) {
         console.log(series.min());
         var optionsbudget = {
             axisX: {
-                showGrid: false
+                showGrid: true
             },
             axisY: {
-                showGrid: false,
+                showGrid: true,
                 labelInterpolationFnc: function(value) {
-                    if (value > 1000000000)
-                        return '' + value / 1000000000 + 'Mr';
-                    else
-                    if (value > 1000000)
-                        return '' + value / 1000000 + 'M';
-                    else if (value > 1000)
-                        return '' + value / 1000 + 'K';
+                    return value * 100 + '%';
 
                 }
             },
             low: series.min() - Math.abs(series.min()) * 0.5,
             high: series.max() + series.max() * 0.5, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 5 },
+            chartPadding: { top: 5, right: 5, bottom: 5, left: 5 },
         }
 
         var responsiveOptions = [
@@ -283,7 +267,60 @@ odoo.define('pncevaluation.axe_one', function(require) {
         console.log("series in draw_budget_chart");
         console.log(series);
         var budget = new Chartist.Line('#budget_chart', budgetChart, optionsbudget, responsiveOptions);
-        //md.startAnimationForLineChart(budget);
+        md.startAnimationForLineChart(budget);
+    }
+
+    function draw_appreciation_chart() {
+        $('#appr_chart').addClass('appr_chart');
+        var appreciation = new Chartist.Pie('.appr_chart', {
+            series: [data_source.count_qualite.appreciation * 2]
+        }, {
+            donut: true,
+            donutWidth: 40,
+            donutSolid: true,
+            startAngle: 270,
+            total: 80,
+            showLabel: true
+        });
+        appreciation.on('draw', function(data) {
+            if (data.type === 'slice') {
+                // Get the total path length in order to use for dash array animation
+                var pathLength = data.element._node.getTotalLength();
+
+                // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+                data.element.attr({
+                    'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+                });
+
+                // Create animation definition while also assigning an ID to the animation for later sync usage
+                var animationDefinition = {
+                    'stroke-dashoffset': {
+                        id: 'anim' + data.index,
+                        dur: 1000,
+                        from: -pathLength + 'px',
+                        to: '0px',
+                        easing: Chartist.Svg.Easing.easeOutQuint,
+                        // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                        fill: 'freeze'
+                    }
+                };
+
+                // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+                if (data.index !== 0) {
+                    animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+                }
+
+                // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+                data.element.attr({
+                    'stroke-dashoffset': -pathLength + 'px'
+                });
+
+                // We can't use guided mode as the animations need to rely on setting begin manually
+                // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+                data.element.animate(animationDefinition, false);
+            }
+        });
+        md.startAnimationForLineChart(appreciation);
     }
 
 
@@ -323,25 +360,65 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         var category = document.createElement('p');
         $(category).addClass("category");
+        var str2 = "";
+        if (chart_id == "budget_chart") {
+            var ecartLastyear = (data_source.budgets[data_source.budgets.length - 1].ecart) * 100;
+            var lastYear = data_source.budgets[data_source.budgets.length - 1].annee;
+            if (data_source.budgets.length >= 2) {
+                var prelastYear = data_source.budgets[data_source.budgets.length - 2].annee;
+                var ecratPrelastYear = (data_source.budgets[data_source.budgets.length - 2].ecart) * 100;
 
-        //if (chart_id == "budget_chart")
-        var currentTime = new Date();
-        var year = currentTime.getFullYear();
+                var taux;
+                var sClass;
+                var iClass;
+                var comment;
+                console.log("ecarts");
+                console.log("last");
+                console.log(ecartLastyear)
+                console.log("prelast");
+                console.log(ecratPrelastYear);
+                var sPourc = taux + '%'
+                if (ecartLastyear > ecratPrelastYear) {
+                    sClass = 'text-success'
+                    iClass = 'fa fa fa-long-arrow-up'
+                    taux = Math.abs(((ecartLastyear - ecratPrelastYear) / ecratPrelastYear).toFixed(2)) * 100;
+                    sPourc = taux + '%'
+                } else if (ecartLastyear < ecratPrelastYear) {
+                    sClass = 'text-danger'
+                    iClass = 'fa fa fa-long-arrow-down'
+                    taux = Math.abs(((ecratPrelastYear - ecartLastyear) / ecartLastyear).toFixed(2)) * 100;
+                    sPourc = taux + '%'
 
+                } else {
+                    iClass = ''
+                    sPourc = "Pas d\'écart";
+                }
 
-        var sClass = 'text-success'
-        var iClass = 'fa fa fa-long-arrow-up'
-        var sPourc = '55%'
-        var strP = '<span class="' + sClass + '"><i class="' + iClass + '"></i>' + sPourc + '</span>'
-        strP += "  " + data_title
-        $(category).append(strP);
+                var strP = '<big><span class="' + sClass + '"><i class="' + iClass + '"></i>  ' + sPourc + '</span>'
+                strP += "  par rapport à l\'an dernier</big>"
+                $(category).append(strP);
+            }
 
-        var title = document.createElement('h3');
-        $(title).addClass("title");
-        var str2 = data + '<smal>' + unit + '</smal>'
+            var title = document.createElement('h3');
+            $(title).addClass("title");
+            var txtEcart
+            if (ecartLastyear > 0) {
+                txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear + '%  Restant )</big>'
+                $(cardOHeader).attr("data-background-color", "green");
+            } else if (ecartLastyear < 0) {
+                txtEcart = '<space></space><big class="text-danger"> ( Dépassé de ' + (-ecartLastyear) + '%  ) </big>'
+                $(cardOHeader).attr("data-background-color", "red");
+            } else {
+                txtEcart = '<space></space><big class="text-warning">( Consommé )' + ecartLastyear + ' </big>'
+                $(cardOHeader).attr("data-background-color", "orange");
+            }
+            str2 = data + txtEcart + '<smal>' + unit + '</smal>'
+        }
+        if (chart_id == "appr_chart") {
+            draw_appreciation_chart();
+        }
+
         $(title).append(str2);
-
-
         $(cardOContent).append(title);
         $(cardOContent).append(category);
 
