@@ -450,6 +450,7 @@ class PNC_Evaluation(Controller):
         var_retard_debut = 0
         var_retard_fin = 0
         #
+        count_total_act = 0
         count_actions_ret_debut = 0
         count_actions_ret_fin = 0
         
@@ -470,6 +471,7 @@ class PNC_Evaluation(Controller):
                                 count_actions_ret_debut = count_actions_ret_debut + 1 
                         if(retard_fin.days > 365):
                                 count_actions_ret_fin = count_actions_ret_fin + 1
+                        count_total_act = count_total_act +1
         
         return{
             'budgets':ecarts,
@@ -478,7 +480,8 @@ class PNC_Evaluation(Controller):
             'count_qualite': listV,
             'correspond': count_correspondence,
             'count_retard_debut':count_actions_ret_debut,
-            'count_retard_fin':count_actions_ret_fin
+            'count_retard_fin':count_actions_ret_fin,
+            'count_total_act':count_total_act
 
         }
 

@@ -118,14 +118,14 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var rowAdds2 = document.createElement('div');
         $(rowAdds2).addClass("row");
         $(container_fluid).append(rowAdds2);
-        draw_row_add2(rowAdds2, "green");
+        draw_row_add2(rowAdds, "green");
 
     }
 
     function draw_row_add_coordination(rowAdds, color) {
         // n contri assistent les contre m invite 
         var divReunions = document.createElement('div');
-        $(divReunions).addClass("col-lg-6 col-md-12");
+        $(divReunions).addClass("col-lg-4 col-md-12");
         $(rowAdds).append(divReunions);
 
         var cardReunions = document.createElement('div');
@@ -205,13 +205,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var tr2 = document.createElement('tr');
         var strP = ""
         if (taux_par < 40) {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-danger">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "red");
         } else if (taux_par < 70) {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "orange");
         } else {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-success">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "green");
         }
 
@@ -288,7 +288,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
     function draw_row_add_evaluation(rowAdds, color) {
         // n contri assistent les contre m invite 
         var divReunions = document.createElement('div');
-        $(divReunions).addClass("col-lg-6 col-md-12");
+        $(divReunions).addClass("col-lg-4 col-md-12");
         $(rowAdds).append(divReunions);
 
         var cardReunions = document.createElement('div');
@@ -361,13 +361,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var tr2 = document.createElement('tr');
         var strP = ""
         if (taux_par < 40) {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-danger">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "red");
         } else if (taux_par < 70) {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "orange");
         } else {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-success">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "green");
         }
 
@@ -408,7 +408,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
     function draw_row_add2(rowAdds, color) {
         var divStats = document.createElement('div');
-        $(divStats).addClass("col-lg-6 col-md-12");
+        $(divStats).addClass("col-lg-4 col-md-12");
         $(rowAdds).append(divStats);
         var cardStats = document.createElement('div');
         $(cardStats).addClass("card");
@@ -432,6 +432,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var cardOContent = document.createElement('div');
         $(cardOContent).addClass("card-content");
         $(cardStats).append(cardOContent);
+
+        var tab = document.createElement('table');
 
 
 
