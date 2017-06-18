@@ -112,12 +112,17 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var rowAdds = document.createElement('div');
         $(rowAdds).addClass("row");
         $(container_fluid).append(rowAdds);
-        draw_row_add(rowAdds, "purple");
-        draw_row_add2(rowAdds, "green");
+        draw_row_add_coordination(rowAdds, "purple");
+        draw_row_add_evaluation(rowAdds, "purple");
+
+        var rowAdds2 = document.createElement('div');
+        $(rowAdds2).addClass("row");
+        $(container_fluid).append(rowAdds2);
+        draw_row_add2(rowAdds2, "green");
 
     }
 
-    function draw_row_add(rowAdds, color) {
+    function draw_row_add_coordination(rowAdds, color) {
         // n contri assistent les contre m invite 
         var divReunions = document.createElement('div');
         $(divReunions).addClass("col-lg-6 col-md-12");
@@ -141,7 +146,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs_navigation).append(nav_tabs_wrapper);
 
         var nav_tabs_title = document.createElement('span');
-        $(nav_tabs_title).append("Réunions");
+        $(nav_tabs_title).append("Réunions de coordination :");
         $(nav_tabs_wrapper).append(nav_tabs_title);
 
         var nav_tabs = document.createElement('ul');
@@ -149,11 +154,94 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs).attr("data-tabs", "tabs");
         $(nav_tabs_wrapper).append(nav_tabs);
 
-        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Réunions Coordination<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top <div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_act_eval" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Réunions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 10 Actions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 5 Programmes Action<div class="ripple-container"></div></a></li>');
+
+
+
+        var cardContent = document.createElement('div');
+        $(cardContent).addClass("card-content");
+        $(cardReunions).append(cardContent);
+
+        var tab_content = document.createElement('div');
+        $(tab_content).addClass("tab-content");
+        $(cardContent).append(tab_content);
+
+        var tabPaneReuCoor = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "coordination");
+        var tabPaneTopAct = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_act");
+        var tabPaneTopPa = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_pa");
+        var tabPaneReuEval = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "evaluation");
+        var tabPaneTopActEval = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_act_eval");
+
+        var tabPane1 = document.createElement('div');
+        $(tabPane1).addClass('tab-pane active');
+        $(tabPane1).attr('id', 'coordination')
+        $(tab_content).append(tabPane1);
+
+
+        var tableCoordination = document.createElement('table');
+        $(tableCoordination).addClass('table');
+        $(tabPane1).append(tableCoordination);
+        var tbodyCoordination = document.createElement('tbody');
+        $(tableCoordination).append(tbodyCoordination);
+        var tr1 = document.createElement('tr');
+        $(tr1).append('<h3>Une moyenne de 10 invités par réunion</h3>');
+        $(tbodyCoordination).append(tr1);
+
+        var tr2 = document.createElement('tr');
+        $(tr2).append('<h3>Un taux de présence au réunions de  10%</h3>');
+        $(tbodyCoordination).append(tr2);
+
+
+
+    }
+
+    function draw_row_add_evaluation(rowAdds, color) {
+        // n contri assistent les contre m invite 
+        var divReunions = document.createElement('div');
+        $(divReunions).addClass("col-lg-6 col-md-12");
+        $(rowAdds).append(divReunions);
+
+        var cardReunions = document.createElement('div');
+        $(cardReunions).addClass("card card-nav-tabs");
+        $(divReunions).append(cardReunions);
+
+        var cardHeader = document.createElement('div');
+        $(cardHeader).addClass("card-header");
+        $(cardHeader).attr("data-background-color", color);
+        $(cardReunions).append(cardHeader);
+
+        var nav_tabs_navigation = document.createElement('div');
+        $(nav_tabs_navigation).addClass("nav-tabs-navigation");
+        $(cardHeader).append(nav_tabs_navigation);
+
+        var nav_tabs_wrapper = document.createElement('div');
+        $(nav_tabs_wrapper).addClass("nav-tabs-wrapper");
+        $(nav_tabs_navigation).append(nav_tabs_wrapper);
+
+        var nav_tabs_title = document.createElement('span');
+        $(nav_tabs_title).append("Réunions d\'évaluation :");
+        $(nav_tabs_wrapper).append(nav_tabs_title);
+
+        var nav_tabs = document.createElement('ul');
+        $(nav_tabs).addClass("nav nav-tabs");
+        $(nav_tabs).attr("data-tabs", "tabs");
+        $(nav_tabs_wrapper).append(nav_tabs);
+
+
+        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Réunions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act_eval" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 10 Action<div class="ripple-container"></div></a></li>');
 
 
 
@@ -188,6 +276,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
     }
 
+
     function draw_row_add2(rowAdds, color) {
         var divStats = document.createElement('div');
         $(divStats).addClass("col-lg-6 col-md-12");
@@ -219,7 +308,6 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
 
     }
-
 
 
     function draw_row_stats(rowStats) {
