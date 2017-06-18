@@ -146,7 +146,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs_navigation).append(nav_tabs_wrapper);
 
         var nav_tabs_title = document.createElement('span');
-        $(nav_tabs_title).append("Réunions de coordination :");
+        $(nav_tabs_title).append("<big>Réunions de coordination :</big>");
         $(nav_tabs_wrapper).append(nav_tabs_title);
 
         var nav_tabs = document.createElement('ul');
@@ -154,9 +154,9 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs).attr("data-tabs", "tabs");
         $(nav_tabs_wrapper).append(nav_tabs);
 
-        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Réunions<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 10 Actions<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 5 Programmes Action<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">date_range</i>Réunions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">stars</i>Top 10 Actions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">stars</i>Top 5 Programmes Action<div class="ripple-container"></div></a></li>');
 
 
 
@@ -195,13 +195,86 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(tabPane1).append(tableCoordination);
         var tbodyCoordination = document.createElement('tbody');
         $(tableCoordination).append(tbodyCoordination);
+
+        var taux_par = ((data_source.reunions.coordination.particip / data_source.reunions.coordination.invit) * 100).toFixed(2)
+        var moyInv = Math.round(data_source.reunions.coordination.invit / data_source.reunions.count);
         var tr1 = document.createElement('tr');
-        $(tr1).append('<h3>Une moyenne de 10 invités par réunion</h3>');
+        $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
         $(tbodyCoordination).append(tr1);
 
         var tr2 = document.createElement('tr');
-        $(tr2).append('<h3>Un taux de présence au réunions de  10%</h3>');
+        var strP = ""
+        if (taux_par < 40)
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-danger">' + taux_par + '%</span></h3>');
+        else if (taux_par < 70)
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
+        else
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-sucess">' + taux_par + '%</span></h3>');
         $(tbodyCoordination).append(tr2);
+
+
+        var tabPane2 = document.createElement('div');
+        $(tabPane2).addClass('tab-pane');
+        $(tabPane2).attr('id', 'top_act')
+        $(tab_content).append(tabPane2);
+
+        var tableCoordination2 = document.createElement('table');
+        $(tableCoordination2).addClass('table');
+        $(tabPane2).append(tableCoordination2);
+        var thead = document.createElement('thead');
+        $(tableCoordination2).append(thead);
+        var tbodyCoordination2 = document.createElement('tbody');
+        $(tableCoordination2).append(tbodyCoordination2);
+
+        $(thead).append('<tr><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
+
+
+        function sortNumber2(a, b) {
+            return b.count - a.count;
+        }
+        data_source.reunions.coordination.actions.sort(sortNumber2);
+        for (var i = 0; i < data_source.reunions.coordination.actions.length; i++) {
+            if (i > 10)
+                break;
+            var line = document.createElement('tr');
+            tbodyCoordination2.append(line);
+            $(line).append('<td>' + data_source.reunions.coordination.actions[i].name + '</td><td>' + data_source.reunions.coordination.actions[i].count + '</td>')
+        }
+
+
+
+        var tabPane3 = document.createElement('div');
+        $(tabPane3).addClass('tab-pane');
+        $(tabPane3).attr('id', 'top_pa')
+        $(tab_content).append(tabPane3);
+
+        var tableCoordination3 = document.createElement('table');
+        $(tableCoordination3).addClass('table');
+        $(tabPane3).append(tableCoordination3);
+        var thead = document.createElement('thead');
+        $(tableCoordination3).append(thead);
+        var tbodyCoordination3 = document.createElement('tbody');
+        $(tableCoordination3).append(tbodyCoordination3);
+
+        $(thead).append('<tr><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
+
+
+        function sortNumber2(a, b) {
+            return b.count - a.count;
+        }
+        data_source.reunions.coordination.pas.sort(sortNumber2);
+        for (var i = 0; i < data_source.reunions.coordination.actions.length; i++) {
+            if (i > 10)
+                break;
+            var line = document.createElement('tr');
+            tbodyCoordination3.append(line);
+            $(line).append('<td>' + data_source.reunions.coordination.pas[i].name + '</td><td>' + data_source.reunions.coordination.pas[i].count + '</td>')
+        }
+
+
+
+
+
 
 
 
