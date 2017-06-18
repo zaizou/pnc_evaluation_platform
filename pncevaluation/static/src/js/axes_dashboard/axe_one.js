@@ -118,6 +118,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
     }
 
     function draw_row_add(rowAdds, color) {
+        // n contri assistent les contre m invite 
         var divReunions = document.createElement('div');
         $(divReunions).addClass("col-lg-6 col-md-12");
         $(rowAdds).append(divReunions);
@@ -213,8 +214,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(rowStats).append(divCorr);
 
         draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
-        draw_elem_stats(divReal, "appr_chart", "Hausse", "data", "unit", "", "green");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "data", "unit", "", "yellow");
+        draw_elem_stats(divReal, "appr_chart", "Hausse", "<big>Appréciation </big>", "unit", "", "green");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondence </big>", "unit", "compare_arrows", "yellow");
 
     }
 
@@ -272,60 +273,18 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
     function draw_appreciation_chart() {
         $('#appr_chart').addClass('appr_chart');
-        var appreciation = new Chartist.Pie('.appr_chart', {
-            series: [data_source.count_qualite.appreciation * 2]
-        }, {
-            donut: true,
-            donutWidth: 40,
-            donutSolid: true,
-            startAngle: 270,
-            total: 80,
-            showLabel: true
+        var powerGauge = gauge('#appr_chart', {
+            size: 500,
+            clipWidth: 500,
+            clipHeight: 150,
+            ringWidth: 60,
+            maxValue: 100,
+            transitionMs: 4000,
         });
-        appreciation.on('draw', function(data) {
-            if (data.type === 'slice') {
-                // Get the total path length in order to use for dash array animation
-                var pathLength = data.element._node.getTotalLength();
-
-                // Set a dasharray that matches the path length as prerequisite to animate dashoffset
-                data.element.attr({
-                    'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
-                });
-
-                // Create animation definition while also assigning an ID to the animation for later sync usage
-                var animationDefinition = {
-                    'stroke-dashoffset': {
-                        id: 'anim' + data.index,
-                        dur: 1000,
-                        from: -pathLength + 'px',
-                        to: '0px',
-                        easing: Chartist.Svg.Easing.easeOutQuint,
-                        // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
-                        fill: 'freeze'
-                    }
-                };
-
-                // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-                if (data.index !== 0) {
-                    animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
-                }
-
-                // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
-                data.element.attr({
-                    'stroke-dashoffset': -pathLength + 'px'
-                });
-
-                // We can't use guided mode as the animations need to rely on setting begin manually
-                // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
-                data.element.animate(animationDefinition, false);
-            }
-        });
-        md.startAnimationForLineChart(appreciation);
+        powerGauge.render();
+        powerGauge.update(data_source.count_qualite.appreciation);
+        //md.startAnimationForLineChart(appreciation);
     }
-
-
-
-
 
     function draw_elem_stats(divStat, chart_id, data_title, data, unit, icon, color) {
         var cardQo = document.createElement('div');
@@ -361,6 +320,9 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var category = document.createElement('p');
         $(category).addClass("category");
         var str2 = "";
+        var strP = "";
+        var title = document.createElement('h3');
+        $(title).addClass("title");
         if (chart_id == "budget_chart") {
             var ecartLastyear = (data_source.budgets[data_source.budgets.length - 1].ecart) * 100;
             var lastYear = data_source.budgets[data_source.budgets.length - 1].annee;
@@ -394,14 +356,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
                     sPourc = "Pas d\'écart";
                 }
 
-                var strP = '<big><span class="' + sClass + '"><i class="' + iClass + '"></i>  ' + sPourc + '</span>'
+                strP = '<big><span class="' + sClass + '"><i class="' + iClass + '"></i>  ' + sPourc + '</span>'
                 strP += "  par rapport à l\'an dernier</big>"
-                $(category).append(strP);
+                    //$(category).append(strP);
             }
 
-            var title = document.createElement('h3');
-            $(title).addClass("title");
-            var txtEcart
+
+            var txtEcart;
             if (ecartLastyear > 0) {
                 txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear + '%  Restant )</big>'
                 $(cardOHeader).attr("data-background-color", "green");
@@ -416,22 +377,46 @@ odoo.define('pncevaluation.axe_one', function(require) {
         }
         if (chart_id == "appr_chart") {
             draw_appreciation_chart();
+            if (data_source.count_qualite.appreciation < 40) {
+                txtEcart = '<big class="text-danger"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                $(cardOHeader).attr("data-background-color", "red");
+            } else if (data_source.count_qualite.appreciation < 70) {
+                txtEcart = '<big class="text-warning"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                $(cardOHeader).attr("data-background-color", "orange");
+            } else {
+                txtEcart = '<big class="text-success"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                $(cardOHeader).attr("data-background-color", "green");
+            }
+
+            str2 = data + txtEcart;
+            //strP = data + txtEcart;
+            console.log("str2");
+            console.log(str2);
         }
 
+        if (chart_id == "corr_chart") {
+            data_source.correspond *= 100;
+            if (data_source.correspond < 40) {
+                txtEcart = '<big class="text-danger">( ' + data_source.correspond + '% des actions de PA )</big>'
+                $(cardOHeader).attr("data-background-color", "red");
+            } else if (data_source.correspond < 70) {
+                txtEcart = '<big class="text-warning">( ' + data_source.correspond + '% des actions de PA )</big>'
+                $(cardOHeader).attr("data-background-color", "orange");
+            } else {
+                txtEcart = '<big class="text-sucess">( ' + data_source.correspond + '% des actions de PA )</big>'
+                $(cardOHeader).attr("data-background-color", "green");
+            }
+            str2 = data + txtEcart;
+        }
         $(title).append(str2);
+        $(category).append(strP);
         $(cardOContent).append(title);
         $(cardOContent).append(category);
-
-
-
-
-
         var cardOFooter = document.createElement('div');
         $(cardOFooter).addClass("card-footer");
         $(cardQo).append(cardOFooter);
 
     }
-
 
     function draw_row_qualite(rowQualite) {
         var divQo = document.createElement('div');

@@ -323,10 +323,124 @@ class PNC_Evaluation(Controller):
         #reunions coordination
         coorORM = request.env['pncevaluation.reucoor']
         reu_coor = coorORM.search([('numero_axe', '=', numero_axe)])
+        reunions_coordination = []
+        avgInvites = 0
+        avgPresents = 0
+        reuCoorAction = []
+        actions = []
+        actionsIds = []
+        pas = []
+        pasIds = []
+        countActs = {}
+        countPas = {}
+        indexPa = 0
+        indexAction = 0
+        for r_coor in reu_coor:
+            avgInvites = avgInvites + len(r_coor.contributeurs_invites_ids)
+            avgPresents = avgPresents + len(r_coor.contributeurs_presents_ids)
+            if r_coor.pa_id:
+                if r_coor.pa_id.id in pasIds:
+                    countPas[str(r_coor.pa_id.id)] = countPas[str(r_coor.pa_id.id)] + 1
+                    pas[pasIds.index(r_coor.pa_id.id)] = {
+                        'name' : r_coor.pa_id.name,
+                        'id' : r_coor.pa_id.id,
+                        'count' : countPas[str(r_coor.pa_id.id)]
+                    }
+                else:
+                    pas.append( {
+                        'name' : r_coor.pa_id.name,
+                        'id' : r_coor.pa_id.id,
+                        'count' : 1
+                    })
+                    pasIds.append(r_coor.pa_id.id)
+                    countPas[str(r_coor.pa_id.id)] = 1
+                indexPa = indexPa + 1 
+            if r_coor.action_id:
+                if r_coor.action_id.id in actionsIds:
+                    countActs[str(r_coor.action_id.id)] = countActs[str(r_coor.action_id.id)] + 1
+                    actions[actionsIds.index(r_coor.action_id.id)] = {
+                        'name' : r_coor.action_id.name,
+                        'id' : r_coor.action_id.id,
+                        'count' : countActs[str(r_coor.action_id.id)]
+                    }
+                else:
+                    actions.append({
+                        'name' : r_coor.action_id.name,
+                        'id' : r_coor.action_id.id,
+                        'count' : 1
+                    })
+                    actionsIds.append(r_coor.action_id.id)
+                    countActs[str(r_coor.action_id.id)] = 1
+                indexAction = indexAction + 1 
+    
+        _logger.warning(u"----- Resultats des stats")
+        _logger.warning("PAS")
+        _logger.warning(pas)
+        _logger.warning("Action")
+        _logger.warning(actions)
+
+
+        
+        
+
+
+
+        
+
+
 
         #reunions evaluation
         evalORM = request.env['pncevaluation.reueval']
         reu_eval = evalORM.search([('numero_axe', '=', numero_axe)])
+        avgInvitesEval = 0
+        avgPresentsEval = 0
+        reuCoorAction = []
+        actionsEval = []
+        actionsEvalIds = []
+        countActsEval = {}
+        for r_eval in reu_eval:
+            avgInvitesEval = avgInvitesEval + len(r_eval.contributeurs_invites_ids)
+            avgPresentsEval = avgPresentsEval + len(r_eval.contributeurs_presents_ids)
+            if r_eval.action_id:
+                if r_eval.action_id.id in actionsEvalIds:
+                    countActsEval[str(r_eval.action_id.id)] = countActsEval[str(r_eval.action_id.id)] + 1
+                    actionsEval[actionsEvalIds.index(r_eval.action_id.id)] = {
+                        'name' : r_eval.action_id.name,
+                        'id' : r_eval.action_id.id,
+                        'count' : countActsEval[str(r_eval.action_id.id)]
+                    }
+                else:
+                    actionsEval.append({
+                        'name' : r_eval.action_id.name,
+                        'id' : r_eval.action_id.id,
+                        'count' : 1
+                    })
+                    actionsEvalIds.append(r_eval.action_id.id)
+                    countActsEval[str(r_eval.action_id.id)] = 1
+
+
+        _logger.warning(u"----- Resultats des stats Eval")
+        _logger.warning("Action Eval")
+        _logger.warning(actionsEval)
+
+        reunions = {
+            'coordination':{
+                'count' : len(reu_coor),
+                'invit' : avgInvites,
+                'particip' : avgPresents,
+                'pas':pas,
+                'actions' : actions
+            },
+            'evaluation':{
+                'count' : len(reu_eval),
+                'invit' : avgInvitesEval,
+                'particip' : avgPresentsEval,
+                'actions' : actionsEval
+            }
+        }
+
+
+
 
         axe_orm = request.env['pncevaluation.axepnc']
         axe_objects = axe_orm.search([])
@@ -360,8 +474,7 @@ class PNC_Evaluation(Controller):
         return{
             'budgets':ecarts,
             'num_axe': numero_axe,
-            'nb_reu_coor': len( reu_coor),
-            'nb_reu_eval' : len(reu_eval) ,
+            'reunions' :reunions,
             'count_qualite': listV,
             'correspond': count_correspondence,
             'count_retard_debut':count_actions_ret_debut,

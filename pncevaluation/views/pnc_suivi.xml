@@ -317,6 +317,8 @@
 						<group>
 							<field name="name"/>
 							<field name="user_id"/>
+							<field name="pa_id"/>
+							<field name="action_id"/>
 							<field name="start"/>
 							<field name="stop"/>
 							<field name="contributeurs_invites_ids" />

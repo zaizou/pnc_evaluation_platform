@@ -90,6 +90,9 @@ class reunionCoordination(models.Model):
                             relation='reucoor_contribut_invite',string=u"Contributeurs invités")
      pv_reunion_ids = fields.Many2one('pncevaluation.pvreunionaction',string=u"PV de la réunion")
 
+     pa_id = fields.Many2one('pncevaluation.pa',string=u"Programme d\'action concerné")
+     action_id = fields.Many2one('pncevaluation.actionpnc',string=u"Action Concernée")
+
      @api.multi
      def get_reunions_date(self):
          listV = self.read_group([], ['user_id','start'], ['user_id','start'], lazy=False)

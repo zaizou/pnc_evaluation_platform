@@ -194,6 +194,7 @@
 							<field name="start"/>
 							<field name="stop"/>
 							<field name="user_id"/>
+							<field name="action_id"/>
 							<field name="contributeurs_invites_ids" />
 							<field name="contributeurs_presents_ids" />
 							<field name="contributions_ids" />
