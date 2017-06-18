@@ -149,8 +149,11 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs).attr("data-tabs", "tabs");
         $(nav_tabs_wrapper).append(nav_tabs);
 
-        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Bugs<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Réunions Coordination<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top <div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
         $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act_eval" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
 
 
 
@@ -159,11 +162,30 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(cardReunions).append(cardContent);
 
         var tab_content = document.createElement('div');
-        $(cardContent).addClass("tab-content");
+        $(tab_content).addClass("tab-content");
         $(cardContent).append(tab_content);
 
-        $(tab_content).append('<div class="tab-pane active" id="coordination">Hello</div>');
-        $(tab_content).append('<div class="tab-pane" id="evaluation">Eval :(</div>');
+        var tabPaneReuCoor = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "coordination");
+        var tabPaneTopAct = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_act");
+        var tabPaneTopPa = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_pa");
+        var tabPaneReuEval = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "evaluation");
+        var tabPaneTopActEval = document.createElement('div');
+        $(tab_content).addClass("tab-pane");
+        $(nav_tabs).attr("id", "top_act_eval");
+
+        $(tab_content).append('<div class="tab-pane active" id="coordination"></div>');
+        $(tab_content).append('<div class="tab-pane" id="evaluation"><div>Eval :(</div></div>');
+
+
+
     }
 
     function draw_row_add2(rowAdds, color) {
@@ -274,8 +296,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
     function draw_appreciation_chart() {
         $('#appr_chart').addClass('appr_chart');
         var powerGauge = gauge('#appr_chart', {
-            size: 500,
-            clipWidth: 500,
+            size: 400,
+            clipWidth: 400,
             clipHeight: 150,
             ringWidth: 60,
             maxValue: 100,
@@ -343,12 +365,12 @@ odoo.define('pncevaluation.axe_one', function(require) {
                 if (ecartLastyear > ecratPrelastYear) {
                     sClass = 'text-success'
                     iClass = 'fa fa fa-long-arrow-up'
-                    taux = Math.abs(((ecartLastyear - ecratPrelastYear) / ecratPrelastYear).toFixed(2)) * 100;
-                    sPourc = taux + '%'
+                    taux = Math.abs(((((ecartLastyear - ecratPrelastYear) / ecratPrelastYear)) * 100).toFixed(2));
+                    sPourc = taux.toFixed(2) + '%'
                 } else if (ecartLastyear < ecratPrelastYear) {
                     sClass = 'text-danger'
                     iClass = 'fa fa fa-long-arrow-down'
-                    taux = Math.abs(((ecratPrelastYear - ecartLastyear) / ecartLastyear).toFixed(2)) * 100;
+                    taux = Math.abs(((((ecratPrelastYear - ecartLastyear) / ecartLastyear)) * 100).toFixed(2));
                     sPourc = taux + '%'
 
                 } else {
@@ -364,13 +386,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
             var txtEcart;
             if (ecartLastyear > 0) {
-                txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear + '%  Restant )</big>'
+                txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear.toFixed(2) + '%  Restant )</big>'
                 $(cardOHeader).attr("data-background-color", "green");
             } else if (ecartLastyear < 0) {
-                txtEcart = '<space></space><big class="text-danger"> ( Dépassé de ' + (-ecartLastyear) + '%  ) </big>'
+                txtEcart = '<space></space><big class="text-danger"> ( Dépassé de ' + (-ecartLastyear).toFixed(2) + '%  ) </big>'
                 $(cardOHeader).attr("data-background-color", "red");
             } else {
-                txtEcart = '<space></space><big class="text-warning">( Consommé )' + ecartLastyear + ' </big>'
+                txtEcart = '<space></space><big class="text-warning">( Consommé )' + ecartLastyear.toFixed(2) + ' </big>'
                 $(cardOHeader).attr("data-background-color", "orange");
             }
             str2 = data + txtEcart + '<smal>' + unit + '</smal>'
