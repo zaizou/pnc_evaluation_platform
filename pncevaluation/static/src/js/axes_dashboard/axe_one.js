@@ -149,8 +149,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs).attr("data-tabs", "tabs");
         $(nav_tabs_wrapper).append(nav_tabs);
 
-        $(nav_tabs).append('<li><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Bugs<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="true"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">bug_report</i>Bugs<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Website<div class="ripple-container"></div></a></li>');
 
 
 
@@ -162,8 +162,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(cardContent).addClass("tab-content");
         $(cardContent).append(tab_content);
 
-        $(tab_content).append('<div class="tab-pane active" id="coordination"></class>');
-        $(tab_content).append('<div class="tab-pane" id="evaluation"></class>');
+        $(tab_content).append('<div class="tab-pane active" id="coordination">Hello</div>');
+        $(tab_content).append('<div class="tab-pane" id="evaluation">Eval :(</div>');
     }
 
     function draw_row_add2(rowAdds, color) {
