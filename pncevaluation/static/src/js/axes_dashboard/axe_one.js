@@ -168,21 +168,21 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(tab_content).addClass("tab-content");
         $(cardContent).append(tab_content);
 
-        var tabPaneReuCoor = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "coordination");
-        var tabPaneTopAct = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_act");
-        var tabPaneTopPa = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_pa");
-        var tabPaneReuEval = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "evaluation");
-        var tabPaneTopActEval = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_act_eval");
+        // var tabPaneReuCoor = document.createElement('div');
+        // $(tab_content).addClass("tab-pane");
+        // $(nav_tabs).attr("id", "coordination");
+        // var tabPaneTopAct = document.createElement('div');
+        // $(tab_content).addClass("tab-pane");
+        // $(nav_tabs).attr("id", "top_act");
+        // var tabPaneTopPa = document.createElement('div');
+        // $(tab_content).addClass("tab-pane");
+        // $(nav_tabs).attr("id", "top_pa");
+        // var tabPaneReuEval = document.createElement('div');
+        // $(tab_content).addClass("tab-pane");
+        // $(nav_tabs).attr("id", "evaluation");
+        // var tabPaneTopActEval = document.createElement('div');
+        // $(tab_content).addClass("tab-pane");
+        // $(nav_tabs).attr("id", "top_act_eval");
 
         var tabPane1 = document.createElement('div');
         $(tabPane1).addClass('tab-pane active');
@@ -211,7 +211,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
             $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "orange");
         } else {
-            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-sucess">' + taux_par + '%</span></h3>');
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-success">' + taux_par + '%</span></h3>');
             $(cardHeader).attr("data-background-color", "green");
         }
 
@@ -242,7 +242,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
             if (i > 10)
                 break;
             var line = document.createElement('tr');
-            tbodyCoordination2.append(line);
+            $(tbodyCoordination2).append(line);
             $(line).append('<td>' + (i + 1) + '</td><td>' + data_source.reunions.coordination.actions[i].name + '</td><td>' + data_source.reunions.coordination.actions[i].count + '</td>')
         }
 
@@ -309,7 +309,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs_navigation).append(nav_tabs_wrapper);
 
         var nav_tabs_title = document.createElement('span');
-        $(nav_tabs_title).append("Réunions d\'évaluation :");
+        $(nav_tabs_title).append("<big>Réunions d\'évaluation :</big>");
         $(nav_tabs_wrapper).append(nav_tabs_title);
 
         var nav_tabs = document.createElement('ul');
@@ -318,8 +318,9 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs_wrapper).append(nav_tabs);
 
 
-        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Réunions<div class="ripple-container"></div></a></li>');
-        $(nav_tabs).append('<li><a href="#top_act_eval" data-toggle="tab" aria-expanded="false"><i class="material-icons">code</i>Top 10 Action<div class="ripple-container"></div></a></li>');
+
+        $(nav_tabs).append('<li><a href="#evaluation" data-toggle="tab" aria-expanded="false"><i class="material-icons">date_range</i>Réunions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li><a href="#top_act_eval" data-toggle="tab" aria-expanded="false"><i class="material-icons">stars</i>Top 10 Action<div class="ripple-container"></div></a></li>');
 
 
 
@@ -331,25 +332,75 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(tab_content).addClass("tab-content");
         $(cardContent).append(tab_content);
 
-        var tabPaneReuCoor = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "coordination");
-        var tabPaneTopAct = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_act");
-        var tabPaneTopPa = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_pa");
-        var tabPaneReuEval = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "evaluation");
-        var tabPaneTopActEval = document.createElement('div');
-        $(tab_content).addClass("tab-pane");
-        $(nav_tabs).attr("id", "top_act_eval");
+        // var tabPaneReuEval = document.createElement('div');
+        // $(tabPaneReuEval).addClass("tab-pane");
+        // $(tabPaneReuEval).attr("id", "coordination");
+        // var tabPaneTopAct = document.createElement('div');
+        // $(tabPaneTopAct).addClass("tab-pane");
+        // $(tabPaneTopAct).attr("id", "top_act_eval");
 
-        $(tab_content).append('<div class="tab-pane active" id="coordination"></div>');
-        $(tab_content).append('<div class="tab-pane" id="evaluation"><div>Eval :(</div></div>');
 
+        var tabPane1 = document.createElement('div');
+        $(tabPane1).addClass('tab-pane active');
+        $(tabPane1).attr('id', 'evaluation')
+        $(tab_content).append(tabPane1);
+
+
+        var tableEvaluation = document.createElement('table');
+        $(tableEvaluation).addClass('table');
+        $(tabPane1).append(tableEvaluation);
+        var tbodyEvaluation = document.createElement('tbody');
+        $(tableEvaluation).append(tbodyEvaluation);
+
+        var taux_par = ((data_source.reunions.evaluation.particip / data_source.reunions.evaluation.invit) * 100).toFixed(2)
+        var moyInv = Math.round(data_source.reunions.evaluation.invit / data_source.reunions.evaluation.count);
+        var tr1 = document.createElement('tr');
+        $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
+        $(tbodyEvaluation).append(tr1);
+
+        var tr2 = document.createElement('tr');
+        var strP = ""
+        if (taux_par < 40) {
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-danger">' + taux_par + '%</span></h3>');
+            $(cardHeader).attr("data-background-color", "red");
+        } else if (taux_par < 70) {
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
+            $(cardHeader).attr("data-background-color", "orange");
+        } else {
+            $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-success">' + taux_par + '%</span></h3>');
+            $(cardHeader).attr("data-background-color", "green");
+        }
+
+        $(tbodyEvaluation).append(tr2);
+
+
+        var tabPane2 = document.createElement('div');
+        $(tabPane2).addClass('tab-pane');
+        $(tabPane2).attr('id', 'top_act_eval')
+        $(tab_content).append(tabPane2);
+
+        var tableEvaluation2 = document.createElement('table');
+        $(tableEvaluation2).addClass('table');
+        $(tabPane2).append(tableEvaluation2);
+        var thead = document.createElement('thead');
+        $(tableEvaluation2).append(thead);
+        var tbodyEvaluation2 = document.createElement('tbody');
+        $(tableEvaluation2).append(tbodyEvaluation2);
+
+        $(thead).append('<tr><th>Ordre</th><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
+
+
+        function sortNumber2(a, b) {
+            return b.count - a.count;
+        }
+        data_source.reunions.evaluation.actions.sort(sortNumber2);
+        for (var i = 0; i < data_source.reunions.evaluation.actions.length; i++) {
+            if (i > 10)
+                break;
+            var line = document.createElement('tr');
+            $(tableEvaluation2).append(line);
+            $(line).append('<td>' + (i + 1) + '</td><td>' + data_source.reunions.evaluation.actions[i].name + '</td><td>' + data_source.reunions.evaluation.actions[i].count + '</td>')
+        }
 
 
     }
