@@ -154,7 +154,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(nav_tabs).attr("data-tabs", "tabs");
         $(nav_tabs_wrapper).append(nav_tabs);
 
-        $(nav_tabs).append('<li class="active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">date_range</i>Réunions<div class="ripple-container"></div></a></li>');
+        $(nav_tabs).append('<li class="reu_coor_tab active"><a href="#coordination" data-toggle="tab" aria-expanded="true"><i class="material-icons">date_range</i>Réunions<div class="ripple-container"></div></a></li>');
         $(nav_tabs).append('<li><a href="#top_act" data-toggle="tab" aria-expanded="false"><i class="material-icons">stars</i>Top 10 Actions<div class="ripple-container"></div></a></li>');
         $(nav_tabs).append('<li><a href="#top_pa" data-toggle="tab" aria-expanded="false"><i class="material-icons">stars</i>Top 5 Programmes Action<div class="ripple-container"></div></a></li>');
 
@@ -197,19 +197,24 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(tableCoordination).append(tbodyCoordination);
 
         var taux_par = ((data_source.reunions.coordination.particip / data_source.reunions.coordination.invit) * 100).toFixed(2)
-        var moyInv = Math.round(data_source.reunions.coordination.invit / data_source.reunions.count);
+        var moyInv = Math.round(data_source.reunions.coordination.invit / data_source.reunions.coordination.count);
         var tr1 = document.createElement('tr');
         $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
         $(tbodyCoordination).append(tr1);
 
         var tr2 = document.createElement('tr');
         var strP = ""
-        if (taux_par < 40)
+        if (taux_par < 40) {
             $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-danger">' + taux_par + '%</span></h3>');
-        else if (taux_par < 70)
+            $(cardHeader).attr("data-background-color", "red");
+        } else if (taux_par < 70) {
             $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-warning">' + taux_par + '%</span></h3>');
-        else
+            $(cardHeader).attr("data-background-color", "orange");
+        } else {
             $(tr2).append('<h3>Un taux de présence au réunions de <span class="text-sucess">' + taux_par + '%</span></h3>');
+            $(cardHeader).attr("data-background-color", "green");
+        }
+
         $(tbodyCoordination).append(tr2);
 
 
@@ -226,7 +231,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var tbodyCoordination2 = document.createElement('tbody');
         $(tableCoordination2).append(tbodyCoordination2);
 
-        $(thead).append('<tr><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
+        $(thead).append('<tr><th>Ordre</th><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
 
 
         function sortNumber2(a, b) {
@@ -238,7 +243,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
                 break;
             var line = document.createElement('tr');
             tbodyCoordination2.append(line);
-            $(line).append('<td>' + data_source.reunions.coordination.actions[i].name + '</td><td>' + data_source.reunions.coordination.actions[i].count + '</td>')
+            $(line).append('<td>' + (i + 1) + '</td><td>' + data_source.reunions.coordination.actions[i].name + '</td><td>' + data_source.reunions.coordination.actions[i].count + '</td>')
         }
 
 
@@ -256,7 +261,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var tbodyCoordination3 = document.createElement('tbody');
         $(tableCoordination3).append(tbodyCoordination3);
 
-        $(thead).append('<tr><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
+        $(thead).append('<tr><th>Ordre</th><th>Intitulé</th><th>Nombre de réunions programmées</th></tr>');
 
 
         function sortNumber2(a, b) {
@@ -264,11 +269,11 @@ odoo.define('pncevaluation.axe_one', function(require) {
         }
         data_source.reunions.coordination.pas.sort(sortNumber2);
         for (var i = 0; i < data_source.reunions.coordination.actions.length; i++) {
-            if (i > 10)
+            if (i > 5)
                 break;
             var line = document.createElement('tr');
             tbodyCoordination3.append(line);
-            $(line).append('<td>' + data_source.reunions.coordination.pas[i].name + '</td><td>' + data_source.reunions.coordination.pas[i].count + '</td>')
+            $(line).append('<td>' + (i + 1) + '</td><td>' + data_source.reunions.coordination.pas[i].name + '</td><td>' + data_source.reunions.coordination.pas[i].count + '</td>')
         }
 
 
