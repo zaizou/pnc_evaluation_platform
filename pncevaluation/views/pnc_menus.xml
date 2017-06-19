@@ -127,8 +127,7 @@
 -->
      
 
-         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
-		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="8"/>
+     
 
           <menuitem name="Axes" id="pnc_dash_axes_section"
 		  parent="menu_pnc_dashboard" sequence="9"/>
@@ -139,17 +138,105 @@
          <menuitem name="Tableau de bord" id="pnc_dash_ve_axeone_dash"
 		 action="pncevaluation_axe_one" parent="pnc_dash_axe_one_section" sequence="1"/>
 
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
+		 action="pncevaluation_axes_ve" parent="pnc_dash_axe_one_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axeone"
+		 action="board.open_board_my_dash_actionone" parent="pnc_dash_axe_one_section" sequence="9"/>
+
+
+            <menuitem name="Axe 02 " id="pnc_dash_axe_two_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axetwo_dash"
+		 action="pncevaluation_axe_two" parent="pnc_dash_axe_two_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_two"
+		 action="pncevaluation_axes_ve_two" parent="pnc_dash_axe_two_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axetwo"
+		 action="board.open_board_my_dash_actiontwo" parent="pnc_dash_axe_two_section" sequence="9"/>
+
+
+      <menuitem name="Axe 03 " id="pnc_dash_axe_three_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axethree_dash"
+		 action="pncevaluation_axe_three" parent="pnc_dash_axe_three_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_three"
+		 action="pncevaluation_axes_ve_three" parent="pnc_dash_axe_three_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axethree"
+		 action="board.open_board_my_dash_actionthree" parent="pnc_dash_axe_three_section" sequence="9"/>
+
+
+      <menuitem name="Axe 04 " id="pnc_dash_axe_four_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axefour_dash"
+		 action="pncevaluation_axe_four" parent="pnc_dash_axe_four_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_four"
+		 action="pncevaluation_axes_ve_four" parent="pnc_dash_axe_four_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axefour"
+		 action="board.open_board_my_dash_actionfour" parent="pnc_dash_axe_four_section" sequence="9"/>
+
+
+     <menuitem name="Axe 05 " id="pnc_dash_axe_five_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axefive_dash"
+		 action="pncevaluation_axe_five" parent="pnc_dash_axe_five_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_five"
+		 action="pncevaluation_axes_ve_five" parent="pnc_dash_axe_five_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axefive"
+		 action="board.open_board_my_dash_actionfive" parent="pnc_dash_axe_five_section" sequence="9"/>
+
+         <menuitem name="Axe 06 " id="pnc_dash_axe_six_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axesix_dash"
+		 action="pncevaluation_axe_six" parent="pnc_dash_axe_six_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_six"
+		 action="pncevaluation_axes_ve_six" parent="pnc_dash_axe_six_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axesix"
+		 action="board.open_board_my_dash_actionsix" parent="pnc_dash_axe_six_section" sequence="9"/>
+
+         <menuitem name="Axe 07 " id="pnc_dash_axe_seven_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axeseven_dash"
+		 action="pncevaluation_axe_seven" parent="pnc_dash_axe_seven_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_seven"
+		 action="pncevaluation_axes_ve_seven" parent="pnc_dash_axe_seven_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axeseven"
+		 action="board.open_board_my_dash_actionseven" parent="pnc_dash_axe_seven_section" sequence="9"/>
+
+         <menuitem name="Axe 08 " id="pnc_dash_axe_eight_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axeeight_dash"
+		 action="pncevaluation_axe_eight" parent="pnc_dash_axe_eight_section" sequence="1"/>
+
+         <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve_eight"
+		 action="pncevaluation_axes_ve_eight" parent="pnc_dash_axe_eight_section" sequence="8"/>
+
+         <menuitem name="Détail" id="pnc_dash_ve_axeeight"
+		 action="board.open_board_my_dash_actioneight" parent="pnc_dash_axe_eight_section" sequence="9"/>
+
       
 
 
      <menuitem name="Rapports" id="menu_pnc_reporting"
 		  parent="menu_php_evaluation" sequence="30"/>
-
-
-     
-
-         <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone"
-		 action="board.open_board_my_dash_actionone" parent="menu_pnc_reporting" sequence="9"/>
 
          <menuitem name="Axe 02 : Tableau de bord" id="pnc_dash_ve_axetwo"
 		 action="board.open_board_my_dash_actiontwo" parent="menu_pnc_reporting" sequence="9"/>
