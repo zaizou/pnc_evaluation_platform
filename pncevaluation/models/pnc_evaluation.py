@@ -65,14 +65,22 @@ class formulaire_evaluation(models.Model):
                 if fEval.realisation == u"très bien réalisée":
                     count_ml = count_tbr + 1
          if count >0:
-             avgAppr = avgAppr / count
-         return{
-             'count_tbr':count_tbr,
-             'count_br':count_br,
-             'count_pmbr':count_pmbr,
-             'count_ml':count_ml,
-             'appreciation':avgAppr
-         }
+            avgAppr = avgAppr / count
+            return{
+                'count_tbr':count_tbr,
+                'count_br':count_br,
+                'count_pmbr':count_pmbr,
+                'count_ml':count_ml,
+                'appreciation':avgAppr
+            }
+         else:
+            return{
+                'count_tbr':count_tbr,
+                'count_br':count_br,
+                'count_pmbr':count_pmbr,
+                'count_ml':count_ml,
+                'appreciation':-1
+            }
                  
 
 

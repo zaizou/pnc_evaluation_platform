@@ -319,6 +319,8 @@ class PNC_Evaluation(Controller):
             count_total = count_total + len( pa.actions_ids )
         if count_total>0:
             count_correspondence = count_correspondence/count_total
+        else:
+            count_correspondence = -1
 
         #reunions coordination
         coorORM = request.env['pncevaluation.reucoor']
