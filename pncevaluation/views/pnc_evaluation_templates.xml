@@ -8,6 +8,13 @@
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_view.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_graph.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_one.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_two.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_three.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_four.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_five.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_six.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_seven.js"></script>
+                <script type="text/javascript" src="/pncevaluation/static/src/js/axes_dashboard/axe_eight.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/material.min.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/chartist.min.js"></script>
                 <script type="text/javascript" src="/pncevaluation/static/src/js/material-dashboard.js"></script>

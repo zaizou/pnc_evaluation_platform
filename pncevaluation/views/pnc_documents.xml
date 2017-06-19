@@ -68,10 +68,80 @@
 			</field>
 		</record>
 
+		
+		<record model="ir.ui.view" id="axepnc_axe_two">
+			<field name="name">axepnc.axe_two</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_two></axe_two>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_three">
+			<field name="name">axepnc.axe_three</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_three></axe_three>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_three">
+			<field name="name">axepnc.axe_three</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_three></axe_three>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_four">
+			<field name="name">axepnc.axe_four</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_four></axe_four>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_five">
+			<field name="name">axepnc.axe_five</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_five></axe_five>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepncaxe_six">
+			<field name="name">axepnc.axe_six</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_six></axe_six>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_seven">
+			<field name="name">axepnc.axe_seven</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_seven></axe_seven>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_eight">
+			<field name="name">axepnc.axe_eight</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_eight></axe_eight>
+			</field>
+		</record>
+
+		
+
 		<record model="ir.actions.act_window" id="pncevaluation_axe_one">
 			<field name="name">Axe 01 : Dashboard</field>
 			<field name="res_model">pncevaluation.axepnc</field>
-			<field name="view_mode">axe_one</field>
+			<field name="view_mode">axe_one,axe_two,axe_eight</field>
 		</record>
 
 
