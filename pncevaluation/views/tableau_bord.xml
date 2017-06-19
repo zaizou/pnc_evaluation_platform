@@ -18,18 +18,18 @@
 			</field>
 		</record>
 
-		<record model="ir.ui.view" id="axepnc_axes_graphs">
-			<field name="name">axepnc.axes_graphs</field>
+		<record model="ir.ui.view" id="axepnc_axes">
+			<field name="name">axepnc.axes</field>
 			<field name="model">pncevaluation.axepnc</field>
 			<field name="arch" type="xml">
-				<axes_graphs></axes_graphs>
+				<axes></axes>
 			</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_gen">
 			<field name="name">Vue d'ensemble des axes</field>
 			<field name="res_model">pncevaluation.axepnc</field>
-			<field name="view_mode">axes_graphs</field>
+			<field name="view_mode">axes</field>
 		</record>
 
 
