@@ -203,10 +203,6 @@ odoo.define('pncevaluation.axes', function(require) {
             var axeCt = document.createElement('td');
             $(avn_line).append(axeCt);
             $(axeCt).addClass("pnc");
-
-
-
-
             $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axes[i].stats.compre / countResSat) * 100).toFixed(2) + '%</h5> </td></tr> ');
         }
         $(avn_line).append('<td>100%</td>');
@@ -272,11 +268,8 @@ odoo.define('pncevaluation.axes', function(require) {
             var axeCt = document.createElement('td');
             $(eval_line).append(axeCt);
             $(axeCt).addClass("pnc");
-
-
-
             $(axeCt).append('<tr class="pnc"><td class="pnc" ><h5>' + ((axes[i].fe_ids.length / countEval) * 100).toFixed(2) + '%</h5> </td></tr> ');
-            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axes[i].fi_ids.length / countInsp) * 100).toFixed(2) + '%</h5></td></tr>');
+            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((countInsp > 0) ? ((axes[i].fi_ids.length / countInsp) * 100).toFixed(2) : 0) + '%</h5></td></tr>');
         }
         $(eval_line).append('<td>100%</td>');
     }

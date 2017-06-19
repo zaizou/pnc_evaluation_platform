@@ -131,7 +131,8 @@
 
               <menuitem name="Vue d'ensemble" id=" pnc_dash_axes_vue_ensem"
 		  action="pncevaluation_axes_gen" parent="pnc_dash_gen_section" sequence="1"/>
-      
+              <menuitem name="Rapports" id=" pnc_dash_axes_vue_ensem_graph"
+		  action="board.open_board_my_dash_actionglo" parent="pnc_dash_gen_section" sequence="1"/>
 
 
      

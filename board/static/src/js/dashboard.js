@@ -43,6 +43,9 @@ odoo.define('board.dashboard', function(require) {
             case "board.boardeight":
                 boardNumber = "eight";
                 return "08";
+            case "board.boardglo":
+                boardNumber = "glo";
+                return "";
         }
     }
 
@@ -71,6 +74,8 @@ odoo.define('board.dashboard', function(require) {
             this.$el.addClass('o_dashboard');
             console.log("Board definition :");
             console.log(this);
+
+            $('div.o_cp_left').attr('style', 'display:none');
 
             this.set_title = "Tableau de bord  Axe : " + setBoardNumber(self.view.model);
 
@@ -357,6 +362,9 @@ odoo.define('board.dashboard', function(require) {
                 action_manager = view_manager.getParent();
             this.view.destroy();
             action_manager.do_action(view_manager.action);
+        },
+        destroy: function() {
+            $('div.o_cp_left').attr('style', 'display:');
         }
     });
 
