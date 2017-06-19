@@ -712,10 +712,10 @@ odoo.define('pncevaluation.axe_one', function(require) {
         $(divQf).addClass("col-lg-3 col-md-6 col-sm-6");
         $(rowQualite).append(divQf);
 
-        draw_elem_qualite(divQo, "Très bien réalisées", "156", "Actions", "star_rate", "green");
-        draw_elem_qualite(divQt, "Bien réalisées", "156", "Actions", "thumb_up", "blue");
-        draw_elem_qualite(divQth, "Plus ou moin bien réalisées", "156", "Actions", "thumbs_up_down", "orange");
-        draw_elem_qualite(divQf, "Mal réalisées", "156", "Actions", "thumb_down", "red");
+        draw_elem_qualite(divQo, "Très bien réalisées", "" + data_source.count_qualite.count_tbr, " appréciations", "star_rate", "green");
+        draw_elem_qualite(divQt, "Bien réalisées", "" + data_source.count_qualite.count_br, " appréciations", "thumb_up", "blue");
+        draw_elem_qualite(divQth, "Plus ou moin bien réalisées", "" + data_source.count_qualite.count_pmbr, " appréciations", "thumbs_up_down", "orange");
+        draw_elem_qualite(divQf, "Mal réalisées", "" + data_source.count_qualite.count_ml, " appréciations", "thumb_down", "red");
     }
 
 
