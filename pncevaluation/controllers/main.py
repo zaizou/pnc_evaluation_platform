@@ -143,13 +143,43 @@ class PNC_Evaluation(Controller):
     @route('/pncevaluation/get_axes_stats', type='json', auth='user')
     def get_stats_axes(self,axes_ids,date_debut,date_fin):
         #2Budget #1resultat satifaisants #   realisation
+        count_axes = 0
+        tota_count_reu_coor = 0
+        tota_count_reu_eval = 0
+        tota_count_reu_coor = 0
+        count_pas = 0
+        tot_bud_est = 0
+        tot_bud_reel = 0
+        count_insp = 0
+        count_sat_pqs = 0
+        #  'axe_id':axe_id,
+        #         'reunions_coord': len(reunsC),
+        #         'reunions_eval': len(reunsE),
+        #         'plans_action': len(pas),
+        #         'budget_estim': budgeEst,
+        #         'budget_reel': budgetReel,
+        #         'taux_real':apppreciation_axe,
+        #         'eval_sub':evals,
+        #         'inspec':len(insp),
+        #         'compre':len(compre3)
+
         elements = []
+        _logger.warning(u"----- Axes")
         for axe_id in axes_ids:
             reORM = request.env['pncevaluation.reucoor']
-            reunsC = reORM.search([('axe_id', '=', axe_id)])
+            reunsC = reORM.search([('user_id', '=', axe_id)])
 
             re_ev_ORM = request.env['pncevaluation.reueval']
-            reunsE = re_ev_ORM.search([('axe_id', '=', axe_id)])
+            reunsE = re_ev_ORM.search([('user_id', '=', axe_id)])
+
+            _logger.warning(u"----- Axe  i")
+            _logger.warning(axe_id)
+            _logger.warning(u"----- Reun Coord")
+            _logger.warning(reunsC)
+            _logger.warning(u"----- Reun Coord len")
+            _logger.warning(len(reunsC))
+            _logger.warning(u"----- Reun Eval")
+            _logger.warning(reunsE)
 
             paORM = request.env['pncevaluation.pa']
             pas = paORM.search([('axe_id', '=', axe_id)])
@@ -174,7 +204,14 @@ class PNC_Evaluation(Controller):
             compre2 =appORM.search([('axe_id', '=', axe_id),('res_attend','=',u"plus que satisfaisants")])
             compre3=compre1 | compre2
 
-
+            count_axes = count_axes +1
+            tota_count_reu_coor = tota_count_reu_coor +len(reunsC)
+            tota_count_reu_eval = tota_count_reu_eval + len(reunsE)
+            count_pas = count_pas + len(pas)
+            tot_bud_est = tot_bud_est +budgeEst
+            tot_bud_reel = tot_bud_reel + budgetReel
+            count_insp = count_insp + len(insp)
+            count_sat_pqs = count_sat_pqs + len(compre3)
 
             ret = {
                 'axe_id':axe_id,
@@ -189,6 +226,17 @@ class PNC_Evaluation(Controller):
                 'compre':len(compre3)
             }
             elements.append(ret)
+            # elements.append({
+            #     'count_axes':count_axes,
+            #     'tota_count_reu_coor':tota_count_reu_coor,
+            #     'tota_count_reu_eval':tota_count_reu_eval,
+            #     'count_pas':count_pas,
+            #     'tot_bud_est':tot_bud_est,
+            #     'tot_bud_reel':tot_bud_reel,
+            #     'count_insp':count_insp,
+            #     'count_sat_pqs':count_sat_pqs
+
+            # })
         return elements
     
     @route('/pncevaluation/get_budgets', type='json', auth='user')
