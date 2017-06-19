@@ -15,6 +15,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/pnc_documents.xml',
+        'views/tableau_bord.xml',
         'views/contributeur.xml',
         'views/pnc_evaluation.xml',
         'views/pnc_suivi.xml',

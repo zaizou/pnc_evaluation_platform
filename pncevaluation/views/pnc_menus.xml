@@ -130,8 +130,14 @@
          <menuitem name="Vue d'ensemble des axes" id="pnc_dash_ve"
 		 action="pncevaluation_axes_ve" parent="menu_pnc_dashboard" sequence="8"/>
 
-         <menuitem name="Axe 01 : Tableau de bord" id="pnc_dash_ve_axeone_dash"
-		 action="pncevaluation_axe_one" parent="menu_pnc_dashboard" sequence="9"/>
+          <menuitem name="Axes" id="pnc_dash_axes_section"
+		  parent="menu_pnc_dashboard" sequence="9"/>
+
+            <menuitem name="Axe 01 " id="pnc_dash_axe_one_section"
+		  parent="pnc_dash_axes_section" sequence="1"/>
+
+         <menuitem name="Tableau de bord" id="pnc_dash_ve_axeone_dash"
+		 action="pncevaluation_axe_one" parent="pnc_dash_axe_one_section" sequence="1"/>
 
       
 

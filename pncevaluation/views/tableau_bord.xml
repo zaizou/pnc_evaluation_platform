@@ -1,0 +1,174 @@
+<odoo>
+  <data>
+
+
+        <record model="ir.ui.view" id="axepnc_esi_view">
+			<field name="name">axepnc.esi</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<esi></esi>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axes_view">
+			<field name="name">axepnc.axes</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axes></axes>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axes_graphs">
+			<field name="name">axepnc.axes_graphs</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axes_graphs></axes_graphs>
+			</field>
+		</record>
+
+
+		<record model="ir.actions.act_window" id="pncevaluation_axes">
+			<field name="name">Axes d'orientation</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">kanban,esi,axes,tree,form,graph</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axes_ve">
+			<field name="name">Vue d'ensemble des axes</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">esi,axes,axes_graphs</field>
+		</record>
+
+
+
+    	<record model="ir.ui.view" id="axepnc_axe_one">
+			<field name="name">axepnc.axe_one</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_one></axe_one>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_two">
+			<field name="name">axepnc.axe_two</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_two></axe_two>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_three">
+			<field name="name">axepnc.axe_three</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_three></axe_three>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_three">
+			<field name="name">axepnc.axe_three</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_three></axe_three>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_four">
+			<field name="name">axepnc.axe_four</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_four></axe_four>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_five">
+			<field name="name">axepnc.axe_five</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_five></axe_five>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepncaxe_six">
+			<field name="name">axepnc.axe_six</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_six></axe_six>
+			</field>
+		</record>
+
+		
+		<record model="ir.ui.view" id="axepnc_axe_seven">
+			<field name="name">axepnc.axe_seven</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_seven></axe_seven>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="axepnc_axe_eight">
+			<field name="name">axepnc.axe_eight</field>
+			<field name="model">pncevaluation.axepnc</field>
+			<field name="arch" type="xml">
+				<axe_eight></axe_eight>
+			</field>
+		</record>
+
+		
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_one">
+			<field name="name">Axe 01 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_one</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_two">
+			<field name="name">Axe 02 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_two</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_three">
+			<field name="name">Axe 03 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_three</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_four">
+			<field name="name">Axe 04 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_four</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_five">
+			<field name="name">Axe 05 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_five</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_six">
+			<field name="name">Axe 06 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_six</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_seven">
+			<field name="name">Axe 07 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_seven</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pncevaluation_axe_eight">
+			<field name="name">Axe 08 : Dashboard</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axe_eight</field>
+		</record>
+
+
+
+
+  </data>
+</odoo>

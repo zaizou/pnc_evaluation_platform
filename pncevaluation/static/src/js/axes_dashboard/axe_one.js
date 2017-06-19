@@ -52,7 +52,8 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         },
         do_search: function(domains, contexts, group_bys) {
-            $(container).empty();
+
+            $('.o_control_panel').attr('style', 'display:none');
 
             var self = this;
             var isAxeVide = true;
@@ -65,6 +66,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
                     context: contexts
                 }).then(function(data) {
                     self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 1 }).done(function(result) {
+                        $(container).empty();
                         console.log("Stats Axe 01 :::");
                         console.log(result);
                         container = document.createElement('div');
@@ -86,6 +88,9 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
                 });
             });
+        },
+        destroy: function() {
+            $('.o_control_panel').attr('style', 'display:');
         }
 
     });

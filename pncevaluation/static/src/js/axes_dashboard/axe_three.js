@@ -52,8 +52,8 @@ odoo.define('pncevaluation.axe_three', function(require) {
 
         },
         do_search: function(domains, contexts, group_bys) {
-            $(container).empty();
 
+            $('.o_control_panel').attr('style', 'display:none');
             var self = this;
             var isAxeVide = true;
             var fields = _.compact(_.map(["id", "name"], function(key) {
@@ -64,7 +64,8 @@ odoo.define('pncevaluation.axe_three', function(require) {
                     domain: domains,
                     context: contexts
                 }).then(function(data) {
-                    self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 1 }).done(function(result) {
+                    self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 3 }).done(function(result) {
+                        $(container).empty();
                         console.log("Stats Axe 01 :::");
                         console.log(result);
                         container = document.createElement('div');
@@ -86,7 +87,11 @@ odoo.define('pncevaluation.axe_three', function(require) {
 
                 });
             });
+        },
+        destroy: function() {
+            $('.o_control_panel').attr('style', 'display:');
         }
+
 
     });
 
@@ -196,26 +201,41 @@ odoo.define('pncevaluation.axe_three', function(require) {
         var tbodyCoordination = document.createElement('tbody');
         $(tableCoordination).append(tbodyCoordination);
 
-        var taux_par = ((data_source.reunions.coordination.particip / data_source.reunions.coordination.invit) * 100).toFixed(2)
-        var moyInv = Math.round(data_source.reunions.coordination.invit / data_source.reunions.coordination.count);
-        var tr1 = document.createElement('tr');
-        $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
-        $(tbodyCoordination).append(tr1);
+        var taux_par;
+        var moyInv
+        if (data_source.reunions.coordination.invit > 0)
+            taux_par = ((data_source.reunions.coordination.particip / data_source.reunions.coordination.invit) * 100).toFixed(2)
+        else
+            taux_par = -1;
+        if (data_source.reunions.coordination.count > 0)
+            moyInv = Math.round(data_source.reunions.coordination.invit / data_source.reunions.coordination.count);
+        else moyInv = -1;
 
-        var tr2 = document.createElement('tr');
-        var strP = ""
-        if (taux_par < 40) {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "red");
-        } else if (taux_par < 70) {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "orange");
+
+        if (taux_par > 0 && moyInv > 0) {
+
+
+            var tr1 = document.createElement('tr');
+            $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
+            $(tbodyCoordination).append(tr1);
+
+            var tr2 = document.createElement('tr');
+            var strP = ""
+            if (taux_par < 40) {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "red");
+            } else if (taux_par < 70) {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "orange");
+            } else {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "green");
+            }
+
+            $(tbodyCoordination).append(tr2);
         } else {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "green");
+            $(cardHeader).attr("data-background-color", "grey");
         }
-
-        $(tbodyCoordination).append(tr2);
 
 
         var tabPane2 = document.createElement('div');
@@ -352,26 +372,40 @@ odoo.define('pncevaluation.axe_three', function(require) {
         var tbodyEvaluation = document.createElement('tbody');
         $(tableEvaluation).append(tbodyEvaluation);
 
-        var taux_par = ((data_source.reunions.evaluation.particip / data_source.reunions.evaluation.invit) * 100).toFixed(2)
-        var moyInv = Math.round(data_source.reunions.evaluation.invit / data_source.reunions.evaluation.count);
-        var tr1 = document.createElement('tr');
-        $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
-        $(tbodyEvaluation).append(tr1);
+        var taux_par = 0;
+        if (data_source.reunions.evaluation.invit > 0)
+            taux_par = ((data_source.reunions.evaluation.particip / data_source.reunions.evaluation.invit) * 100).toFixed(2)
+        else
+            taux_par = -1;
+        var moyInv = 0
+        if (data_source.reunions.evaluation.count > 0)
+            moyInv = Math.round(data_source.reunions.evaluation.invit / data_source.reunions.evaluation.count);
+        else
+            moyInv = -1;
 
-        var tr2 = document.createElement('tr');
-        var strP = ""
-        if (taux_par < 40) {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "red");
-        } else if (taux_par < 70) {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "orange");
+        if (taux_par > 0 && moyInv > 0) {
+            var tr1 = document.createElement('tr');
+            $(tr1).append('<h3>Une moyenne de ' + moyInv + ' invités par réunion</h3>');
+            $(tbodyEvaluation).append(tr1);
+
+            var tr2 = document.createElement('tr');
+            var strP = ""
+            if (taux_par < 40) {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-danger">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "red");
+            } else if (taux_par < 70) {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-warning">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "orange");
+            } else {
+                $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
+                $(cardHeader).attr("data-background-color", "green");
+            }
+
+            $(tbodyEvaluation).append(tr2);
         } else {
-            $(tr2).append('<h3>Taux de présence au réunions : <span class="text-success">' + taux_par + '%</span></h3>');
-            $(cardHeader).attr("data-background-color", "green");
+            $(cardHeader).attr("data-background-color", "grey");
         }
 
-        $(tbodyEvaluation).append(tr2);
 
 
         var tabPane2 = document.createElement('div');
@@ -437,36 +471,44 @@ odoo.define('pncevaluation.axe_three', function(require) {
         var tab = document.createElement('table');
         $(cardOContent).append(tab);
 
-        var tauxRD = ((data_source.count_retard_fin / data_source.count_total_act) * 100).toFixed(2);
+        var tauxRD
+        if (data_source.count_total_act > 0)
+            tauxRD = ((data_source.count_retard_fin / data_source.count_total_act) * 100).toFixed(2);
+        else
+            tauxRD = -1;
 
+        if (tauxRD > 0) {
+            var tr1 = document.createElement('tr');
+            if (tauxRD > 50) {
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
+                $(cardOHeader).attr("data-background-color", "red");
+            } else if (tauxRD > 0) {
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
+                $(cardOHeader).attr("data-background-color", "orange");
+            } else {
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
+                $(cardOHeader).attr("data-background-color", "green");
+            }
+            var tauxRF = ((data_source.count_retard_debut / data_source.count_total_act) * 100).toFixed(2);
+            var tr2 = document.createElement('tr');
+            if (tauxRF > 50) {
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
+                $(cardOHeader).attr("data-background-color", "red");
+            } else if (tauxRF > 0 && tauxRD < 50) {
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
+                $(cardOHeader).attr("data-background-color", "orange");
+            }
+            if (tauxRF == 0 && tauxRD == 0) {
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
+                $(cardOHeader).attr("data-background-color", "green");
+            }
 
-        var tr1 = document.createElement('tr');
-        if (tauxRD > 50) {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
-            $(cardOHeader).attr("data-background-color", "red");
-        } else if (tauxRD > 0) {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
-            $(cardOHeader).attr("data-background-color", "orange");
+            $(tab).append(tr1);
+            $(tab).append(tr2);
         } else {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
-            $(cardOHeader).attr("data-background-color", "green");
-        }
-        var tauxRF = ((data_source.count_retard_debut / data_source.count_total_act) * 100).toFixed(2);
-        var tr2 = document.createElement('tr');
-        if (tauxRF > 50) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
-            $(cardOHeader).attr("data-background-color", "red");
-        } else if (tauxRF > 0 && tauxRD < 50) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
-            $(cardOHeader).attr("data-background-color", "orange");
-        }
-        if (tauxRF == 0 && tauxRD == 0) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
-            $(cardOHeader).attr("data-background-color", "green");
+            $(cardOHeader).attr("data-background-color", "grey");
         }
 
-        $(tab).append(tr1);
-        $(tab).append(tr2);
 
 
 
@@ -585,7 +627,8 @@ odoo.define('pncevaluation.axe_three', function(require) {
             $(cardQo).append(cardOHeader);
             $(cardOHeader).append(chart);
             if (chart_id == "budget_chart")
-                draw_budget_chart();
+                if (data_source.budgets.length > 0)
+                    draw_budget_chart();
         }
 
 
@@ -600,9 +643,10 @@ odoo.define('pncevaluation.axe_three', function(require) {
         var title = document.createElement('h3');
         $(title).addClass("title");
         if (chart_id == "budget_chart") {
-            var ecartLastyear = (data_source.budgets[data_source.budgets.length - 1].ecart) * 100;
-            var lastYear = data_source.budgets[data_source.budgets.length - 1].annee;
+            var ecartLastyear = 0;
             if (data_source.budgets.length >= 2) {
+                ecartLastyear = (data_source.budgets[data_source.budgets.length - 1].ecart) * 100;
+                var lastYear = data_source.budgets[data_source.budgets.length - 1].annee;
                 var prelastYear = data_source.budgets[data_source.budgets.length - 2].annee;
                 var ecratPrelastYear = (data_source.budgets[data_source.budgets.length - 2].ecart) * 100;
 
@@ -639,30 +683,44 @@ odoo.define('pncevaluation.axe_three', function(require) {
 
 
             var txtEcart;
-            if (ecartLastyear > 0) {
-                txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear.toFixed(2) + '%  Restant )</big>'
-                $(cardOHeader).attr("data-background-color", "green");
-            } else if (ecartLastyear < 0) {
-                txtEcart = '<space></space><big class="text-danger"> ( Dépassé de ' + (-ecartLastyear).toFixed(2) + '%  ) </big>'
-                $(cardOHeader).attr("data-background-color", "red");
+            if (data_source.budgets.length > 0) {
+                if (ecartLastyear > 0) {
+                    txtEcart = '<space></space><big class="text-success"> ( ' + ecartLastyear.toFixed(2) + '%  Restant )</big>'
+                    $(cardOHeader).attr("data-background-color", "green");
+                } else if (ecartLastyear < 0) {
+                    txtEcart = '<space></space><big class="text-danger"> ( Dépassé de ' + (-ecartLastyear).toFixed(2) + '%  ) </big>'
+                    $(cardOHeader).attr("data-background-color", "red");
+                } else {
+                    txtEcart = '<space></space><big class="text-warning">( Consommé )' + ecartLastyear.toFixed(2) + ' </big>'
+                    $(cardOHeader).attr("data-background-color", "orange");
+                }
             } else {
-                txtEcart = '<space></space><big class="text-warning">( Consommé )' + ecartLastyear.toFixed(2) + ' </big>'
-                $(cardOHeader).attr("data-background-color", "orange");
+                txtEcart = '<space></space><big class="text-warning">( Non encore introduit )' + ' </big>'
+                $(cardOHeader).attr("data-background-color", "grey");
+                $(cardOHeader).removeClass("card-chart");
             }
+
             str2 = data + txtEcart + '<smal>' + unit + '</smal>'
         }
         if (chart_id == "appr_chart") {
-            draw_appreciation_chart();
-            if (data_source.count_qualite.appreciation < 40) {
-                txtEcart = '<big class="text-danger"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
-                $(cardOHeader).attr("data-background-color", "red");
-            } else if (data_source.count_qualite.appreciation < 70) {
-                txtEcart = '<big class="text-warning"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
-                $(cardOHeader).attr("data-background-color", "orange");
+            if (data_source.count_qualite.appreciation > 0) {
+                draw_appreciation_chart();
+                if (data_source.count_qualite.appreciation < 40) {
+                    txtEcart = '<big class="text-danger"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                    $(cardOHeader).attr("data-background-color", "red");
+                } else if (data_source.count_qualite.appreciation < 70) {
+                    txtEcart = '<big class="text-warning"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                    $(cardOHeader).attr("data-background-color", "orange");
+                } else {
+                    txtEcart = '<big class="text-success"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                    $(cardOHeader).attr("data-background-color", "green");
+                }
             } else {
-                txtEcart = '<big class="text-success"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
-                $(cardOHeader).attr("data-background-color", "green");
+                txtEcart = '<big class="text-warning"> (Non calculée)</big>'
+                $(cardOHeader).attr("data-background-color", "grey");
+                $(cardOHeader).removeClass("card-chart");
             }
+
 
             str2 = data + txtEcart;
             //strP = data + txtEcart;
@@ -671,17 +729,24 @@ odoo.define('pncevaluation.axe_three', function(require) {
         }
 
         if (chart_id == "corr_chart") {
-            data_source.correspond *= 100;
-            if (data_source.correspond < 40) {
-                txtEcart = '<big class="text-danger">( ' + data_source.correspond + '% des actions de PA )</big>'
-                $(cardOHeader).attr("data-background-color", "red");
-            } else if (data_source.correspond < 70) {
-                txtEcart = '<big class="text-warning">( ' + data_source.correspond + '% des actions de PA )</big>'
-                $(cardOHeader).attr("data-background-color", "orange");
+            if (data_source.correspond > 0) {
+                data_source.correspond *= 100;
+                if (data_source.correspond < 40) {
+                    txtEcart = '<big class="text-danger">( ' + data_source.correspond + '% des actions de PA )</big>'
+                    $(cardOHeader).attr("data-background-color", "red");
+                } else if (data_source.correspond < 70) {
+                    txtEcart = '<big class="text-warning">( ' + data_source.correspond + '% des actions de PA )</big>'
+                    $(cardOHeader).attr("data-background-color", "orange");
+                } else {
+                    txtEcart = '<big class="text-sucess">( ' + data_source.correspond + '% des actions de PA )</big>'
+                    $(cardOHeader).attr("data-background-color", "green");
+                }
             } else {
-                txtEcart = '<big class="text-sucess">( ' + data_source.correspond + '% des actions de PA )</big>'
-                $(cardOHeader).attr("data-background-color", "green");
+                txtEcart = '<big class="text-warning"> (Non calculé)</big>'
+                $(cardOHeader).attr("data-background-color", "grey");
+                $(cardOHeader).removeClass("card-chart");
             }
+
             str2 = data + txtEcart;
         }
         $(title).append(str2);
