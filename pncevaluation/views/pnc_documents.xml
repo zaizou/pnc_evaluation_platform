@@ -12,6 +12,7 @@
 						<group>
                             <field name="name" />
 							<field name="numero" />
+							<field name="description" />
 							<field name="focus" />
 							<field name="color"/>
 							<field name="budgets_ids" />
@@ -30,6 +31,7 @@
 			<field name="arch" type="xml">
 					<tree string="Axe">
                             <field name="name" />
+							
 							<field name="focus" />
 							<field name="budget_estime" />
 					</tree>
@@ -83,6 +85,7 @@
 						<group>
                             <field name="name" />
 							<field name="numero" />
+							<field name="description" />
 
 							<field name="date_debut_p" />
 							<field name="date_debut_r" />
@@ -118,6 +121,7 @@
 						<group>
                             <field name="name" />
 							<field name="numero" />
+							<field name="description" />
 						</group>
 					</sheet>
 				</form>

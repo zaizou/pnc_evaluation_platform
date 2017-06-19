@@ -19,7 +19,7 @@ class AxePNC(models.Model):
     _description = u"Axe du plan national cancer"
     name = fields.Char(u"Intitulé de l\'axe",required=True, translate=True)
     numero = fields.Integer(u"Numéro de l axe",required=True)
-    description = fields.Char(u"Description de l\'axe")
+    description = fields.Text(u"Description de l\'axe")
     color = fields.Integer(u"Couleur",default=1)
     budgets_ids = fields.One2many('pncevaluation.budgetpnc','axe_id',u"Budgets")
     focus = fields.Char('Focus de l\'Axe',required=True, translate=True)
@@ -39,7 +39,7 @@ class ObjectifPNC(models.Model):
     _description = u"Objectif du plan national cancer"
     name = fields.Char(u"Intitulé de de l\'objectif")
     numero = fields.Integer(u"Numéro de l\'objectif",required=True, translate=True)
-    description = fields.Char(u"Description")
+    description = fields.Text(u"Description")
     axelie_id = fields.Many2one('pncevaluation.axe_pnc',string='Axe lié', ondelete='SET NULL')
     actions_ids = fields.One2many('pncevaluation.actionpnc','objectiflie_id',string="Actions")
     action_programs_ids = fields.Many2many('pncevaluation.pa',string="Programmes d\'actions")
@@ -49,6 +49,8 @@ class ActionPNC(models.Model):
     _name = 'pncevaluation.actionpnc'
     _description = u"Action du plan national cancer"
     name = fields.Char(u"Intitulé de l\'action",required=True, translate=True)
+    description = fields.Text(u"Description")
+
     numero = fields.Integer(u"Numéro de l\'action")
     objectiflie_id = fields.Many2one('pncevaluation.objectifpnc',string='Objectif lié', ondelete='SET NULL')
     mesures_ids = fields.One2many('pncevaluation.mesurepnc','actionlie_id',string="Mesures")
@@ -73,6 +75,7 @@ class MesurePNC(models.Model):
     _name = 'pncevaluation.mesurepnc'
     _description = u"Objectif du plan national cancer"
     name = fields.Char('Intitulé de de la mesure')
+    description = fields.Text(u"Description")
     numero = fields.Integer(u"Numéro de la mesure")
     actionlie_id = fields.Many2one('pncevaluation.actionpnc',string='Action liée', ondelete='SET NULL')
     # add  pnc_program_idd 

@@ -152,6 +152,8 @@ odoo.define('pncevaluation.axes', function(require) {
         var reu_coord_sum = 0;
         var reu_eval_sum = 0;
         var pas_sum = 0;
+        totBE = 0;
+        totBR = 0;
         for (var j = 0; j < axesTable.length; j++) {
             console.log("reun coord length");
 
