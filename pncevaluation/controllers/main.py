@@ -445,7 +445,7 @@ class PNC_Evaluation(Controller):
 
 
         axe_orm = request.env['pncevaluation.axepnc']
-        axe_objects = axe_orm.search([])
+        axe_objects = axe_orm.search([('numero','=',numero_axe)])
         fmt = '%Y-%m-%d'
         retard_debut = 0
         retard_fin = 0
