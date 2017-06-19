@@ -125,7 +125,14 @@
   <!--       <menuitem name="Génération d'un rapport" id="report_gen"
 		 action="bi_view_editor.action_bi_view_editor_view_form" parent="menu_pnc_dashboard" sequence="0"/>
 -->
-     
+
+        <menuitem name="Général" id="pnc_dash_gen_section"
+		  parent="menu_pnc_dashboard" sequence="8"/>
+
+              <menuitem name="Vue d'ensemble" id=" pnc_dash_axes_vue_ensem"
+		  action="pncevaluation_axes_gen" parent="pnc_dash_gen_section" sequence="1"/>
+      
+
 
      
 
@@ -233,41 +240,6 @@
 		 action="board.open_board_my_dash_actioneight" parent="pnc_dash_axe_eight_section" sequence="9"/>
 
       
-
-
-     <menuitem name="Rapports" id="menu_pnc_reporting"
-		  parent="menu_php_evaluation" sequence="30"/>
-
-         <menuitem name="Axe 02 : Tableau de bord" id="pnc_dash_ve_axetwo"
-		 action="board.open_board_my_dash_actiontwo" parent="menu_pnc_reporting" sequence="9"/>
-
-         <menuitem name="Axe 03 : Tableau de bord" id="pnc_dash_ve_axethree"
-		 action="board.open_board_my_dash_actionthree" parent="menu_pnc_reporting" sequence="9"/>
-
-         <menuitem name="Axe 04 : Tableau de bord" id="pnc_dash_ve_axefour"
-		 action="board.open_board_my_dash_actionfour" parent="menu_pnc_reporting" sequence="9"/>
-
-
-         <menuitem name="Axe 05 : Tableau de bord" id="pnc_dash_ve_axefive"
-		 action="board.open_board_my_dash_actionfive" parent="menu_pnc_reporting" sequence="9"/>
-
-         <menuitem name="Axe 06 : Tableau de bord" id="pnc_dash_ve_axesix"
-		 action="board.open_board_my_dash_actionsix" parent="menu_pnc_reporting" sequence="9"/>
-
-         <menuitem name="Axe 07 : Tableau de bord" id="pnc_dash_ve_axeseven"
-		 action="board.open_board_my_dash_actionseven" parent="menu_pnc_reporting" sequence="9"/>
-
-         <menuitem name="Axe 08 : Tableau de bord" id="pnc_dash_ve_axeeight"
-		 action="board.open_board_my_dash_actioneight" parent="menu_pnc_reporting" sequence="9"/>
-
-
-
-<!--
-         <menuitem name="Tableau de bord M" id="pnc_dash_test"
-		 action="pncevaluation_dash" parent="menu_pnc_dashboard" sequence="10"/>
--->
-
-         
 
 
          <menuitem name="Configuration" id="pnc_evaluation_config"

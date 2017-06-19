@@ -26,6 +26,13 @@
 			</field>
 		</record>
 
+		<record model="ir.actions.act_window" id="pncevaluation_axes_gen">
+			<field name="name">Vue d'ensemble des axes</field>
+			<field name="res_model">pncevaluation.axepnc</field>
+			<field name="view_mode">axes_graphs</field>
+		</record>
+
+
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes">
 			<field name="name">Axes d'orientation</field>
@@ -34,56 +41,56 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 01</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','1')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_two">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 02</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','2')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_three">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 03</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','3')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_four">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 04</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','4')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_five">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 05</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','5')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_six">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 06</field>
 			<field name="res_model">pncevaluation.axepnc</field>
-			<field name="domain">[('numero','=','2')]</field>
+			<field name="domain">[('numero','=','6')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_seven">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 07</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','7')]</field>
 			<field name="view_mode">esi</field>
 		</record>
 
 		<record model="ir.actions.act_window" id="pncevaluation_axes_ve_eight">
-			<field name="name">Vue d'ensemble des axes</field>
+			<field name="name">Vue d'ensemble de l'axe 08</field>
 			<field name="res_model">pncevaluation.axepnc</field>
 			<field name="domain">[('numero','=','8')]</field>
 			<field name="view_mode">esi</field>
