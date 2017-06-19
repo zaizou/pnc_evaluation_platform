@@ -65,6 +65,7 @@ odoo.define('pncevaluation.axe_five', function(require) {
                     context: contexts
                 }).then(function(data) {
                     self.rpc("/pncevaluation/get_dashboard_stats", { numero_axe: 5 }).done(function(result) {
+                        $('.o_control_panel').attr('style', 'display:none');
                         $(container).empty();
                         console.log("Stats Axe 01 :::");
                         console.log(result);

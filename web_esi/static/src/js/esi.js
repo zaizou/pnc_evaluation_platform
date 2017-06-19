@@ -59,7 +59,7 @@ odoo.define('web_esi.esi', function(require) {
         },
         do_search: function(domains, contexts, group_bys) {
             $(container).empty();
-
+            $('.o_control_panel').attr('style', 'display:none');
             var self = this;
             var isAxeVide = true;
             var fields = _.compact(_.map(["id", "name"], function(key) {
@@ -430,6 +430,9 @@ odoo.define('web_esi.esi', function(require) {
                     });
                 });
             });
+        },
+        destroy: function() {
+            $('.o_control_panel').attr('style', 'display:');
         }
 
     });
