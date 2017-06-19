@@ -475,26 +475,26 @@ odoo.define('pncevaluation.axe_eight', function(require) {
         if (tauxRD > 0) {
             var tr1 = document.createElement('tr');
             if (tauxRD > 50) {
-                $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
                 $(cardOHeader).attr("data-background-color", "red");
             } else if (tauxRD > 0) {
-                $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
                 $(cardOHeader).attr("data-background-color", "orange");
             } else {
-                $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
+                $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
                 $(cardOHeader).attr("data-background-color", "green");
             }
             var tauxRF = ((data_source.count_retard_debut / data_source.count_total_act) * 100).toFixed(2);
             var tr2 = document.createElement('tr');
             if (tauxRF > 50) {
-                $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
                 $(cardOHeader).attr("data-background-color", "red");
             } else if (tauxRF > 0 && tauxRD < 50) {
-                $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
                 $(cardOHeader).attr("data-background-color", "orange");
             }
             if (tauxRF == 0 && tauxRD == 0) {
-                $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
+                $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
                 $(cardOHeader).attr("data-background-color", "green");
             }
 
