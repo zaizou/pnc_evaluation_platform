@@ -345,6 +345,29 @@
 			</field>
 		</record>
 
+			<record id="contributeur_search_view" model="ir.ui.view">
+			<field name="name">contributeur.search.view</field>
+			<field name="model">pncevaluation.contributeur</field>
+			<field name="arch" type="xml">
+				<search string="Contributeur Information">
+					<field name="name"/>
+					
+					<group expand="0" string="Group By">
+						<filter name="groupby_course" string="Course" domain="[]" context="{'group_by':'course_id'}"
+							help="Group Students Course Wise"/>
+						<filter name="groupby_year" context="{'group_by': 'registration_date:year'}" string="Year"
+							help="Group Students by Year" />
+						<filter name="groupby_month" context="{'group_by': 'registration_date:month'}" string="Month"/>
+					</group>
+					<filter name="fil_by_disability" string="Physically Disabled" domain="[('is_physically_disabled','=','True')]"
+						help="Show all Physically Disabled Students" />
+					<filter string="Registered Current Year" name="fil_by_current_year" domain="[('registration_date','&lt;=',
+						time.strftime('%%Y-12-31')),('registration_date','&gt;=',time.strftime('%%Y-01-01'))]"
+						help="Filter Students Registered in Current Year"/>
+				</search>
+			</field>
+		</record>
+
 		<record model="ir.actions.act_window" id="pncevaluation_contributeur">
 			<field name="name">Conrtibuteurs</field>
 			<field name="res_model">pncevaluation.contributeur</field>

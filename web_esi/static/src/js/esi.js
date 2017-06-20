@@ -19,9 +19,45 @@ odoo.define('web_esi.esi', function(require) {
     var headerAspect;
     var headerObject;
     var headerAction;
+    var currentSelf;
 
     var container;
 
+    function open_tree_contrib(self) {
+        //self = this;
+        //var model_obj = new instance.web.Model('ir.model.data');
+        // view_id = Model.call('get_object_reference', ["pncevaluation",
+        //     "contributeur_tree_view"
+        // ]);
+        var view_id;
+        var Menus = new Model('ir.model.data');
+
+        Menus.query(['id']).filter([
+            ['name', '=', 'contributeur_tree_view']
+        ]).all().then(function(ir_model_datas) {
+            console.log(ir_model_datas);
+            view_id = ir_model_datas[0];
+            // for (i in ir_model_datas) {
+            //     console.log(ir_model_datas[i].id);
+            // }
+        });
+
+        // var Model = require('web.DataModel');
+        // var formats = require('web.formats');
+
+        var view_manager = currentSelf.view.getParent(),
+            action_manager = view_manager.getParent();
+        //self.view.destroy();
+        action_manager.do_action({
+            type: 'ir.actions.act_window',
+            res_model: 'pncevaluation.contributeur',
+            view_mode: 'tree',
+            views: [
+                [view_id, 'tree']
+            ],
+            target: 'new'
+        });
+    }
 
     var MyView = View.extend({
         icon: 'fa-briefcase',
@@ -36,6 +72,7 @@ odoo.define('web_esi.esi', function(require) {
         willStart: function() {
             console.log("WillStart Called");
             var self = this;
+
             this.$el.addClass(this.fields_view.arch.attrs['class']);
             return self.alive(new Model(this.dataset.model)
                 .call('fields_get')).then(function(fields) {
@@ -61,6 +98,7 @@ odoo.define('web_esi.esi', function(require) {
             $(container).empty();
             $('.o_control_panel').attr('style', 'display:none');
             var self = this;
+            currentSelf = self;
             var isAxeVide = true;
             var fields = _.compact(_.map(["id", "name"], function(key) {
                 return self.fields_view.arch.attrs[key] || '';
@@ -320,74 +358,32 @@ odoo.define('web_esi.esi', function(require) {
                                         console.log(url.split('-')[1])
                                         console.log("id objectif");
                                         console.log(url.split('-')[2])
+                                            //open_tree_contrib(self);
 
-                                        // do something, like make an ajax request to get the url
-                                        // self.rpc('/pncevaluation/get_contribs_view', { actions_ids: 1, date_debut: "1", date_fin: "2" }).done(function(result) {
-                                        //     console.log("done from get contributeurs");
+                                        // var model_obj = new instance.web.Model('ir.model.data');
+                                        // view_id = model_obj.call('get_object_reference', ["pncevaluation",
+                                        //     "contributeur_tree_view"
+                                        // ]);
+
+
+
+                                        // var Model = require('web.DataModel');
+                                        // var formats = require('web.formats');
+
+                                        // var view_manager = self.view.getParent(),
+                                        //     action_manager = view_manager.getParent();
+                                        // self.view.destroy();
+                                        // action_manager.do_action({
+                                        //     type: 'ir.actions.act_window',
+                                        //     res_model: res_model,
+                                        //     res_id: res_id,
+                                        //     view_mode: 'form',
+                                        //     views: [
+                                        //         [view_id, 'form']
+                                        //     ],
+                                        //     target: 'current'
                                         // });
 
-
-                                        /*return this.do_action({
-
-                                            type: 'ir.actions.act_window',
-
-                                            name: 'pncevaluation.pncevaluation_contributeur_action_js',
-
-                                            res_model: 'pncevaluation.contributeur',
-
-                                            views: ['tree'],
-
-                                            target: 'new',
-
-
-                                        });*/
-
-
-
-                                        // self.rpc("/pncevaluation/get_contribs_view").done(function(result) {
-                                        //     console.log(result);
-                                        //     var self = this;
-                                        //     // you can pass in other data using the context dictionary variable
-                                        //     var context = {
-                                        //         'id': this.id,
-                                        //     };
-                                        //     // the action dictionary variable sends data in the "self.do_action" method
-                                        //     var action = {
-                                        //         type: 'ir.actions.act_window',
-                                        //         res_model: 'pncevaluation.contributeu',
-                                        //         view_mode: 'form',
-                                        //         view_type: 'tree',
-                                        //         views: [
-                                        //             [false, 'tree']
-                                        //         ],
-                                        //         target: 'new',
-                                        //         context: context,
-                                        //     };
-                                        //     // self.do_action accepts the action parameter and opens the new view
-                                        //     self.getParent().do_action(action);
-
-
-                                        //     /*self.getParent().do_action(result, {
-                                        //         additional_context: {
-                                        //             //HERE WE ARE TRYING SOME OPTIONS.
-                                        //         },
-                                        //     });*/
-
-                                        // });
-
-
-                                        /*  self.getParent().do_action({
-
-                                              type: 'ir.actions.act_window',
-
-                                              res_model: 'pncevaluation.contributeur',
-
-                                              views: ['tree'],
-
-
-                                              domain: [('id', '=', '1')],
-
-                                          });*/
 
 
                                         self.rpc("/web/action/load", { action_id: "pncevaluation.pncevaluation_contributeur_action_js" }).done(function(result) {
@@ -436,6 +432,9 @@ odoo.define('web_esi.esi', function(require) {
         }
 
     });
+
+
+
 
 
 
