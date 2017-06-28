@@ -289,7 +289,7 @@ odoo.define('pncevaluation.axe_two', function(require) {
             return b.count - a.count;
         }
         data_source.reunions.coordination.pas.sort(sortNumber2);
-        for (var i = 0; i < data_source.reunions.coordination.actions.length; i++) {
+        for (var i = 0; i < data_source.reunions.coordination.pas.length; i++) {
             if (i > 5)
                 break;
             var line = document.createElement('tr');
@@ -534,7 +534,7 @@ odoo.define('pncevaluation.axe_two', function(require) {
 
         draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
         draw_elem_stats(divReal, "appr_chart", "Hausse", "<big>Appréciation </big>", "unit", "", "green");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondence </big>", "unit", "compare_arrows", "yellow");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondance </big>", "unit", "compare_arrows", "yellow");
 
     }
 

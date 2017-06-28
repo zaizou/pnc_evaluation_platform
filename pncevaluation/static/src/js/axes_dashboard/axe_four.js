@@ -534,7 +534,7 @@ odoo.define('pncevaluation.axe_four', function(require) {
 
         draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
         draw_elem_stats(divReal, "appr_chart", "Hausse", "<big>Appréciation </big>", "unit", "", "green");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondence </big>", "unit", "compare_arrows", "yellow");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondance </big>", "unit", "compare_arrows", "yellow");
 
     }
 

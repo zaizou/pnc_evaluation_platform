@@ -274,7 +274,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
             return b.count - a.count;
         }
         data_source.reunions.coordination.pas.sort(sortNumber2);
-        for (var i = 0; i < data_source.reunions.coordination.actions.length; i++) {
+        for (var i = 0; i < data_source.reunions.coordination.pas.length; i++) {
             if (i > 5)
                 break;
             var line = document.createElement('tr');
@@ -443,31 +443,34 @@ odoo.define('pncevaluation.axe_one', function(require) {
         var tab = document.createElement('table');
         $(cardOContent).append(tab);
 
-        var tauxRD = ((data_source.count_retard_fin / data_source.count_total_act) * 100).toFixed(2);
+
+        var tauxRD
+        if (data_source.count_total_act > 0)
+            tauxRD = ((data_source.count_retard_fin / data_source.count_total_act) * 100).toFixed(2);
 
 
         var tr1 = document.createElement('tr');
         if (tauxRD > 50) {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
+            $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-danger">' + tauxRD + '%</span><h3>')
             $(cardOHeader).attr("data-background-color", "red");
         } else if (tauxRD > 0) {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
+            $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-warning">' + tauxRD + '%</span></h3>')
             $(cardOHeader).attr("data-background-color", "orange");
         } else {
-            $(tr1).append('<h3>Taux d\'ations en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
+            $(tr1).append('<h3>Taux d\'actions en retard (début) : <span class="text-success">' + tauxRD + '%</span></h3>')
             $(cardOHeader).attr("data-background-color", "green");
         }
         var tauxRF = ((data_source.count_retard_debut / data_source.count_total_act) * 100).toFixed(2);
         var tr2 = document.createElement('tr');
         if (tauxRF > 50) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
+            $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-danger">' + tauxRF + '%</span></h3>')
             $(cardOHeader).attr("data-background-color", "red");
         } else if (tauxRF > 0 && tauxRD < 50) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
+            $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-warning">' + tauxRF + '%</span></h3>')
             $(cardOHeader).attr("data-background-color", "orange");
         }
         if (tauxRF == 0 && tauxRD == 0) {
-            $(tr2).append('<h3>Taux d\'ations en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
+            $(tr2).append('<h3>Taux d\'actions en retard (fin) : <span class="text-success">' + tauxRF + '%</span></h3>')
             $(cardOHeader).attr("data-background-color", "green");
         }
 
@@ -497,7 +500,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
 
         draw_elem_stats(divBudget, "budget_chart", "Hausse", "<big>Budget</big>", "", "", "red");
         draw_elem_stats(divReal, "appr_chart", "Hausse", "<big>Appréciation </big>", "unit", "", "green");
-        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondence </big>", "unit", "compare_arrows", "yellow");
+        draw_elem_stats(divCorr, "corr_chart", "Hausse", "<big>Correspondance </big>", "unit", "compare_arrows", "yellow");
 
     }
 
@@ -564,7 +567,7 @@ odoo.define('pncevaluation.axe_one', function(require) {
             transitionMs: 4000,
         });
         powerGauge.render();
-        powerGauge.update(data_source.count_qualite.appreciation);
+        powerGauge.update((data_source.count_qualite.appreciation).toFixed(2));
         //md.startAnimationForLineChart(appreciation);
     }
 
@@ -660,13 +663,13 @@ odoo.define('pncevaluation.axe_one', function(require) {
         if (chart_id == "appr_chart") {
             draw_appreciation_chart();
             if (data_source.count_qualite.appreciation < 40) {
-                txtEcart = '<big class="text-danger"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                txtEcart = '<big class="text-danger"> ( ' + (data_source.count_qualite.appreciation).toFixed(2) + '% )</big>'
                 $(cardOHeader).attr("data-background-color", "red");
             } else if (data_source.count_qualite.appreciation < 70) {
-                txtEcart = '<big class="text-warning"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                txtEcart = '<big class="text-warning"> ( ' + (data_source.count_qualite.appreciation).toFixed(2) + '% )</big>'
                 $(cardOHeader).attr("data-background-color", "orange");
             } else {
-                txtEcart = '<big class="text-success"> ( ' + data_source.count_qualite.appreciation + '% )</big>'
+                txtEcart = '<big class="text-success"> ( ' + (data_source.count_qualite.appreciation).toFixed(2) + '% )</big>'
                 $(cardOHeader).attr("data-background-color", "green");
             }
 

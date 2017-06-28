@@ -22,8 +22,8 @@ class formulaire_evaluation(models.Model):
      numero_axe = fields.Integer(related='axe_id.numero')
      action_realisee = fields.Many2one('pncevaluation.actionpnc',string = u"Action réalisée", required=True)
      etat = fields.Selection(selection=[(u"finalisée",u"Finalisée"),(u"en cours",u"En cours"),(u"en préparation",u"En préparation")],string=u"Etat de l\'action",required=True)
-     realisation = fields.Selection(selection=[(u"mal réalisée",u"Mal réalisée"),(u"plus ou moin bien réalisée",u"Plus ou moin bien réalisée"),(u"bien réalisée",u"Bien réalisée"),(u"très bien réalisée",u"Très bien réalisée")],string=u"L\'Action a été",required=True)
-     res_attend = fields.Selection(selection= [(u"moin satisfaisants",u"Moin satisfaisants"),(u"plus ou moin satisfaisants",u"Plus ou moin satisfaisants"),(u"satisfaisants",u"Satisfaisants"),(u"plus que satisfaisants",u"Plus que satisfaisants")],string=u"Résultats attendus / résultats obtenus",required=True)
+     realisation = fields.Selection(selection=[(u"non défini",u"Non défini"),(u"mal réalisée",u"Mal réalisée"),(u"plus ou moin bien réalisée",u"Plus ou moin bien réalisée"),(u"bien réalisée",u"Bien réalisée"),(u"très bien réalisée",u"Très bien réalisée")],string=u"L\'Action a été",required=True)
+     res_attend = fields.Selection(selection= [(u"non défini",u"Non défini"),(u"moin satisfaisants",u"Moin satisfaisants"),(u"plus ou moin satisfaisants",u"Plus ou moin satisfaisants"),(u"satisfaisants",u"Satisfaisants"),(u"plus que satisfaisants",u"Plus que satisfaisants")],string=u"Résultats attendus / résultats obtenus",required=True)
      inspection = fields.Boolean(u"Nécessité d\'inspection")
      date_debut_p = fields.Date(u"Date début prévue")
      date_debut_r = fields.Date(u"Date début réelle")
@@ -63,7 +63,7 @@ class formulaire_evaluation(models.Model):
                 if fEval.realisation == u"bien réalisée":
                     count_br = count_br + 1
                 if fEval.realisation == u"très bien réalisée":
-                    count_ml = count_tbr + 1
+                    count_tbr = count_tbr + 1
          if count >0:
             avgAppr = avgAppr / count
             return{
@@ -134,8 +134,17 @@ class reunion_evaluation(models.Model):
      numero_axe = fields.Integer(related='user_id.numero')
      action_id = fields.Many2one('pncevaluation.actionpnc',string=u"Action Concernée")
      contributions_ids = fields.One2many('pncevaluation.contribution','reunion_evaluation_id',string=u"Contributions")
-     contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
-     contributeurs_invites_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs invités")
+
+    #  contributeurs_presents_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs Présents")
+    #  contributeurs_invites_ids = fields.Many2many('pncevaluation.contributeur',string=u"Contributeurs invités")
+
+
+     contributeurs_presents_ids = fields.Many2many(comodel_name='pncevaluation.contributeur',
+                            relation='reueval_contribut_present',string=u"Contributeurs présents")
+     contributeurs_invites_ids = fields.Many2many(comodel_name='pncevaluation.contributeur',
+                            relation='reueval_contribut_invite',string=u"Contributeurs invités")
+
+     
      pv_reunion_ids = fields.Many2one('pncevaluation.pvreunionevaluation',string=u"PV de la réunion")
 
 

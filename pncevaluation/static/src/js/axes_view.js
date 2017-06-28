@@ -148,10 +148,11 @@ odoo.define('pncevaluation.axes', function(require) {
         $(kpi_cont).addClass("pnc");
         $(kpi_cont).append('<tr class="pnc"><td class="pnc"><h5 >Réunions de Coordination</h5></td></tr>');
         $(kpi_cont).append('<tr class="pnc"><td class="pnc"><h5>Réunions d\'évaluation</h5></td></tr>');
-        $(kpi_cont).append('<tr class="pnc"><td class="pnc"><h5>Plans d\'action</h5></td></tr>');
+        $(kpi_cont).append('<tr class="pnc"><td class="pnc"><h5>Programmes d\'action</h5></td></tr>');
         var reu_coord_sum = 0;
         var reu_eval_sum = 0;
         var pas_sum = 0;
+        countResSat = 0
         totBE = 0;
         totBR = 0;
         for (var j = 0; j < axesTable.length; j++) {
@@ -178,10 +179,10 @@ odoo.define('pncevaluation.axes', function(require) {
             $(avn_line).append(axeCt);
             $(axeCt).addClass("pnc");
             if (reu_eval_sum)
-                $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axesTable[i].stats.reunions_eval / reu_eval_sum) * 100).toFixed(2) + '%</h5> </td></tr> ');
+                $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axesTable[i].stats.reunions_coord / reu_coord_sum) * 100).toFixed(2) + '%</h5> </td></tr> ');
             else
                 $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>Non calculé</h5> </td></tr> ');
-            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axesTable[i].stats.reunions_coord / reu_coord_sum) * 100).toFixed(2) + '%</h5></td></tr>');
+            $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axesTable[i].stats.reunions_eval / reu_eval_sum) * 100).toFixed(2) + '%</h5></td></tr>');
             $(axeCt).append('<tr class="pnc"><td class="pnc"><h5>' + ((axesTable[i].stats.plans_action / pas_sum) * 100).toFixed(2) + '%</h5></td></tr>');
         }
         //$(axeCt).append('<tr class="pnc"><td class="pnc"><h5>%</h5> </td></tr> ');
@@ -199,6 +200,7 @@ odoo.define('pncevaluation.axes', function(require) {
         $(kpi_cont).addClass("cat2");
         $(kpi_cont).addClass("pnc");
         $(kpi_cont).append('<tr class="pnc"><td class="pnc"><h5>Résultats satisfaisants</h5></td></tr>');
+
         for (var i = 0; i < axes.length; i++) {
             var axeCt = document.createElement('td');
             $(avn_line).append(axeCt);
